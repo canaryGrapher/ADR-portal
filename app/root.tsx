@@ -6,7 +6,6 @@ import {
   Scripts,
   ScrollRestoration,
 } from "remix";
-import React from "react";
 import type { MetaFunction } from "remix";
 
 export const meta: MetaFunction = () => {
@@ -15,34 +14,15 @@ export const meta: MetaFunction = () => {
 
 export default function App() {
   return (
-    <Document
-      children
-      title={"ADR Portal | Manipal Academy of Higher Education"}
-    >
-      {/* <Outlet /> */}
-    </Document>
-  );
-}
-
-const Document: React.FC<{ children: React.ReactNode; title: string }> = (
-  children,
-  title
-) => {
-  return (
     <html lang="en">
       <head>
         <meta charSet="utf-8" />
-        <meta name="viewport" content="width=device-width,initial-scale=1" />
-        <title>{title}</title>
-        <Meta />
-        <Links />
+        <title>ADR Portal | MAHE</title>
       </head>
       <body>
-        {children}
-        <ScrollRestoration />
-        <Scripts />
-        {process.env.NODE_ENV === "development" ? <LiveReload /> : null}
+        <Outlet />
+        <LiveReload />
       </body>
     </html>
   );
-};
+}
