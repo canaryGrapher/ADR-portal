@@ -1,12 +1,16 @@
-import {
-  Links,
-  LiveReload,
-  Meta,
-  Outlet,
-  Scripts,
-  ScrollRestoration,
-} from "remix";
+import React from "react";
+import { Links, LiveReload, Outlet } from "remix";
 import type { MetaFunction } from "remix";
+
+// importing types
+import { DocumentProps, LayoutProps } from "~/types/general";
+
+//importing global stylesheet
+import globalStyle from "~/styles/global.css";
+
+export function links() {
+  return [{ rel: "stylesheet", href: globalStyle }];
+}
 
 export const meta: MetaFunction = () => {
   return { title: "New Remix App" };
@@ -14,15 +18,34 @@ export const meta: MetaFunction = () => {
 
 export default function App() {
   return (
+    <Document>
+      <Layout>
+        <Outlet />
+      </Layout>
+    </Document>
+  );
+}
+
+const Document = ({ children, title }: DocumentProps) => {
+  return (
     <html lang="en">
       <head>
-        <meta charSet="utf-8" />
-        <title>ADR Portal | MAHE</title>
+        <title>{title ? title : "ADR Portal | MAHE"}</title>
+        <Links />
       </head>
       <body>
-        <Outlet />
-        <LiveReload />
+        {children}
+        {process.env.NODE_ENV === "development" && <LiveReload />}
       </body>
     </html>
   );
-}
+};
+
+const Layout = ({ children }: LayoutProps) => {
+  return (
+    <React.Fragment>
+      <h1 className="text-blue-400">Navbar here</h1>
+      {children}
+    </React.Fragment>
+  );
+};
