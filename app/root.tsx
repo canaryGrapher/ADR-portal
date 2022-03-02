@@ -2,6 +2,13 @@ import React from "react";
 import { Links, LiveReload, Outlet } from "remix";
 import type { MetaFunction } from "remix";
 
+// importing redux-toolkit
+import { store } from "./states/store";
+import { Provider } from "react-redux";
+
+// importing the components
+import Navbar from "./components/common/navbar";
+
 // importing types
 import { DocumentProps, LayoutProps } from "~/types/general";
 
@@ -44,8 +51,10 @@ const Document = ({ children, title }: DocumentProps) => {
 const Layout = ({ children }: LayoutProps) => {
   return (
     <React.Fragment>
-      <h1 className="text-blue-400">Navbar here</h1>
-      {children}
+      <Provider store={store}>
+        <Navbar />
+        {children}
+      </Provider>
     </React.Fragment>
   );
 };
