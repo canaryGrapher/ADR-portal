@@ -9,7 +9,7 @@ const sidebarItems: Array<SidebarItemData> = [
   { title: "Suspected Adverse Reaction", isActive: true, isCompleted: true },
   {
     title: "Suspected Medication(s)",
-    isActive: true,
+    isActive: false,
     isCompleted: false,
     isParent: true,
     parentSidebarItemData: [
@@ -46,10 +46,10 @@ export default function Form1() {
       <div className="text-[35px] text-[#E8590C]">ADR Reporting Form</div>
       <div
         style={{ fontFamily: "system-ui, sans-serif", lineHeight: "1.4" }}
-        className="form1__content flex flex-row w-screen justify-around mt-5"
+        className="form1__content mt-5 flex w-screen flex-row justify-around"
       >
         <div className="form1__sidebarWrapper ">
-          <div className="form1_sidebar w-fit h-fit pl-10 pt-5 pr-5 pb-5 shadow-[0_0_10px_rgba(0,0,0,0.25)] rounded-md">
+          <div className="form1_sidebar h-fit w-fit rounded-md pl-10 pt-5 pb-5 pr-5 shadow-[0_0_10px_rgba(0,0,0,0.25)]">
             <Sidebar sidebarItems={sidebarItems} />
           </div>
           <Button type="primary" block>

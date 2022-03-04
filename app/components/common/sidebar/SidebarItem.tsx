@@ -1,25 +1,4 @@
-import SidebarItemData from "./SidebarItemData";
-
-const styles = {
-  mainBottom: "border-[1px] h-fill min-h-[1.25rem] w-0 mb-1 mt-1",
-  subBottom: "border-[1px] h-fill min-h-[1.25rem] w-0",
-  mainCircle: "w-8 h-8 rounded-full  flex justify-center items-center",
-  subCircle: "w-2 h-2 ml-[12.5px] rounded-full",
-  inactiveText: "text-[#7E7E7E]",
-  activeText: "text-[#6C567B]",
-  completeText: "text-[#6C567B]",
-};
-
-type Props = {
-  title: String;
-  isActive: Boolean;
-  isCompleted: Boolean;
-  isLast: Boolean;
-  isParent: Boolean;
-  isSubSidebar: Boolean;
-  parentSidebarData?: Array<SidebarItemData>;
-  index: number;
-};
+import { SidebarProps } from "~/types/common/sidebar";
 
 function SidebarItem({
   title,
@@ -30,11 +9,12 @@ function SidebarItem({
   isSubSidebar,
   parentSidebarData,
   index,
-}: Props) {
+}: SidebarProps) {
   return (
-    <div className="sidebarItem__wrapper">
+    <div>
+      {/* circle component for the sidebar item */}
       <div
-        className={`sidebarItem__top flex flex-row items-center ${
+        className={` flex flex-row items-center ${
           index == 0 ? "mt-1" : isLast ? "mb-1" : ""
         }`}
       >
@@ -43,8 +23,8 @@ function SidebarItem({
           : renderMainCircle(isCompleted, isActive, index)}
 
         <div
-          className={`sidebarItem__titleWrapper ml-2 
-          ${isSubSidebar ? "w-[225px]" : ""}
+          className={` ml-2
+          ${isSubSidebar ? "w-2/3 min-w-[100px]" : ""}
           `}
         >
           {isSubSidebar
@@ -52,13 +32,16 @@ function SidebarItem({
             : renderMainText(isCompleted, isActive, title)}
         </div>
       </div>
-      <div
-        className={`sidebarItem__bottomWrapper w-fit flex flex-row justify-center`}
-      >
-        <div className={`min-w-[2rem] max-w-[2rem] flex justify-center`}>
+      {/* line indicator for the sidebar item */}
+      <div className={`flex w-fit flex-row justify-center`}>
+        <div className={`flex min-w-[2rem] max-w-[2rem] justify-center`}>
           <div
-            className={`sidebarItem__bottom
-        ${isSubSidebar ? styles.subBottom : styles.mainBottom}
+            className={`
+        ${
+          isSubSidebar
+            ? "h-fill min-h-[1.25rem] w-0 border-[1px]"
+            : "h-fill mb-1 mt-1 min-h-[1.25rem] w-0 border-[1px]"
+        }
         ${isLast ? "hidden" : "block"}
         ${
           isCompleted
@@ -67,11 +50,13 @@ function SidebarItem({
         }`}
           />
         </div>
+        {/* sidebar generation is component is a parent */}
         {isParent && isActive ? (
           <div>
             {parentSidebarData?.map((item, index) => {
               return (
                 <SidebarItem
+                  title={item.title}
                   isActive={item.isActive}
                   isCompleted={item.isCompleted}
                   isLast={index == parentSidebarData.length - 1 ? true : false}
@@ -80,7 +65,6 @@ function SidebarItem({
                   parentSidebarData={
                     item.isParent == undefined ? [] : item.parentSidebarItemData
                   }
-                  title={item.title}
                   index={index}
                 />
               );
@@ -101,8 +85,7 @@ function renderMainCircle(
 ) {
   return (
     <div
-      className={`sidebarItem__cicle 
-  ${styles.mainCircle}
+      className={`flex h-8 w-8  items-center justify-center rounded-full
   ${
     isCompleted
       ? "bg-[#6C567B]"
@@ -116,8 +99,8 @@ function renderMainCircle(
           isCompleted
             ? "hidden"
             : isActive
-            ? styles.activeText
-            : styles.inactiveText
+            ? "text-[#6C567B]"
+            : "text-[#7E7E7E]"
         }`}
       >
         {index + 1}
@@ -132,7 +115,7 @@ function renderMainCircle(
 function renderSubCircle(isCompleted: Boolean, isActive: Boolean) {
   return (
     <div
-      className={`sidebarItem__circle ${styles.subCircle} ${
+      className={`ml-[12.5px] h-2 w-2 rounded-full ${
         isCompleted
           ? "bg-[#6C567B]"
           : isActive
@@ -150,8 +133,8 @@ function renderMainText(
 ) {
   return (
     <p
-      className={`sidebarItem__title text-base ${
-        isCompleted || isActive ? styles.activeText : styles.inactiveText
+      className={`text-base ${
+        isCompleted || isActive ? "text-[#6C567B]" : "text-[#7E7E7E]"
       }`}
     >
       {title}
@@ -162,7 +145,7 @@ function renderMainText(
 function renderSubText(isCompleted: Boolean, isActive: Boolean, title: String) {
   return (
     <p
-      className={`sidebarItem_title text-xs  ${
+      className={`text-xs  ${
         isCompleted
           ? "text-[#6C567B]"
           : isActive
