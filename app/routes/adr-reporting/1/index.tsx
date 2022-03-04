@@ -1,6 +1,8 @@
-import Sidebar from "~/components/common/sidebar/Sidebar";
+import Sidebar from "~/components/common/sidebar";
 import SidebarItemData from "~/components/common/sidebar/SidebarItemData";
 import Page1 from "./Page1";
+
+import { Button, Radio } from "antd";
 
 const sidebarItems: Array<SidebarItemData> = [
   { title: "Patient Information", isActive: false, isCompleted: true },
@@ -50,6 +52,9 @@ export default function Form1() {
           <div className="form1_sidebar w-fit h-fit pl-10 pt-5 pr-5 pb-5 shadow-[0_0_10px_rgba(0,0,0,0.25)] rounded-md">
             <Sidebar sidebarItems={sidebarItems} />
           </div>
+          <Button type="primary" block>
+            Download
+          </Button>
         </div>
         <div className="form1__content">
           <Page1 />

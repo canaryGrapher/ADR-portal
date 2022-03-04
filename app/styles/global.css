@@ -468,10 +468,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   --tw-backdrop-sepia:  ;
 }
 
-.visible {
-  visibility: visible;
-}
-
 .mb-1 {
   margin-bottom: 0.25rem;
 }
@@ -480,48 +476,16 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-top: 0.25rem;
 }
 
-.ml-\[15\.5px\] {
-  margin-left: 15.5px;
+.ml-\[12\.5px\] {
+  margin-left: 12.5px;
 }
 
 .ml-2 {
   margin-left: 0.5rem;
 }
 
-.ml-\[12\.5px\] {
-  margin-left: 12.5px;
-}
-
-.mt-\[-5px\] {
-  margin-top: -5px;
-}
-
-.mb-\[2px\] {
-  margin-bottom: 2px;
-}
-
 .mt-5 {
   margin-top: 1.25rem;
-}
-
-.mt-2 {
-  margin-top: 0.5rem;
-}
-
-.mt-10 {
-  margin-top: 2.5rem;
-}
-
-.mb-2 {
-  margin-bottom: 0.5rem;
-}
-
-.ml-1 {
-  margin-left: 0.25rem;
-}
-
-.mb-5 {
-  margin-bottom: 1.25rem;
 }
 
 .block {
@@ -536,12 +500,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   display: none;
 }
 
-.h-fit {
-  height: -webkit-fit-content;
-  height: -moz-fit-content;
-  height: fit-content;
-}
-
 .h-8 {
   height: 2rem;
 }
@@ -550,16 +508,14 @@ Ensure the default browser behavior of the `hidden` attribute.
   height: 0.5rem;
 }
 
-.h-4 {
-  height: 1rem;
+.h-fit {
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
 }
 
 .min-h-\[1\.25rem\] {
   min-height: 1.25rem;
-}
-
-.min-h-\[1rem\] {
-  min-height: 1rem;
 }
 
 .w-0 {
@@ -574,8 +530,8 @@ Ensure the default browser behavior of the `hidden` attribute.
   width: 0.5rem;
 }
 
-.w-screen {
-  width: 100vw;
+.w-\[225px\] {
+  width: 225px;
 }
 
 .w-fit {
@@ -584,16 +540,8 @@ Ensure the default browser behavior of the `hidden` attribute.
   width: fit-content;
 }
 
-.w-\[200px\] {
-  width: 200px;
-}
-
-.w-\[225px\] {
-  width: 225px;
-}
-
-.min-w-\[32px\] {
-  min-width: 32px;
+.w-screen {
+  width: 100vw;
 }
 
 .min-w-\[2rem\] {
@@ -686,13 +634,13 @@ Ensure the default browser behavior of the `hidden` attribute.
   line-height: 1.5rem;
 }
 
-.text-\[35px\] {
-  font-size: 35px;
-}
-
 .text-xs {
   font-size: 0.75rem;
   line-height: 1rem;
+}
+
+.text-\[35px\] {
+  font-size: 35px;
 }
 
 .text-red-400 {

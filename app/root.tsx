@@ -2,7 +2,6 @@ import React from "react";
 import { Links, LiveReload, Outlet } from "remix";
 import type { MetaFunction } from "remix";
 
-
 // importing redux-toolkit
 import { store } from "./states/store";
 import { Provider } from "react-redux";
@@ -13,11 +12,15 @@ import Navbar from "./components/common/navbar";
 // importing types
 import { DocumentProps, LayoutProps } from "~/types/general";
 
-//importing global stylesheet
+//importing stylesheet
 import globalStyle from "~/styles/global.css";
+import antStyles from "antd/dist/antd.css";
 
 export function links() {
-  return [{ rel: "stylesheet", href: globalStyle }];
+  return [
+    { rel: "stylesheet", href: globalStyle },
+    { rel: "stylesheet", href: antStyles },
+  ];
 }
 
 export const meta: MetaFunction = () => {
