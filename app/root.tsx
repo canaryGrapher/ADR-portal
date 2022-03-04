@@ -2,6 +2,7 @@ import React from "react";
 import { Links, LiveReload, Outlet } from "remix";
 import type { MetaFunction } from "remix";
 
+
 // importing redux-toolkit
 import { store } from "./states/store";
 import { Provider } from "react-redux";
