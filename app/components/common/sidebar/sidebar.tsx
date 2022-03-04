@@ -1,4 +1,4 @@
-import MainSidebarItem from "./MainSidebarItem";
+import MainSidebarItem from "./SidebarItem";
 import SidebarItemData from "./SidebarItemData";
 
 type Props = {
@@ -17,6 +17,7 @@ export default function Sidebar({ sidebarItems }: Props) {
               isCompleted={item.isCompleted}
               isLast={sidebarItems.length - 1 == index}
               isParent={item.isParent == undefined ? false : item.isParent}
+              isSubSidebar={false}
               parentSidebarData={
                 item.isParent == undefined ? [] : item.parentSidebarItemData
               }
