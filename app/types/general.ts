@@ -6,3 +6,4 @@ export type DocumentProps = {
 export type LayoutProps = {
     children: React.ReactNode;
 }
+
