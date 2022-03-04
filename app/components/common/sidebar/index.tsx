@@ -12,6 +12,7 @@ export default function Sidebar({ sidebarItems }: Props) {
         {sidebarItems.map((item, index) => {
           return (
             <MainSidebarItem
+              key={index}
               title={item.title}
               isActive={item.isActive}
               isCompleted={item.isCompleted}

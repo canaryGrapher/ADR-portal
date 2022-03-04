@@ -56,6 +56,7 @@ function SidebarItem({
             {parentSidebarData?.map((item, index) => {
               return (
                 <SidebarItem
+                  key={index}
                   title={item.title}
                   isActive={item.isActive}
                   isCompleted={item.isCompleted}
