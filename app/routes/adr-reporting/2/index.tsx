@@ -15,7 +15,7 @@ export default function Form1page2() {
           <div className="pl-4 text-[24px] text-[#E8590C]">
             Patient Information
           </div>
-          <div className="flex flex-row pt-2">
+          <div className="flex flex-row pt-4">
             <div className="w-1/2 px-4">
               <InputDescription
                 isRequired={true}
