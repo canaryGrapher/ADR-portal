@@ -6,11 +6,16 @@ import { LayoutProps } from "~/types/general";
 
 const FormLayout = ({ children }: LayoutProps) => {
   return (
-    <div className="grid grid-cols-12 gap-5 w-100 p-16">
-      <div className="col-span-3">
-        <Sidebar />
+    <div className="flex w-screen flex-col">
+      <div className="flex w-screen justify-center pt-8 text-[35px] text-[#E8590C]">
+        ADR Reporting Form
       </div>
-      <div className="col-span-9 p-2">{children}</div>
+      <div className="w-100 grid grid-cols-12 gap-5 px-16 pt-4">
+        <div className="col-span-3">
+          <Sidebar />
+        </div>
+        <div className="col-span-9 p-2">{children}</div>
+      </div>
     </div>
   );
 };
