@@ -16,6 +16,7 @@
     "@reduxjs/toolkit": "^1.8.0",
     "@remix-run/react": "^1.2.2",
     "@remix-run/serve": "^1.2.2",
+    "@zerollup/ts-transform-paths": "^1.7.18",
     "antd": "^4.18.9",
     "cross-env": "^7.0.3",
     "react": "^17.0.2",

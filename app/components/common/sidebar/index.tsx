@@ -1,32 +1,47 @@
-import MainSidebarItem from "./SidebarItem";
-import SidebarItemData from "./SidebarItemData";
+import { useState } from "react";
 
-type Props = {
-  sidebarItems: Array<SidebarItemData>;
-};
+// importing components
+import { ListItems } from "./ListItems";
 
-export default function Sidebar({ sidebarItems }: Props) {
+// importing data
+import { AdrReporting } from "./SidebarTemplates";
+
+// importing types
+import { TemplateProps } from "~/types/common/sidebar";
+
+const Sidebar = () => {
+  const [adrReportingData, setAdrReportingData] = useState<TemplateProps[]>(
+    AdrReporting.template
+  );
+
+  const changeData = (changeElement: string) => {
+    const currentState = adrReportingData;
+    console.log(changeElement);
+    const newState = currentState.map((element: TemplateProps) => {
+      if (element.name === changeElement) {
+        element.isActive = !element.isActive;
+      } else {
+        element.isActive = false;
+      }
+      return element;
+    });
+    setAdrReportingData(newState);
+  };
+
   return (
-    <div className="sidebar__wrapper">
-      <div className="sidebar__content">
-        {sidebarItems.map((item, index) => {
-          return (
-            <MainSidebarItem
-              key={index}
-              title={item.title}
-              isActive={item.isActive}
-              isCompleted={item.isCompleted}
-              isLast={sidebarItems.length - 1 == index}
-              isParent={item.isParent == undefined ? false : item.isParent}
-              isSubSidebar={false}
-              parentSidebarData={
-                item.isParent == undefined ? [] : item.parentSidebarItemData
-              }
-              index={index}
-            />
-          );
-        })}
-      </div>
+    <div className="shadow-xl p-5 rounded-lg text-[#6C567B]">
+      {adrReportingData.map((item: TemplateProps, index: number) => {
+        return (
+          <ListItems
+            key={index}
+            {...item}
+            number={index}
+            clicker={() => changeData(item.name)}
+          />
+        );
+      })}
     </div>
   );
-}
+};
+
+export default Sidebar;

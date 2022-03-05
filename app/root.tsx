@@ -1,4 +1,4 @@
-import { Links, LiveReload, Outlet } from "remix";
+import { Links, LiveReload, Outlet, Meta } from "remix";
 import type { MetaFunction } from "remix";
 
 // importing layouts
@@ -11,6 +11,10 @@ import { DocumentProps } from "~/types/general";
 import globalStyle from "~/styles/global.css";
 import antStyles from "antd/dist/antd.css";
 
+export const meta: MetaFunction = () => {
+  return { title: "New Remix App" };
+};
+
 export function links() {
   return [
     { rel: "stylesheet", href: globalStyle },
@@ -18,8 +22,19 @@ export function links() {
   ];
 }
 
-export const meta: MetaFunction = () => {
-  return { title: "New Remix App" };
+const Document = ({ children }: DocumentProps) => {
+  return (
+    <html lang="en">
+      <head>
+        <Meta />
+        <Links />
+      </head>
+      <body>
+        {children}
+        {process.env.NODE_ENV === "development" && <LiveReload />}
+      </body>
+    </html>
+  );
 };
 
 export default function App() {
@@ -31,18 +46,3 @@ export default function App() {
     </Document>
   );
 }
-
-const Document = ({ children, title }: DocumentProps) => {
-  return (
-    <html lang="en">
-      <head>
-        <title>{title ? title : "ADR Portal | MAHE"}</title>
-        <Links />
-      </head>
-      <body>
-        {children}
-        {process.env.NODE_ENV === "development" && <LiveReload />}
-      </body>
-    </html>
-  );
-};
