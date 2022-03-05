@@ -1,16 +1,11 @@
-import React from "react";
 import { Links, LiveReload, Outlet } from "remix";
 import type { MetaFunction } from "remix";
 
-// importing redux-toolkit
-import { store } from "./states/store";
-import { Provider } from "react-redux";
-
-// importing the components
-import Navbar from "./components/common/navbar";
+// importing layouts
+import RootLayout from "~/layouts/root";
 
 // importing types
-import { DocumentProps, LayoutProps } from "~/types/general";
+import { DocumentProps } from "~/types/general";
 
 //importing stylesheet
 import globalStyle from "~/styles/global.css";
@@ -30,9 +25,9 @@ export const meta: MetaFunction = () => {
 export default function App() {
   return (
     <Document>
-      <Layout>
+      <RootLayout>
         <Outlet />
-      </Layout>
+      </RootLayout>
     </Document>
   );
 }
@@ -49,16 +44,5 @@ const Document = ({ children, title }: DocumentProps) => {
         {process.env.NODE_ENV === "development" && <LiveReload />}
       </body>
     </html>
-  );
-};
-
-const Layout = ({ children }: LayoutProps) => {
-  return (
-    <React.Fragment>
-      <Provider store={store}>
-        <Navbar />
-        {children}
-      </Provider>
-    </React.Fragment>
   );
 };

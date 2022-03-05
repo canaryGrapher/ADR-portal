@@ -1,4 +1,4 @@
-import { SidebarProps } from "~/types/common/sidebar";
+import { SidebarProps } from "Types/common/sidebar";
 
 function SidebarItem({
   title,
