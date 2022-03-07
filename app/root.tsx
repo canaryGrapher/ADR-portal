@@ -1,4 +1,4 @@
-import { Links, LiveReload, Outlet, Meta } from "remix";
+import { Links, LiveReload, Outlet, Meta, Scripts } from "remix";
 import type { MetaFunction } from "remix";
 
 // importing layouts
@@ -30,6 +30,7 @@ const Document = ({ children }: DocumentProps) => {
         <Links />
       </head>
       <body>
+        <Scripts />
         {children}
         {process.env.NODE_ENV === "development" && <LiveReload />}
       </body>
