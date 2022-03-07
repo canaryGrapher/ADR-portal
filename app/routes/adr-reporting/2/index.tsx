@@ -39,6 +39,9 @@ export default function Form1page2() {
             <TextArea rows={4} />
           </div>
         </div>
+        <Button type="primary" size={"large"} onClick={() => alert("Clicked")}>
+          Primary
+        </Button>
       </div>
     </FormLayout>
   );

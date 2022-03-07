@@ -1,4 +1,4 @@
-import { Links, LiveReload, Outlet, Meta } from "remix";
+import { Links, LiveReload, Outlet, Meta, Scripts } from "remix";
 import type { MetaFunction } from "remix";
 
 // importing layouts
@@ -12,7 +12,7 @@ import globalStyle from "~/styles/global.css";
 import antStyles from "antd/dist/antd.css";
 
 export const meta: MetaFunction = () => {
-  return { title: "New Remix App" };
+  return { title: "ADR Portal | KMC" };
 };
 
 export function links() {
@@ -30,6 +30,7 @@ const Document = ({ children }: DocumentProps) => {
         <Links />
       </head>
       <body>
+        <Scripts />
         {children}
         {process.env.NODE_ENV === "development" && <LiveReload />}
       </body>
