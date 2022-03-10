@@ -38,7 +38,7 @@ const Document = ({ children }: DocumentProps) => {
   );
 };
 
-export default function App() {
+const App = () => {
   return (
     <Document>
       <RootLayout>
@@ -46,4 +46,6 @@ export default function App() {
       </RootLayout>
     </Document>
   );
-}
+};
+
+export default App;

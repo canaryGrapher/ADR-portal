@@ -1,71 +1,35 @@
-import InputDescription from "~/components/forms/inputDescription/InputDescription";
+// importing layouts
 import FormLayout from "~/layouts/forms";
 
-import { Input, DatePicker } from "antd";
+// importing components
+import { Checkbox } from "antd";
+import TextArea from "antd/lib/input/TextArea";
+import NavigationPanel from "~/components/forms/NavigationPanel";
 
-export default function Form1page3h() {
-    const options = ["Specific", "Symptomatic", "None"]
+export default function Form1page3g() {
+  const options = ["Specific", "Symptomatic", "None"];
   return (
     <FormLayout>
       {/* Anything between the <FormLayout> tag can be changed */}
-      <div className="w-full shadow-xl">
-        <div className="mx-8 py-4 pb-8">
-          <div className="pl-4 text-[24px] text-[#E8590C]">Concomitant medical product<span className="text-sm"> including self-medication and herbal remedies with therapy dates</span></div>
-          <div className="mx-4 min-w-full pt-4">
-            <InputDescription 
-                isRequired={true}
-                description="Name (brand/generic)"
-            />
-            <Input />
+      <div className="shadow-xl rounded-md w-full p-10 border">
+        <div>
+          <div className="text-[24px] text-[#E8590C]">Treatment Given</div>
+          <div className="w-full pt-2">
+            <Checkbox.Group options={options}></Checkbox.Group>
           </div>
-            <div className="flex flex-row pt-4">
-              <div className="w-1/2 px-4">
-                <InputDescription
-                  isRequired={true}
-                  description="Dose Used"
-                />
-                <Input />
-              </div>
-              <div className="w-1/2 pr-4">
-                <InputDescription
-                  isRequired={true}
-                  description="Route Used"
-                />
-                <Input />
-              </div>
-            </div>
-            <div className="mt-4 w-full px-4">
-              <InputDescription
-                isRequired={true}
-                description="Frequency (OD, BD)"
-              />
-              <Input />
-            </div>
-            <div className="flex flex-row pt-4">
-              <div className="w-1/2 px-4">
-                <InputDescription
-                  isRequired={true}
-                  description="Date started"
-                />
-                <DatePicker className="w-full" />
-              </div>
-              <div className="w-1/2 pr-4">
-                <InputDescription
-                  isRequired={true}
-                  description="Date stopped"
-                />
-                <DatePicker className="w-full" />
-              </div>
-            </div>
-            <div className="mt-4 w-full px-4">
-              <InputDescription
-                isRequired={true}
-                description="Indication"
-              />
-              <Input />
-            </div>
         </div>
       </div>
+      <div className="shadow-xl rounded-md w-full p-10 border mt-5">
+        <div>
+          <div className="my-0 py-0">
+            <p className="font-medium my-0 py-0">Treatment Details (if any)</p>
+          </div>
+          <div className="w-full pt-4">
+            <TextArea rows={4} />
+          </div>
+        </div>
+      </div>
+      <NavigationPanel />
     </FormLayout>
   );
 }

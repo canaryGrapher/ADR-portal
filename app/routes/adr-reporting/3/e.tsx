@@ -1,46 +1,113 @@
-import InputDescription from "~/components/forms/inputDescription/InputDescription";
+import { useState } from "react";
+
+// importing layouts
 import FormLayout from "~/layouts/forms";
 
-import cross from "./../../../components/close.svg"
+// importing components
+import InputDescription from "~/components/forms/inputDescription";
+import NavigationPanel from "~/components/forms/NavigationPanel";
 
-import { Radio, Input, Button } from "antd";;
+// importing icons
+import { FiHelpCircle, FiPlus, FiX } from "react-icons/fi";
+
+import { Radio, Input } from "antd";
 
 export default function Form1page3e() {
   return (
     <FormLayout>
       {/* Anything between the <FormLayout> tag can be changed */}
-      <div className="w-full shadow-xl">
-        <div className="mx-8 py-4 pb-8">
-          <div className="pl-4 text-[24px] text-[#E8590C]">Reaction Reappeared After Re-introduction</div>
-          <div className="mx-4 min-w-full pt-4">
-            <InputDescription isRequired={true} description="Drug 1" />
-            <Radio.Group defaultValue={0} buttonStyle="solid">
-              <Radio.Button value={0}>No rechallenge</Radio.Button>
-              <Radio.Button value={1}>Recurrence of symptoms</Radio.Button>
-              <Radio.Button value={2}>No occurence of symptoms</Radio.Button>
-              <Radio.Button value={3}>Unkonwn</Radio.Button>
-            </Radio.Group>
-            <div className="flex items-center p-4">
-                <p className="mb-[0px] pr-1 text-[16px]">Dose</p>
-                <Input addonAfter={"?"} className="w-16"/>
-            </div>
+      <div className="shadow-xl rounded-md w-full p-10 border">
+        <div className="mx-auto">
+          <div className="text-[24px] text-[#E8590C]">
+            Reaction Reappeared After Re-introduction
           </div>
-          <div className="mx-4 min-w-full pt-4 flex flex-col justify-center">
-                <div className="flex w-2/3 items-center">
-                    <div className="w-full border-2 border-gray-300 py-2 px-2">
-                        <p className="my-auto text-[16px]">Add a drug</p>
-                    </div>
-                    <Button type="primary" className="mx-1" size={"large"} onClick={() => alert("Clicked")}>
-                      +
-                    </Button>
-                </div>
-                <div className="flex w-2/3 mr-1 my-2 items-center border-2 border-gray-500 px-2">
-                    <p className="my-auto py-2 w-full text-[16px]">Paracetamol</p>
-                    <img src={cross} className="h-4"></img>
-                </div>
-          </div>
+          <RadioGroupDrugs />
+          {/* Section to add drug information */}
+          <AddDrugsBox />
         </div>
       </div>
+      <NavigationPanel />
     </FormLayout>
   );
 }
+
+const RadioGroupDrugs = () => {
+  const radioOptions = [
+    "No rechallenge",
+    "Recurrance of symptoms",
+    "No occurance of symptoms",
+    "Unknown",
+  ];
+  const onChangeRadioSelection = (e: any) => {
+    console.log("radio1 checked", e.target.value);
+  };
+  return (
+    <div className="w-full pt-2">
+      {/* Make description dynamic */}
+      <InputDescription isRequired={true} description="Drug 1" />
+      <Radio.Group
+        size="large"
+        buttonStyle="solid"
+        options={radioOptions}
+        optionType="button"
+        defaultValue={radioOptions[0]}
+        onChange={onChangeRadioSelection}
+      />
+      <div className="flex flex-row pt-4">
+        <p className="pl-1 pr-7 my-auto">Dose</p>
+        <Input suffix={<FiHelpCircle />} />
+      </div>
+    </div>
+  );
+};
+
+const AddDrugsBox = () => {
+  const [drugsAdded, setDrugsAdded] = useState<readonly String[]>([]);
+  const [inputValue, setInputValue] = useState<String>("");
+
+  const onChangeInput = (e: any) => {
+    setInputValue(e.target.value);
+  };
+
+  const onClickAddDrug = (e: any) => {
+    e.preventDefault();
+    setDrugsAdded([...drugsAdded, inputValue]);
+    setInputValue("");
+  };
+
+  const onClickRemoveDrug = (drug: String) => {
+    setDrugsAdded(drugsAdded.filter((d) => d !== drug));
+  };
+
+  return (
+    <div className="w-full pt-16">
+      <form
+        className="grid grid-cols-12 gap-1 gap-y-3"
+        onSubmit={onClickAddDrug}
+      >
+        <Input
+          className="col-span-11"
+          placeholder="Add a drug"
+          onChange={onChangeInput}
+          value={inputValue}
+        />
+        <button
+          type="submit"
+          className="col-span-1 bg-[#6C567B] text-white p-2 border hover:bg-white hover:text-[#6C567B] border-[#6C567B]"
+        >
+          <FiPlus className="mx-auto" />
+        </button>
+      </form>
+      <div className="grid grid-cols-12 gap-1 pt-2">
+        {drugsAdded.map((drug: String) => (
+          <div className="border border-gray-400 col-span-11 flex flex-row justify-between px-5 py-1">
+            <p className="my-auto">{drug}</p>
+            <button className="my-auto" onClick={() => onClickRemoveDrug(drug)}>
+              <FiX />
+            </button>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};

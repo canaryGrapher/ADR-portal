@@ -1,26 +1,48 @@
-import InputDescription from "~/components/forms/inputDescription/InputDescription";
+// importing layouts
 import FormLayout from "~/layouts/forms";
 
+// importing components
 import { Radio } from "antd";
+import InputDescription from "~/components/forms/inputDescription";
+import NavigationPanel from "~/components/forms/NavigationPanel";
 
 export default function Form1page3a() {
   return (
     <FormLayout>
       {/* Anything between the <FormLayout> tag can be changed */}
-      <div className="w-full shadow-xl">
-        <div className="mx-8 py-4 pb-8">
+      <div className="shadow-xl rounded-md w-full p-10 border">
+        <div className="mx-auto">
           <div className="pl-4 text-[24px] text-[#E8590C]">Dechallenge</div>
-          <div className="mx-4 min-w-full pt-4">
-            <InputDescription isRequired={true} description="Drug 1" />
-            <Radio.Group defaultValue={0} buttonStyle="solid">
-              <Radio.Button value={0}>No dechallenge</Radio.Button>
-              <Radio.Button value={1}>Definite Improvement</Radio.Button>
-              <Radio.Button value={2}>No Improvement</Radio.Button>
-              <Radio.Button value={3}>Unknown</Radio.Button>
-            </Radio.Group>
-          </div>
+          <RadioGroupDrugs />
         </div>
       </div>
+      <NavigationPanel />
     </FormLayout>
   );
 }
+
+const RadioGroupDrugs = () => {
+  const radioOptions = [
+    "No dechallenge",
+    "Definite Improvement",
+    "No Improvement",
+    "Unknown",
+  ];
+  const onChangeRadioSelection = (e: any) => {
+    console.log("radio1 checked", e.target.value);
+  };
+  return (
+    <div className="w-full pt-2">
+      {/* Make description dynamic */}
+      <InputDescription isRequired={true} description="Drug 1" />
+      <Radio.Group
+        size="large"
+        buttonStyle="solid"
+        options={radioOptions}
+        optionType="button"
+        defaultValue={radioOptions[0]}
+        onChange={onChangeRadioSelection}
+      />
+    </div>
+  );
+};
