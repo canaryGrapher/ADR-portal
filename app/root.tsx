@@ -8,7 +8,7 @@ import RootLayout from "~/layouts/root";
 import { DocumentProps } from "~/types/general";
 
 //importing stylesheet
-import globalStyle from "~/styles/global.css";
+import globalStyle from "./styles/app.css";
 import antStyles from "antd/dist/antd.css";
 
 export const meta: MetaFunction = () => {
