@@ -1,11 +1,10 @@
 // importing layouts
 import FormLayout from "~/layouts/forms";
 
-//importing components
+// importing components
+import { Radio } from "antd";
 import InputDescription from "~/components/forms/inputDescription";
 import NavigationPanel from "~/components/forms/NavigationPanel";
-
-import { Radio } from "antd";
 
 export default function Form1page3a() {
   return (
@@ -13,7 +12,7 @@ export default function Form1page3a() {
       {/* Anything between the <FormLayout> tag can be changed */}
       <div className="shadow-xl rounded-md w-full p-10 border">
         <div className="mx-auto">
-          <div className="text-[24px] text-[#E8590C]">Action Taken</div>
+          <div className="pl-4 text-[24px] text-[#E8590C]">Dechallenge</div>
           <RadioGroupDrugs />
         </div>
       </div>
@@ -24,11 +23,9 @@ export default function Form1page3a() {
 
 const RadioGroupDrugs = () => {
   const radioOptions = [
-    "Drug withdrawn",
-    "Dose increased",
-    "Dose reduced",
-    "Dose not changed",
-    "Not applicable",
+    "No dechallenge",
+    "Definite Improvement",
+    "No Improvement",
     "Unknown",
   ];
   const onChangeRadioSelection = (e: any) => {

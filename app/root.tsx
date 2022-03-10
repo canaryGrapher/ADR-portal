@@ -12,7 +12,7 @@ import globalStyle from "~/styles/global.css";
 import antStyles from "antd/dist/antd.css";
 
 export const meta: MetaFunction = () => {
-  return { title: "New Remix App" };
+  return { title: "ADR Portal | KMC" };
 };
 
 export function links() {
@@ -38,7 +38,7 @@ const Document = ({ children }: DocumentProps) => {
   );
 };
 
-export default function App() {
+const App = () => {
   return (
     <Document>
       <RootLayout>
@@ -46,4 +46,6 @@ export default function App() {
       </RootLayout>
     </Document>
   );
-}
+};
+
+export default App;

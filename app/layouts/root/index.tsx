@@ -12,12 +12,12 @@ import { LayoutProps } from "~/types/general";
 
 const RootLayout = ({ children }: LayoutProps) => {
   return (
-    <React.Fragment>
+    <div className="overflow-x-hidden">
       <Provider store={store}>
         <Navbar />
         {children}
       </Provider>
-    </React.Fragment>
+    </div>
   );
 };
 
