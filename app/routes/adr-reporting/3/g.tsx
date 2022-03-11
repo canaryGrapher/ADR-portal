@@ -29,7 +29,7 @@ export default function Form1page3g() {
           </div>
         </div>
       </div>
-      <NavigationPanel />
+      <NavigationPanel currentRoute="3g" />
     </FormLayout>
   );
 }

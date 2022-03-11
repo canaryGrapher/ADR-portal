@@ -16,7 +16,7 @@ export default function Form1page3a() {
           <RadioGroupDrugs />
         </div>
       </div>
-      <NavigationPanel />
+      <NavigationPanel currentRoute="3d" />
     </FormLayout>
   );
 }

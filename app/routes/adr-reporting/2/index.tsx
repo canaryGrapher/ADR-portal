@@ -39,7 +39,7 @@ export default function Form1page2() {
           <TextArea rows={4} />
         </div>
       </div>
-      <NavigationPanel />
+      <NavigationPanel currentRoute="2" />
     </FormLayout>
   );
 }

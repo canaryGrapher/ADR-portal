@@ -159,7 +159,7 @@ export default function Form1page3f1() {
           </div>
         </div>
       </div>
-      <NavigationPanel />
+      <NavigationPanel currentRoute="3f" />
     </FormLayout>
   );
 }

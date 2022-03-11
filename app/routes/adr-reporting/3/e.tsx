@@ -26,7 +26,7 @@ export default function Form1page3e() {
           <AddDrugsBox />
         </div>
       </div>
-      <NavigationPanel />
+      <NavigationPanel currentRoute="3e" />
     </FormLayout>
   );
 }

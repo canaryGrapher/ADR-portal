@@ -23,7 +23,7 @@ export default function Form1page3i() {
           </div>
         </div>
       </div>
-      <NavigationPanel />
+      <NavigationPanel currentRoute="3i" />
     </FormLayout>
   );
 }

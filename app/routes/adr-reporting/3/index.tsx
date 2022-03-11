@@ -22,7 +22,7 @@ export default function Form1page3() {
           <Subform />
         </form>
       </div>
-      <NavigationPanel />
+      <NavigationPanel currentRoute="3" />
     </FormLayout>
   );
 }

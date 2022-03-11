@@ -65,7 +65,7 @@ export default function Form1page3f2() {
           </div>
         </div>
       </div>
-      <NavigationPanel />
+      <NavigationPanel currentRoute="3f2" />
     </FormLayout>
   );
 }

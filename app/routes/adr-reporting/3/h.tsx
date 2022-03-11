@@ -21,7 +21,7 @@ export default function Form1page3h() {
           <Subform />
         </div>
       </div>
-      <NavigationPanel />
+      <NavigationPanel currentRoute="3h" />
     </FormLayout>
   );
 }

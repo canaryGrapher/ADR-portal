@@ -10,6 +10,7 @@ import {
   Col,
 } from "antd";
 import InputDescription from "~/components/forms/inputDescription";
+import NavigationPanel from "~/components/forms/NavigationPanel";
 
 const { TextArea } = Input;
 
@@ -131,6 +132,7 @@ export default function Form1() {
           </div>
         </div>
       </div>
+      <NavigationPanel currentRoute="1" />
     </FormLayout>
   );
 }

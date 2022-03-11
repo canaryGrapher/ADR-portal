@@ -40,7 +40,7 @@ export default function Form1page3f5() {
           </div>
         </div>
       </div>
-      <NavigationPanel />
+      <NavigationPanel currentRoute="3f5" />
     </FormLayout>
   );
 }
