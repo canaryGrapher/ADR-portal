@@ -19,6 +19,10 @@ export default function Form1() {
     <FormLayout>
       {/* Anything between the <FormLayout> tag can be changed */}
       <div className="shadow-xl rounded-md w-full p-10 border">
+        <div className="text-3xl">
+          {/* Change the name of the form based on the form */}
+          <h2 className="text-[#E8590C]">Patient Information</h2>
+        </div>
         <div className="w-full">
           <div className="mx-4 min-w-full pt-4">
             <div className="mt-4 w-full px-4">

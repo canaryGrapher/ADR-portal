@@ -12,7 +12,7 @@ export default function Form1page3a() {
       {/* Anything between the <FormLayout> tag can be changed */}
       <div className="shadow-xl rounded-md w-full p-10 border">
         <div className="mx-auto">
-          <div className="pl-4 text-[24px] text-[#E8590C]">Dechallenge</div>
+          <div className="text-[24px] text-[#E8590C]">Dechallenge</div>
           <RadioGroupDrugs />
         </div>
       </div>

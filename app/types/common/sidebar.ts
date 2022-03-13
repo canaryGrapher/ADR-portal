@@ -19,4 +19,10 @@ type ListItemsProps = {
   clicker: (name: string) => void;
 }
 
-export type { SidebarProps, TemplateProps, ListItemsProps };
+type SidebarNumberingBullets = {
+  isCompleted: boolean;
+  isActive: boolean;
+  bulletNumber: number;
+}
+
+export type { SidebarProps, TemplateProps, ListItemsProps, SidebarNumberingBullets };

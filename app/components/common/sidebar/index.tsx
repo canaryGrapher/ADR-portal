@@ -29,17 +29,35 @@ const Sidebar = () => {
   };
 
   return (
-    <div className="shadow-xl p-5 rounded-lg text-[#6C567B]">
-      {adrReportingData.map((item: TemplateProps, index: number) => {
-        return (
-          <ListItems
-            key={index}
-            {...item}
-            number={index}
-            clicker={() => changeData(item.name)}
-          />
-        );
-      })}
+    <div className="flex flex-col">
+      <div className="grid grid-cols-4 pb-4">
+        <div className="col-span-1">
+          <img src="/emblem.png" className="p-1" />
+        </div>
+        <div className="col-span-3 text-center">
+          <h2 className="text-[#6C567B] text-xl m-0 mb-3">
+            INDIAN PHARMACOPOEIA COMMISSION
+          </h2>
+          <p className="text-[7px] border-t-2 border-[#6C567B] pt-2 font-bold">
+            (National Coordination Centre-Pharmacovigilance Programme of India)
+            <br />
+            Ministry of Health & Family Welfare, Government of India Sector-23,
+            Raj Nagar, Ghaziabad-201002
+          </p>
+        </div>
+      </div>
+      <div className="shadow-xl p-5 rounded-lg text-[#6C567B] border">
+        {adrReportingData.map((item: TemplateProps, index: number) => {
+          return (
+            <ListItems
+              key={index}
+              {...item}
+              number={index}
+              clicker={() => changeData(item.name)}
+            />
+          );
+        })}
+      </div>
     </div>
   );
 };

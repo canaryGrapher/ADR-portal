@@ -14,7 +14,7 @@ export default function Form1page3() {
   return (
     <FormLayout>
       <div className="shadow-xl rounded-md w-full p-10 border">
-        <div className="pl-4 text-3xl">
+        <div className="text-3xl">
           {/* Change the name of the form based on the form */}
           <h2 className="text-[#E8590C]">Medication</h2>
         </div>
