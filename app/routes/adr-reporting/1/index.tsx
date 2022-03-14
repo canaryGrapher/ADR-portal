@@ -1,4 +1,4 @@
-import FormLayout from "~/layouts/forms";
+import FormLayout from "~/layouts/forms/adr-reporting";
 import {
   Input,
   DatePicker,

@@ -1,4 +1,4 @@
-import FormLayout from "~/layouts/forms";
+import FormLayout from "~/layouts/forms/adr-reporting";
 
 //importing components
 import { Input, Form, DatePicker } from "antd";

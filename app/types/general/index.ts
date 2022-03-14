@@ -11,3 +11,9 @@ export type InputDescriptionProps = {
   isRequired: Boolean;
   description: String;
 };
+
+export type InputRadioComponentProps = {
+  title: String;
+  radioOptionFalse: String;
+  radioOptionTrue: String;
+}; 
