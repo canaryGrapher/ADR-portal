@@ -4,7 +4,7 @@ import Sidebar from "~/components/common/sidebar";
 // importing types
 import { LayoutProps } from "~/types/general";
 
-const SuspectedAdrReportingLayout = ({ children }: LayoutProps) => {
+const FormLayout = ({ children }: LayoutProps) => {
   return (
     <div className="flex w-screen flex-col">
       <div className="flex w-screen flex-col items-center justify-center pt-8 text-[35px] text-[#6C567B]">
@@ -25,4 +25,4 @@ const SuspectedAdrReportingLayout = ({ children }: LayoutProps) => {
   );
 };
 
-export default SuspectedAdrReportingLayout;
+export default FormLayout;
