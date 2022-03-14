@@ -3,6 +3,25 @@ import { InputRadioComponentProps } from "~/types/general";
 import { Switch } from "antd";
 import { useState } from "react";
 
+const RadioOptions = () => (
+  <div className="w-full grid grid-cols-2 gap-4">
+    <div className="col-span-1">
+      <InputRadioComponent
+        title="Report Type"
+        radioOptionFalse="Predictable"
+        radioOptionTrue="Not Predictable"
+      />
+    </div>
+    <div className="col-span-1">
+      <InputRadioComponent
+        title="AMC/NCC"
+        radioOptionFalse="Applicable"
+        radioOptionTrue="Not Applicable"
+      />
+    </div>
+  </div>
+);
+
 const InputRadioComponent = (props: InputRadioComponentProps) => {
   const [selectedOption, setSelectedOption] = useState(props.radioOptionFalse);
 
@@ -25,4 +44,4 @@ const InputRadioComponent = (props: InputRadioComponentProps) => {
   );
 };
 
-export default InputRadioComponent;
+export default RadioOptions;
