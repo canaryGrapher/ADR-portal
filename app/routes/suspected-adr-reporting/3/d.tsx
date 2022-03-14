@@ -4,7 +4,7 @@ import InputRadioComponent from "~/components/forms/InputRadioComponent";
 import NavigationPanel from "~/components/forms/NavigationPanel";
 import { Input, DatePicker } from "antd";
 
-export default function Form1page3a() {
+export default function Form1page3d() {
   return (
     <FormLayout>
       {/* Anything between the <FormLayout> tag can be changed */}
@@ -81,7 +81,7 @@ export default function Form1page3a() {
         </div>
       </div>
 
-      <NavigationPanel currentRoute="3b" />
+      <NavigationPanel currentRoute="3d" />
     </FormLayout>
   );
 }

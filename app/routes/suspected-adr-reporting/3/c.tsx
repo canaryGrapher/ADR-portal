@@ -2,20 +2,9 @@ import InputDescription from "~/components/forms/inputDescription";
 import FormLayout from "~/layouts/forms/suspected-adr-reporting";
 import InputRadioComponent from "~/components/forms/InputRadioComponent";
 import NavigationPanel from "~/components/forms/NavigationPanel";
-import {
-  Radio,
-  Button,
-  Input,
-  DatePicker,
-  Form,
-  Select,
-  Checkbox,
-  Row,
-  Col,
-} from "antd";
-const { TextArea } = Input;
+import { Radio, Input } from "antd";
 
-export default function Form1page3a() {
+export default function Form1page3c() {
   return (
     <FormLayout>
       {/* Anything between the <FormLayout> tag can be changed */}
@@ -35,58 +24,47 @@ export default function Form1page3a() {
           />
         </div>
       </div>
-      <div className="w-full shadow-xl my-8">
+      <br />
+
+      <div className="w-full border shadow-xl">
         <div className="mx-8 py-4 pb-8">
           <div className="pl-4 text-[24px] text-[#E8590C]">
-            Concomitant medical product including self-medication and herbal
-            remedies with therapy dates
+            Reaction reappeared after reintroduction
           </div>
           <div className="mx-4 min-w-full pt-4">
-            <div className="mt-4 w-full px-4">
-              <InputDescription
-                isRequired={true}
-                description="Name( Brand/Generic)"
-              />
-              <Input />
+            <InputDescription isRequired={true} description="Drug 1" />
+            <Radio.Group defaultValue={0} buttonStyle="solid">
+              <Radio.Button className="w-48" value={0}>
+                No
+              </Radio.Button>
+              <Radio.Button className="w-48" value={1}>
+                Yes
+              </Radio.Button>
+              <Radio.Button className="w-48" value={3}>
+                Effects Unknown
+              </Radio.Button>
+            </Radio.Group>
+            <div className="flex items-center p-4">
+              <p className="mb-[0px] pr-1 text-[16px]">Dose</p>
+              <Input addonAfter={"?"} className="w-16" />
             </div>
-            <div className="flex flex-row pt-4">
-              <div className="w-1/2 px-4">
-                <InputDescription isRequired={false} description="Dose Used" />
-                <Input />
-              </div>
-              <div className="w-1/2 pr-4">
-                <InputDescription isRequired={false} description="Route Used" />
-                <Input />
-              </div>
-            </div>
-            <div className="flex flex-row pt-4">
-              <div className="mt-4 w-full px-4">
-                <InputDescription
-                  isRequired={false}
-                  description="Frequency (OD, BD etc.)"
-                />
-                <Input />
-              </div>
-            </div>
-            <div className="flex flex-row pt-4">
-              <div className="w-1/2 px-4">
-                <InputDescription
-                  isRequired={true}
-                  description="Date started"
-                />
-                <DatePicker className="w-full" />
-              </div>
-              <div className="w-1/2 px-4">
-                <InputDescription
-                  isRequired={false}
-                  description="Date stopped"
-                />
-                <DatePicker className="w-full" />
-              </div>
-            </div>
-            <div className="mt-4 w-full px-4">
-              <InputDescription isRequired={false} description="Indication" />
-              <Input />
+          </div>
+          <div className="mx-4 min-w-full pt-4">
+            <InputDescription isRequired={true} description="Drug 2" />
+            <Radio.Group defaultValue={0} buttonStyle="solid">
+              <Radio.Button className="w-48" value={0}>
+                No
+              </Radio.Button>
+              <Radio.Button className="w-48" value={1}>
+                Yes
+              </Radio.Button>
+              <Radio.Button className="w-48" value={3}>
+                Effects Unknown
+              </Radio.Button>
+            </Radio.Group>
+            <div className="flex items-center p-4">
+              <p className="mb-[0px] pr-1 text-[16px]">Dose</p>
+              <Input addonAfter={"?"} className="w-16" />
             </div>
           </div>
         </div>

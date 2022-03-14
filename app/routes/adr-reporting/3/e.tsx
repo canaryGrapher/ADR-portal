@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 // importing layouts
-import FormLayout from "~/layouts/forms";
+import FormLayout from "~/layouts/forms/adr-reporting";
 
 // importing components
 import InputDescription from "~/components/forms/inputDescription";
