@@ -1,0 +1,29 @@
+type TemplateProps = {
+  name: string;
+  pageLink: string;
+  isCompleted: boolean;
+  children?: TemplateProps[],
+};
+
+type SidebarProps = {
+  baseUrl: string;
+  template: TemplateProps[];
+};
+
+type ListItemsProps = {
+  name: string;
+  pageLink: string;
+  isCompleted: boolean;
+  children?: TemplateProps[],
+  number: number;
+  clicker: (name: string) => void;
+  currentPage: string;
+}
+
+type SidebarNumberingBullets = {
+  isCurrentPage: boolean;
+  isCompleted: boolean;
+  bulletNumber: number;
+}
+
+export type { SidebarProps, TemplateProps, ListItemsProps, SidebarNumberingBullets };

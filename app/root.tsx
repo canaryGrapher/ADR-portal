@@ -1,39 +1,36 @@
-import React from "react";
-import { Links, LiveReload, Outlet } from "remix";
+import { Links, LiveReload, Outlet, Meta, Scripts } from "remix";
 import type { MetaFunction } from "remix";
 
+// importing layouts
+import RootLayout from "~/layouts/root";
+
 // importing types
-import { DocumentProps, LayoutProps } from "~/types/general";
+import { DocumentProps } from "~/types/general";
 
-//importing global stylesheet
-import globalStyle from "~/styles/global.css";
-
-export function links() {
-  return [{ rel: "stylesheet", href: globalStyle }];
-}
+//importing stylesheet
+import globalStyle from "./styles/app.css";
+import antStyles from "antd/dist/antd.css";
 
 export const meta: MetaFunction = () => {
-  return { title: "New Remix App" };
+  return { title: "ADR Portal | KMC" };
 };
 
-export default function App() {
-  return (
-    <Document>
-      <Layout>
-        <Outlet />
-      </Layout>
-    </Document>
-  );
+export function links() {
+  return [
+    { rel: "stylesheet", href: globalStyle },
+    { rel: "stylesheet", href: antStyles },
+  ];
 }
 
-const Document = ({ children, title }: DocumentProps) => {
+const Document = ({ children }: DocumentProps) => {
   return (
     <html lang="en">
       <head>
-        <title>{title ? title : "ADR Portal | MAHE"}</title>
+        <Meta />
         <Links />
       </head>
       <body>
+        <Scripts />
         {children}
         {process.env.NODE_ENV === "development" && <LiveReload />}
       </body>
@@ -41,11 +38,14 @@ const Document = ({ children, title }: DocumentProps) => {
   );
 };
 
-const Layout = ({ children }: LayoutProps) => {
+const App = () => {
   return (
-    <React.Fragment>
-      <h1 className="text-blue-400">Navbar here</h1>
-      {children}
-    </React.Fragment>
+    <Document>
+      <RootLayout>
+        <Outlet />
+      </RootLayout>
+    </Document>
   );
 };
+
+export default App;
