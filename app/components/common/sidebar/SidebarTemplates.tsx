@@ -161,6 +161,12 @@ const SuspectedAdrReporting: SidebarProps = {
           isCompleted: false,
           children: [],
         },
+        {
+          name: "AMC/NCC Section",
+          pageLink: "3e",
+          isCompleted: false,
+          children: [],
+        },
       ],
     },
     {

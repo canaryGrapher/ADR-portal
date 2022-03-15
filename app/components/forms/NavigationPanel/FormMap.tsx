@@ -17,4 +17,27 @@ const ADRreporting_portalMap = [
   "4",
 ];
 
-export { ADRreporting_portalMap };
+const SuspectedAdrReporting_portalMap = [
+  "1",
+  "2",
+  "3",
+  "3b",
+  "3c",
+  "3d",
+  "3e",
+  "4",
+];
+
+const MedicalDeviceReporting_portalMap = [
+  "1",
+  "2",
+  "3",
+  "4",
+  "5",
+  "5b",
+  "5c",
+  "5d",
+  "5e",
+];
+
+export { ADRreporting_portalMap, SuspectedAdrReporting_portalMap };

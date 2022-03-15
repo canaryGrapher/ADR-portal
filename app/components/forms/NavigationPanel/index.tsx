@@ -1,7 +1,11 @@
 import { useState, useEffect } from "react";
 
 // importing entitites
-import { ADRreporting_portalMap } from "./FormMap";
+import {
+  ADRreporting_portalMap,
+  SuspectedAdrReporting_portalMap,
+} from "./FormMap";
+import { BrowserRouter as Router, useLocation } from "react-router-dom";
 
 // importing types
 import { NavigationPanelProps } from "~/types/forms/NavigationPanel";
@@ -10,26 +14,39 @@ import { Link } from "remix";
 const NavigationPanel = (props: NavigationPanelProps) => {
   const [nextPage, setNextPage] = useState<string>("");
   const [previousPage, setPreviousPage] = useState<string>("");
-  const pageType = "/adr-reporting/";
+  const location = useLocation();
+  const currentLocation = location.pathname.split("/");
+  const pageType =
+    currentLocation[1] === "adr-reporting"
+      ? { link: "/adr-reporting/", mapRoute: ADRreporting_portalMap }
+      : currentLocation[1] === "suspected-adr-reporting"
+      ? {
+          link: "/suspected-adr-reporting/",
+          mapRoute: SuspectedAdrReporting_portalMap,
+        }
+      : {
+          link: "/medical-device-reporting/",
+          mapRoute: ADRreporting_portalMap,
+        };
 
   useEffect(() => {
-    for (let route = 0; route < ADRreporting_portalMap.length; route++) {
-      if (props.currentRoute === ADRreporting_portalMap[route]) {
-        if (route < ADRreporting_portalMap.length - 1 && route != 0) {
+    for (let route = 0; route < pageType.mapRoute.length; route++) {
+      if (props.currentRoute === pageType.mapRoute[route]) {
+        if (route < pageType.mapRoute.length - 1 && route != 0) {
           setNextPage(
-            pageType + ADRreporting_portalMap[route + 1].split("").join("/")
+            pageType.link + pageType.mapRoute[route + 1].split("").join("/")
           );
           setPreviousPage(
-            pageType + ADRreporting_portalMap[route - 1].split("").join("/")
+            pageType.link + pageType.mapRoute[route - 1].split("").join("/")
           );
-        } else if (route == ADRreporting_portalMap.length - 1) {
+        } else if (route == pageType.mapRoute.length - 1) {
           setNextPage(pageType + "submit");
           setPreviousPage(
-            pageType + ADRreporting_portalMap[route - 1].split("").join("/")
+            pageType.link + pageType.mapRoute[route - 1].split("").join("/")
           );
         } else if (route === 0) {
           setNextPage(
-            pageType + ADRreporting_portalMap[route + 1].split("").join("/")
+            pageType.link + pageType.mapRoute[route + 1].split("").join("/")
           );
           setPreviousPage("/");
         }
