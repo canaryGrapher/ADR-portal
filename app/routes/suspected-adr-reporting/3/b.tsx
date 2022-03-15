@@ -1,16 +1,12 @@
 import { Radio } from "antd";
 import InputDescription from "~/components/forms/inputDescription";
-import RadioOptions from "~/components/forms/suspectedADRRadioMenu";
 import NavigationPanel from "~/components/forms/NavigationPanel";
 import FormLayout from "~/layouts/forms/suspected-adr-reporting";
 
 export default function Form2page3b() {
   return (
     <FormLayout>
-      <div className="flex w-full flex-col">
-        <RadioOptions />
-      </div>
-      <div className="shadow-xl rounded-md w-full p-10 border mt-4">
+      <div className="shadow-xl rounded-md w-full p-10 border">
         <div>
           <div className="text-[24px] text-[#E8590C]">Action Taken</div>
           <RadioGroupDrugs />

@@ -1,6 +1,6 @@
 type TemplateProps = {
   name: string;
-  isActive: boolean;
+  pageLink: string;
   isCompleted: boolean;
   children?: TemplateProps[],
 };
@@ -12,16 +12,17 @@ type SidebarProps = {
 
 type ListItemsProps = {
   name: string;
-  isActive: boolean;
+  pageLink: string;
   isCompleted: boolean;
   children?: TemplateProps[],
   number: number;
   clicker: (name: string) => void;
+  currentPage: string;
 }
 
 type SidebarNumberingBullets = {
+  isCurrentPage: boolean;
   isCompleted: boolean;
-  isActive: boolean;
   bulletNumber: number;
 }
 

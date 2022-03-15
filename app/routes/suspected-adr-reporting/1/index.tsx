@@ -7,11 +7,9 @@ import NavigationPanel from "~/components/forms/NavigationPanel";
 export default function Form2page1() {
   return (
     <FormLayout>
-      <div className="flex w-full flex-col">
-        <RadioOptions />
-      </div>
-      <div className="mt-5 flex w-full flex-col rounded-xl border py-5 shadow-md">
-        <div className="mx-8 py-4">
+      <div className="flex w-full flex-col rounded-xl border p-10 shadow-md">
+        <div className="text-[24px] text-[#E8590C]">Patient Information</div>
+        <div className="py-4">
           <div className="w-full">
             <InputDescription
               isRequired={true}
@@ -43,6 +41,9 @@ export default function Form2page1() {
             </div>
           </div>
         </div>
+      </div>
+      <div className="flex w-full flex-col mt-5">
+        <RadioOptions />
       </div>
       <NavigationPanel currentRoute="1" />
     </FormLayout>

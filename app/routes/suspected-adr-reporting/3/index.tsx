@@ -1,4 +1,3 @@
-import RadioOptions from "~/components/forms/suspectedADRRadioMenu";
 import FormLayout from "~/layouts/forms/suspected-adr-reporting";
 
 import { DatePicker, Input, Form } from "antd";
@@ -12,11 +11,8 @@ export default function Form2page3() {
   };
   return (
     <FormLayout>
-      <div className="flex w-full flex-col">
-        <RadioOptions />
-      </div>
-      <div className="shadow-xl rounded-md w-full p-10 border mt-4">
-        <div className="text-3xl">
+      <div className="shadow-xl rounded-md w-full p-10 border">
+        <div className="text-[24px]">
           {/* Change the name of the form based on the form */}
           <h2 className="text-[#E8590C]">Medication</h2>
         </div>
@@ -28,7 +24,7 @@ export default function Form2page3() {
 }
 const SubForm = () => (
   <Form>
-    <div className="min-w-full pt-4">
+    <div className="pt-4">
       <InputDescription isRequired={true} description="Name (Brand/Generic)" />
       <Input />
     </div>
