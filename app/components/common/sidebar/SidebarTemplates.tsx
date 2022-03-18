@@ -178,4 +178,71 @@ const SuspectedAdrReporting: SidebarProps = {
   ],
 };
 
+const MedicalDeviceReporting: SidebarProps = {
+  baseUrl: "/medical-device-reporting",
+  template: [
+    {
+      name: "AMC/NCC Section",
+      pageLink: "1",
+      isCompleted: false,
+      children: [],
+    },
+    {
+      name: "AMC/NCC Section",
+      pageLink: "2",
+      isCompleted: false,
+      children: [],
+    },
+    {
+      name: "AMC/NCC Section",
+      pageLink: "3",
+      isCompleted: false,
+      children: [],
+    },
+    {
+      name: "AMC/NCC Section",
+      pageLink: "4",
+      isCompleted: false,
+      children: [],
+    },
+    {
+      name: "AMC/NCC Section",
+      pageLink: "5",
+      isCompleted: false,
+      children: [
+        {
+          name: "AMC/NCC Section",
+          pageLink: "5b",
+          isCompleted: false,
+          children: [],
+        },
+        {
+          name: "AMC/NCC Section",
+          pageLink: "5c",
+          isCompleted: false,
+          children: [],
+        },
+        {
+          name: "AMC/NCC Section",
+          pageLink: "5d",
+          isCompleted: false,
+          children: [],
+        },
+      ],
+    },
+      {
+        name: "AMC/NCC Section",
+        pageLink: "6",
+        isCompleted: false,
+        children: [],
+      },
+      {
+        name: "AMC/NCC Section",
+        pageLink: "3e",
+        isCompleted: false,
+        children: [],
+      },
+    },
+};
+
 export { AdrReporting, SuspectedAdrReporting };
