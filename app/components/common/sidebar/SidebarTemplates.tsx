@@ -182,67 +182,85 @@ const MedicalDeviceReporting: SidebarProps = {
   baseUrl: "/medical-device-reporting",
   template: [
     {
-      name: "AMC/NCC Section",
+      name: "Primary Information",
       pageLink: "1",
       isCompleted: false,
       children: [],
     },
     {
-      name: "AMC/NCC Section",
+      name: "Reporter Information",
       pageLink: "2",
       isCompleted: false,
       children: [],
     },
     {
-      name: "AMC/NCC Section",
+      name: "Device Category",
       pageLink: "3",
       isCompleted: false,
       children: [],
     },
     {
-      name: "AMC/NCC Section",
+      name: "Device Description",
       pageLink: "4",
-      isCompleted: false,
-      children: [],
-    },
-    {
-      name: "AMC/NCC Section",
-      pageLink: "5",
       isCompleted: false,
       children: [
         {
-          name: "AMC/NCC Section",
-          pageLink: "5b",
+          name: "Manufacturer Details",
+          pageLink: "4",
           isCompleted: false,
           children: [],
         },
         {
-          name: "AMC/NCC Section",
-          pageLink: "5c",
+          name: "Importer Details",
+          pageLink: "4b",
           isCompleted: false,
           children: [],
         },
         {
-          name: "AMC/NCC Section",
-          pageLink: "5d",
+          name: "Distributor Details",
+          pageLink: "4c",
+          isCompleted: false,
+          children: [],
+        },
+        {
+          name: "Further Information",
+          pageLink: "4d",
           isCompleted: false,
           children: [],
         },
       ],
     },
-      {
-        name: "AMC/NCC Section",
-        pageLink: "6",
-        isCompleted: false,
-        children: [],
-      },
-      {
-        name: "AMC/NCC Section",
-        pageLink: "3e",
-        isCompleted: false,
-        children: [],
-      },
+    {
+      name: "Event Description",
+      pageLink: "5",
+      isCompleted: false,
+      children: [],
     },
+    {
+      name: "Patient Information",
+      pageLink: "6",
+      isCompleted: false,
+      children: [],
+    },
+    {
+      name: "Healthcare Facility Details",
+      pageLink: "7",
+      isCompleted: false,
+      children: [],
+    },
+    {
+      name: "Casualty Assessment",
+      pageLink: "8",
+      isCompleted: false,
+      children: [],
+    },
+    {
+      name: "Product Owner's Investigation",
+      pageLink: "9",
+      isCompleted: false,
+      children: [],
+    },
+  ],
 };
 
 export { AdrReporting, SuspectedAdrReporting };
