@@ -63,7 +63,7 @@ const RadioGroupDrugs = () => {
 
 const AddDrugsBox = () => {
   const [drugsAdded, setDrugsAdded] = useState<readonly String[]>([]);
-  const [inputValue, setInputValue] = useState<String>("");
+  const [inputValue, setInputValue] = useState<string>("");
 
   const onChangeInput = (e: any) => {
     setInputValue(e.target.value);
