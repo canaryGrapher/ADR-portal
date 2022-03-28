@@ -5,7 +5,11 @@ import { BrowserRouter as Router, useLocation } from "react-router-dom";
 import { ListItems } from "./ListItems";
 
 // importing data
-import { AdrReporting, SuspectedAdrReporting } from "./SidebarTemplates";
+import {
+  AdrReporting,
+  SuspectedAdrReporting,
+  MedicalDeviceReporting,
+} from "./SidebarTemplates";
 
 // importing types
 import { TemplateProps } from "~/types/common/sidebar";
@@ -32,29 +36,21 @@ const Sidebar = () => {
     if (currentForm === "suspected-adr-reporting") {
       setAdrReportingData(SuspectedAdrReporting.template);
     }
+    if (currentForm === "medical-device-reporting") {
+      setAdrReportingData(MedicalDeviceReporting.template);
+    }
     setActiveTab(currentPage + currentPageSub + currentPageSubSub);
   }, [location]);
-
-  const changeData = (changeElement: string) => {
-    // alert(changeElement);
-    // const currentState = adrReportingData;
-    // console.log(changeElement);
-    // const newState = currentState.map((element: TemplateProps) => {
-    //   if (element.name === changeElement) {
-    //     element.isActive = !element.isActive;
-    //   } else {
-    //     element.isActive = false;
-    //   }
-    //   return element;
-    // });
-    // setAdrReportingData(newState);
-  };
 
   return (
     <div className="flex flex-col">
       <div className="grid grid-cols-4 pb-4">
         <div className="col-span-1">
-          <img src="/emblem.png" className="p-1" />
+          <img
+            alt="Picture of Indian National Emblem"
+            src="/emblem.png"
+            className="p-1"
+          />
         </div>
         <div className="col-span-3 text-center">
           <h2 className="text-[#6C567B] text-xl m-0 mb-3">
@@ -75,7 +71,6 @@ const Sidebar = () => {
               key={index}
               {...item}
               number={index}
-              clicker={() => changeData(item.name)}
               currentPage={activeTab}
               pageLink={item.pageLink}
             />

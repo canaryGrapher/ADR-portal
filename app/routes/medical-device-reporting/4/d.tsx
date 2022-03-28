@@ -4,7 +4,7 @@ import { useState } from "react";
 import FormLayout from "~/layouts/forms/adr-reporting";
 
 //importing components
-import { Input, DatePicker, Form, Select, Checkbox, Radio } from "antd";
+import { Input, DatePicker, Radio } from "antd";
 import InputDescription from "~/components/forms/inputDescription";
 import NavigationPanel from "~/components/forms/NavigationPanel";
 
@@ -17,7 +17,6 @@ export default function Form3page4d() {
     useState<string>("Yes");
 
   const changeStateOfRadio = (radioIdentifier: string, radioValue: any) => {
-    console.log(radioValue.target.value);
     if (radioIdentifier === "1") {
       setRegulatedInIndia(radioValue.target.value);
     }
@@ -235,7 +234,7 @@ export default function Form3page4d() {
           </div>
         </div>
       </div>
-      <NavigationPanel currentRoute="4" />
+      <NavigationPanel currentRoute="4d" />
     </FormLayout>
   );
 }

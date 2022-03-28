@@ -16,7 +16,6 @@ type ListItemsProps = {
   isCompleted: boolean;
   children?: TemplateProps[],
   number: number;
-  clicker: (name: string) => void;
   currentPage: string;
 }
 

@@ -8,7 +8,6 @@ import NavigationPanel from "~/components/forms/NavigationPanel";
 export default function Form1page3() {
   const onFormSubmit = (e: any) => {
     e.preventDefault();
-    console.log(e.target.value);
   };
 
   return (

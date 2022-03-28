@@ -22,12 +22,7 @@ const ListItems = (props: ListItemsProps) => {
             bulletNumber={props.number}
           />
         </div>
-        <p
-          className="cursor-pointer hover:underline text-base"
-          onClick={() => props.clicker}
-        >
-          {props.name}
-        </p>
+        <p className="cursor-pointer hover:underline text-base">{props.name}</p>
       </div>
       <div className="block pl-8">
         {props.currentPage.split("")[0] === props.pageLink &&
@@ -55,11 +50,6 @@ const ListItems = (props: ListItemsProps) => {
                     child.pageLink.split("")[1] &&
                     child.children?.map(
                       (subChild: TemplateProps, subIndex: number) => {
-                        console.log(
-                          subChild.pageLink.split("")[2],
-                          " ",
-                          props.currentPage.split("")[2]
-                        );
                         const isActiveSubTab =
                           subChild.pageLink.split("")[2] ===
                           props.currentPage.split("")[2];

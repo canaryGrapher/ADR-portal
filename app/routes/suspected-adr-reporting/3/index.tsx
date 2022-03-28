@@ -5,10 +5,6 @@ import InputDescription from "~/components/forms/inputDescription";
 import NavigationPanel from "~/components/forms/NavigationPanel";
 
 export default function Form2page3() {
-  const onFormSubmit = (e: any) => {
-    e.preventDefault();
-    console.log(e.target.value);
-  };
   return (
     <FormLayout>
       <div className="shadow-xl rounded-md w-full p-10 border">
