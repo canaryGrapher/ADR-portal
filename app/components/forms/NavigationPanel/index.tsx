@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import {
   ADRreporting_portalMap,
   SuspectedAdrReporting_portalMap,
+  MedicalDeviceReporting_portalMap,
 } from "./FormMap";
 import { BrowserRouter as Router, useLocation } from "react-router-dom";
 
@@ -12,9 +13,9 @@ import { NavigationPanelProps } from "~/types/forms/NavigationPanel";
 import { Link } from "remix";
 
 const NavigationPanel = (props: NavigationPanelProps) => {
+  const location = useLocation();
   const [nextPage, setNextPage] = useState<string>("");
   const [previousPage, setPreviousPage] = useState<string>("");
-  const location = useLocation();
   const currentLocation = location.pathname.split("/");
   const pageType =
     currentLocation[1] === "adr-reporting"
@@ -26,7 +27,7 @@ const NavigationPanel = (props: NavigationPanelProps) => {
         }
       : {
           link: "/medical-device-reporting/",
-          mapRoute: ADRreporting_portalMap,
+          mapRoute: MedicalDeviceReporting_portalMap,
         };
 
   useEffect(() => {
@@ -39,7 +40,7 @@ const NavigationPanel = (props: NavigationPanelProps) => {
           setPreviousPage(
             pageType.link + pageType.mapRoute[route - 1].split("").join("/")
           );
-        } else if (route == pageType.mapRoute.length - 1) {
+        } else if (route === pageType.mapRoute.length - 1) {
           setNextPage(pageType + "submit");
           setPreviousPage(
             pageType.link + pageType.mapRoute[route - 1].split("").join("/")
@@ -52,7 +53,7 @@ const NavigationPanel = (props: NavigationPanelProps) => {
         }
       }
     }
-  });
+  }, []);
 
   return (
     <div className="py-10 w-full flex flex-row justify-end">

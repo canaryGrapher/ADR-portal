@@ -29,7 +29,6 @@ const InputRadioComponent = (props: InputRadioComponentProps) => {
     checked
       ? setSelectedOption(props.radioOptionTrue)
       : setSelectedOption(props.radioOptionFalse);
-    console.log(selectedOption);
   };
 
   return (

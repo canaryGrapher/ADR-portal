@@ -263,4 +263,4 @@ const MedicalDeviceReporting: SidebarProps = {
   ],
 };
 
-export { AdrReporting, SuspectedAdrReporting };
+export { AdrReporting, SuspectedAdrReporting, MedicalDeviceReporting };

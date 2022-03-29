@@ -32,7 +32,11 @@ const CardSelect = (props: { name: string; route: string; image?: string }) => (
   <Link to={props.route} className="">
     <div className="border-2 rounded-lg border-gray-400 p-3 h-full hover:scale-105 duration-75">
       <div className="w-full h-full flex flex-col justify-start">
-        <img src="https://via.placeholder.com/150" className="h-3/4 w-full" />
+        <img
+          alt="Placeholder image"
+          src="https://via.placeholder.com/150"
+          className="h-3/4 w-full"
+        />
         <p className="font-medium text-xl text-black pt-5 text-center">
           {props.name}
         </p>

@@ -33,11 +33,14 @@ const MedicalDeviceReporting_portalMap = [
   "2",
   "3",
   "4",
+  "4b",
+  "4c",
+  "4d",
   "5",
-  "5b",
-  "5c",
-  "5d",
-  "5e",
+  "6",
+  "7",
+  "8",
+  "9"
 ];
 
-export { ADRreporting_portalMap, SuspectedAdrReporting_portalMap };
+export { ADRreporting_portalMap, SuspectedAdrReporting_portalMap, MedicalDeviceReporting_portalMap };

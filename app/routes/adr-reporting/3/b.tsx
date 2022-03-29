@@ -31,9 +31,6 @@ const RadioGroupDrugs = () => {
     "Not applicable",
     "Unknown",
   ];
-  const onChangeRadioSelection = (e: any) => {
-    console.log("radio1 checked", e.target.value);
-  };
   return (
     <div className="w-full pt-2">
       {/* Make description dynamic */}
@@ -44,7 +41,6 @@ const RadioGroupDrugs = () => {
         options={radioOptions}
         optionType="button"
         defaultValue={radioOptions[0]}
-        onChange={onChangeRadioSelection}
       />
     </div>
   );
