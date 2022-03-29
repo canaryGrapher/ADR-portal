@@ -1,0 +1,25 @@
+/* Ant design override styles */
+
+.ant-radio-group {
+    width    : 100% !important;
+    display  : flex !important;
+    font-size: 15px !important;
+}
+
+
+.ant-radio-button-wrapper {
+    border         : 1px rgba(126, 126, 126, 1) solid !important;
+    flex           : 1 1 0px !important;
+    font-size      : 10px !important;
+    text-align     : center !important;
+    display        : flex !important;
+    flex-direction : column !important;
+    justify-content: center !important;
+    height         : auto !important;
+    line-height    : 15px !important;
+    padding        : 10px !important;
+}
+
+.ant-radio-button-wrapper-checked {
+    background-color: rgba(108, 86, 123, 1) !important;
+}

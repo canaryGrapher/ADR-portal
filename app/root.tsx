@@ -8,7 +8,8 @@ import RootLayout from "~/layouts/root";
 import { DocumentProps } from "~/types/general";
 
 //importing stylesheet
-import globalStyle from "./styles/app.css";
+import tailwindStyle from "./styles/app.css";
+import globalStyle from "./styles/global.css";
 import antStyles from "antd/dist/antd.css";
 
 export const meta: MetaFunction = () => {
@@ -17,6 +18,7 @@ export const meta: MetaFunction = () => {
 
 export function links() {
   return [
+    { rel: "stylesheet", href: tailwindStyle },
     { rel: "stylesheet", href: globalStyle },
     { rel: "stylesheet", href: antStyles },
   ];

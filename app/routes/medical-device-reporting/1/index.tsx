@@ -48,6 +48,7 @@ export default function Form3page1() {
           </div>
         </div>
       </div>
+      <NavigationPanel currentRoute="1" />
     </FormLayout>
   );
 }
