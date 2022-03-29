@@ -1,9 +1,9 @@
 import { useState } from "react";
 import FormLayout from "~/layouts/forms/medical-device-reporting";
 import { Radio, Checkbox } from "antd";
-import Option1 from "./subforms/Option1";
-import Option2 from "./subforms/Option2";
-import Option3 from "./subforms/Option3";
+import Option1 from "./subforms/option1";
+import Option2 from "./subforms/option2";
+import Option3 from "./subforms/option3";
 import NavigationPanel from "~/components/forms/NavigationPanel";
 export default function Form3page9() {
   const [opt1, setOpt1] = useState(true);
