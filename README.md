@@ -16,7 +16,7 @@ Once that is done, the following steps can be followed to install the portal on 
 2. Once you have done it, type `npm install` in the terminal window and press enter. This will take time based on your internet speed. _This is a one time step._ <br /> ![image](https://user-images.githubusercontent.com/27415791/160664455-1e5ce6f9-cedf-4777-9578-21a1d57c147b.png)
 3. If everything is completed without any errors, you have successfully installed everything for your project. Now simply type `npm run dev` in the command prompt to start the server on your local system. <br /> ![image](https://user-images.githubusercontent.com/27415791/160664768-72599e90-251f-447a-9849-fc0dc9289f01.png)
 4. You should see something like the output shown below on your screen. This message tells that the server has been started on your local system and that you can access it now. <br /> ![image](https://user-images.githubusercontent.com/27415791/160665218-c266183c-6a86-437e-9009-c77e4cab83c9.png)
-5. To access the portal, open your browser and type [http://localhost:3000/](http://localhost:3000). in the address bar. The portal will be accessible now. 
+5. To access the portal, open your browser and type [http://localhost:3000](http://localhost:3000) in the address bar. The portal will be accessible now. 
 6. You can close the terminal window after you are done to close the server. Do no close the window before.
 
 
