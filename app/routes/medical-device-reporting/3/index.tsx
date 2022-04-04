@@ -1,6 +1,6 @@
 import { useState } from "react";
 import FormLayout from "~/layouts/forms/medical-device-reporting";
-import { Radio, Checkbox } from "antd";
+import { Radio } from "antd";
 import Option1 from "./subforms/option1";
 import Option2 from "./subforms/option2";
 import Option3 from "./subforms/option3";
