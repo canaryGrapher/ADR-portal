@@ -17,8 +17,7 @@ export default function Form1page3f3() {
             Hartwig's Severity Assessment Scale
           </div>
           <div className="mx-4 min-w-full pt-4">
-            <InputDescription isRequired={true} description="Drug 1" />
-            <Radio.Group defaultValue={0} buttonStyle="solid">
+            <Radio.Group buttonStyle="solid">
               <Radio.Button value={0}>Level 1</Radio.Button>
               <Radio.Button value={1}>Level 2</Radio.Button>
               <Radio.Button value={2}>Level 3</Radio.Button>

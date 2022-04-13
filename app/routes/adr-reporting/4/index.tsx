@@ -39,11 +39,11 @@ export default function Form1page4() {
           {/* Third */}
           <div className="grid grid-cols-2 gap-5 pt-4">
             <div className="col-span-1">
-              <InputDescription isRequired={false} description="Email ID" />
+              <InputDescription isRequired={true} description="Email ID" />
               <Input />
             </div>
             <div className="col-span-1">
-              <InputDescription isRequired={false} description="Tel. Number" />
+              <InputDescription isRequired={true} description="Tel. Number" />
               <Input />
             </div>
             <div></div>

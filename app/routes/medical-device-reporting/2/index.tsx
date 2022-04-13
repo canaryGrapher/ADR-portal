@@ -33,7 +33,6 @@ export default function Form1() {
                 buttonStyle="solid"
                 className="w-full"
                 onChange={(e) => changedReporterType(e)}
-                defaultValue={reporterType}
               >
                 <Radio.Button
                   value={"manufacturer"}
@@ -73,7 +72,6 @@ export default function Form1() {
                 description="Has the reporter informed the incident to the manufacturer?"
               />
               <Radio.Group
-                defaultValue={0}
                 buttonStyle="solid"
                 className="w-full"
                 disabled={reporterType === "manufacturer"}
@@ -96,7 +94,6 @@ export default function Form1() {
                 description="Is the reporter also submitting the report on behalf of the manufacturer?"
               />
               <Radio.Group
-                defaultValue={0}
                 buttonStyle="solid"
                 className="w-full"
                 disabled={reporterType === "manufacturer"}

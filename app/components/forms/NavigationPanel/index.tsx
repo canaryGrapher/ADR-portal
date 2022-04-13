@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 // importing entitites
 import {
   ADRreporting_portalMap,
-  SuspectedAdrReporting_portalMap,
   MedicalDeviceReporting_portalMap,
 } from "./FormMap";
 import { BrowserRouter as Router, useLocation } from "react-router-dom";
@@ -20,11 +19,6 @@ const NavigationPanel = (props: NavigationPanelProps) => {
   const pageType =
     currentLocation[1] === "adr-reporting"
       ? { link: "/adr-reporting/", mapRoute: ADRreporting_portalMap }
-      : currentLocation[1] === "suspected-adr-reporting"
-      ? {
-          link: "/suspected-adr-reporting/",
-          mapRoute: SuspectedAdrReporting_portalMap,
-        }
       : {
           link: "/medical-device-reporting/",
           mapRoute: MedicalDeviceReporting_portalMap,

@@ -11,10 +11,9 @@ import NavigationPanel from "~/components/forms/NavigationPanel";
 const { TextArea } = Input;
 
 export default function Form3page4d() {
-  const [regulatedInIndia, setRegulatedInIndia] = useState<string>("Yes");
-  const [availabilityValue, setAvailabilityValue] = useState<string>("Yes");
-  const [usagePerManufacturer, setUsagePerManufacturer] =
-    useState<string>("Yes");
+  const [regulatedInIndia, setRegulatedInIndia] = useState<string>("");
+  const [availabilityValue, setAvailabilityValue] = useState<string>("");
+  const [usagePerManufacturer, setUsagePerManufacturer] = useState<string>("");
 
   const changeStateOfRadio = (radioIdentifier: string, radioValue: any) => {
     if (radioIdentifier === "1") {
@@ -55,7 +54,6 @@ export default function Form3page4d() {
               size="large"
               buttonStyle="solid"
               options={radioOptions1}
-              defaultValue={radioOptions1[0]}
               optionType="button"
               value={regulatedInIndia}
               onChange={(e) => changeStateOfRadio("1", e)}
@@ -70,7 +68,6 @@ export default function Form3page4d() {
               size="large"
               buttonStyle="solid"
               options={radioOptions2}
-              defaultValue={radioOptions2[0]}
               optionType="button"
             />
           </div>
@@ -189,7 +186,6 @@ export default function Form3page4d() {
                 size="large"
                 buttonStyle="solid"
                 options={radioOptions4}
-                defaultValue={radioOptions4[0]}
                 optionType="button"
                 disabled={availabilityValue === "No"}
               />
@@ -203,7 +199,6 @@ export default function Form3page4d() {
                 size="large"
                 buttonStyle="solid"
                 options={radioOptions3}
-                defaultValue={radioOptions3[0]}
                 optionType="button"
                 value={usagePerManufacturer}
                 onChange={(e) => changeStateOfRadio("3", e)}

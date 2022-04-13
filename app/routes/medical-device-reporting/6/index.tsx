@@ -66,7 +66,6 @@ export default function Form3page6() {
               size="large"
               buttonStyle="solid"
               options={radioOptions1}
-              defaultValue={radioOptions1[0]}
               optionType="button"
             />
           </div>
@@ -86,7 +85,6 @@ export default function Form3page6() {
               size="large"
               buttonStyle="solid"
               options={radioOptions2}
-              defaultValue={radioOptions2[0]}
               optionType="button"
               onChange={(e) => {
                 changeRecoveryData(e);
@@ -109,7 +107,6 @@ export default function Form3page6() {
               size="large"
               buttonStyle="solid"
               options={radioOptions2}
-              defaultValue={radioOptions2[1]}
               optionType="button"
               onChange={(e) => {
                 changeDeathData(e);

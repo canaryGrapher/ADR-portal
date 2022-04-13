@@ -25,7 +25,7 @@ export default function Form1page2() {
           </div>
           <div className="w-1/2 pr-4">
             <InputDescription
-              isRequired={true}
+              isRequired={false}
               description="Date of recovery"
             />
             <DatePicker className="w-full" />

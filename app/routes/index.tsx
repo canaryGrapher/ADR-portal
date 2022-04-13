@@ -2,24 +2,19 @@ import { Link } from "remix";
 
 export default function Home() {
   return (
-    <div className="w-screen h-screen flex flex-col pt-14">
+    <div className="w-screen h-screen flex flex-col">
       <div className="rounded-lg w-3/4 min-h-3/4 mx-auto p-10 text-left">
         <h2 className="text-gray-500 text-2xl">Select a form to fill</h2>
 
-        <div className="grid grid-cols-3 grid-rows-1 gap-5">
+        <div className="grid grid-cols-2 grid-rows-1 gap-5">
           <CardSelect
             route="adr-reporting/1"
             image="1"
             name="ADR Reporting Form"
           />
           <CardSelect
-            route="suspected-adr-reporting/1"
-            image="2"
-            name="Suspected ADR Reporting Form"
-          />
-          <CardSelect
             route="medical-device-reporting/1"
-            image="3"
+            image="2"
             name="Medical Device ADR Reporting Form"
           />
         </div>

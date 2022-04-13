@@ -10,11 +10,7 @@ function Option1() {
           <div className="pl-4 text-[24px] text-[#E8590C]">Medical Device</div>
           <div className="mx-4 min-w-full pt-4">
             <InputDescription isRequired={true} description="" />
-            <Radio.Group
-              className="w-full"
-              defaultValue={0}
-              buttonStyle="solid"
-            >
+            <Radio.Group className="w-full" buttonStyle="solid">
               <Radio.Button value={0} className="w-1/3 text-center">
                 Therapeutic
               </Radio.Button>
@@ -29,11 +25,7 @@ function Option1() {
           </div>
           <div className="mx-4 min-w-full pt-4">
             <InputDescription isRequired={true} description="" />
-            <Radio.Group
-              className="w-full"
-              defaultValue={0}
-              buttonStyle="solid"
-            >
+            <Radio.Group className="w-full" buttonStyle="solid">
               <Radio.Button value={0} className="w-1/2 text-center">
                 Implantable
               </Radio.Button>
@@ -44,11 +36,7 @@ function Option1() {
           </div>
           <div className="mx-4 min-w-full pt-4">
             <InputDescription isRequired={true} description="" />
-            <Radio.Group
-              className="w-full"
-              defaultValue={0}
-              buttonStyle="solid"
-            >
+            <Radio.Group className="w-full" buttonStyle="solid">
               <Radio.Button value={0} className="w-1/4 text-center">
                 Single Use Device
               </Radio.Button>

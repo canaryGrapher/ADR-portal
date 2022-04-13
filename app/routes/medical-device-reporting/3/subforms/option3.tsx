@@ -12,11 +12,7 @@ const option3 = () => {
           </div>
           <div className="mx-4 min-w-full pt-4">
             <InputDescription isRequired={true} description="" />
-            <Radio.Group
-              className="w-full"
-              defaultValue={0}
-              buttonStyle="solid"
-            >
+            <Radio.Group className="w-full" buttonStyle="solid">
               <Radio.Button value={0} className="w-1/3 text-center">
                 Therapeutic
               </Radio.Button>
@@ -31,11 +27,7 @@ const option3 = () => {
           </div>
           <div className="mx-4 min-w-full pt-4">
             <InputDescription isRequired={true} description="" />
-            <Radio.Group
-              className="w-full"
-              defaultValue={0}
-              buttonStyle="solid"
-            >
+            <Radio.Group className="w-full" buttonStyle="solid">
               <Radio.Button value={0} className="w-1/2 text-center">
                 Invasive
               </Radio.Button>

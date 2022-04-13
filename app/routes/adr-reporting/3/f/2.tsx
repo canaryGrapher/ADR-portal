@@ -29,12 +29,7 @@ export default function Form1page3f2() {
             WHO Probability Scale
           </div>
           <div className="mx-4 min-w-full pt-4">
-            <InputDescription
-              isRequired={true}
-              description="Are there previous conclusion reports on this reaction?"
-            />
             <Radio.Group
-              defaultValue={"certain"}
               optionType="button"
               buttonStyle="solid"
               size="large"

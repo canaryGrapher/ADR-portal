@@ -37,7 +37,6 @@ const RadioGroupDrugs = () => {
         buttonStyle="solid"
         options={radioOptions}
         optionType="button"
-        defaultValue={radioOptions[0]}
       />
     </div>
   );

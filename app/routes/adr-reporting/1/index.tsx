@@ -26,13 +26,16 @@ export default function Form1() {
             <div className="flex flex-row pt-4">
               <div className="w-1/2 px-4">
                 <InputDescription
-                  isRequired={true}
+                  isRequired={false}
                   description="Date of Birth"
                 />
                 <DatePicker className="w-full" />
               </div>
               <div className="w-1/2 pr-4">
-                <InputDescription isRequired={true} description="Age" />
+                <InputDescription
+                  isRequired={true}
+                  description="Age of onset"
+                />
                 <Input />
               </div>
             </div>
@@ -58,17 +61,17 @@ export default function Form1() {
             </div>
             <div className="flex flex-row pt-4">
               <div className="w-1/2 px-4">
-                <InputDescription isRequired={true} description="IP/OP" />
+                <InputDescription isRequired={false} description="IP/OP" />
                 <Input />
               </div>
               <div className="w-1/2 pr-4">
-                <InputDescription isRequired={true} description="Unit" />
+                <InputDescription isRequired={false} description="Unit" />
                 <Input />
               </div>
             </div>
             <div className="mt-4 w-full px-4">
               <InputDescription
-                isRequired={true}
+                isRequired={false}
                 description="Reason for taking medication/vaccination"
               />
               <TextArea rows={4} />
@@ -76,7 +79,7 @@ export default function Form1() {
             <div className="flex flex-row pt-4">
               <div className="w-3/4 px-4">
                 <InputDescription
-                  isRequired={true}
+                  isRequired={false}
                   description="Medicines/vaccines advised by"
                 />
                 <Checkbox.Group className="w-full grid grid-cols-1">
@@ -111,7 +114,7 @@ export default function Form1() {
             </div>
             <div className="mt-4 w-full px-4">
               <InputDescription
-                isRequired={true}
+                isRequired={false}
                 description="Known Allergies"
               />
               <Input />
@@ -119,7 +122,7 @@ export default function Form1() {
 
             <div className="mt-4 w-full px-4">
               <InputDescription
-                isRequired={true}
+                isRequired={false}
                 description="Social History"
               />
               <Input />

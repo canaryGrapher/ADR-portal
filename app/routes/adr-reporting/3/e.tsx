@@ -47,7 +47,6 @@ const RadioGroupDrugs = () => {
         buttonStyle="solid"
         options={radioOptions}
         optionType="button"
-        defaultValue={radioOptions[0]}
       />
       <div className="flex flex-row pt-4">
         <p className="pl-1 pr-7 my-auto">Dose</p>

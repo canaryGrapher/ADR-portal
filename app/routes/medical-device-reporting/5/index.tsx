@@ -90,7 +90,6 @@ export default function Form3page5() {
                 buttonStyle="solid"
                 options={radioOptions1}
                 optionType="button"
-                defaultValue={radioOptions1[0]}
               />
             </div>
             <div className="col-span-2 flex flex-col">
@@ -103,7 +102,6 @@ export default function Form3page5() {
                 buttonStyle="solid"
                 options={radioOptions2}
                 optionType="button"
-                defaultValue={radioOptions2[0]}
               />
             </div>
             <div className="col-span-2 flex flex-col">
@@ -116,7 +114,6 @@ export default function Form3page5() {
                 buttonStyle="solid"
                 options={radioOptions3}
                 optionType="button"
-                defaultValue={radioOptions3[0]}
               />
             </div>
             <div className="col-span-1 flex flex-col">
@@ -136,7 +133,6 @@ export default function Form3page5() {
                 buttonStyle="solid"
                 options={radioOptions4}
                 optionType="button"
-                defaultValue={radioOptions4[1]}
                 onChange={(e) => {
                   changeSeriousEventState(e);
                 }}
@@ -149,7 +145,6 @@ export default function Form3page5() {
                 buttonStyle="solid"
                 options={radioOptions5}
                 optionType="button"
-                defaultValue={radioOptions5[2]}
                 disabled={!isSeriousEvent}
                 onChange={(e) => {
                   changeSeriousEventValue(e);
@@ -173,7 +168,6 @@ export default function Form3page5() {
                 buttonStyle="solid"
                 options={radioOptions4}
                 optionType="button"
-                defaultValue={radioOptions4[0]}
               />
             </div>
             <div className="col-span-2 flex flex-col">

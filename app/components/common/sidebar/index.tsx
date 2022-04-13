@@ -5,11 +5,7 @@ import { BrowserRouter as Router, useLocation } from "react-router-dom";
 import { ListItems } from "./ListItems";
 
 // importing data
-import {
-  AdrReporting,
-  SuspectedAdrReporting,
-  MedicalDeviceReporting,
-} from "./SidebarTemplates";
+import { AdrReporting, MedicalDeviceReporting } from "./SidebarTemplates";
 
 // importing types
 import { TemplateProps } from "~/types/common/sidebar";
@@ -32,9 +28,6 @@ const Sidebar = () => {
       currentLocation.length >= 5 ? currentLocation[4] : "";
     if (currentForm === "adr-reporting") {
       setAdrReportingData(AdrReporting.template);
-    }
-    if (currentForm === "suspected-adr-reporting") {
-      setAdrReportingData(SuspectedAdrReporting.template);
     }
     if (currentForm === "medical-device-reporting") {
       setAdrReportingData(MedicalDeviceReporting.template);

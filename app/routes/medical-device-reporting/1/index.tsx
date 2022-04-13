@@ -42,7 +42,6 @@ export default function Form3page1() {
               size="large"
               buttonStyle="solid"
               options={radioOptions}
-              defaultValue={radioOptions[0]}
               optionType="button"
             />
           </div>
