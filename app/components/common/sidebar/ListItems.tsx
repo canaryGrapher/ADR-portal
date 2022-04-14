@@ -117,4 +117,4 @@ const SidebarNumberingBullet = (props: SidebarNumberingBullets) => {
   }
 };
 
-export { ListItems };
+export default ListItems;

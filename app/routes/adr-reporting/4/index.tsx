@@ -15,7 +15,6 @@ export default function Form1page4() {
     <FormLayout>
       <div className="shadow-xl rounded-md w-full p-10 border">
         <div className="pl-4 text-3xl">
-          {/* Change the name of the form based on the form */}
           <h2 className="text-[#E8590C]">Reporter Details</h2>
         </div>
         <div className="flex flex-col pb-8">
@@ -81,7 +80,8 @@ export default function Form1page4() {
             <div className="pt-4">
               <div>
                 <InputDescription
-                  isRequired={true}
+                  isRequired={false}
+                  // defaultValue={Number(Date.now())} value is today's date
                   description="Date of this report"
                 />
                 <DatePicker className="w-full" />

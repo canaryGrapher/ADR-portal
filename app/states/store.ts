@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit'
 
 //importing slices here
-import form1page1Reducer from '~/states/Slices/formOne/1'
+import form1page1Reducer from '~/states/Slices/AdrReportingForm/1'
 
 export const store = configureStore({
     reducer: {

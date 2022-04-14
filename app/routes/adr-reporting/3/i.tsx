@@ -11,8 +11,12 @@ const { TextArea } = Input;
 
 export default function Form1page3i() {
   const [seriousReaction, setSeriousReaction] = useState<boolean>(false);
+  const [isApplicable, setIsApplicable] = useState<boolean>(false);
   const changeSeriousness = (checked: boolean) => {
     setSeriousReaction(checked);
+  };
+  const changeApplicability = (checked: boolean) => {
+    setIsApplicable(checked);
   };
 
   return (
@@ -24,7 +28,7 @@ export default function Form1page3i() {
           <div className="w-full pt-4 grid grid-col-12">
             <div className="flex flex-row col-span-6">
               <p className="pr-3">Not Applicable</p>
-              <Switch />
+              <Switch onChange={changeApplicability} />
               <p className="pl-3">Applicable</p>
             </div>
           </div>
@@ -36,7 +40,7 @@ export default function Form1page3i() {
               />
             </div>
             <div className="col-span-9">
-              <Input />
+              <Input disabled={!isApplicable} />
             </div>
           </div>
           <div className="grid grid-cols-12 py-4">
@@ -47,7 +51,7 @@ export default function Form1page3i() {
               />
             </div>
             <div className="col-span-9">
-              <Input />
+              <Input disabled={!isApplicable} />
             </div>
           </div>
           <div className="py-4">

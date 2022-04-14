@@ -1,136 +1,148 @@
 import FormLayout from "~/layouts/forms/adr-reporting";
-import { Input, DatePicker, Form, Select, Checkbox } from "antd";
-import InputDescription from "~/components/forms/inputDescription";
+import { Input, DatePicker, Form, Select, Checkbox, InputNumber } from "antd";
 import NavigationPanel from "~/components/forms/NavigationPanel";
+
+// importing redux reducers
+import { RootState } from "~/states/store";
+import { useSelector, useDispatch } from "react-redux";
+import { setNewFormData } from "~/states/Slices/AdrReportingForm/1";
 
 const { TextArea } = Input;
 
-export default function Form1() {
+export default function Form1page1() {
+  const dispatch = useDispatch();
+  const formState = useSelector((state: RootState) => state.form1page1);
+  const changeFormData = (value: any, fieldName: any) => {
+    dispatch(setNewFormData({ fieldName, value }));
+  };
+
   return (
     <FormLayout>
-      {/* Anything between the <FormLayout> tag can be changed */}
-      <div className="shadow-xl rounded-md w-full p-10 border">
-        <div className="text-3xl">
-          {/* Change the name of the form based on the form */}
-          <h2 className="text-[#E8590C]">Patient Information</h2>
-        </div>
-        <div className="w-full">
-          <div className="mx-4 min-w-full pt-4">
-            <div className="mt-4 w-full px-4">
-              <InputDescription
-                isRequired={true}
-                description="Patient Initials"
-              />
+      <Form
+        name="Form1Page1"
+        initialValues={{ remember: true }}
+        onFinish={(values) => console.log(values)}
+        layout="vertical"
+      >
+        {/* Anything between the <FormLayout> tag can be changed */}
+        <div className="shadow-xl rounded-md w-full p-10 border">
+          <div className="text-3xl">
+            <h2 className="text-[#E8590C]">Patient Information</h2>
+          </div>
+          <div className="w-full">
+            <Form.Item
+              label="Patient Initials"
+              name="patientInitials"
+              rules={[
+                { required: true, message: "Patient initials is required" },
+              ]}
+              className="w-full"
+            >
               <Input />
-            </div>
-            <div className="flex flex-row pt-4">
-              <div className="w-1/2 px-4">
-                <InputDescription
-                  isRequired={false}
-                  description="Date of Birth"
-                />
+            </Form.Item>
+            <div className="grid grid-cols-2 gap-5">
+              <Form.Item
+                label="Date of Birth"
+                name="DateOfBirth"
+                className="w-full"
+              >
                 <DatePicker className="w-full" />
-              </div>
-              <div className="w-1/2 pr-4">
-                <InputDescription
-                  isRequired={true}
-                  description="Age of onset"
-                />
-                <Input />
-              </div>
-            </div>
-            <div className="flex flex-row pt-4">
-              <div className="w-1/2 px-4">
-                <InputDescription isRequired={false} description="Gender" />
-                <Form.Item>
-                  <Select allowClear>
-                    <option>Male</option>
-                    <option>Female</option>
-                    <option>Other</option>
-                  </Select>
-                </Form.Item>
-              </div>
-              <div className="w-1/2 pr-4">
-                <InputDescription isRequired={false} description="Weight" />
-                <Input addonAfter={"mgs"} />
-              </div>
-              <div className="w-1/2 pr-4">
-                <InputDescription isRequired={false} description="Patient ID" />
-                <Input />
-              </div>
-            </div>
-            <div className="flex flex-row pt-4">
-              <div className="w-1/2 px-4">
-                <InputDescription isRequired={false} description="IP/OP" />
-                <Input />
-              </div>
-              <div className="w-1/2 pr-4">
-                <InputDescription isRequired={false} description="Unit" />
-                <Input />
-              </div>
-            </div>
-            <div className="mt-4 w-full px-4">
-              <InputDescription
-                isRequired={false}
-                description="Reason for taking medication/vaccination"
-              />
-              <TextArea rows={4} />
-            </div>
-            <div className="flex flex-row pt-4">
-              <div className="w-3/4 px-4">
-                <InputDescription
-                  isRequired={false}
-                  description="Medicines/vaccines advised by"
-                />
-                <Checkbox.Group className="w-full grid grid-cols-1">
-                  <div className="grid grid-cols-4">
-                    <div className="col-span-1">
-                      <Checkbox value="A">Doctor</Checkbox>
-                    </div>
-                    <div className="col-span-1">
-                      <Checkbox value="B">Pharmacist</Checkbox>
-                    </div>
-                    <div className="col-span-1">
-                      <Checkbox value="C">Friends</Checkbox>
-                    </div>
-                    <div className="col-span-1">
-                      <Checkbox value="D">Relatives</Checkbox>
-                    </div>
-                  </div>
-                  <div className="grid grid-cols-2">
-                    <div className="col-span-1">
-                      <Checkbox value="E">
-                        Self (past disease experienced)
-                      </Checkbox>
-                    </div>
-                    <div className="col-span-1">
-                      <Checkbox value="F">
-                        Self (no past disease experienced)
-                      </Checkbox>
-                    </div>
-                  </div>
-                </Checkbox.Group>
-              </div>
-            </div>
-            <div className="mt-4 w-full px-4">
-              <InputDescription
-                isRequired={false}
-                description="Known Allergies"
-              />
-              <Input />
-            </div>
+              </Form.Item>
 
-            <div className="mt-4 w-full px-4">
-              <InputDescription
-                isRequired={false}
-                description="Social History"
-              />
-              <Input />
+              <Form.Item
+                className="w-full"
+                label="Age of Onset"
+                name="ageOfOnset"
+                rules={[
+                  { required: true, message: "Age of onset is required" },
+                ]}
+              >
+                <InputNumber style={{ width: "100%" }} />
+              </Form.Item>
             </div>
+            <div className="grid grid-cols-3 gap-5">
+              <Form.Item label="Gender" name="gender" className="w-full">
+                <Select allowClear>
+                  <Select.Option value="male">Male</Select.Option>
+                  <Select.Option value="female">Female</Select.Option>
+                  <Select.Option value="other">Other</Select.Option>
+                </Select>
+              </Form.Item>
+              <Form.Item className="w-full" label="Weight" name="weight">
+                <InputNumber addonAfter={"mgs"} />
+              </Form.Item>
+              <Form.Item name="patientID" label="Patient ID" className="w-full">
+                <Input />
+              </Form.Item>
+            </div>
+            <div className="grid grid-cols-2 gap-5">
+              <Form.Item label="IP/OP" name="ip_op" className="w-full">
+                <Input />
+              </Form.Item>
+              <Form.Item label="Unit" name="unit" className="w-full">
+                <Input />
+              </Form.Item>
+            </div>
+            <Form.Item
+              label="Reason for taking medication/vaccination"
+              name="reasonForTakingMedication"
+              className="w-full py-4"
+            >
+              <TextArea rows={4} />
+            </Form.Item>
+
+            <Form.Item
+              label="Medicines/vaccines advised by"
+              name="medicineAdvised"
+              className="w-3/4"
+            >
+              <Checkbox.Group className="w-full">
+                <div className="grid grid-cols-4 gap-x-5 gap-y-2">
+                  <div className="col-span-1">
+                    <Checkbox value="Doctor">Doctor</Checkbox>
+                  </div>
+                  <div className="col-span-1">
+                    <Checkbox value="Pharmacist">Pharmacist</Checkbox>
+                  </div>
+                  <div className="col-span-1">
+                    <Checkbox value="Friends">Friends</Checkbox>
+                  </div>
+                  <div className="col-span-1">
+                    <Checkbox value="Relative">Relatives</Checkbox>
+                  </div>
+                  <div className="col-span-2">
+                    <Checkbox value="Self (past disease experienced)">
+                      Self (past disease experienced)
+                    </Checkbox>
+                  </div>
+                  <div className="col-span-2">
+                    <Checkbox value="Self (no past disease experienced)">
+                      Self (no past disease experienced)
+                    </Checkbox>
+                  </div>
+                </div>
+              </Checkbox.Group>
+            </Form.Item>
+
+            <Form.Item
+              label="Known Allergies"
+              name="knownAllergies"
+              className="w-full"
+            >
+              <Input />
+            </Form.Item>
+
+            <Form.Item
+              label="Social History"
+              name="socialHistory"
+              className="w-full"
+            >
+              <Input />
+            </Form.Item>
           </div>
         </div>
-      </div>
-      <NavigationPanel currentRoute="1" />
+        <NavigationPanel currentRoute="1" />
+      </Form>
     </FormLayout>
   );
 }

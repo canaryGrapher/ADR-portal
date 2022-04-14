@@ -14,7 +14,6 @@ export default function Form1page3() {
     <FormLayout>
       <div className="shadow-xl rounded-md w-full p-10 border">
         <div className="text-3xl">
-          {/* Change the name of the form based on the form */}
           <h2 className="text-[#E8590C]">Medication</h2>
         </div>
         <form onSubmit={onFormSubmit}>
@@ -55,7 +54,7 @@ function Subform() {
           <DatePicker className="w-full" />
         </div>
         <div className="flex flex-col">
-          <InputDescription isRequired={true} description="Dose used" />
+          <InputDescription isRequired={false} description="Dose used" />
           <Input type={"number"} suffix="kgs" />
         </div>
         <div className="flex flex-col">
@@ -82,7 +81,7 @@ function Subform() {
       </div>
       <div className="grid grid-cols-2 gap-5 pb-5">
         <div className="flex flex-col">
-          <InputDescription isRequired={true} description="Date started" />
+          <InputDescription isRequired={false} description="Date started" />
           <DatePicker className="w-full" />
         </div>
         <div className="flex flex-col">

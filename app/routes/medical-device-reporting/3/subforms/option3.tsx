@@ -11,7 +11,10 @@ const option3 = () => {
             Equipment/Machines
           </div>
           <div className="mx-4 min-w-full pt-4">
-            <InputDescription isRequired={true} description="" />
+            <InputDescription
+              isRequired={false}
+              description="Equipment usage"
+            />
             <Radio.Group className="w-full" buttonStyle="solid">
               <Radio.Button value={0} className="w-1/3 text-center">
                 Therapeutic
@@ -26,7 +29,7 @@ const option3 = () => {
             </Radio.Group>
           </div>
           <div className="mx-4 min-w-full pt-4">
-            <InputDescription isRequired={true} description="" />
+            <InputDescription isRequired={false} description="Invasibility" />
             <Radio.Group className="w-full" buttonStyle="solid">
               <Radio.Button value={0} className="w-1/2 text-center">
                 Invasive

@@ -12,7 +12,6 @@ export default function Form1page2() {
     <FormLayout>
       <div className="shadow-xl rounded-md w-full p-10 border">
         <div className="pl-4 text-3xl">
-          {/* Change the name of the form based on the form */}
           <h2 className="text-[#E8590C]">Suspected Adverse Reaction</h2>
         </div>
         <div className="flex flex-row pt-4">
@@ -33,7 +32,7 @@ export default function Form1page2() {
         </div>
         <div className="mt-4 w-full px-4">
           <InputDescription
-            isRequired={false}
+            isRequired={true}
             description="Describe reaction or problem"
           />
           <TextArea rows={4} />

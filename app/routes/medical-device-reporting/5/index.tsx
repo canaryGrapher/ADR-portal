@@ -69,21 +69,21 @@ export default function Form3page5() {
             <div className="col-span-1 flex flex-col">
               <InputDescription
                 description={"Date of Event"}
-                isRequired={true}
+                isRequired={false}
               />
               <DatePicker />
             </div>
             <div className="col-span-1 flex flex-col">
               <InputDescription
                 description={"Date of Implant"}
-                isRequired={true}
+                isRequired={false}
               />
               <DatePicker />
             </div>
             <div className="col-span-2 flex flex-col">
               <InputDescription
                 description={"Location of event"}
-                isRequired={true}
+                isRequired={false}
               />
               <Radio.Group
                 size="large"
@@ -95,7 +95,7 @@ export default function Form3page5() {
             <div className="col-span-2 flex flex-col">
               <InputDescription
                 description={"Device Operator"}
-                isRequired={true}
+                isRequired={false}
               />
               <Radio.Group
                 size="large"
@@ -107,7 +107,7 @@ export default function Form3page5() {
             <div className="col-span-2 flex flex-col">
               <InputDescription
                 description={"Device location"}
-                isRequired={true}
+                isRequired={false}
               />
               <Radio.Group
                 size="large"
@@ -119,14 +119,14 @@ export default function Form3page5() {
             <div className="col-span-1 flex flex-col">
               <InputDescription
                 description={"Date of return"}
-                isRequired={true}
+                isRequired={false}
               />
               <DatePicker />
             </div>
             <div className="col-span-2 flex flex-col">
               <InputDescription
                 description={"Serious event?"}
-                isRequired={true}
+                isRequired={false}
               />
               <Radio.Group
                 size="large"
@@ -139,7 +139,7 @@ export default function Form3page5() {
               />
             </div>
             <div className="col-span-2 flex flex-col">
-              <InputDescription description={"Reason"} isRequired={true} />
+              <InputDescription description={"Reason"} isRequired={false} />
               <Radio.Group
                 size="large"
                 buttonStyle="solid"
@@ -154,14 +154,14 @@ export default function Form3page5() {
             <div className="col-span-1 flex flex-col">
               <InputDescription
                 description={"Date of death"}
-                isRequired={true}
+                isRequired={false}
               />
               <DatePicker disabled={!isDead} />
             </div>
             <div className="col-span-2 flex flex-col">
               <InputDescription
                 description={"Is device in use after the incident?"}
-                isRequired={true}
+                isRequired={false}
               />
               <Radio.Group
                 size="large"
@@ -173,7 +173,7 @@ export default function Form3page5() {
             <div className="col-span-2 flex flex-col">
               <InputDescription
                 description={"Detailed description of the incident"}
-                isRequired={true}
+                isRequired={false}
               />
               <TextArea rows={4} />
             </div>
@@ -183,27 +183,27 @@ export default function Form3page5() {
               </div>
               <div className="grid grid-cols-4 gap-5">
                 <div className="flex flex-col col-span-1">
-                  <InputDescription description={"Year"} isRequired={true} />
+                  <InputDescription description={"Year"} isRequired={false} />
                   <DatePicker picker="year" />
                 </div>
                 <div className="flex flex-col col-span-1">
                   <InputDescription
                     description={"Number of similar events"}
-                    isRequired={true}
+                    isRequired={false}
                   />
                   <Input type="number" />
                 </div>
                 <div className="flex flex-col col-span-1">
                   <InputDescription
                     description={"Total number suplied"}
-                    isRequired={true}
+                    isRequired={false}
                   />
                   <Input type="number" />
                 </div>
                 <div className="flex flex-col col-span-1">
                   <InputDescription
                     description={"Frequency"}
-                    isRequired={true}
+                    isRequired={false}
                   />
                   <Input />
                 </div>
@@ -215,27 +215,27 @@ export default function Form3page5() {
               </div>
               <div className="grid grid-cols-4 gap-5">
                 <div className="flex flex-col col-span-1">
-                  <InputDescription description={"Year"} isRequired={true} />
+                  <InputDescription description={"Year"} isRequired={false} />
                   <DatePicker picker="year" />
                 </div>
                 <div className="flex flex-col col-span-1">
                   <InputDescription
                     description={"Number of similar events"}
-                    isRequired={true}
+                    isRequired={false}
                   />
                   <Input type="number" />
                 </div>
                 <div className="flex flex-col col-span-1">
                   <InputDescription
                     description={"Total number suplied"}
-                    isRequired={true}
+                    isRequired={false}
                   />
                   <Input type="number" />
                 </div>
                 <div className="flex flex-col col-span-1">
                   <InputDescription
                     description={"Frequency"}
-                    isRequired={true}
+                    isRequired={false}
                   />
                   <Input />
                 </div>

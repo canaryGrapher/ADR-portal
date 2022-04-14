@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { BrowserRouter as Router, useLocation } from "react-router-dom";
 
 // importing components
-import { ListItems } from "./ListItems";
+import ListItems from "./ListItems";
 
 // importing data
 import { AdrReporting, MedicalDeviceReporting } from "./SidebarTemplates";
@@ -13,11 +13,12 @@ import { TemplateProps } from "~/types/common/sidebar";
 const Sidebar = () => {
   let location = useLocation();
   // Holds the current form sidebar data
-  const [adrReportingData, setAdrReportingData] = useState<TemplateProps[]>(
+  const [SidebarData, setSidebarData] = useState<TemplateProps[]>(
     AdrReporting.template
   );
   const [activeTab, setActiveTab] = useState<string>("");
 
+  //set next, previous and current page on every page load
   useEffect(() => {
     const currentLocation = location.pathname.split("/");
     const currentForm = currentLocation[1];
@@ -27,10 +28,10 @@ const Sidebar = () => {
     const currentPageSubSub =
       currentLocation.length >= 5 ? currentLocation[4] : "";
     if (currentForm === "adr-reporting") {
-      setAdrReportingData(AdrReporting.template);
+      setSidebarData(AdrReporting.template);
     }
     if (currentForm === "medical-device-reporting") {
-      setAdrReportingData(MedicalDeviceReporting.template);
+      setSidebarData(MedicalDeviceReporting.template);
     }
     setActiveTab(currentPage + currentPageSub + currentPageSubSub);
   }, [location]);
@@ -47,18 +48,17 @@ const Sidebar = () => {
         </div>
         <div className="col-span-3 text-center">
           <h2 className="text-[#6C567B] text-xl m-0 mb-3">
-            INDIAN PHARMACOPOEIA COMMISSION
+            MANIPAL COLLEGE OF PHARMACY
           </h2>
-          <p className="text-[7px] border-t-2 border-[#6C567B] pt-2 font-bold">
-            (National Coordination Centre-Pharmacovigilance Programme of India)
+          <p className="text-[10px] border-t-2 border-[#6C567B] pt-2 font-medium">
+            Manipal Academy of Higer Education
             <br />
-            Ministry of Health & Family Welfare, Government of India Sector-23,
-            Raj Nagar, Ghaziabad-201002
+            (Institution of Eminence Deemed to be University)
           </p>
         </div>
       </div>
       <div className="shadow-xl p-5 rounded-lg text-[#6C567B] border">
-        {adrReportingData.map((item: TemplateProps, index: number) => {
+        {SidebarData.map((item: TemplateProps, index: number) => {
           return (
             <ListItems
               key={index}

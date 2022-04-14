@@ -19,14 +19,13 @@ export default function Form1() {
       {/* Anything between the <FormLayout> tag can be changed */}
       <div className="shadow-xl rounded-md w-full p-10 border">
         <div className="text-3xl">
-          {/* Change the name of the form based on the form */}
           <h2 className="text-[#E8590C]">Reporter Information</h2>
         </div>
         <div className="w-full">
           <div className="mx-4 min-w-full pt-4">
             <div className="mt-4 w-full px-4">
               <InputDescription
-                isRequired={true}
+                isRequired={false}
                 description="Type of Reporter"
               />
               <Radio.Group
@@ -68,7 +67,7 @@ export default function Form1() {
 
             <div className="mt-4 w-full px-4">
               <InputDescription
-                isRequired={true}
+                isRequired={false}
                 description="Has the reporter informed the incident to the manufacturer?"
               />
               <Radio.Group
@@ -90,7 +89,7 @@ export default function Form1() {
 
             <div className="mt-4 w-full px-4">
               <InputDescription
-                isRequired={true}
+                isRequired={false}
                 description="Is the reporter also submitting the report on behalf of the manufacturer?"
               />
               <Radio.Group
@@ -112,12 +111,12 @@ export default function Form1() {
 
             <div className="flex flex-row pt-4">
               <div className="w-1/2 px-4">
-                <InputDescription isRequired={true} description="Name" />
+                <InputDescription isRequired={false} description="Name" />
                 <Input />
               </div>
               <div className="w-1/2 pr-4">
                 <InputDescription
-                  isRequired={true}
+                  isRequired={false}
                   description="Phone Number"
                 />
                 <Input />
@@ -126,13 +125,13 @@ export default function Form1() {
 
             <div className="flex flex-row pt-4">
               <div className="w-full px-4">
-                <InputDescription isRequired={true} description="Email ID" />
+                <InputDescription isRequired={false} description="Email ID" />
                 <Input />
               </div>
             </div>
 
             <div className="mt-4 w-full px-4">
-              <InputDescription isRequired={true} description="Address" />
+              <InputDescription isRequired={false} description="Address" />
               <TextArea rows={4} />
             </div>
           </div>

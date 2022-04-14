@@ -9,7 +9,7 @@ function Option1() {
         <div className="mx-8 py-16 pb-8">
           <div className="pl-4 text-[24px] text-[#E8590C]">Medical Device</div>
           <div className="mx-4 min-w-full pt-4">
-            <InputDescription isRequired={true} description="" />
+            <InputDescription isRequired={false} description="Type of device" />
             <Radio.Group className="w-full" buttonStyle="solid">
               <Radio.Button value={0} className="w-1/3 text-center">
                 Therapeutic
@@ -24,7 +24,7 @@ function Option1() {
             </Radio.Group>
           </div>
           <div className="mx-4 min-w-full pt-4">
-            <InputDescription isRequired={true} description="" />
+            <InputDescription isRequired={false} description="Implantability" />
             <Radio.Group className="w-full" buttonStyle="solid">
               <Radio.Button value={0} className="w-1/2 text-center">
                 Implantable
@@ -35,7 +35,7 @@ function Option1() {
             </Radio.Group>
           </div>
           <div className="mx-4 min-w-full pt-4">
-            <InputDescription isRequired={true} description="" />
+            <InputDescription isRequired={false} description="Reusability" />
             <Radio.Group className="w-full" buttonStyle="solid">
               <Radio.Button value={0} className="w-1/4 text-center">
                 Single Use Device

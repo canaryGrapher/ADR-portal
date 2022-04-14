@@ -29,7 +29,7 @@ export default function Form1page3h() {
 const Subform = () => (
   <div>
     <div className="min-w-full pt-4">
-      <InputDescription isRequired={true} description="Name (brand/generic)" />
+      <InputDescription isRequired={false} description="Name (brand/generic)" />
       <Input />
     </div>
     <div className="grid grid-cols-2 gap-5 pt-4">
@@ -48,7 +48,7 @@ const Subform = () => (
     </div>
     <div className="grid grid-cols-2 gap-5 pt-4">
       <div className="col-span-1">
-        <InputDescription isRequired={true} description="Date started" />
+        <InputDescription isRequired={false} description="Date started" />
         <DatePicker className="w-full" />
       </div>
       <div className="col-span-1">

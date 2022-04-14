@@ -41,13 +41,12 @@ export default function Form3page4d() {
       {/* Anything between the <FormLayout> tag can be changed */}
       <div className="shadow-xl rounded-md w-full p-10 border">
         <div className="text-3xl">
-          {/* Change the name of the form based on the form */}
           <h2 className="text-[#E8590C]">Further Information</h2>
         </div>
         <div className="w-full">
           <div className="flex flex-col pt-4">
             <InputDescription
-              isRequired={true}
+              isRequired={false}
               description="Is the device notified/regulated in India?"
             />
             <Radio.Group
@@ -61,7 +60,7 @@ export default function Form3page4d() {
           </div>
           <div className="flex flex-col pt-4">
             <InputDescription
-              isRequired={true}
+              isRequired={false}
               description="Device Risk Classification as per India MDR 2017"
             />
             <Radio.Group
@@ -74,97 +73,100 @@ export default function Form3page4d() {
           <div className="grid grid-cols-2 gap-5 pt-4">
             <div className="flex flex-col col-span-1">
               <InputDescription
-                isRequired={true}
+                isRequired={false}
                 description="License Number"
               />
               <Input />
             </div>
             <div className="flex flex-col col-span-1">
               <InputDescription
-                isRequired={true}
+                isRequired={false}
                 description="Catalogue Number"
               />
               <Input />
             </div>
             <div className="flex flex-col col-span-1">
-              <InputDescription isRequired={true} description="Model Number" />
+              <InputDescription isRequired={false} description="Model Number" />
               <Input />
             </div>
             <div className="flex flex-col col-span-1">
-              <InputDescription isRequired={true} description="Batch Number" />
-              <Input />
-            </div>
-            <div className="flex flex-col col-span-1">
-              <InputDescription isRequired={true} description="Serial Number" />
+              <InputDescription isRequired={false} description="Batch Number" />
               <Input />
             </div>
             <div className="flex flex-col col-span-1">
               <InputDescription
-                isRequired={true}
+                isRequired={false}
+                description="Serial Number"
+              />
+              <Input />
+            </div>
+            <div className="flex flex-col col-span-1">
+              <InputDescription
+                isRequired={false}
                 description="Software Number"
               />
               <Input />
             </div>
             <div className="flex flex-col col-span-2">
               <InputDescription
-                isRequired={true}
+                isRequired={false}
                 description="Accessories/Associated Devices"
               />
               <Input />
             </div>
             <div className="flex flex-col col-span-2">
               <InputDescription
-                isRequired={true}
+                isRequired={false}
                 description="GMDN Code &amp; GMDN Term"
               />
               <Input />
             </div>
             <div className="flex flex-col col-span-2">
-              <InputDescription isRequired={true} description="UDI Number" />
+              <InputDescription isRequired={false} description="UDI Number" />
               <Input />
             </div>
             <div className="flex flex-col col-span-1">
               <InputDescription
-                isRequired={true}
+                isRequired={false}
                 description="Installation Date"
               />
               <DatePicker />
             </div>
             <div className="flex flex-col col-span-1">
               <InputDescription
-                isRequired={true}
+                isRequired={false}
                 description="Expiration Date"
               />
               <DatePicker />
             </div>
             <div className="flex flex-col col-span-1">
               <InputDescription
-                isRequired={true}
+                isRequired={false}
                 description="Last Calibration"
               />
               <DatePicker />
             </div>
             <div className="flex flex-col col-span-1">
-              <InputDescription isRequired={true} description="" />
+              <InputDescription isRequired={false} description="" />
               <DatePicker />
             </div>
             <div className="flex flex-col col-span-1">
               <InputDescription
-                isRequired={true}
+                isRequired={false}
                 description="Age of device from date of manufacturing"
               />
               <Input />
             </div>
             <div className="flex flex-col col-span-1">
               <InputDescription
-                isRequired={true}
+                isRequired={false}
                 description="How long was device in use"
               />
               <Input />
             </div>
             <div className="flex flex-col col-span-2">
               <InputDescription
-                isRequired={true}
+                isRequired={false}
                 description="Availability of device for evaluation"
               />
               <Radio.Group
@@ -192,7 +194,7 @@ export default function Form3page4d() {
             </div>
             <div className="flex flex-col col-span-2">
               <InputDescription
-                isRequired={true}
+                isRequired={false}
                 description="Is the usage of device as per manufacturer’s claims/instructions for use/user manual"
               />
               <Radio.Group

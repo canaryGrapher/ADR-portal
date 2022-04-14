@@ -13,7 +13,6 @@ export default function Form3page1() {
       {/* Anything between the <FormLayout> tag can be changed */}
       <div className="shadow-xl rounded-md w-full p-10 border">
         <div className="text-3xl">
-          {/* Change the name of the form based on the form */}
           <h2 className="text-[#E8590C]">Primary Information</h2>
         </div>
         <div className="w-full">
@@ -21,14 +20,14 @@ export default function Form3page1() {
             <div className="flex flex-col col-span-1">
               <InputDescription
                 description={"Reporter Reference Number"}
-                isRequired={true}
+                isRequired={false}
               />
               <Input />
             </div>
             <div className="flex flex-col col-span-1">
               <InputDescription
                 description={"Date of report"}
-                isRequired={true}
+                isRequired={false}
               />
               <DatePicker />
             </div>
@@ -36,7 +35,7 @@ export default function Form3page1() {
           <div className="grid grid-cols-1 pt-4">
             <InputDescription
               description={"Type of report"}
-              isRequired={true}
+              isRequired={false}
             />
             <Radio.Group
               size="large"

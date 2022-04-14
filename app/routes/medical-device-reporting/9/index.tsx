@@ -17,14 +17,14 @@ export default function Form3page9() {
           </div>
           <div className="mt-4 w-full">
             <InputDescription
-              isRequired={true}
+              isRequired={false}
               description="Product Owners device risk analysis report"
             />
             <TextArea rows={4} />
           </div>
           <div className="mt-4 w-full">
             <InputDescription
-              isRequired={true}
+              isRequired={false}
               description="Corrective / preventive action taken"
             />
             <TextArea rows={4} />

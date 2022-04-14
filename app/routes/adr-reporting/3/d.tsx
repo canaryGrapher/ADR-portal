@@ -31,7 +31,7 @@ const RadioGroupDrugs = () => {
   return (
     <div className="w-full pt-2">
       {/* Make description dynamic */}
-      <InputDescription isRequired={true} description="Drug 1" />
+      <InputDescription isRequired={false} description="Drug 1" />
       <Radio.Group
         size="large"
         buttonStyle="solid"

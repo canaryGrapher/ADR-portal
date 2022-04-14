@@ -41,27 +41,27 @@ export default function Form3page6() {
           <div className="col-span-1 flex flex-col">
             <InputDescription
               description={"Patient Hospital Number"}
-              isRequired={true}
+              isRequired={false}
             />
             <Input />
           </div>
           <div className="col-span-1 flex flex-col">
             <InputDescription
               description={"Patient Initials"}
-              isRequired={true}
+              isRequired={false}
             />
             <Input />
           </div>
           <div className="col-span-1 flex flex-col">
-            <InputDescription description={"Age"} isRequired={true} />
+            <InputDescription description={"Age"} isRequired={false} />
             <Input />
           </div>
           <div className="col-span-1 flex flex-col">
-            <InputDescription description={"Weight"} isRequired={true} />
+            <InputDescription description={"Weight"} isRequired={false} />
             <Input />
           </div>
           <div className="col-span-2">
-            <InputDescription description={"Sex"} isRequired={true} />
+            <InputDescription description={"Sex"} isRequired={false} />
             <Radio.Group
               size="large"
               buttonStyle="solid"
@@ -71,7 +71,7 @@ export default function Form3page6() {
           </div>
           <div className="col-span-2">
             <InputDescription
-              isRequired={true}
+              isRequired={false}
               description="Other relevant history, including pre-existing medical conditions"
             />
             <TextArea rows={4} />
@@ -79,7 +79,7 @@ export default function Form3page6() {
           <div className="col-span-2">
             <InputDescription
               description={"Has the patient recovered?"}
-              isRequired={true}
+              isRequired={false}
             />
             <Radio.Group
               size="large"
@@ -94,14 +94,14 @@ export default function Form3page6() {
           <div className="col-span-1">
             <InputDescription
               description={"Date of recovery"}
-              isRequired={true}
+              isRequired={false}
             />
             <DatePicker className="w-full" disabled={isRecovered === false} />
           </div>
           <div className="col-span-2">
             <InputDescription
               description={"Is the patient dead?"}
-              isRequired={true}
+              isRequired={false}
             />
             <Radio.Group
               size="large"
@@ -114,13 +114,16 @@ export default function Form3page6() {
             />
           </div>
           <div className="col-span-1">
-            <InputDescription description={"Date of death"} isRequired={true} />
+            <InputDescription
+              description={"Date of death"}
+              isRequired={false}
+            />
             <DatePicker className="w-full" disabled={isDead === false} />
           </div>
           <div className="col-span-2">
             <InputDescription
               description={"Other patient outcomes"}
-              isRequired={true}
+              isRequired={false}
             />
             <TextArea rows={4} />
           </div>

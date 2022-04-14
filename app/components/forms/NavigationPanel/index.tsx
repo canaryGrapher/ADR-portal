@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-// importing entitites
+// importing maps
 import {
   ADRreporting_portalMap,
   MedicalDeviceReporting_portalMap,
@@ -15,6 +15,8 @@ const NavigationPanel = (props: NavigationPanelProps) => {
   const location = useLocation();
   const [nextPage, setNextPage] = useState<string>("");
   const [previousPage, setPreviousPage] = useState<string>("");
+  const [isLastPage, setIsLastPage] = useState<boolean>(false);
+  const [isFirstPage, setIsFirstPage] = useState<boolean>(false);
   const currentLocation = location.pathname.split("/");
   const pageType =
     currentLocation[1] === "adr-reporting"
@@ -25,25 +27,31 @@ const NavigationPanel = (props: NavigationPanelProps) => {
         };
 
   useEffect(() => {
+    // default settings on every page render
+    setIsFirstPage(false);
+    setIsLastPage(false);
+
     for (let route = 0; route < pageType.mapRoute.length; route++) {
       if (props.currentRoute === pageType.mapRoute[route]) {
-        if (route < pageType.mapRoute.length - 1 && route != 0) {
-          setNextPage(
-            pageType.link + pageType.mapRoute[route + 1].split("").join("/")
-          );
-          setPreviousPage(
-            pageType.link + pageType.mapRoute[route - 1].split("").join("/")
-          );
-        } else if (route === pageType.mapRoute.length - 1) {
-          setNextPage(pageType + "submit");
-          setPreviousPage(
-            pageType.link + pageType.mapRoute[route - 1].split("").join("/")
-          );
-        } else if (route === 0) {
+        if (route === 0) {
+          setIsFirstPage(true);
           setNextPage(
             pageType.link + pageType.mapRoute[route + 1].split("").join("/")
           );
           setPreviousPage("/");
+        } else if (route === pageType.mapRoute.length - 1) {
+          setIsLastPage(true);
+          setNextPage(pageType + "submit");
+          setPreviousPage(
+            pageType.link + pageType.mapRoute[route - 1].split("").join("/")
+          );
+        } else if (route < pageType.mapRoute.length - 1 && route != 0) {
+          setNextPage(
+            pageType.link + pageType.mapRoute[route + 1].split("").join("/")
+          );
+          setPreviousPage(
+            pageType.link + pageType.mapRoute[route - 1].split("").join("/")
+          );
         }
       }
     }
@@ -53,15 +61,21 @@ const NavigationPanel = (props: NavigationPanelProps) => {
     <div className="py-10 w-full flex flex-row justify-end">
       <div className="grid grid-cols-2 gap-5">
         <Link to={previousPage}>
-          <button className="bg-white text-[#E8590C] hover:shadow-xl p-2 w-32 border border-[#E8590C]">
-            Previous
+          <button
+            className="bg-white text-[#E8590C] hover:shadow-xl p-2 w-32 border border-[#E8590C]"
+            type="submit"
+          >
+            {isFirstPage ? "Home" : "Previous"}
           </button>
         </Link>
-        <Link to={nextPage}>
-          <button className="bg-[#E8590C] text-white hover:shadow-xl p-2 w-32">
-            Next
-          </button>
-        </Link>
+        {/* <Link to={nextPage}> */}
+        <button
+          className="bg-[#E8590C] text-white hover:shadow-xl p-2 w-32"
+          type="submit"
+        >
+          {isLastPage ? "Submit" : "Next"}
+        </button>
+        {/* </Link> */}
       </div>
     </div>
   );

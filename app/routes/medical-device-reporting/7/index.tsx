@@ -17,24 +17,24 @@ export default function Form3page7() {
         </div>
         <div className="pt-4 grid grid-cols-2 gap-5">
           <div className="col-span-1 flex flex-col">
-            <InputDescription description={"Name"} isRequired={true} />
+            <InputDescription description={"Name"} isRequired={false} />
             <Input />
           </div>
           <div className="col-span-1 flex flex-col">
-            <InputDescription description={"Address"} isRequired={true} />
+            <InputDescription description={"Address"} isRequired={false} />
             <Input />
           </div>
           <div className="col-span-1 flex flex-col">
             <InputDescription
               description={"Contact Number of Person at the site of event"}
-              isRequired={true}
+              isRequired={false}
             />
             <Input />
           </div>
           <div className="col-span-1 flex flex-col">
             <InputDescription
               description={"Telephone Number"}
-              isRequired={true}
+              isRequired={false}
             />
             <Input />
           </div>
