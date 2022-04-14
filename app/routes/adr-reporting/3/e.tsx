@@ -10,23 +10,30 @@ import NavigationPanel from "~/components/forms/NavigationPanel";
 // importing icons
 import { FiHelpCircle, FiPlus, FiX } from "react-icons/fi";
 
-import { Radio, Input } from "antd";
+import { Radio, Input, Form } from "antd";
 
 export default function Form1page3e() {
   return (
     <FormLayout>
-      {/* Anything between the <FormLayout> tag can be changed */}
-      <div className="shadow-xl rounded-md w-full p-10 border">
-        <div className="mx-auto">
-          <div className="text-[24px] text-[#E8590C]">
-            Reaction Reappeared After Re-introduction
+      <Form
+        name="Form1Page3e"
+        initialValues={{ remember: true }}
+        onFinish={(values) => console.log(values)}
+        layout="vertical"
+      >
+        {/* Anything between the <FormLayout> tag can be changed */}
+        <div className="shadow-xl rounded-md w-full p-10 border">
+          <div className="mx-auto">
+            <div className="text-[24px] text-[#E8590C]">
+              Reaction Reappeared After Re-introduction
+            </div>
+            <RadioGroupDrugs />
+            {/* Section to add drug information */}
+            <AddDrugsBox />
           </div>
-          <RadioGroupDrugs />
-          {/* Section to add drug information */}
-          <AddDrugsBox />
         </div>
-      </div>
-      <NavigationPanel currentRoute="3e" />
+        <NavigationPanel currentRoute="3e" />
+      </Form>
     </FormLayout>
   );
 }

@@ -5,19 +5,26 @@ import FormLayout from "~/layouts/forms/adr-reporting";
 import InputDescription from "~/components/forms/inputDescription";
 import NavigationPanel from "~/components/forms/NavigationPanel";
 
-import { Radio } from "antd";
+import { Radio, Form } from "antd";
 
 export default function Form1page3a() {
   return (
     <FormLayout>
-      {/* Anything between the <FormLayout> tag can be changed */}
-      <div className="shadow-xl rounded-md w-full p-10 border">
-        <div className="mx-auto">
-          <div className="text-[24px] text-[#E8590C]">Action Taken</div>
-          <RadioGroupDrugs />
+      <Form
+        name="Form1Page3b"
+        initialValues={{ remember: true }}
+        onFinish={(values) => console.log(values)}
+        layout="vertical"
+      >
+        {/* Anything between the <FormLayout> tag can be changed */}
+        <div className="shadow-xl rounded-md w-full p-10 border">
+          <div className="mx-auto">
+            <div className="text-[24px] text-[#E8590C]">Action Taken</div>
+            <RadioGroupDrugs />
+          </div>
         </div>
-      </div>
-      <NavigationPanel currentRoute="3b" />
+        <NavigationPanel currentRoute="3b" />
+      </Form>
     </FormLayout>
   );
 }

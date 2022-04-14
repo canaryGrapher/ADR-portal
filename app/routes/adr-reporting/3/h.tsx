@@ -4,24 +4,31 @@ import FormLayout from "~/layouts/forms/adr-reporting";
 // importing components
 import InputDescription from "~/components/forms/inputDescription";
 import NavigationPanel from "~/components/forms/NavigationPanel";
-import { Input, DatePicker } from "antd";
+import { Input, DatePicker, Form } from "antd";
 
 export default function Form1page3h() {
   return (
     <FormLayout>
-      {/* Anything between the <FormLayout> tag can be changed */}
-      <div className="shadow-xl rounded-md w-full p-10 border">
-        <div>
-          <div className="text-[24px] text-[#E8590C]">
-            <p className="my-0 py-0">Concomitant medical product</p>
-            <p className="text-sm text-gray-600">
-              Including self-medication and herbal remedies with therapy dates
-            </p>
+      <Form
+        name="Form1Page3h"
+        initialValues={{ remember: true }}
+        onFinish={(values) => console.log(values)}
+        layout="vertical"
+      >
+        {/* Anything between the <FormLayout> tag can be changed */}
+        <div className="shadow-xl rounded-md w-full p-10 border">
+          <div>
+            <div className="text-[24px] text-[#E8590C]">
+              <p className="my-0 py-0">Concomitant medical product</p>
+              <p className="text-sm text-gray-600">
+                Including self-medication and herbal remedies with therapy dates
+              </p>
+            </div>
+            <Subform />
           </div>
-          <Subform />
         </div>
-      </div>
-      <NavigationPanel currentRoute="3h" />
+        <NavigationPanel currentRoute="3h" />
+      </Form>
     </FormLayout>
   );
 }

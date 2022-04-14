@@ -22,9 +22,15 @@ export default function Form1page3i() {
   return (
     <FormLayout>
       {/* Anything between the <FormLayout> tag can be changed */}
-      <div className="shadow-xl rounded-md w-full p-10 border">
-        <div className="text-[24px] text-[#E8590C]">AMC/NCC Section</div>
-        <Form>
+      <Form
+        name="Form1Page3i"
+        initialValues={{ remember: true }}
+        onFinish={(values) => console.log(values)}
+        layout="vertical"
+      >
+        <div className="shadow-xl rounded-md w-full p-10 border">
+          <div className="text-[24px] text-[#E8590C]">AMC/NCC Section</div>
+
           <div className="w-full pt-4 grid grid-col-12">
             <div className="flex flex-row col-span-6">
               <p className="pr-3">Not Applicable</p>
@@ -149,10 +155,9 @@ export default function Form1page3i() {
               </Radio.Button>
             </Radio.Group>
           </div>
-        </Form>
-      </div>
-
-      <NavigationPanel currentRoute="3i" />
+        </div>
+        <NavigationPanel currentRoute="3i" />
+      </Form>
     </FormLayout>
   );
 }
