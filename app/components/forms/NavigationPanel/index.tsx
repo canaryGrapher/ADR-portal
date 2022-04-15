@@ -68,14 +68,14 @@ const NavigationPanel = (props: NavigationPanelProps) => {
             {isFirstPage ? "Home" : "Previous"}
           </button>
         </Link>
-        {/* <Link to={nextPage}> */}
-        <button
-          className="bg-[#E8590C] text-white hover:shadow-xl p-2 w-32"
-          type="submit"
-        >
-          {isLastPage ? "Submit" : "Next"}
-        </button>
-        {/* </Link> */}
+        <Link to={nextPage}>
+          <button
+            className="bg-[#E8590C] text-white hover:shadow-xl p-2 w-32"
+            type="submit"
+          >
+            {isLastPage ? "Submit" : "Next"}
+          </button>
+        </Link>
       </div>
     </div>
   );

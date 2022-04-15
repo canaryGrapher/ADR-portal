@@ -3,10 +3,12 @@ import FormLayout from "~/layouts/forms/adr-reporting";
 
 // importing components
 import { Form, Radio } from "antd";
-import InputDescription from "~/components/forms/inputDescription";
 import NavigationPanel from "~/components/forms/NavigationPanel";
 
 export default function Form1page3a() {
+  //temporary variable
+  const drugs = ["drug1", "drug2", "drug3"];
+
   return (
     <FormLayout>
       <Form
@@ -19,7 +21,7 @@ export default function Form1page3a() {
         <div className="shadow-xl rounded-md w-full p-10 border">
           <div className="mx-auto">
             <div className="text-[24px] text-[#E8590C]">Dechallenge</div>
-            <RadioGroupDrugs />
+            <RadioGroupDrugs drugOptions={drugs} />
           </div>
         </div>
         <NavigationPanel currentRoute="3c" />
@@ -28,23 +30,25 @@ export default function Form1page3a() {
   );
 }
 
-const RadioGroupDrugs = () => {
+const RadioGroupDrugs = (props: { drugOptions: string[] }) => {
   const radioOptions = [
-    "No dechallenge",
-    "Definite Improvement",
-    "No Improvement",
+    "Drug withdrawn",
+    "Dose increased",
+    "Dose reduced",
+    "Dose not changed",
+    "Not applicable",
     "Unknown",
   ];
-  return (
-    <div className="w-full pt-2">
-      {/* Make description dynamic */}
-      <InputDescription isRequired={false} description="Drug 1" />
+  const radioFields = props.drugOptions.map((drug, index) => (
+    <Form.Item name={drug} label={drug} className="w-full" key={index}>
       <Radio.Group
         size="large"
         buttonStyle="solid"
         options={radioOptions}
         optionType="button"
       />
-    </div>
-  );
+    </Form.Item>
+  ));
+
+  return <>{radioFields}</>;
 };

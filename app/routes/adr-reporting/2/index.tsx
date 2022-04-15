@@ -17,32 +17,36 @@ export default function Form1page2() {
         layout="vertical"
       >
         <div className="shadow-xl rounded-md w-full p-10 border">
-          <div className="pl-4 text-3xl">
+          <div className="text-3xl">
             <h2 className="text-[#E8590C]">Suspected Adverse Reaction</h2>
           </div>
-          <div className="flex flex-row pt-4">
-            <div className="w-1/2 px-4">
-              <InputDescription
-                isRequired={true}
-                description="Date of reaction started"
-              />
+          <div className="grid grid-cols-2 gap-5">
+            <Form.Item
+              className="w-full"
+              label="Date of reaction started"
+              name="dateOfReactionStarted"
+              rules={[{ required: true, message: "Date of reaction started" }]}
+            >
               <DatePicker className="w-full" />
-            </div>
-            <div className="w-1/2 pr-4">
-              <InputDescription
-                isRequired={false}
-                description="Date of recovery"
-              />
+            </Form.Item>
+            <Form.Item
+              className="w-full"
+              label="Date of recovery"
+              name="dateOfRecovery"
+            >
               <DatePicker className="w-full" />
-            </div>
+            </Form.Item>
           </div>
-          <div className="mt-4 w-full px-4">
-            <InputDescription
-              isRequired={true}
-              description="Describe reaction or problem"
-            />
+          <Form.Item
+            className="w-full"
+            label="Describe reaction or problem"
+            name="reactionDescription"
+            rules={[
+              { required: true, message: "Reaction description is mandatory" },
+            ]}
+          >
             <TextArea rows={4} />
-          </div>
+          </Form.Item>
         </div>
         <NavigationPanel currentRoute="2" />
       </Form>

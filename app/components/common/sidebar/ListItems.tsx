@@ -92,7 +92,7 @@ const ListItems = (props: ListItemsProps) => {
 const SidebarNumberingBullet = (props: SidebarNumberingBullets) => {
   if (props.isCompleted) {
     return (
-      <div className="border-2 border-[#6C567B] bg-[#6C567B] rounded-full h-7 w-7 text-center text-white flex flex-col justify-center">
+      <div className="border-2 border-[#6C567B] bg-[#6C567B] dark:bg-[#a262cf] dark:border-[#a262cf] rounded-full h-7 w-7 text-center text-white flex flex-col justify-center">
         <Link to="" className="text-white">
           <FiCheck className="mx-auto my-auto font-extrabold" />
         </Link>
@@ -100,8 +100,8 @@ const SidebarNumberingBullet = (props: SidebarNumberingBullets) => {
     );
   } else if (props.isCurrentPage) {
     return (
-      <p className="font-bold border-2 border-[#6C567B] rounded-full h-7 w-7 text-center">
-        <Link to="" className="text-[#6C567B]">
+      <p className="font-bold border-2 border-[#6C567B] dark:border-[#a262cf] rounded-full h-7 w-7 text-center">
+        <Link to="" className="text-[#6C567B] dark:text-[#a262cf]">
           {props.bulletNumber + 1}
         </Link>
       </p>

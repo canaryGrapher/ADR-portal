@@ -47,7 +47,7 @@ const Sidebar = () => {
           />
         </div>
         <div className="col-span-3 text-center">
-          <h2 className="text-[#6C567B] text-xl m-0 mb-3">
+          <h2 className="text-[#6C567B] dark:text-[#a262cf] text-xl m-0 mb-3">
             MANIPAL COLLEGE OF PHARMACY
           </h2>
           <p className="text-[10px] border-t-2 border-[#6C567B] pt-2 font-medium">
@@ -57,7 +57,7 @@ const Sidebar = () => {
           </p>
         </div>
       </div>
-      <div className="shadow-xl p-5 rounded-lg text-[#6C567B] border">
+      <div className="shadow-xl p-5 rounded-lg text-[#6C567B] dark:text-[#a262cf] border">
         {SidebarData.map((item: TemplateProps, index: number) => {
           return (
             <ListItems

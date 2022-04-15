@@ -31,3 +31,9 @@
 .sidebarLinks:hover {
     color: rgb(53, 41, 61) !important;
 }
+
+@media (prefers-color-scheme: dark) {
+    .ant-form-item-label>label {
+        color: #d8d8d8 !important;
+    }
+}

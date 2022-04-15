@@ -16,6 +16,26 @@ export default function Form1page1() {
     dispatch(setNewFormData({ fieldName, value }));
   };
 
+  // options for form items
+  const genderOptions = [
+    { label: "Male", value: "male" },
+    { label: "Female", value: "female" },
+    { label: "Other", value: "other" },
+  ];
+  const advisedMedicineOptions = [
+    { label: "Doctor", value: "doctor" },
+    { label: "Pharmacist", value: "pharmacist" },
+    { label: "Friends", value: "friends" },
+    {
+      label: "Self (past disease experienced)",
+      value: "self(past disease experienced)",
+    },
+    {
+      label: "Self (no past disease experienced)",
+      value: "self(no past disease experienced)",
+    },
+  ];
+
   return (
     <FormLayout>
       <Form
@@ -62,11 +82,7 @@ export default function Form1page1() {
             </div>
             <div className="grid grid-cols-3 gap-5">
               <Form.Item label="Gender" name="gender" className="w-full">
-                <Select allowClear>
-                  <Select.Option value="male">Male</Select.Option>
-                  <Select.Option value="female">Female</Select.Option>
-                  <Select.Option value="other">Other</Select.Option>
-                </Select>
+                <Select allowClear options={genderOptions} />
               </Form.Item>
               <Form.Item className="w-full" label="Weight" name="weight">
                 <InputNumber addonAfter={"mgs"} />
@@ -96,32 +112,11 @@ export default function Form1page1() {
               name="medicineAdvised"
               className="w-3/4"
             >
-              <Checkbox.Group className="w-full">
-                <div className="grid grid-cols-4 gap-x-5 gap-y-2">
-                  <div className="col-span-1">
-                    <Checkbox value="Doctor">Doctor</Checkbox>
-                  </div>
-                  <div className="col-span-1">
-                    <Checkbox value="Pharmacist">Pharmacist</Checkbox>
-                  </div>
-                  <div className="col-span-1">
-                    <Checkbox value="Friends">Friends</Checkbox>
-                  </div>
-                  <div className="col-span-1">
-                    <Checkbox value="Relative">Relatives</Checkbox>
-                  </div>
-                  <div className="col-span-2">
-                    <Checkbox value="Self (past disease experienced)">
-                      Self (past disease experienced)
-                    </Checkbox>
-                  </div>
-                  <div className="col-span-2">
-                    <Checkbox value="Self (no past disease experienced)">
-                      Self (no past disease experienced)
-                    </Checkbox>
-                  </div>
-                </div>
-              </Checkbox.Group>
+              <Checkbox.Group
+                className="w-full grid grid-cols-3 gap-x-5 gap-y-2"
+                options={advisedMedicineOptions}
+                name="medicineAdvised"
+              />
             </Form.Item>
 
             <Form.Item

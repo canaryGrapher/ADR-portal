@@ -1,3 +1,10 @@
+/*
+Note: 
+    This page needs fixing. 
+    Do not edit it if you are not @canaryGrapher
+
+*/
+
 import { useState } from "react";
 
 // importing layouts
@@ -13,6 +20,9 @@ import { FiHelpCircle, FiPlus, FiX } from "react-icons/fi";
 import { Radio, Input, Form } from "antd";
 
 export default function Form1page3e() {
+  //temporary variable
+  const drugs = ["drug1", "drug2", "drug3"];
+
   return (
     <FormLayout>
       <Form
@@ -27,7 +37,7 @@ export default function Form1page3e() {
             <div className="text-[24px] text-[#E8590C]">
               Reaction Reappeared After Re-introduction
             </div>
-            <RadioGroupDrugs />
+            <RadioGroupDrugs drugOptions={drugs} />
             {/* Section to add drug information */}
             <AddDrugsBox />
           </div>
@@ -38,29 +48,36 @@ export default function Form1page3e() {
   );
 }
 
-const RadioGroupDrugs = () => {
+const RadioGroupDrugs = (props: { drugOptions: string[] }) => {
   const radioOptions = [
     "No rechallenge",
     "Recurrance of symptoms",
     "No occurance of symptoms",
     "Unknown",
   ];
-  return (
-    <div className="w-full pt-2">
-      {/* Make description dynamic */}
-      <InputDescription isRequired={false} description="Drug 1" />
-      <Radio.Group
-        size="large"
-        buttonStyle="solid"
-        options={radioOptions}
-        optionType="button"
-      />
-      <div className="flex flex-row pt-4">
-        <p className="pl-1 pr-7 my-auto">Dose</p>
+
+  const componentsForDrugs = props.drugOptions.map((drug, index) => (
+    <div className="pb-5">
+      <Form.Item
+        name={drug}
+        label={drug}
+        className="w-full m-0 p-0 "
+        key={index}
+      >
+        <Radio.Group
+          size="large"
+          buttonStyle="solid"
+          options={radioOptions}
+          optionType="button"
+        />
+      </Form.Item>
+      <Form.Item name={"drugDose_" + drug} label={"Dose"} className="w-full">
         <Input suffix={<FiHelpCircle />} />
-      </div>
+      </Form.Item>
     </div>
-  );
+  ));
+
+  return <>{componentsForDrugs}</>;
 };
 
 const AddDrugsBox = () => {
@@ -78,6 +95,7 @@ const AddDrugsBox = () => {
   };
 
   const onClickRemoveDrug = (drug: String) => {
+    // drub
     setDrugsAdded(drugsAdded.filter((d) => d !== drug));
   };
 
@@ -93,10 +111,7 @@ const AddDrugsBox = () => {
           onChange={onChangeInput}
           value={inputValue}
         />
-        <button
-          type="submit"
-          className="col-span-1 bg-[#6C567B] text-white p-2 border hover:bg-white hover:text-[#6C567B] border-[#6C567B]"
-        >
+        <button className="col-span-1 bg-[#6C567B] text-white p-2 border hover:bg-white hover:text-[#6C567B] border-[#6C567B]">
           <FiPlus className="mx-auto" />
         </button>
       </form>
