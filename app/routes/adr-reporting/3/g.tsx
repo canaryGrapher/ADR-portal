@@ -19,22 +19,22 @@ export default function Form1page3g() {
         {/* Anything between the <FormLayout> tag can be changed */}
         <div className="shadow-xl rounded-md w-full p-10 border">
           <div>
-            <div className="text-[24px] text-[#E8590C]">Treatment Given</div>
-            <div className="w-full pt-2">
-              <Checkbox.Group options={options}></Checkbox.Group>
+            <div className="text-[24px] text-[#E8590C] pb-5">
+              Treatment Given
             </div>
-          </div>
-        </div>
-        <div className="shadow-xl rounded-md w-full p-10 border mt-5">
-          <div>
-            <div className="my-0 py-0">
-              <p className="font-medium my-0 py-0">
-                Treatment Details (if any)
-              </p>
-            </div>
-            <div className="w-full pt-4">
+            <Form.Item
+              name="treatment given"
+              label="Select the treatment given"
+              className="w-full"
+            >
+              <Checkbox.Group options={options} />
+            </Form.Item>
+            <Form.Item
+              label="Treatment details (if any)"
+              name="treatmentDetails"
+            >
               <TextArea rows={4} />
-            </div>
+            </Form.Item>
           </div>
         </div>
         <NavigationPanel currentRoute="3g" />

@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 // importing layouts
 import FormLayout from "~/layouts/forms/adr-reporting";
 
@@ -5,15 +7,30 @@ import FormLayout from "~/layouts/forms/adr-reporting";
 import NavigationPanel from "~/components/forms/NavigationPanel";
 import { Radio, Checkbox, Input, Form } from "antd";
 import { FiHelpCircle } from "react-icons/fi";
+import { changeConfirmLocale } from "antd/lib/modal/locale";
 
 export default function Form1page3f5() {
+  const [predisposingFactorsValues, setPredisposingFactorsValues] = useState<
+    string[]
+  >([""]);
+
   const options = [
     { label: "Age", value: "age" },
     { label: "Gender", value: "gender" },
     { label: "Genetic", value: "genetic" },
     { label: "Inter-current disease", value: "inter-current disease" },
     { label: "Multiple Drug Therapy", value: "multiple drug therapy" },
+    { label: "Other", value: "other" },
   ];
+  const radioOptions = [
+    { label: "Predictable", value: "predictable" },
+    { label: "Not Predictable", value: "notPredictable" },
+  ];
+
+  const onChangeCheckBoxGroup = (values: any[]) => {
+    setPredisposingFactorsValues(values);
+  };
+
   return (
     <FormLayout>
       <Form
@@ -25,27 +42,36 @@ export default function Form1page3f5() {
         {/* Anything between the <FormLayout> tag can be changed */}
         <div className="shadow-xl rounded-md w-full p-10 border">
           <div className="mx-8 py-4 pb-8">
-            <div className="pl-4 text-[24px] text-[#E8590C]">
-              Predictability
-            </div>
-            <div className="mx-4 min-w-full pt-4">
-              <Radio.Group defaultValue={0} buttonStyle="solid">
-                <Radio.Button value={0}>Predictable</Radio.Button>
-                <Radio.Button value={1}>Not predictable</Radio.Button>
-              </Radio.Group>
-            </div>
-            <div className="pl-4 my-4 text-[24px] text-[#E8590C]">
+            <div className="text-[24px] text-[#E8590C]">Predictability</div>
+            <Form.Item
+              name="predictability"
+              label="Predictability"
+              className="mx-4 min-w-full pt-4"
+            >
+              <Radio.Group
+                buttonStyle="solid"
+                options={radioOptions}
+                optionType="button"
+              />
+            </Form.Item>
+            <div className="my-4 text-[24px] text-[#E8590C]">
               Predisposing factors
             </div>
-            <div className="pl-4">
-              <Checkbox.Group options={options}></Checkbox.Group>
-              <div className="flex flex-row pt-2">
-                <div className="flex flex-col justify-center">
-                  <Checkbox value="other">Other</Checkbox>
-                </div>
-                <Input suffix={<FiHelpCircle />} />
-              </div>
-            </div>
+            <Form.Item name="predisposingFactors" label="Predisposing factors">
+              <Checkbox.Group
+                options={options}
+                onChange={(e) => onChangeCheckBoxGroup(e)}
+              />
+            </Form.Item>
+            <Form.Item
+              name="otherInformation"
+              label="If other, mention the factor"
+            >
+              <Input
+                suffix={<FiHelpCircle />}
+                disabled={!predisposingFactorsValues.includes("other")}
+              />
+            </Form.Item>
           </div>
         </div>
         <NavigationPanel currentRoute="3f5" />

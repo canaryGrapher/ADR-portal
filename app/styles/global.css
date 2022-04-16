@@ -34,6 +34,11 @@
 
 @media (prefers-color-scheme: dark) {
     .ant-form-item-label>label {
-        color: #d8d8d8 !important;
+        color      : #d8d8d8 !important;
+        font-weight: bold;
+    }
+
+    .ant-checkbox-wrapper>span:last-child {
+        color: #c1c1c1 !important;
     }
 }

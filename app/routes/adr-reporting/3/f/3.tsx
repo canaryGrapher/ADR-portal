@@ -8,6 +8,15 @@ import { FiHelpCircle } from "react-icons/fi";
 import { Radio, Progress, Form } from "antd";
 
 export default function Form1page3f3() {
+  const radioOptions = [
+    { label: "Level 1", value: "1" },
+    { label: "Level 2", value: "2" },
+    { label: "Level 3", value: "3" },
+    { label: "Level 4", value: "4" },
+    { label: "Level 5", value: "5" },
+    { label: "Level 6", value: "6" },
+    { label: "Level 7", value: "7" },
+  ];
   return (
     <FormLayout>
       <Form
@@ -22,35 +31,38 @@ export default function Form1page3f3() {
             <div className="text-[24px] text-[#E8590C]">
               Hartwig's Severity Assessment Scale
             </div>
-            <div className="mx-4 min-w-full pt-4">
-              <Radio.Group buttonStyle="solid">
-                <Radio.Button value={0}>Level 1</Radio.Button>
-                <Radio.Button value={1}>Level 2</Radio.Button>
-                <Radio.Button value={2}>Level 3</Radio.Button>
-                <Radio.Button value={3}>Level 4</Radio.Button>
-                <Radio.Button value={4}>Level 5</Radio.Button>
-                <Radio.Button value={5}>Level 6</Radio.Button>
-                <Radio.Button value={6}>Level 7</Radio.Button>
-              </Radio.Group>
-              <div className="flex flex-row pt-4">
-                <div className="w-2/3 mr-3">
+            <div className="min-w-full pt-4">
+              <Form.Item name="hartwigseveritytest" label="Select a level">
+                <Radio.Group
+                  optionType="button"
+                  buttonStyle="solid"
+                  size="large"
+                  options={radioOptions}
+                />
+              </Form.Item>
+              <div className="flex flex-col pt-4">
+                <p className="m-0 p-0 text-gray-800 dark:text-gray-300 font-medium">
+                  Mild Level
+                </p>
+                <div className="w-full m-0 p-0">
                   <Progress
+                    // make percentage value dynamic
                     percent={30}
                     status={"normal"}
                     showInfo={false}
                     strokeColor={"#E8590C"}
                     trailColor={"#E5E5E5"}
+                    className="w-full"
                   />
                 </div>
-                <p className="">{"Mild Level"}</p>
               </div>
               <div className="w-full pt-5">
-                <div className="flex flex-row">
-                  <h5 className="text-xl text-[#E8590C]">
-                    Assessment criteria
-                  </h5>
-                  <div className="flex flex-col justify-center ml-2 mb-1">
-                    <FiHelpCircle />
+                <div className="text-[24px] max-w-fit mx-auto mt-10 px-5 py-1 border-2 flex flex-row rounded-md mb-5">
+                  <h2 className="text-[#E8590C] my-auto mr-2">
+                    Assesment criteria
+                  </h2>
+                  <div className="flex flex-col justify-center my-auto">
+                    <FiHelpCircle className="text-black dark:text-white" />
                   </div>
                 </div>
                 <p>

@@ -11,13 +11,12 @@ import { useState } from "react";
 import FormLayout from "~/layouts/forms/adr-reporting";
 
 // importing components
-import InputDescription from "~/components/forms/inputDescription";
 import NavigationPanel from "~/components/forms/NavigationPanel";
 
 // importing icons
 import { FiHelpCircle, FiPlus, FiX } from "react-icons/fi";
 
-import { Radio, Input, Form } from "antd";
+import { Radio, Input, Form, Select } from "antd";
 
 export default function Form1page3e() {
   //temporary variable
@@ -57,13 +56,8 @@ const RadioGroupDrugs = (props: { drugOptions: string[] }) => {
   ];
 
   const componentsForDrugs = props.drugOptions.map((drug, index) => (
-    <div className="pb-5">
-      <Form.Item
-        name={drug}
-        label={drug}
-        className="w-full m-0 p-0 "
-        key={index}
-      >
+    <div key={index}>
+      <Form.Item name={drug} label={drug} className="w-full" key={index}>
         <Radio.Group
           size="large"
           buttonStyle="solid"
@@ -81,50 +75,13 @@ const RadioGroupDrugs = (props: { drugOptions: string[] }) => {
 };
 
 const AddDrugsBox = () => {
-  const [drugsAdded, setDrugsAdded] = useState<readonly String[]>([]);
-  const [inputValue, setInputValue] = useState<string>("");
-
-  const onChangeInput = (e: any) => {
-    setInputValue(e.target.value);
-  };
-
-  const onClickAddDrug = (e: any) => {
-    e.preventDefault();
-    setDrugsAdded([...drugsAdded, inputValue]);
-    setInputValue("");
-  };
-
-  const onClickRemoveDrug = (drug: String) => {
-    // drub
-    setDrugsAdded(drugsAdded.filter((d) => d !== drug));
-  };
-
   return (
-    <div className="w-full pt-16">
-      <form
-        className="grid grid-cols-12 gap-1 gap-y-3"
-        onSubmit={onClickAddDrug}
-      >
-        <Input
-          className="col-span-11"
-          placeholder="Add a drug"
-          onChange={onChangeInput}
-          value={inputValue}
-        />
-        <button className="col-span-1 bg-[#6C567B] text-white p-2 border hover:bg-white hover:text-[#6C567B] border-[#6C567B]">
-          <FiPlus className="mx-auto" />
-        </button>
-      </form>
-      <div className="grid grid-cols-12 gap-1 pt-2">
-        {drugsAdded.map((drug: String) => (
-          <div className="border border-gray-400 col-span-11 flex flex-row justify-between px-5 py-1">
-            <p className="my-auto">{drug}</p>
-            <button className="my-auto" onClick={() => onClickRemoveDrug(drug)}>
-              <FiX />
-            </button>
-          </div>
-        ))}
-      </div>
-    </div>
+    <Form.Item
+      className="w-full pt-21"
+      name="additionalDrugs"
+      label="Add a drug"
+    >
+      <Select mode="tags" style={{ width: "100%" }} placeholder="Add a drug" />
+    </Form.Item>
   );
 };

@@ -8,6 +8,21 @@ import { FiHelpCircle } from "react-icons/fi";
 import { Form, Radio } from "antd";
 
 export default function Form1page3f1() {
+  const RadioOptions = ["Yes", "No", "Don't know"];
+  const formLayout = [
+    "Are there previous conclusion reports on this reaction?",
+    "Are there previous conclusion reports on this reaction?",
+    "Did the adverse event appear after the suspect drug was administered?",
+    "Did the AR improve when the drug was discontinued or a specific antagonist was administered?",
+    "Did the AR reappear when drug was re-administered?",
+    "Are there alternate causes [other than the drug] that could solely have caused the reaction?",
+    "Did the reaction reappear when a placebo was given?",
+    "Was the drug detected in the blood [or other fluids] in a concentration known to be toxic?",
+    "Was the reaction more severe when the dose was increased or less severe when the dose was decreased?",
+    "Did the patient have a similar reaction to the same or similar drugs in any previous exposure?",
+    "Was the adverse event confirmed by objective evidence?",
+  ];
+
   return (
     <FormLayout>
       <Form
@@ -19,140 +34,28 @@ export default function Form1page3f1() {
         {/* Anything between the <FormLayout> tag can be changed */}
         <div className="shadow-xl rounded-md w-full p-10 border">
           <div className="">
-            <div className="pl-4 text-[24px] text-[#E8590C]">
+            <div className="text-[24px] text-[#E8590C] pb-5">
               Naranjo’s Scale
             </div>
-            <form>
-              <div className="w-full pt-4">
-                <InputDescription
-                  isRequired={false}
-                  description="Are there previous conclusion reports on this reaction?"
-                />
-                <Radio.Group buttonStyle="solid">
-                  <Radio.Button value={0}>Yes</Radio.Button>
-                  <Radio.Button value={1}>No</Radio.Button>
-                  <Radio.Button value={2}>Don't know</Radio.Button>
-                </Radio.Group>
-              </div>
-              <div className="w-full pt-4">
-                <InputDescription
-                  isRequired={false}
-                  description="Are there previous conclusion reports on this reaction?"
-                />
-                <Radio.Group buttonStyle="solid">
-                  <Radio.Button value={0}>Yes</Radio.Button>
-                  <Radio.Button value={1}>No</Radio.Button>
-                  <Radio.Button value={2}>Don't know</Radio.Button>
-                </Radio.Group>
-              </div>
-              <div className="w-full pt-4">
-                <InputDescription
-                  isRequired={false}
-                  description="Did the adverse event appear after the suspect drug was administered?"
-                />
-                <Radio.Group buttonStyle="solid">
-                  <Radio.Button value={0}>Yes</Radio.Button>
-                  <Radio.Button value={1}>No</Radio.Button>
-                  <Radio.Button value={2}>Don't know</Radio.Button>
-                </Radio.Group>
-              </div>
-              <div className="w-full pt-4">
-                <InputDescription
-                  isRequired={false}
-                  description="Did the AR improve when the drug was discontinued or a specific antagonist was administered?"
-                />
-                <Radio.Group buttonStyle="solid">
-                  <Radio.Button value={0}>Yes</Radio.Button>
-                  <Radio.Button value={1}>No</Radio.Button>
-                  <Radio.Button value={2}>Don't know</Radio.Button>
-                </Radio.Group>
-              </div>
-              <div className="w-full pt-4">
-                <InputDescription
-                  isRequired={false}
-                  description="Did the AR reappear when drug was re-administered?"
-                />
-                <Radio.Group buttonStyle="solid">
-                  <Radio.Button value={0}>Yes</Radio.Button>
-                  <Radio.Button value={1}>No</Radio.Button>
-                  <Radio.Button value={2}>Don't know</Radio.Button>
-                </Radio.Group>
-              </div>
-              <div className="w-full pt-4">
-                <InputDescription
-                  isRequired={false}
-                  description="Are there alternate causes [other than the drug] that could solely have caused the reaction?"
-                />
-                <Radio.Group buttonStyle="solid">
-                  <Radio.Button value={0}>Yes</Radio.Button>
-                  <Radio.Button value={1}>No</Radio.Button>
-                  <Radio.Button value={2}>Don't know</Radio.Button>
-                </Radio.Group>
-              </div>
-              <div className="w-full pt-4">
-                <InputDescription
-                  isRequired={false}
-                  description="Did the reaction reappear when a placebo was given?"
-                />
-                <Radio.Group buttonStyle="solid">
-                  <Radio.Button value={0}>Yes</Radio.Button>
-                  <Radio.Button value={1}>No</Radio.Button>
-                  <Radio.Button value={2}>Don't know</Radio.Button>
-                </Radio.Group>
-              </div>
-              <div className="w-full pt-4">
-                <InputDescription
-                  isRequired={false}
-                  description="Was the drug detected in the blood [or other fluids] in a concentration known to be toxic?"
-                />
-                <Radio.Group buttonStyle="solid">
-                  <Radio.Button value={0}>Yes</Radio.Button>
-                  <Radio.Button value={1}>No</Radio.Button>
-                  <Radio.Button value={2}>Don't know</Radio.Button>
-                </Radio.Group>
-              </div>
-              <div className="w-full pt-4">
-                <InputDescription
-                  isRequired={false}
-                  description="Was the reaction more severe when the dose was increased or less severe when the dose was decreased?"
-                />
-                <Radio.Group buttonStyle="solid">
-                  <Radio.Button value={0}>Yes</Radio.Button>
-                  <Radio.Button value={1}>No</Radio.Button>
-                  <Radio.Button value={2}>Don't know</Radio.Button>
-                </Radio.Group>
-              </div>
-              <div className="w-full pt-4">
-                <InputDescription
-                  isRequired={false}
-                  description="Did the patient have a similar reaction to the same or similar drugs in any previous exposure?"
-                />
-                <Radio.Group buttonStyle="solid">
-                  <Radio.Button value={0}>Yes</Radio.Button>
-                  <Radio.Button value={1}>No</Radio.Button>
-                  <Radio.Button value={2}>Don't know</Radio.Button>
-                </Radio.Group>
-              </div>
-              <div className="w-full pt-4">
-                <InputDescription
-                  isRequired={false}
-                  description="Was the adverse event confirmed by objective evidence?"
-                />
-                <Radio.Group buttonStyle="solid">
-                  <Radio.Button value={0}>Yes</Radio.Button>
-                  <Radio.Button value={1}>No</Radio.Button>
-                  <Radio.Button value={2}>Don't know</Radio.Button>
-                </Radio.Group>
-              </div>
-            </form>
+            {formLayout.map((field, index) => (
+              <Form.Item
+                key={index}
+                name={index}
+                label={field}
+                className="w-full pt-4"
+              >
+                <Radio.Group options={RadioOptions} optionType="button" />
+              </Form.Item>
+            ))}
             {/* calculated score for the ADR is displayed here */}
-            <div className="flex flex-row-reverse">
+            <div className="flex flex-row-reverse text-black dark:text-gray-200">
               <div className="grid grid-cols-2 gap-x-3">
                 <div className="flex flex-col justify-end">
                   <p className="text-lg text-[#6C567B] p-0 m-0">Probable ADR</p>
                 </div>
                 <div className="flex flex-col justify-end">
                   <p className="text-[#6C567B] p-0 m-0">
+                    {/* Score is dynamically calculated */}
                     <span className="font-bold text-4xl">07</span>/10
                   </p>
                 </div>

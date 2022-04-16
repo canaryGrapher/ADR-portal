@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 
 // importing layouts
 import FormLayout from "~/layouts/forms/adr-reporting";
@@ -7,17 +7,43 @@ import FormLayout from "~/layouts/forms/adr-reporting";
 import InputDescription from "~/components/forms/inputDescription";
 import NavigationPanel from "~/components/forms/NavigationPanel";
 import { Form, Input, DatePicker, Switch, Checkbox, Radio } from "antd";
+import { CheckboxValueType } from "antd/lib/checkbox/Group";
 const { TextArea } = Input;
 
 export default function Form1page3i() {
   const [seriousReaction, setSeriousReaction] = useState<boolean>(false);
   const [isApplicable, setIsApplicable] = useState<boolean>(false);
+  const [seriousnessLevelState, setSeriousnessLevelState] =
+    useState<CheckboxValueType[]>();
+
   const changeSeriousness = (checked: boolean) => {
     setSeriousReaction(checked);
   };
   const changeApplicability = (checked: boolean) => {
     setIsApplicable(checked);
   };
+
+  const radioOptions = [
+    { label: "Recovered", value: "recovered" },
+    { label: "Recovering", value: "recovering" },
+    { label: "Not recovered", value: "notRecovered" },
+    { label: "Fatal", value: "fatal" },
+    { label: "Recovered with sequelae", value: "recoveredWithSequelae" },
+    { label: "Unknown", value: "unknown" },
+  ];
+
+  const checkBoxOptions = [
+    { label: "Congenital-anomaly", value: "congenitalAnamoly" },
+    { label: "Life Threatening", value: "lifeThreatening" },
+    { label: "Hospitalized/Prolonged", value: "Disability" },
+    { label: "Disability", value: "disability" },
+    {
+      label: "Required intervention to Prevent permanent impairment/damage",
+      value: "requiredIntervention",
+    },
+    { label: "Death", value: "death" },
+    { label: "Other (Mention below)", value: "other" },
+  ];
 
   return (
     <FormLayout>
@@ -29,132 +55,122 @@ export default function Form1page3i() {
         layout="vertical"
       >
         <div className="shadow-xl rounded-md w-full p-10 border">
-          <div className="text-[24px] text-[#E8590C]">AMC/NCC Section</div>
-
-          <div className="w-full pt-4 grid grid-col-12">
-            <div className="flex flex-row col-span-6">
-              <p className="pr-3">Not Applicable</p>
-              <Switch onChange={changeApplicability} />
-              <p className="pl-3">Applicable</p>
-            </div>
-          </div>
-          <div className="grid grid-cols-12 py-4">
-            <div className="col-span-3">
-              <InputDescription
-                isRequired={true}
-                description="AMC Report No."
-              />
-            </div>
-            <div className="col-span-9">
-              <Input disabled={!isApplicable} />
-            </div>
-          </div>
-          <div className="grid grid-cols-12 py-4">
-            <div className="col-span-3">
-              <InputDescription
-                isRequired={true}
-                description="Worldwide Unique No."
-              />
-            </div>
-            <div className="col-span-9">
-              <Input disabled={!isApplicable} />
-            </div>
-          </div>
-          <div className="py-4">
-            <InputDescription
-              isRequired={false}
-              description="Relevant tests/ laboratory data with dates"
+          <div className="text-[24px] text-[#E8590C] mb-5">AMC/NCC Section</div>
+          <Form.Item
+            name="applicability"
+            label="Applicability"
+            className="w-full flex"
+          >
+            <Switch
+              checkedChildren="Applicable"
+              unCheckedChildren="Not applicable"
+              onChange={changeApplicability}
+              checked={isApplicable}
             />
+          </Form.Item>
+          <Form.Item
+            className="w-full"
+            name="amcReportNumber"
+            label="AMC Report Number"
+            required={isApplicable}
+            hidden={!isApplicable}
+          >
+            <Input disabled={!isApplicable} />
+          </Form.Item>
+          <Form.Item
+            label="Worldwide Unique Number"
+            name="worldwideUniqueNumber"
+            className="w-full"
+            required={isApplicable}
+            hidden={!isApplicable}
+          >
+            <Input disabled={!isApplicable} />
+          </Form.Item>
+          <Form.Item
+            className="w-full"
+            label="Relevant tests/ laboratory data with dates"
+            name="relevantTests"
+          >
             <TextArea rows={2} placeholder="" />
-          </div>
-          <div className="py-4">
-            <InputDescription
-              isRequired={false}
-              description="Relevant medical/ medication history (e.g. allergies, race, 
+          </Form.Item>
+          <Form.Item
+            className="w-full"
+            label="Relevant medical/ medication history (e.g. allergies, race, 
                 pregnancy, smoking, alcohol use, hepatic/renal dysfunction etc.)"
-            />
+            name="relevantMedicalHistory"
+          >
             <TextArea rows={2} placeholder="" />
-          </div>
-          <div className="py-4 flex flex-row">
-            <InputDescription
-              isRequired={false}
-              description="Seriousness of the reaction"
+          </Form.Item>
+          <Form.Item
+            label="Was it a serious reaction?"
+            name="seriousnessOfTheReaction"
+            className="w-full"
+          >
+            <Switch
+              checkedChildren="Yes"
+              unCheckedChildren="No"
+              onChange={changeSeriousness}
+              checked={seriousReaction}
             />
-            <div className="flex flex-row pt-2 pl-5">
-              <p className="pr-3">No</p>
-              <Switch onChange={changeSeriousness} />
-              <p className="pl-3">Yes</p>
-            </div>
-          </div>
-          <Checkbox.Group disabled={!seriousReaction}>
-            <div className="grid grid-cols-2 gap-5">
-              <div className="col-span-1">
-                <Checkbox value={"Congenital-anomaly"}>
-                  Congenital-anomaly
-                </Checkbox>
-              </div>
-              <div className="col-span-1">
-                <Checkbox value={"Life threatening"}>
-                  Life threatening{" "}
-                </Checkbox>
-              </div>
-              <div className="col-span-1">
-                <Checkbox value={"Hospitalization/Prolonged"}>
-                  Hospitalization/Prolonged
-                </Checkbox>
-              </div>
-              <div className="col-span-1">
-                <Checkbox value={"Disability"}>Disability</Checkbox>
-              </div>
-              <div className="col-span-2">
-                <Checkbox
-                  value={
-                    "Required intervention to Prevent permanent impairment/damage"
-                  }
-                >
-                  Required intervention to Prevent permanent impairment/damage
-                </Checkbox>
-              </div>
-              <div className="col-span-2 grid grid-cols-12">
-                <Checkbox className="col-span-2" value={"Death"}>
-                  Death
-                </Checkbox>
-                <DatePicker className="my-auto col-span-10" />
-              </div>
-              <div className="col-span-2 grid grid-cols-12">
-                <Checkbox className="col-span-2" value={"Other"}>
-                  Other (specify)
-                </Checkbox>
-                <Input className="my-auto col-span-10" />
-              </div>
-            </div>
-          </Checkbox.Group>
-          <div className="py-4">
-            <InputDescription isRequired={false} description="Outcomes" />
-            <Radio.Group className="w-full" buttonStyle="solid">
-              <Radio.Button className="w-2/12 text-center" value="recovered">
-                Recovered
-              </Radio.Button>
-              <Radio.Button className="w-2/12 text-center" value="recovering">
-                Recovering
-              </Radio.Button>
-              <Radio.Button className="w-2/12 text-center" value="notrecovered">
-                Not recovered
-              </Radio.Button>
-              <Radio.Button className="w-1/12 text-center" value="fatal">
-                Fatal
-              </Radio.Button>
-              <Radio.Button
-                className="w-3/12 text-center"
-                value="recoveredwithsequelae"
-              >
-                Recovered with sequelae
-              </Radio.Button>
-              <Radio.Button className="w-2/12 text-center" value="unknown">
-                Unknown
-              </Radio.Button>
-            </Radio.Group>
-          </div>
+          </Form.Item>
+          <Form.Item
+            label="Seriousness level"
+            name="seriousnessLabel"
+            className="w-full"
+            hidden={!seriousReaction}
+          >
+            <Checkbox.Group
+              disabled={!seriousReaction}
+              options={checkBoxOptions}
+              onChange={(value: CheckboxValueType[]) =>
+                setSeriousnessLevelState(value)
+              }
+            />
+          </Form.Item>
+
+          <Form.Item
+            label="Date of death"
+            name="dateOfDeath"
+            className="w-full"
+            hidden={
+              !seriousReaction || !seriousnessLevelState?.includes("death")
+            }
+            rules={[
+              {
+                required:
+                  seriousReaction && seriousnessLevelState?.includes("death"),
+                message: "Date of death is required",
+              },
+            ]}
+          >
+            <DatePicker className="w-full" disabled={false} />
+          </Form.Item>
+          <Form.Item
+            label="Mention details of other"
+            name="dateOfDeath"
+            className="w-full"
+            hidden={
+              !seriousReaction || !seriousnessLevelState?.includes("other")
+            }
+            rules={[
+              {
+                required:
+                  seriousReaction && seriousnessLevelState?.includes("other"),
+                message: "You need to mention other details",
+              },
+            ]}
+          >
+            <Input className="my-auto col-span-10" />
+          </Form.Item>
+
+          <Form.Item label="Outcome" name="outcome" className="w-full">
+            <Radio.Group
+              size="large"
+              buttonStyle="solid"
+              optionType="button"
+              options={radioOptions}
+            />
+          </Form.Item>
         </div>
         <NavigationPanel currentRoute="3i" />
       </Form>

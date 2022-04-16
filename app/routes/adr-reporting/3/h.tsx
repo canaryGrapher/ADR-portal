@@ -20,7 +20,7 @@ export default function Form1page3h() {
           <div>
             <div className="text-[24px] text-[#E8590C]">
               <p className="my-0 py-0">Concomitant medical product</p>
-              <p className="text-sm text-gray-600">
+              <p className="text-sm text-gray-600 dark:text-gray-400">
                 Including self-medication and herbal remedies with therapy dates
               </p>
             </div>
@@ -35,44 +35,48 @@ export default function Form1page3h() {
 
 const Subform = () => (
   <div>
-    <div className="min-w-full pt-4">
-      <InputDescription isRequired={false} description="Name (brand/generic)" />
+    <Form.Item
+      className="min-w-full pt-4"
+      label="Name (brand/generic)"
+      name="name"
+    >
       <Input />
-    </div>
+    </Form.Item>
     <div className="grid grid-cols-2 gap-5 pt-4">
-      <div className="col-span-1">
-        <InputDescription isRequired={false} description="Dose Used" />
+      <Form.Item className="col-span-1" label="Dose used" name="doseUsage">
         <Input />
-      </div>
-      <div className="col-span-1">
-        <InputDescription isRequired={false} description="Route Used" />
+      </Form.Item>
+      <Form.Item className="col-span-1" label="Route used" name="routeUsed">
         <Input />
-      </div>
+      </Form.Item>
     </div>
-    <div className="mt-4 w-full">
-      <InputDescription isRequired={false} description="Frequency (OD, BD)" />
+    <Form.Item
+      className="mt-4 w-full"
+      label="Frequency (OD, BD)"
+      name="frequency"
+    >
       <Input />
-    </div>
+    </Form.Item>
     <div className="grid grid-cols-2 gap-5 pt-4">
-      <div className="col-span-1">
-        <InputDescription isRequired={false} description="Date started" />
+      <Form.Item className="col-span-1" label="Date started" name="startDate">
         <DatePicker className="w-full" />
-      </div>
-      <div className="col-span-1">
-        <InputDescription isRequired={false} description="Date stopped" />
+      </Form.Item>
+      <Form.Item className="col-span-1" label="Date stopped" name="stopDate">
         <DatePicker className="w-full" />
-      </div>
+      </Form.Item>
     </div>
-    <div className="mt-4 w-full">
-      <InputDescription isRequired={false} description="Indication" />
+    <Form.Item className="mt-4 w-full" label="Indication" name="indication">
       <Input />
-    </div>
+    </Form.Item>
     <div className="flex flex-row justify-between w-100 pt-5">
-      <button className="bg-[#6C567B] text-white p-2 w-32 border hover:bg-white hover:text-[#6C567B] border-[#6C567B]">
+      <button
+        className="bg-[#6C567B] text-white p-2 w-32 border hover:bg-white hover:text-[#6C567B] border-[#6C567B]"
+        type="button"
+      >
         Save
       </button>
       <button
-        type="submit"
+        type="button"
         className="bg-white text-[#6C567B] p-2 w-32 border border-[#6C567B] hover:bg-[#E8590C] hover:text-white hover:border-[#E8590C]"
       >
         Add more

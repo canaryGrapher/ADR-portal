@@ -6,6 +6,28 @@ import { Form, Radio } from "antd";
 import NavigationPanel from "~/components/forms/NavigationPanel";
 
 export default function Form1page3j() {
+  const radioOptions = [
+    {
+      label: "Fatal",
+      value: "fatal",
+    },
+    {
+      label: "Recovery",
+      value: "recovery",
+    },
+    {
+      label: "Continuing",
+      value: "continuing",
+    },
+    {
+      label: "Unknown",
+      value: "unknown",
+    },
+    {
+      label: "Other",
+      value: "other",
+    },
+  ];
   return (
     <FormLayout>
       <Form
@@ -18,15 +40,14 @@ export default function Form1page3j() {
         <div className="shadow-xl rounded-md w-full p-10 border">
           <div>
             <div className="text-[24px] text-[#E8590C]">Outcome</div>
-            <div className="w-full pt-4">
-              <Radio.Group buttonStyle="solid">
-                <Radio.Button value={0}>Fatal</Radio.Button>
-                <Radio.Button value={1}>Recovery</Radio.Button>
-                <Radio.Button value={2}>Continuing</Radio.Button>
-                <Radio.Button value={3}>Unknown</Radio.Button>
-                <Radio.Button value={4}>Other</Radio.Button>
-              </Radio.Group>
-            </div>
+            <Form.Item name="outcome" className="w-full pt-4">
+              <Radio.Group
+                options={radioOptions}
+                optionType="button"
+                buttonStyle="solid"
+                size="large"
+              />
+            </Form.Item>
           </div>
         </div>
         <NavigationPanel currentRoute="3j" />
