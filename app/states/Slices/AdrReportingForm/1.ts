@@ -19,7 +19,7 @@ export interface CounterState {
 
 export interface ActionType {
     fieldName: fieldNameTypes;
-    value: undefined;
+    value: string;
 }
 
 enum fieldNameTypes {
@@ -58,20 +58,20 @@ export const form1page1Slice = createSlice({
     name: 'form1page1',
     initialState,
     reducers: {
-        fetchIncompleteFormUserProfile: (state) => {
+        fetchIncompleteFormsFromUserProfile: (state) => {
             // Add logic to fetch incomplete/complete form data from backend API
         },
         submitFormDataToTheBackend: (state) => {
-            // Add logic to submit form data to the backend API
+            // Add logic to submit form data to the backend API when the form is submitted
         },
         setNewFormData: (state, action: PayloadAction<ActionType>) => {
-            // logic to set the new form data in this reducer and eventually in the backend API using the above function
-            state.forms[`${action.payload.fieldName}`] = action.payload.value
+            // logic to set the new form data in this reducer. This changes everytime the form is updated
+            state.forms[`${action.payload?.fieldName}`] = action.payload.value
         },
     },
 })
 
 // Action creators are generated for each case reducer function
-export const { fetchIncompleteFormUserProfile, submitFormDataToTheBackend, setNewFormData } = form1page1Slice.actions
+export const { fetchIncompleteFormsFromUserProfile, submitFormDataToTheBackend, setNewFormData } = form1page1Slice.actions
 
 export default form1page1Slice.reducer

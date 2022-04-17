@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 // Import Form Layout
 import FormLayout from "~/layouts/forms/adr-reporting";
 
@@ -7,13 +9,23 @@ const { TextArea } = Input;
 
 //Import Images
 import { FiHelpCircle } from "react-icons/fi";
-import InputDescription from "~/components/forms/inputDescription";
 import NavigationPanel from "~/components/forms/NavigationPanel";
 
 export default function Form1page4() {
+  const [occupationState, setOccupationState] = useState<string>("");
+  const [form] = Form.useForm();
+  const radioOptions = [
+    { label: "Physician", value: "physician" },
+    { label: "Dentist", value: "dentist" },
+    { label: "Nurse", value: "nurse" },
+    { label: "Pharmacist", value: "pharmacist" },
+    { label: "Other", value: "other" },
+  ];
+
   return (
     <FormLayout>
       <Form
+        form={form}
         name="Form1Page4"
         initialValues={{ remember: true }}
         onFinish={(values) => console.log(values)}
@@ -23,99 +35,108 @@ export default function Form1page4() {
           <div className="pl-4 text-3xl">
             <h2 className="text-[#E8590C]">Reporter Details</h2>
           </div>
-          <div className="flex flex-col pb-8">
-            {/* First */}
-            <div className="mt-4 w-full">
-              <InputDescription isRequired={true} description="Name" />
+          {/* First */}
+          <div className="grid grid-cols-2 gap-5 pb-8">
+            <Form.Item
+              name="name"
+              label="Name"
+              className="w-full col-span-2"
+              rules={[
+                {
+                  required: true,
+                  message: "Date of death is required",
+                },
+              ]}
+            >
               <Input />
-            </div>
+            </Form.Item>
             {/* Second */}
-            <div className="grid grid-cols-1 gap-5 pt-4">
-              <div className="col-span-1">
-                <InputDescription isRequired={false} description="ID Number" />
-                <Input />
-              </div>
-              <div className="col-span-1">
-                <InputDescription isRequired={false} description="Pin" />
-                <Input />
-              </div>
-              <div></div>
-            </div>
+            <Form.Item name="idNumber" label="ID Number" className="col-span-1">
+              <Input />
+            </Form.Item>
+            <Form.Item name="pin" label="Pin" className="col-span-1">
+              <Input />
+            </Form.Item>
             {/* Third */}
-            <div className="grid grid-cols-2 gap-5 pt-4">
-              <div className="col-span-1">
-                <InputDescription isRequired={true} description="Email ID" />
-                <Input />
-              </div>
-              <div className="col-span-1">
-                <InputDescription isRequired={true} description="Tel. Number" />
-                <Input />
-              </div>
-              <div></div>
-            </div>
-            {/* Fourth */}
-            <div className="pt-4">
-              <InputDescription
-                isRequired={false}
-                description="Prof. Address"
-              />
-              <TextArea rows={2} />
-            </div>
-            {/* Fifth */}
-            <div className="pt-4">
-              <p className="mb-1 text-[16px]">Occupation</p>
-              <Radio.Group name="occupation">
-                <Radio value={1}>Physician</Radio>
-                <Radio value={2}>Dentist</Radio>
-                <Radio value={3}>Nurse</Radio>
-                <Radio value={4}>Pharmacist</Radio>
-              </Radio.Group>
-              <div className="flex flex-row items-center pt-1">
-                <Radio value={5}>Others</Radio>
-                <div className="w-full">
-                  <Input suffix={<FiHelpCircle />} />
-                </div>
-              </div>
-            </div>
-            <div className="grid grid-cols-2 gap-5">
-              {/* Sixth */}
-              <div className="pt-4">
-                <div>
-                  <InputDescription
-                    isRequired={false}
-                    description="Department"
-                  />
-                  <Input />
-                </div>
-              </div>
-              {/* Seventh */}
-              <div className="pt-4">
-                <div>
-                  <InputDescription
-                    isRequired={false}
-                    // defaultValue={Number(Date.now())} value is today's date
-                    description="Date of this report"
-                  />
-                  <DatePicker className="w-full" />
-                </div>
-              </div>
-            </div>
-            {/* Eighth */}
-            <div className="pt-4">
-              <InputDescription isRequired={false} description="References" />
-              <TextArea rows={2} />
-            </div>
+            <Form.Item
+              name="email"
+              label="Email ID"
+              rules={[
+                {
+                  required: true,
+                  message: "Email ID is required",
+                },
+              ]}
+              className="col-span-1"
+            >
+              <Input />
+            </Form.Item>
+            <Form.Item
+              name="telephoneNumber"
+              label="Telephone Number"
+              rules={[
+                {
+                  required: true,
+                  message: "Telephone is required",
+                },
+              ]}
+              className="col-span-1"
+            >
+              <Input />
+            </Form.Item>
           </div>
+          {/* Fourth */}
+          <Form.Item
+            label="Prof. Address"
+            name="profAddress"
+            className="w-full"
+          >
+            <TextArea rows={2} />
+          </Form.Item>
+          {/* Fifth */}
+          <Form.Item name="occupation" label="Occupation" className="pt-4">
+            <Radio.Group
+              size="large"
+              buttonStyle="solid"
+              options={radioOptions}
+              optionType="button"
+              onChange={() =>
+                setOccupationState(form.getFieldValue("occupation"))
+              }
+            />
+          </Form.Item>
+          <Form.Item
+            className="w-full"
+            name="other"
+            label="Mention the occupation"
+            hidden={occupationState !== "other"}
+          >
+            <Input
+              suffix={<FiHelpCircle />}
+              disabled={occupationState !== "other"}
+            />
+          </Form.Item>
+          <div className="grid grid-cols-2 gap-5 pt-4">
+            {/* Sixth */}
+
+            <Form.Item name="department" label="Department">
+              <Input />
+            </Form.Item>
+            {/* Seventh */}
+            <Form.Item label="Date of this report" name="dateOfReport">
+              <DatePicker className="w-full" />
+            </Form.Item>
+          </div>
+          {/* Eighth */}
+          <Form.Item label="References" name="references" className="pt-4">
+            <TextArea rows={2} />
+          </Form.Item>
         </div>
         {/* Ninth */}
         <div className="mt-6 shadow-xl rounded-md w-full p-10 border">
-          <div>
-            <InputDescription
-              isRequired={false}
-              description="Reporter's comments"
-            />
+          <Form.Item label="Reporter's Comment" name="reportersComment">
             <TextArea rows={2} />
-          </div>
+          </Form.Item>
         </div>
         <NavigationPanel currentRoute="4" />
       </Form>

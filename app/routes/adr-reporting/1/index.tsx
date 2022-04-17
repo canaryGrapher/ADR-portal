@@ -40,8 +40,11 @@ export default function Form1page1() {
     <FormLayout>
       <Form
         name="Form1Page1"
-        initialValues={{ remember: true }}
+        initialValues={formState.forms}
         onFinish={(values) => console.log(values)}
+        onValuesChange={(values) =>
+          changeFormData(values[Object.keys(values)[0]], Object.keys(values)[0])
+        }
         layout="vertical"
       >
         {/* Anything between the <FormLayout> tag can be changed */}
