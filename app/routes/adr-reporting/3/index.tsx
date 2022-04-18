@@ -80,7 +80,12 @@ function Subform() {
         <Input />
       </Form.Item>
       <div className="grid grid-cols-2 gap-5">
-        <Form.Item name="dateStarted" label="Date started" className="w-full">
+        <Form.Item
+          name="dateStarted"
+          label="Date started"
+          className="w-full"
+          rules={[{ required: true, message: "Start date is mandatory" }]}
+        >
           <DatePicker className="w-full" />
         </Form.Item>
         <Form.Item name="dateStopped" label="Date stopped" className="w-full">

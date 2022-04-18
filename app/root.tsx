@@ -24,6 +24,24 @@ export function links() {
   ];
 }
 
+export function ErrorBoundary({ error }) {
+  console.error(error);
+  return (
+    <html>
+      <head>
+        <title>Oh no!</title>
+        <Meta />
+        <Links />
+      </head>
+      <body>
+        {/* add the UI you want your users to see */}
+        <h1>Oh no! The application is facing issues.</h1>
+        <Scripts />
+      </body>
+    </html>
+  );
+}
+
 const Document = ({ children }: DocumentProps) => {
   return (
     <html lang="en">

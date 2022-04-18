@@ -11,6 +11,7 @@ type SidebarProps = {
 };
 
 type ListItemsProps = {
+  formName: string;
   name: string;
   pageLink: string;
   isCompleted: boolean;

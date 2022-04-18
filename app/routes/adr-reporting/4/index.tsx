@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 // Import Form Layout
 import FormLayout from "~/layouts/forms/adr-reporting";
@@ -13,6 +13,17 @@ import NavigationPanel from "~/components/forms/NavigationPanel";
 
 export default function Form1page4() {
   const [occupationState, setOccupationState] = useState<string>("");
+  const [isOccupationApplicable, setIsOccupationApplicable] =
+    useState<boolean>(false);
+
+  useEffect(() => {
+    if (occupationState === "other") {
+      setIsOccupationApplicable(true);
+    } else {
+      setIsOccupationApplicable(false);
+    }
+  }, [occupationState]);
+
   const [form] = Form.useForm();
   const radioOptions = [
     { label: "Physician", value: "physician" },
@@ -110,6 +121,12 @@ export default function Form1page4() {
             name="other"
             label="Mention the occupation"
             hidden={occupationState !== "other"}
+            rules={[
+              {
+                required: isOccupationApplicable,
+                message: "Entering non-listed occupation is mandatory",
+              },
+            ]}
           >
             <Input
               suffix={<FiHelpCircle />}

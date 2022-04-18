@@ -5,7 +5,7 @@ import {
   ADRreporting_portalMap,
   MedicalDeviceReporting_portalMap,
 } from "./FormMap";
-import { BrowserRouter as Router, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 // importing types
 import { NavigationPanelProps } from "~/types/forms/NavigationPanel";
@@ -59,23 +59,26 @@ const NavigationPanel = (props: NavigationPanelProps) => {
 
   return (
     <div className="py-10 w-full flex flex-row justify-end">
-      <div className="grid grid-cols-2 gap-5">
+      <div className="grid grid-cols-3 gap-2">
         <Link to={previousPage}>
           <button
-            className="bg-white text-[#E8590C] hover:shadow-xl p-2 w-32 border border-[#E8590C]"
+            className="bg-white text-[#E8590C] hover:shadow-xl p-2 w-32 border border-[#E8590C] hover:bg-transparent font-bold"
             type="submit"
           >
             {isFirstPage ? "Home" : "Previous"}
           </button>
         </Link>
-        {/* <Link to={nextPage}> */}
         <button
-          className="bg-[#E8590C] text-white hover:shadow-xl p-2 w-32"
+          className="bg-[#6C567B] text-[#ebebeb] hover:shadow-xl hover:bg-white hover:text-[#6C567B] p-2 w-32 border font-bold"
           type="submit"
         >
-          {isLastPage ? "Submit" : "Next"}
+          Save
         </button>
-        {/* </Link> */}
+        <Link to={nextPage}>
+          <button className="bg-[#E8590C] text-white hover:shadow-xl p-2 w-32 border border-[#E8590C] font-bold hover:bg-transparent">
+            {isLastPage ? "Submit" : "Next"}
+          </button>
+        </Link>
       </div>
     </div>
   );

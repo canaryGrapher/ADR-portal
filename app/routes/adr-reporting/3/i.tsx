@@ -68,24 +68,36 @@ export default function Form1page3i() {
               checked={isApplicable}
             />
           </Form.Item>
-          <Form.Item
-            className="w-full"
-            name="amcReportNumber"
-            label="AMC Report Number"
-            required={isApplicable}
-            hidden={!isApplicable}
-          >
-            <Input disabled={!isApplicable} />
-          </Form.Item>
-          <Form.Item
-            label="Worldwide Unique Number"
-            name="worldwideUniqueNumber"
-            className="w-full"
-            required={isApplicable}
-            hidden={!isApplicable}
-          >
-            <Input disabled={!isApplicable} />
-          </Form.Item>
+          <div className="grid grid-cols-2 gap-5">
+            <Form.Item
+              className="w-full"
+              name="amcReportNumber"
+              label="AMC Report Number"
+              rules={[
+                {
+                  required: isApplicable,
+                  message: "AMC Report number is mandatory",
+                },
+              ]}
+              hidden={!isApplicable}
+            >
+              <Input disabled={!isApplicable} />
+            </Form.Item>
+            <Form.Item
+              label="Worldwide Unique Number"
+              name="worldwideUniqueNumber"
+              className="w-full"
+              rules={[
+                {
+                  required: isApplicable,
+                  message: "Worldwide Unique number is mandatory",
+                },
+              ]}
+              hidden={!isApplicable}
+            >
+              <Input disabled={!isApplicable} />
+            </Form.Item>
+          </div>
           <Form.Item
             className="w-full"
             label="Relevant tests/ laboratory data with dates"
@@ -115,9 +127,15 @@ export default function Form1page3i() {
           </Form.Item>
           <Form.Item
             label="Seriousness level"
-            name="seriousnessLabel"
+            name="seriousnessLevel"
             className="w-full"
             hidden={!seriousReaction}
+            rules={[
+              {
+                required: seriousReaction,
+                message: "Selecting an option is mandatory",
+              },
+            ]}
           >
             <Checkbox.Group
               disabled={!seriousReaction}

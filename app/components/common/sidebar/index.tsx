@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { BrowserRouter as Router, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 // importing components
 import ListItems from "./ListItems";
@@ -16,6 +16,7 @@ const Sidebar = () => {
   const [SidebarData, setSidebarData] = useState<TemplateProps[]>(
     AdrReporting.template
   );
+  const [activeForm, setActiveForm] = useState<string>("");
   const [activeTab, setActiveTab] = useState<string>("");
 
   //set next, previous and current page on every page load
@@ -33,6 +34,7 @@ const Sidebar = () => {
     if (currentForm === "medical-device-reporting") {
       setSidebarData(MedicalDeviceReporting.template);
     }
+    setActiveForm(currentForm);
     setActiveTab(currentPage + currentPageSub + currentPageSubSub);
   }, [location]);
 
@@ -65,6 +67,7 @@ const Sidebar = () => {
               {...item}
               number={index}
               currentPage={activeTab}
+              formName={activeForm}
               pageLink={item.pageLink}
             />
           );

@@ -1,17 +1,60 @@
 import FormLayout from "~/layouts/forms/adr-reporting";
 import { Input, DatePicker, Form, Select, Checkbox, InputNumber } from "antd";
 import NavigationPanel from "~/components/forms/NavigationPanel";
-
+import { useLoaderData } from "remix";
+import { useState } from "react";
 // importing redux reducers
 import { RootState } from "~/states/store";
 import { useSelector, useDispatch } from "react-redux";
-import { setNewFormData } from "~/states/Slices/AdrReportingForm/1";
+import {
+  setNewFormData,
+  fetchIncompleteFormsFromUserProfile,
+} from "~/states/Slices/AdrReportingForm/1";
+import { useEffect } from "react";
+import moment from "moment";
 
 const { TextArea } = Input;
 
+export const loader = async () => {
+  const data2 = {
+    patientInitials: "Adam Levine",
+    DateOfBirth: null,
+    ageOfOnset: 25,
+    gender: null,
+    weight: null,
+    patientID: null,
+    ip_op: null,
+    unit: null,
+    reasonForTakingMedication: null,
+    medicineAdvised: null,
+    knownAllergies: null,
+    socialHistory: null,
+  };
+  const data = {
+    patientInitials: "Adam Levine",
+    DateOfBirth: "2022-04-18T17:27:37.758Z",
+    ageOfOnset: 25,
+    gender: null,
+    weight: null,
+    patientID: null,
+    ip_op: null,
+    unit: null,
+    reasonForTakingMedication: null,
+    medicineAdvised: null,
+    knownAllergies: null,
+    socialHistory: null,
+  };
+  console.log(data2);
+  return data;
+};
+
 export default function Form1page1() {
-  const dispatch = useDispatch();
+  const data = useLoaderData();
+  data.DateOfBirth = moment(data.DateOfBirth);
   const formState = useSelector((state: RootState) => state.form1page1);
+  const dispatch = useDispatch();
+
+  // change the redux value whenever there is a change in the form
   const changeFormData = (value: any, fieldName: any) => {
     dispatch(setNewFormData({ fieldName, value }));
   };
@@ -39,8 +82,10 @@ export default function Form1page1() {
   return (
     <FormLayout>
       <Form
+        preserve={false}
+        scrollToFirstError={true}
         name="Form1Page1"
-        initialValues={formState.forms}
+        initialValues={formState}
         onFinish={(values) => console.log(values)}
         onValuesChange={(values) =>
           changeFormData(values[Object.keys(values)[0]], Object.keys(values)[0])

@@ -39,6 +39,7 @@ const Subform = () => (
       className="min-w-full pt-4"
       label="Name (brand/generic)"
       name="name"
+      rules={[{ required: true, message: "Drug name is mandatory" }]}
     >
       <Input />
     </Form.Item>
@@ -58,7 +59,12 @@ const Subform = () => (
       <Input />
     </Form.Item>
     <div className="grid grid-cols-2 gap-5 pt-4">
-      <Form.Item className="col-span-1" label="Date started" name="startDate">
+      <Form.Item
+        className="col-span-1"
+        label="Date started"
+        name="startDate"
+        rules={[{ required: true, message: "Start date is mandatory" }]}
+      >
         <DatePicker className="w-full" />
       </Form.Item>
       <Form.Item className="col-span-1" label="Date stopped" name="stopDate">
