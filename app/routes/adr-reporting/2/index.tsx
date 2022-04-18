@@ -2,8 +2,7 @@
 import FormLayout from "~/layouts/forms/adr-reporting";
 
 // Import components
-import { Input, DatePicker, Button, Form } from "antd";
-import InputDescription from "~/components/forms/inputDescription";
+import { Input, DatePicker, Form } from "antd";
 import NavigationPanel from "~/components/forms/NavigationPanel";
 const { TextArea } = Input;
 

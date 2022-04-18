@@ -10,6 +10,8 @@ export default function Form3page1() {
   return (
     <FormLayout>
       <Form
+        preserve={false}
+        scrollToFirstError={true}
         name="Form3page1"
         initialValues={{ remember: true }}
         onFinish={(value) => console.log(value)}

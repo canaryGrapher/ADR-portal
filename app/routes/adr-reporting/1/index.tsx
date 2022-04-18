@@ -2,7 +2,6 @@ import FormLayout from "~/layouts/forms/adr-reporting";
 import { Input, DatePicker, Form, Select, Checkbox, InputNumber } from "antd";
 import NavigationPanel from "~/components/forms/NavigationPanel";
 import { useLoaderData } from "remix";
-import { useState } from "react";
 // importing redux reducers
 import { RootState } from "~/states/store";
 import { useSelector, useDispatch } from "react-redux";
@@ -10,26 +9,11 @@ import {
   setNewFormData,
   fetchIncompleteFormsFromUserProfile,
 } from "~/states/Slices/AdrReportingForm/1";
-import { useEffect } from "react";
 import moment from "moment";
 
 const { TextArea } = Input;
 
 export const loader = async () => {
-  const data2 = {
-    patientInitials: "Adam Levine",
-    DateOfBirth: null,
-    ageOfOnset: 25,
-    gender: null,
-    weight: null,
-    patientID: null,
-    ip_op: null,
-    unit: null,
-    reasonForTakingMedication: null,
-    medicineAdvised: null,
-    knownAllergies: null,
-    socialHistory: null,
-  };
   const data = {
     patientInitials: "Adam Levine",
     DateOfBirth: "2022-04-18T17:27:37.758Z",
@@ -44,7 +28,6 @@ export const loader = async () => {
     knownAllergies: null,
     socialHistory: null,
   };
-  console.log(data2);
   return data;
 };
 
