@@ -4,14 +4,14 @@ import { useState } from "react";
 import FormLayout from "~/layouts/forms/medical-device-reporting";
 
 //importing components
-import { DatePicker, Input, Radio } from "antd";
-import InputDescription from "~/components/forms/inputDescription";
+import { DatePicker, Input, Radio, Form } from "antd";
 import NavigationPanel from "~/components/forms/NavigationPanel";
-const { TextArea } = Input;
 
 export default function Form3page5() {
-  const [isSeriousEvent, setIsSeriousEvent] = useState<boolean>(false);
-  const [isDead, setIsDead] = useState<boolean>(false);
+  const [isSeriousEvent, setIsSeriousEvent] = useState<boolean>();
+  const [isDead, setIsDead] = useState<boolean>();
+  const [isReturned, setIsReturned] = useState<boolean>();
+
 
   const radioOptions1 = [
     "Hospital Premise",
@@ -60,191 +60,220 @@ export default function Form3page5() {
     }
   };
 
+  const changeDeviceLocation = (e: any) => {
+    if (e.target.value === "Returned to the company") {
+      setIsReturned(true);
+    } else {
+      setIsReturned(false);
+
   return (
     <FormLayout>
-      <div className="shadow-xl rounded-md w-full p-10 border">
-        <div className="flex flex-col pb-8">
-          <div className="text-[24px] text-[#E8590C]">Event Description</div>
-          <div className="w-full grid grid-cols-2 gap-5 pt-4">
-            <div className="col-span-1 flex flex-col">
-              <InputDescription
-                description={"Date of Event"}
-                isRequired={false}
-              />
-              <DatePicker />
-            </div>
-            <div className="col-span-1 flex flex-col">
-              <InputDescription
-                description={"Date of Implant"}
-                isRequired={false}
-              />
-              <DatePicker />
-            </div>
-            <div className="col-span-2 flex flex-col">
-              <InputDescription
-                description={"Location of event"}
-                isRequired={false}
-              />
-              <Radio.Group
-                size="large"
-                buttonStyle="solid"
-                options={radioOptions1}
-                optionType="button"
-              />
-            </div>
-            <div className="col-span-2 flex flex-col">
-              <InputDescription
-                description={"Device Operator"}
-                isRequired={false}
-              />
-              <Radio.Group
-                size="large"
-                buttonStyle="solid"
-                options={radioOptions2}
-                optionType="button"
-              />
-            </div>
-            <div className="col-span-2 flex flex-col">
-              <InputDescription
-                description={"Device location"}
-                isRequired={false}
-              />
-              <Radio.Group
-                size="large"
-                buttonStyle="solid"
-                options={radioOptions3}
-                optionType="button"
-              />
-            </div>
-            <div className="col-span-1 flex flex-col">
-              <InputDescription
-                description={"Date of return"}
-                isRequired={false}
-              />
-              <DatePicker />
-            </div>
-            <div className="col-span-2 flex flex-col">
-              <InputDescription
-                description={"Serious event?"}
-                isRequired={false}
-              />
-              <Radio.Group
-                size="large"
-                buttonStyle="solid"
-                options={radioOptions4}
-                optionType="button"
-                onChange={(e) => {
-                  changeSeriousEventState(e);
-                }}
-              />
-            </div>
-            <div className="col-span-2 flex flex-col">
-              <InputDescription description={"Reason"} isRequired={false} />
-              <Radio.Group
-                size="large"
-                buttonStyle="solid"
-                options={radioOptions5}
-                optionType="button"
-                disabled={!isSeriousEvent}
-                onChange={(e) => {
-                  changeSeriousEventValue(e);
-                }}
-              />
-            </div>
-            <div className="col-span-1 flex flex-col">
-              <InputDescription
-                description={"Date of death"}
-                isRequired={false}
-              />
-              <DatePicker disabled={!isDead} />
-            </div>
-            <div className="col-span-2 flex flex-col">
-              <InputDescription
-                description={"Is device in use after the incident?"}
-                isRequired={false}
-              />
-              <Radio.Group
-                size="large"
-                buttonStyle="solid"
-                options={radioOptions4}
-                optionType="button"
-              />
-            </div>
-            <div className="col-span-2 flex flex-col">
-              <InputDescription
-                description={"Detailed description of the incident"}
-                isRequired={false}
-              />
-              <TextArea rows={4} />
-            </div>
-            <div className="col-span-2 flex flex-col">
-              <div className="text-[22px] text-[#E8590C]">
-                Frequency of occurrence of similar adverse events in India
+      <Form
+        name="Form3page5"
+        initialValues={{ remember: true }}
+        onFinish={(value) => console.log(value)}
+        layout="vertical"
+      >
+        <div className="shadow-xl rounded-md w-full p-10 border">
+          <div className="flex flex-col pb-8">
+            <div className="text-[24px] text-[#E8590C]">Event Description</div>
+            <div className="w-full">
+              <div className="grid grid-cols-2 gap-5">
+                <Form.Item
+                  label="Date of Event"
+                  name="dateOfEvent"
+                  className="w-full"
+                >
+                  <DatePicker className="w-full" />
+                </Form.Item>
+                <Form.Item
+                  label="Date of Implant"
+                  name="dateOfImplant"
+                  className="w-full"
+                >
+                  <DatePicker className="w-full" />
+                </Form.Item>
               </div>
-              <div className="grid grid-cols-4 gap-5">
-                <div className="flex flex-col col-span-1">
-                  <InputDescription description={"Year"} isRequired={false} />
-                  <DatePicker picker="year" />
-                </div>
-                <div className="flex flex-col col-span-1">
-                  <InputDescription
-                    description={"Number of similar events"}
-                    isRequired={false}
+              <div className="col-span-2 flex flex-col">
+                <Form.Item
+                  label="Location of event"
+                  name="locationOfEvent"
+                  className="w-full"
+                >
+                  <Radio.Group
+                    size="large"
+                    buttonStyle="solid"
+                    options={radioOptions1}
+                    optionType="button"
                   />
-                  <Input type="number" />
-                </div>
-                <div className="flex flex-col col-span-1">
-                  <InputDescription
-                    description={"Total number suplied"}
-                    isRequired={false}
+                </Form.Item>
+              </div>
+              <div className="col-span-2 flex flex-col">
+                <Form.Item
+                  label={"Device Operator"}
+                  name="deviceOperator"
+                  className="w-full"
+                >
+                  <Radio.Group
+                    size="large"
+                    buttonStyle="solid"
+                    options={radioOptions2}
+                    optionType="button"
                   />
-                  <Input type="number" />
-                </div>
-                <div className="flex flex-col col-span-1">
-                  <InputDescription
-                    description={"Frequency"}
-                    isRequired={false}
+                </Form.Item>
+              </div>
+              <div className="col-span-2 flex flex-col">
+                <Form.Item
+                  label={"Device location"}
+                  name="deviceLocation"
+                  className="w-full"
+                >
+                  <Radio.Group
+                    size="large"
+                    buttonStyle="solid"
+                    options={radioOptions3}
+                    optionType="button"
+                    onChange={(e) => {
+                      changeDeviceLocation(e);
+                    }}
                   />
-                  <Input />
+                </Form.Item>
+              </div>
+              <div className="col-span-1">
+                <Form.Item label={"Date of return"} name="dateOfReturn">
+                  <DatePicker disabled={!isReturned} className="w-full" />
+                </Form.Item>
+              </div>
+              <div className="col-span-2 flex flex-col">
+                <Form.Item label={"Serious event?"} name="seriousEvent">
+                  <Radio.Group
+                    size="large"
+                    buttonStyle="solid"
+                    options={radioOptions4}
+                    optionType="button"
+                    onChange={(e) => {
+                      changeSeriousEventState(e);
+                    }}
+                  />
+                </Form.Item>
+              </div>
+              <div className="col-span-2 flex flex-col">
+                <Form.Item label={"Reason"} name="reason" className="w-full" required={isSeriousEvent}>
+                  <Radio.Group
+                    size="large"
+                    buttonStyle="solid"
+                    options={radioOptions5}
+                    optionType="button"
+                    disabled={!isSeriousEvent}
+                    onChange={(e) => {
+                      changeSeriousEventValue(e);
+                    }}
+                  />
+                </Form.Item>
+              </div>
+              <div className="col-span-1">
+                <Form.Item label={"Date of death"} name="dateOfDeath" required={isDead}>
+                  <DatePicker disabled={!isDead} className="w-full" />
+                </Form.Item>
+              </div>
+              <div className="col-span-2 flex flex-col">
+                <Form.Item
+                  label={"Is device in use after the incident?"}
+                  name="isDeviceInUse"
+                >
+                  <Radio.Group
+                    size="large"
+                    buttonStyle="solid"
+                    options={radioOptions4}
+                    optionType="button"
+                  />
+                </Form.Item>
+              </div>
+              <div className="col-span-2 flex flex-col">
+                <Form.Item
+                  label={"Detailed description of the incident"}
+                  name="detailedDescription"
+                >
+                  <Input.TextArea rows={4} />
+                </Form.Item>
+              </div>
+              <div className="col-span-2 flex flex-col">
+                <div className="text-[22px] text-[#E8590C]">
+                  Frequency of occurrence of similar adverse events in India
+                </div>
+                <div className="grid grid-cols-4 gap-5">
+                  <div className="flex flex-col col-span-1">
+                    <Form.Item label={"Year"} name="year" className="w-full">
+                      <DatePicker picker="year" className="w-full" />
+                    </Form.Item>
+                  </div>
+                  <div className="flex flex-col col-span-1">
+                    <Form.Item
+                      label={"Number of similar events"}
+                      name="numberOfSimilarIndia"
+                      className="w-full"
+                    >
+                      <Input type="number" className="w-full" />
+                    </Form.Item>
+                  </div>
+                  <div className="flex flex-col col-span-1">
+                    <Form.Item
+                      label={"Total number suplied"}
+                      name="totalNumberSuppliedIndia"
+                    >
+                      <Input type="number" />
+                    </Form.Item>
+                  </div>
+                  <div className="flex flex-col col-span-1">
+                    <Form.Item
+                      label={"Frequency"}
+                      name="frequencyIndia"
+                      className="w-full"
+                    >
+                      <Input className="w-full" />
+                    </Form.Item>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div className="col-span-2 flex flex-col">
-              <div className="text-[22px] text-[#E8590C]">
-                Frequency of occurrence of similar adverse events globally
-              </div>
-              <div className="grid grid-cols-4 gap-5">
-                <div className="flex flex-col col-span-1">
-                  <InputDescription description={"Year"} isRequired={false} />
-                  <DatePicker picker="year" />
+              <div className="col-span-2 flex flex-col">
+                <div className="text-[22px] text-[#E8590C]">
+                  Frequency of occurrence of similar adverse events globally
                 </div>
-                <div className="flex flex-col col-span-1">
-                  <InputDescription
-                    description={"Number of similar events"}
-                    isRequired={false}
-                  />
-                  <Input type="number" />
-                </div>
-                <div className="flex flex-col col-span-1">
-                  <InputDescription
-                    description={"Total number suplied"}
-                    isRequired={false}
-                  />
-                  <Input type="number" />
-                </div>
-                <div className="flex flex-col col-span-1">
-                  <InputDescription
-                    description={"Frequency"}
-                    isRequired={false}
-                  />
-                  <Input />
+                <div className="grid grid-cols-4 gap-5">
+                  <div className="flex flex-col col-span-1">
+                    <Form.Item label={"Year"} name="year" className="w-full">
+                      <DatePicker picker="year" className="w-full" />
+                    </Form.Item>
+                  </div>
+                  <div className="flex flex-col col-span-1">
+                    <Form.Item
+                      label={"Number of similar events"}
+                      name="numberOfSimilarGlobal"
+                      className="w-full"
+                    >
+                      <Input type="number" />
+                    </Form.Item>
+                  </div>
+                  <div className="flex flex-col col-span-1">
+                    <Form.Item
+                      label={"Total number suplied"}
+                      name="totalNumberSuppliedGlobal"
+                    >
+                      <Input type="number" />
+                    </Form.Item>
+                  </div>
+                  <div className="flex flex-col col-span-1">
+                    <Form.Item label={"Frequency"} name="frequencyGlobal">
+                      <Input />
+                    </Form.Item>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-      <NavigationPanel currentRoute="5" />
+        <NavigationPanel currentRoute="5" />
+      </Form>
     </FormLayout>
   );
 }

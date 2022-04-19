@@ -1,8 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import moment from 'moment'
 import { FormStateType, ActionType } from "~/types/reducers/adrReporting/1"
 
 const initialState: FormStateType = {
-    patientInitials: "Adam Levine",
+    patientInitials: undefined,
     DateOfBirth: null,
     ageOfOnset: undefined,
     gender: null,

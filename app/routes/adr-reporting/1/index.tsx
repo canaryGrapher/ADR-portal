@@ -1,42 +1,24 @@
 import FormLayout from "~/layouts/forms/adr-reporting";
-import { Input, DatePicker, Form, Select, Checkbox, InputNumber } from "antd";
+import { Input, Form, Select, Checkbox, InputNumber, DatePicker } from "antd";
 import NavigationPanel from "~/components/forms/NavigationPanel";
 import { useLoaderData } from "remix";
+import moment from "moment";
+
 // importing redux reducers
 import { RootState } from "~/states/store";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  setNewFormData,
-  fetchIncompleteFormsFromUserProfile,
-} from "~/states/Slices/AdrReportingForm/1";
-import moment from "moment";
-
-const { TextArea } = Input;
-
-export const loader = async () => {
-  const data = {
-    patientInitials: "Adam Levine",
-    DateOfBirth: "2022-04-18T17:27:37.758Z",
-    ageOfOnset: 25,
-    gender: null,
-    weight: null,
-    patientID: null,
-    ip_op: null,
-    unit: null,
-    reasonForTakingMedication: null,
-    medicineAdvised: null,
-    knownAllergies: null,
-    socialHistory: null,
-  };
-  return data;
-};
+import { setNewFormData } from "~/states/Slices/AdrReportingForm/1";
 
 export default function Form1page1() {
-  const data = useLoaderData();
-  data.DateOfBirth = moment(data.DateOfBirth);
-  const formState = useSelector((state: RootState) => state.form1page1);
   const dispatch = useDispatch();
-
+  // converting date value to moment Object
+  const formState = useSelector((state: RootState) => state.form1page1);
+  let newFormState = {
+    ...formState,
+    DateOfBirth: moment(
+      formState.DateOfBirth ? formState.DateOfBirth : new Date()
+    ),
+  };
   // change the redux value whenever there is a change in the form
   const changeFormData = (value: any, fieldName: any) => {
     dispatch(setNewFormData({ fieldName, value }));
@@ -68,7 +50,7 @@ export default function Form1page1() {
         preserve={false}
         scrollToFirstError={true}
         name="Form1Page1"
-        initialValues={formState}
+        initialValues={newFormState}
         onFinish={(values) => console.log(values)}
         onValuesChange={(values) =>
           changeFormData(values[Object.keys(values)[0]], Object.keys(values)[0])
@@ -97,7 +79,7 @@ export default function Form1page1() {
                 name="DateOfBirth"
                 className="w-full"
               >
-                <DatePicker className="w-full" />
+                <DatePicker className="w-full" format="DD/MM/YYYY" />
               </Form.Item>
 
               <Form.Item
@@ -135,7 +117,7 @@ export default function Form1page1() {
               name="reasonForTakingMedication"
               className="w-full py-4"
             >
-              <TextArea rows={4} />
+              <Input.TextArea rows={4} />
             </Form.Item>
 
             <Form.Item
