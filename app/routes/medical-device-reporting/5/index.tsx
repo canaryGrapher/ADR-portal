@@ -7,43 +7,19 @@ import FormLayout from "~/layouts/forms/medical-device-reporting";
 import { DatePicker, Input, Radio, Form } from "antd";
 import NavigationPanel from "~/components/forms/NavigationPanel";
 
+// importing utilities
+import {
+  radioOptions1,
+  radioOptions2,
+  radioOptions3,
+  radioOptions4,
+  radioOptions5,
+} from "~/utils/medical-device-reporting/5";
+
 export default function Form3page5() {
   const [isSeriousEvent, setIsSeriousEvent] = useState<boolean>();
   const [isDead, setIsDead] = useState<boolean>();
   const [isReturned, setIsReturned] = useState<boolean>();
-
-
-  const radioOptions1 = [
-    "Hospital Premise",
-    "Manufacturer Premise",
-    "Home",
-    "Others",
-  ];
-  const radioOptions2 = [
-    "Healthcare professional",
-    "Patient",
-    "Problem noted before use",
-    "Others",
-  ];
-  const radioOptions3 = [
-    "Returned to the company",
-    "Implanted in patient",
-    "Within the facility",
-    "At patient home",
-    "Destroyed",
-    "Others",
-  ];
-  const radioOptions4 = ["Yes", "No"];
-  const radioOptions5 = [
-    "Death",
-    "Life Threatening",
-    "Disability",
-    "Hospitalization",
-    "Congenital Anomaly",
-    "Any medical event",
-    "Permanent Impairment",
-  ];
-
   const changeSeriousEventState = (e: any) => {
     if (e.target.value === "Yes") {
       setIsSeriousEvent(true);
@@ -65,7 +41,8 @@ export default function Form3page5() {
       setIsReturned(true);
     } else {
       setIsReturned(false);
-
+    }
+  };
   return (
     <FormLayout>
       <Form
@@ -158,7 +135,12 @@ export default function Form3page5() {
                 </Form.Item>
               </div>
               <div className="col-span-2 flex flex-col">
-                <Form.Item label={"Reason"} name="reason" className="w-full" required={isSeriousEvent}>
+                <Form.Item
+                  label={"Reason"}
+                  name="reason"
+                  className="w-full"
+                  required={isSeriousEvent}
+                >
                   <Radio.Group
                     size="large"
                     buttonStyle="solid"
@@ -172,7 +154,11 @@ export default function Form3page5() {
                 </Form.Item>
               </div>
               <div className="col-span-1">
-                <Form.Item label={"Date of death"} name="dateOfDeath" required={isDead}>
+                <Form.Item
+                  label={"Date of death"}
+                  name="dateOfDeath"
+                  required={isDead}
+                >
                   <DatePicker disabled={!isDead} className="w-full" />
                 </Form.Item>
               </div>

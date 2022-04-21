@@ -1,8 +1,10 @@
 import FormLayout from "~/layouts/forms/adr-reporting";
-import { Input, Form, Select, Checkbox, InputNumber, DatePicker } from "antd";
+import { Input, Form, InputNumber, DatePicker, Select, Checkbox } from "antd";
 import NavigationPanel from "~/components/forms/NavigationPanel";
-import { useLoaderData } from "remix";
 import moment from "moment";
+
+// importing utilities
+import { genderOptions, advisedMedicineOptions } from "~/utils/adr-reporting/1";
 
 // importing redux reducers
 import { RootState } from "~/states/store";
@@ -13,36 +15,18 @@ export default function Form1page1() {
   const dispatch = useDispatch();
   // converting date value to moment Object
   const formState = useSelector((state: RootState) => state.form1page1);
-  let newFormState = {
+
+  let newFormState = { ...formState };
+  newFormState = {
     ...formState,
     DateOfBirth: moment(
-      formState.DateOfBirth ? formState.DateOfBirth : new Date()
+      formState.DateOfBirth ? formState.DateOfBirth : undefined
     ),
   };
   // change the redux value whenever there is a change in the form
   const changeFormData = (value: any, fieldName: any) => {
     dispatch(setNewFormData({ fieldName, value }));
   };
-
-  // options for form items
-  const genderOptions = [
-    { label: "Male", value: "male" },
-    { label: "Female", value: "female" },
-    { label: "Other", value: "other" },
-  ];
-  const advisedMedicineOptions = [
-    { label: "Doctor", value: "doctor" },
-    { label: "Pharmacist", value: "pharmacist" },
-    { label: "Friends", value: "friends" },
-    {
-      label: "Self (past disease experienced)",
-      value: "self(past disease experienced)",
-    },
-    {
-      label: "Self (no past disease experienced)",
-      value: "self(no past disease experienced)",
-    },
-  ];
 
   return (
     <FormLayout>

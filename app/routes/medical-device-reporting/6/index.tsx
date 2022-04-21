@@ -1,10 +1,17 @@
+import { useState } from "react";
+
 // Import Form Layout
 import FormLayout from "~/layouts/forms/medical-device-reporting";
 
 //importing components
 import { Input, Radio, DatePicker, Form } from "antd";
 import NavigationPanel from "~/components/forms/NavigationPanel";
-import { useState } from "react";
+
+// importing utilities
+import {
+  radioOptions1,
+  radioOptions2,
+} from "~/utils/medical-device-reporting/6";
 
 export default function Form3page6() {
   const [isRecovered, setIsRecovered] = useState<boolean>();
@@ -26,8 +33,6 @@ export default function Form3page6() {
     }
   };
 
-  const radioOptions1 = ["Male", "Female", "Others"];
-  const radioOptions2 = ["Yes", "No"];
   return (
     <FormLayout>
       <Form

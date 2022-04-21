@@ -2,10 +2,11 @@
 import FormLayout from "~/layouts/forms/adr-reporting";
 
 //importing components
-import InputDescription from "~/components/forms/inputDescription";
 import NavigationPanel from "~/components/forms/NavigationPanel";
-
 import { Radio, Form } from "antd";
+
+// importing utilities
+import { radioOptions } from "~/utils/adr-reporting/3b";
 
 export default function Form1page3a() {
   //temporary variable
@@ -33,14 +34,6 @@ export default function Form1page3a() {
 }
 
 const RadioGroupDrugs = (props: { drugOptions: string[] }) => {
-  const radioOptions = [
-    "Drug withdrawn",
-    "Dose increased",
-    "Dose reduced",
-    "Dose not changed",
-    "Not applicable",
-    "Unknown",
-  ];
   const radioFields = props.drugOptions.map((drug, index) => (
     <Form.Item name={drug} label={drug} className="w-full" key={index}>
       <Radio.Group

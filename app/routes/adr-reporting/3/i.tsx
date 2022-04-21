@@ -4,11 +4,12 @@ import React, { useState } from "react";
 import FormLayout from "~/layouts/forms/adr-reporting";
 
 // importing components
-import InputDescription from "~/components/forms/inputDescription";
 import NavigationPanel from "~/components/forms/NavigationPanel";
 import { Form, Input, DatePicker, Switch, Checkbox, Radio } from "antd";
 import { CheckboxValueType } from "antd/lib/checkbox/Group";
-const { TextArea } = Input;
+
+// importing utilities
+import { radioOptions, checkBoxOptions } from "~/utils/adr-reporting/3i";
 
 export default function Form1page3i() {
   const [seriousReaction, setSeriousReaction] = useState<boolean>(false);
@@ -22,28 +23,6 @@ export default function Form1page3i() {
   const changeApplicability = (checked: boolean) => {
     setIsApplicable(checked);
   };
-
-  const radioOptions = [
-    { label: "Recovered", value: "recovered" },
-    { label: "Recovering", value: "recovering" },
-    { label: "Not recovered", value: "notRecovered" },
-    { label: "Fatal", value: "fatal" },
-    { label: "Recovered with sequelae", value: "recoveredWithSequelae" },
-    { label: "Unknown", value: "unknown" },
-  ];
-
-  const checkBoxOptions = [
-    { label: "Congenital-anomaly", value: "congenitalAnamoly" },
-    { label: "Life Threatening", value: "lifeThreatening" },
-    { label: "Hospitalized/Prolonged", value: "Disability" },
-    { label: "Disability", value: "disability" },
-    {
-      label: "Required intervention to Prevent permanent impairment/damage",
-      value: "requiredIntervention",
-    },
-    { label: "Death", value: "death" },
-    { label: "Other (Mention below)", value: "other" },
-  ];
 
   return (
     <FormLayout>
@@ -103,7 +82,7 @@ export default function Form1page3i() {
             label="Relevant tests/ laboratory data with dates"
             name="relevantTests"
           >
-            <TextArea rows={2} placeholder="" />
+            <Input.TextArea rows={2} placeholder="" />
           </Form.Item>
           <Form.Item
             className="w-full"
@@ -111,7 +90,7 @@ export default function Form1page3i() {
                 pregnancy, smoking, alcohol use, hepatic/renal dysfunction etc.)"
             name="relevantMedicalHistory"
           >
-            <TextArea rows={2} placeholder="" />
+            <Input.TextArea rows={2} placeholder="" />
           </Form.Item>
           <Form.Item
             label="Was it a serious reaction?"

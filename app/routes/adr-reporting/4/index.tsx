@@ -3,13 +3,15 @@ import { useEffect, useState } from "react";
 // Import Form Layout
 import FormLayout from "~/layouts/forms/adr-reporting";
 
-// Import Ant Design
+// Importing components
 import { Input, Radio, DatePicker, Form } from "antd";
-const { TextArea } = Input;
+import NavigationPanel from "~/components/forms/NavigationPanel";
+
+// importing utilities
+import { radioOptions } from "~/utils/adr-reporting/4";
 
 //Import Images
 import { FiHelpCircle } from "react-icons/fi";
-import NavigationPanel from "~/components/forms/NavigationPanel";
 
 export default function Form1page4() {
   const [occupationState, setOccupationState] = useState<string>("");
@@ -25,13 +27,6 @@ export default function Form1page4() {
   }, [occupationState]);
 
   const [form] = Form.useForm();
-  const radioOptions = [
-    { label: "Physician", value: "physician" },
-    { label: "Dentist", value: "dentist" },
-    { label: "Nurse", value: "nurse" },
-    { label: "Pharmacist", value: "pharmacist" },
-    { label: "Other", value: "other" },
-  ];
 
   return (
     <FormLayout>
@@ -102,7 +97,7 @@ export default function Form1page4() {
             name="profAddress"
             className="w-full"
           >
-            <TextArea rows={2} />
+            <Input.TextArea rows={2} />
           </Form.Item>
           {/* Fifth */}
           <Form.Item name="occupation" label="Occupation" className="pt-4">
@@ -146,13 +141,13 @@ export default function Form1page4() {
           </div>
           {/* Eighth */}
           <Form.Item label="References" name="references" className="pt-4">
-            <TextArea rows={2} />
+            <Input.TextArea rows={2} />
           </Form.Item>
         </div>
         {/* Ninth */}
         <div className="mt-6 shadow-xl rounded-md w-full p-10 border">
           <Form.Item label="Reporter's Comment" name="reportersComment">
-            <TextArea rows={2} />
+            <Input.TextArea rows={2} />
           </Form.Item>
         </div>
         <NavigationPanel currentRoute="4" />

@@ -1,30 +1,23 @@
+import { useState } from "react";
+
 // importing layouts
 import FormLayout from "~/layouts/forms/medical-device-reporting";
 
 //importing components
-import { useState } from "react";
 import { Input, Radio, Form } from "antd";
 import NavigationPanel from "~/components/forms/NavigationPanel";
 
-const { TextArea } = Input;
+//importing utilities
+import {
+  radioOptions,
+  radioOptionsReporter,
+} from "~/utils/medical-device-reporting/2";
 
 export default function Form1() {
   const [reporterType, setReporterType] = useState<string>("manufacturer");
   const changedReporterType = (e: any) => {
     setReporterType(e.target.value);
   };
-
-  const radioOptionsReporter = [
-    { label: "Manufacturer", value: "manufacturer" },
-    { label: "Importer", value: "importer" },
-    { label: "Distributor", value: "distributor" },
-    { label: "Patients", value: "patients" },
-    { label: "Healthcare Professionals", value: "healthcareProfessionals" },
-    { label: "Other", value: "other" },
-  ];
-
-  const radioOptions = ["Yes", "No", "Don't Know"];
-
   return (
     <FormLayout>
       <Form
@@ -163,7 +156,7 @@ export default function Form1() {
                 },
               ]}
             >
-              <TextArea rows={4} />
+              <Input.TextArea rows={4} />
             </Form.Item>
           </div>
         </div>

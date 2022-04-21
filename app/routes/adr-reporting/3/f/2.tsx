@@ -2,45 +2,14 @@
 import FormLayout from "~/layouts/forms/adr-reporting";
 
 //importing components
-import InputDescription from "~/components/forms/inputDescription";
 import NavigationPanel from "~/components/forms/NavigationPanel";
 import { FiHelpCircle } from "react-icons/fi";
 import { Collapse, Form, Radio } from "antd";
-const { Panel } = Collapse;
+
+//importing utilities
+import { options } from "~/utils/adr-reporting/3f2";
 
 export default function Form1page3f2() {
-  const options = [
-    {
-      label: "Certain",
-      value: "certain",
-      info: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi non vitae ratione quisquam aliquid est natus facere harum error consectetur inventore, dolorum quis asperiores iure quo ea! Ullam, blanditiis exercitationem.",
-    },
-    {
-      label: "Probably / Likely",
-      value: "probably/likely",
-      info: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi non vitae ratione quisquam aliquid est natus facere harum error consectetur inventore, dolorum quis asperiores iure quo ea! Ullam, blanditiis exercitationem.",
-    },
-    {
-      label: "Possible",
-      value: "possible",
-      info: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi non vitae ratione quisquam aliquid est natus facere harum error consectetur inventore, dolorum quis asperiores iure quo ea! Ullam, blanditiis exercitationem.",
-    },
-    {
-      label: "Unlikely",
-      value: "unlikely",
-      info: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi non vitae ratione quisquam aliquid est natus facere harum error consectetur inventore, dolorum quis asperiores iure quo ea! Ullam, blanditiis exercitationem.",
-    },
-    {
-      label: "Conditional / Unclassified",
-      value: "conditional/unclassified",
-      info: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi non vitae ratione quisquam aliquid est natus facere harum error consectetur inventore, dolorum quis asperiores iure quo ea! Ullam, blanditiis exercitationem.",
-    },
-    {
-      label: "Un-assessable / Un-classifiable",
-      value: "un-assessable/un-classifiable",
-      info: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi non vitae ratione quisquam aliquid est natus facere harum error consectetur inventore, dolorum quis asperiores iure quo ea! Ullam, blanditiis exercitationem.",
-    },
-  ];
   return (
     <FormLayout>
       <Form
@@ -79,9 +48,9 @@ export default function Form1page3f2() {
               <div className="px-4 my-4">
                 <Collapse defaultActiveKey={["1"]}>
                   {options.map((option, index) => (
-                    <Panel header={option.label} key={index}>
+                    <Collapse.Panel header={option.label} key={index}>
                       <p>{option.info}</p>
-                    </Panel>
+                    </Collapse.Panel>
                   ))}
                 </Collapse>
               </div>

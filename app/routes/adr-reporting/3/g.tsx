@@ -6,8 +6,10 @@ import { Checkbox, Form } from "antd";
 import TextArea from "antd/lib/input/TextArea";
 import NavigationPanel from "~/components/forms/NavigationPanel";
 
+// importing utilities
+import { options } from "~/utils/adr-reporting/3g";
+
 export default function Form1page3g() {
-  const options = ["Specific", "Symptomatic", "None"];
   return (
     <FormLayout>
       <Form

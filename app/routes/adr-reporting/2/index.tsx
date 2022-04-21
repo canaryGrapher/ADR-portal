@@ -4,7 +4,6 @@ import FormLayout from "~/layouts/forms/adr-reporting";
 // Import components
 import { Input, DatePicker, Form } from "antd";
 import NavigationPanel from "~/components/forms/NavigationPanel";
-const { TextArea } = Input;
 
 export default function Form1page2() {
   return (
@@ -44,7 +43,7 @@ export default function Form1page2() {
               { required: true, message: "Reaction description is mandatory" },
             ]}
           >
-            <TextArea rows={4} />
+            <Input.TextArea rows={4} />
           </Form.Item>
         </div>
         <NavigationPanel currentRoute="2" />

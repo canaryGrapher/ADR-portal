@@ -2,21 +2,14 @@
 import FormLayout from "~/layouts/forms/adr-reporting";
 
 // importing components
-import InputDescription from "~/components/forms/inputDescription";
 import NavigationPanel from "~/components/forms/NavigationPanel";
 import { FiHelpCircle } from "react-icons/fi";
 import { Radio, Progress, Form } from "antd";
 
+//importing utilities
+import { radioOptions } from "~/utils/adr-reporting/3f3";
+
 export default function Form1page3f3() {
-  const radioOptions = [
-    { label: "Level 1", value: "1" },
-    { label: "Level 2", value: "2" },
-    { label: "Level 3", value: "3" },
-    { label: "Level 4", value: "4" },
-    { label: "Level 5", value: "5" },
-    { label: "Level 6", value: "6" },
-    { label: "Level 7", value: "7" },
-  ];
   return (
     <FormLayout>
       <Form

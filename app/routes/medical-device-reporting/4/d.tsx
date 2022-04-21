@@ -4,11 +4,16 @@ import { useState } from "react";
 import FormLayout from "~/layouts/forms/adr-reporting";
 
 //importing components
-import { Input, DatePicker, Radio } from "antd";
-import InputDescription from "~/components/forms/inputDescription";
+import { Input, DatePicker, Radio, Form } from "antd";
 import NavigationPanel from "~/components/forms/NavigationPanel";
 
-const { TextArea } = Input;
+// importing utilities
+import {
+  radioOptions1,
+  radioOptions2,
+  radioOptions3,
+  radioOptions4,
+} from "~/utils/medical-device-reporting/4";
 
 export default function Form3page4d() {
   const [regulatedInIndia, setRegulatedInIndia] = useState<string>("");
@@ -27,163 +32,177 @@ export default function Form3page4d() {
     }
   };
 
-  const radioOptions1 = ["Yes", "No", "Don't know"];
-  const radioOptions2 = ["A", "B", "C", "D"];
-  const radioOptions3 = ["Yes", "No"];
-  const radioOptions4 = [
-    "Destroyed",
-    "Still in use",
-    "Returned to manufacturer or importer",
-  ];
-
   return (
     <FormLayout>
-      {/* Anything between the <FormLayout> tag can be changed */}
-      <div className="shadow-xl rounded-md w-full p-10 border">
-        <div className="text-3xl">
-          <h2 className="text-[#E8590C]">Further Information</h2>
-        </div>
-        <div className="w-full">
-          <div className="flex flex-col pt-4">
-            <InputDescription
-              isRequired={false}
-              description="Is the device notified/regulated in India?"
-            />
-            <Radio.Group
-              size="large"
-              buttonStyle="solid"
-              options={radioOptions1}
-              optionType="button"
-              value={regulatedInIndia}
-              onChange={(e) => changeStateOfRadio("1", e)}
-            />
+      <Form
+        name="Form3page4d"
+        initialValues={{ remember: true }}
+        onFinish={(value) => console.log(value)}
+        layout="vertical"
+      >
+        <div className="w-full rounded-md border p-10 shadow-xl">
+          <div className="text-3xl">
+            <h2 className="text-[#E8590C]">Further Information</h2>
           </div>
-          <div className="flex flex-col pt-4">
-            <InputDescription
-              isRequired={false}
-              description="Device Risk Classification as per India MDR 2017"
-            />
-            <Radio.Group
-              size="large"
-              buttonStyle="solid"
-              options={radioOptions2}
-              optionType="button"
-            />
-          </div>
-          <div className="grid grid-cols-2 gap-5 pt-4">
-            <div className="flex flex-col col-span-1">
-              <InputDescription
-                isRequired={false}
-                description="License Number"
+          <div className="w-full">
+            <Form.Item
+              label="Is the device notified/regulated in India?"
+              name="isTheDeviceNotified/regulatedInIndia"
+              className="w-full"
+            >
+              <Radio.Group
+                size="large"
+                buttonStyle="solid"
+                options={radioOptions1}
+                optionType="button"
+                value={regulatedInIndia}
+                onChange={(e) => changeStateOfRadio("1", e)}
               />
+            </Form.Item>
+            <Form.Item
+              label="Device Risk Classification as per India MDR 2017"
+              name="deviceRiskClassificationAsPerIndiaMDR2017"
+              className="w-full"
+            >
+              <Radio.Group
+                size="large"
+                buttonStyle="solid"
+                options={radioOptions2}
+                optionType="button"
+              />
+            </Form.Item>
+            <div className="grid grid-cols-2 gap-5 pt-4">
+              <Form.Item
+                label="License Number"
+                name="licenseNumber"
+                className="w-full"
+              >
+                <Input />
+              </Form.Item>
+              <Form.Item
+                label="Catalogue Number"
+                name="catalogueNumber"
+                className="w-full"
+              >
+                <Input />
+              </Form.Item>
+            </div>
+            <div className="grid grid-cols-2 gap-5 pt-4">
+              <Form.Item
+                label="Model Number"
+                name="modelNumber"
+                className="w-full"
+              >
+                <Input />
+              </Form.Item>
+              <Form.Item
+                label="Batch Number"
+                name="batchNumber"
+                className="w-full"
+              >
+                <Input />
+              </Form.Item>
+            </div>
+            <div className="grid grid-cols-2 gap-5 pt-4">
+              <Form.Item
+                label="Serial Number"
+                name="serialNumber"
+                className="w-full"
+              >
+                <Input />
+              </Form.Item>
+              <Form.Item
+                label="Software Number"
+                name="softwareNumber"
+                className="w-full"
+              >
+                <Input />
+              </Form.Item>
+            </div>
+            <Form.Item
+              label="Accessories/Associated Devices"
+              name="accessories/associatedDevices"
+              className="w-full"
+            >
               <Input />
-            </div>
-            <div className="flex flex-col col-span-1">
-              <InputDescription
-                isRequired={false}
-                description="Catalogue Number"
-              />
+            </Form.Item>
+            <Form.Item
+              label="GMDN Code &amp; GMDN Term"
+              name="GMDNCodeGMDNTerm"
+              className="w-full"
+            >
               <Input />
-            </div>
-            <div className="flex flex-col col-span-1">
-              <InputDescription isRequired={false} description="Model Number" />
+            </Form.Item>
+            <Form.Item label="UDI Number" name="udiNumber" className="w-full">
               <Input />
+            </Form.Item>
+            <div className="grid grid-cols-2 gap-5 pt-4">
+              <Form.Item
+                label="Installation Date"
+                name="installationDate"
+                className="w-full"
+              >
+                <DatePicker className="w-full" />
+              </Form.Item>
+              <Form.Item
+                label="Expiration Date"
+                name="expirationDate"
+                className="w-full"
+              >
+                <DatePicker className="w-full" />
+              </Form.Item>
             </div>
-            <div className="flex flex-col col-span-1">
-              <InputDescription isRequired={false} description="Batch Number" />
-              <Input />
+            <div className="grid grid-cols-2 gap-5 pt-4">
+              <Form.Item
+                label="Last Preventive Date"
+                name="lastExpirationDate"
+                className="w-full"
+              >
+                <DatePicker className="w-full" />
+              </Form.Item>
+              <Form.Item
+                label="Last Calibration"
+                name="lastCalibration"
+                className="w-full"
+              >
+                <DatePicker className="w-full" />
+              </Form.Item>
             </div>
-            <div className="flex flex-col col-span-1">
-              <InputDescription
-                isRequired={false}
-                description="Serial Number"
-              />
-              <Input />
+            <div className="grid grid-cols-2 gap-5 pt-4">
+              <Form.Item
+                label="Age of device from date of manufacturing"
+                name="ageOfDeviceFromDateOfManufacturing"
+                className="w-full"
+              >
+                <Input />
+              </Form.Item>
+              <Form.Item
+                label="How long was device in use"
+                name="howLongWasDeviceInUse"
+                className="w-full"
+              >
+                <Input />
+              </Form.Item>
             </div>
-            <div className="flex flex-col col-span-1">
-              <InputDescription
-                isRequired={false}
-                description="Software Number"
-              />
-              <Input />
-            </div>
-            <div className="flex flex-col col-span-2">
-              <InputDescription
-                isRequired={false}
-                description="Accessories/Associated Devices"
-              />
-              <Input />
-            </div>
-            <div className="flex flex-col col-span-2">
-              <InputDescription
-                isRequired={false}
-                description="GMDN Code &amp; GMDN Term"
-              />
-              <Input />
-            </div>
-            <div className="flex flex-col col-span-2">
-              <InputDescription isRequired={false} description="UDI Number" />
-              <Input />
-            </div>
-            <div className="flex flex-col col-span-1">
-              <InputDescription
-                isRequired={false}
-                description="Installation Date"
-              />
-              <DatePicker />
-            </div>
-            <div className="flex flex-col col-span-1">
-              <InputDescription
-                isRequired={false}
-                description="Expiration Date"
-              />
-              <DatePicker />
-            </div>
-            <div className="flex flex-col col-span-1">
-              <InputDescription
-                isRequired={false}
-                description="Last Calibration"
-              />
-              <DatePicker />
-            </div>
-            <div className="flex flex-col col-span-1">
-              <InputDescription isRequired={false} description="" />
-              <DatePicker />
-            </div>
-            <div className="flex flex-col col-span-1">
-              <InputDescription
-                isRequired={false}
-                description="Age of device from date of manufacturing"
-              />
-              <Input />
-            </div>
-            <div className="flex flex-col col-span-1">
-              <InputDescription
-                isRequired={false}
-                description="How long was device in use"
-              />
-              <Input />
-            </div>
-            <div className="flex flex-col col-span-2">
-              <InputDescription
-                isRequired={false}
-                description="Availability of device for evaluation"
-              />
+            <Form.Item
+              label="Availability of device for evaluation"
+              name="availabilityOfDeviceForEvaluation"
+              className="w-full"
+            >
               <Radio.Group
                 size="large"
                 buttonStyle="solid"
                 options={radioOptions3}
-                defaultValue={radioOptions3[0]}
                 optionType="button"
                 value={availabilityValue}
                 onChange={(e) => changeStateOfRadio("2", e)}
               />
-            </div>
-            <div className="flex flex-col col-span-2">
-              <InputDescription
-                isRequired={false}
-                description="What is the status of the device?"
-              />
+            </Form.Item>
+            <Form.Item
+              label="What is the status of the device?"
+              name="whatIsTheStatusOfTheDevice"
+              className="w-full"
+            >
               <Radio.Group
                 size="large"
                 buttonStyle="solid"
@@ -191,12 +210,12 @@ export default function Form3page4d() {
                 optionType="button"
                 disabled={availabilityValue === "No"}
               />
-            </div>
-            <div className="flex flex-col col-span-2">
-              <InputDescription
-                isRequired={false}
-                description="Is the usage of device as per manufacturer’s claims/instructions for use/user manual"
-              />
+            </Form.Item>
+            <Form.Item
+              label="Is the usage of device as per manufacturer’s claims/instructions for use/user manual"
+              name="isTheUsageOfDeviceAsPerManufacturersClaims/instructionsForUse/userManual"
+              className="w-full"
+            >
               <Radio.Group
                 size="large"
                 buttonStyle="solid"
@@ -205,33 +224,33 @@ export default function Form3page4d() {
                 value={usagePerManufacturer}
                 onChange={(e) => changeStateOfRadio("3", e)}
               />
-            </div>
-            <div className="flex flex-col col-span-2">
-              <InputDescription
-                isRequired={false}
-                description="Specify usage"
-              />
-              <TextArea
+            </Form.Item>
+            <Form.Item
+              label="Specify usage"
+              name="specifyUsage"
+              className="w-full"
+            >
+              <Input.TextArea
                 rows={3}
                 placeholder=""
                 disabled={usagePerManufacturer === "No"}
               />
-            </div>
-            <div className="flex flex-col col-span-2">
-              <InputDescription
-                isRequired={false}
-                description="Regulator / Regulatory status in country of origin"
-              />
-              <TextArea
+            </Form.Item>
+            <Form.Item
+              label="Regulator / Regulatory status in country of origin"
+              name="regulator/regulatoryStatusInCountryOfOrigin"
+              className="w-full"
+            >
+              <Input.TextArea
                 rows={3}
                 placeholder=""
                 disabled={regulatedInIndia === "Yes"}
               />
-            </div>
+            </Form.Item>
           </div>
         </div>
-      </div>
-      <NavigationPanel currentRoute="4d" />
+        <NavigationPanel currentRoute="4d" />
+      </Form>
     </FormLayout>
   );
 }

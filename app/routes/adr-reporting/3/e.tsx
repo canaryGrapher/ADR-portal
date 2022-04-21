@@ -1,22 +1,15 @@
-/*
-Note: 
-    This page needs fixing. 
-    Do not edit it if you are not @canaryGrapher
-
-*/
-
-import { useState } from "react";
-
 // importing layouts
 import FormLayout from "~/layouts/forms/adr-reporting";
 
 // importing components
 import NavigationPanel from "~/components/forms/NavigationPanel";
+import { Radio, Input, Form, Select } from "antd";
 
 // importing icons
-import { FiHelpCircle, FiPlus, FiX } from "react-icons/fi";
+import { FiHelpCircle } from "react-icons/fi";
 
-import { Radio, Input, Form, Select } from "antd";
+//importing utilities
+import { radioOptions } from "~/utils/adr-reporting/3e";
 
 export default function Form1page3e() {
   //temporary variable
@@ -48,13 +41,6 @@ export default function Form1page3e() {
 }
 
 const RadioGroupDrugs = (props: { drugOptions: string[] }) => {
-  const radioOptions = [
-    "No rechallenge",
-    "Recurrance of symptoms",
-    "No occurance of symptoms",
-    "Unknown",
-  ];
-
   const componentsForDrugs = props.drugOptions.map((drug, index) => (
     <div key={index}>
       <Form.Item name={drug} label={drug} className="w-full" key={index}>

@@ -5,8 +5,10 @@ import FormLayout from "~/layouts/forms/adr-reporting";
 import { Input, DatePicker, Form, Radio } from "antd";
 import NavigationPanel from "~/components/forms/NavigationPanel";
 
+//importing utilities
+import { radioOptions } from "~/utils/medical-device-reporting/1";
+
 export default function Form3page1() {
-  const radioOptions = ["Initial", "Follow-up", "Final", "Trend"];
   return (
     <FormLayout>
       <Form

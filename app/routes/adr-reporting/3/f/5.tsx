@@ -7,25 +7,14 @@ import FormLayout from "~/layouts/forms/adr-reporting";
 import NavigationPanel from "~/components/forms/NavigationPanel";
 import { Radio, Checkbox, Input, Form } from "antd";
 import { FiHelpCircle } from "react-icons/fi";
-import { changeConfirmLocale } from "antd/lib/modal/locale";
+
+// importing utilities
+import { options, radioOptions } from "~/utils/adr-reporting/3f5";
 
 export default function Form1page3f5() {
   const [predisposingFactorsValues, setPredisposingFactorsValues] = useState<
     string[]
   >([""]);
-
-  const options = [
-    { label: "Age", value: "age" },
-    { label: "Gender", value: "gender" },
-    { label: "Genetic", value: "genetic" },
-    { label: "Inter-current disease", value: "inter-current disease" },
-    { label: "Multiple Drug Therapy", value: "multiple drug therapy" },
-    { label: "Other", value: "other" },
-  ];
-  const radioOptions = [
-    { label: "Predictable", value: "predictable" },
-    { label: "Not Predictable", value: "notPredictable" },
-  ];
 
   const onChangeCheckBoxGroup = (values: any[]) => {
     setPredisposingFactorsValues(values);

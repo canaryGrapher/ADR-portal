@@ -5,6 +5,7 @@
   "license": "",
   "sideEffects": false,
   "scripts": {
+    "preinstall": "npx npm-force-resolutions",
     "postinstall": "remix setup node",
     "start": "cross-env NODE_ENV=production remix-serve build",
     "build": "npm run build:css && remix build",
@@ -21,6 +22,7 @@
     "cross-env": "^7.0.3",
     "dayjs": "^1.11.1",
     "moment": "^2.29.3",
+    "npm-force-resolutions": "0.0.10",
     "rc-picker": "^2.6.7",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",

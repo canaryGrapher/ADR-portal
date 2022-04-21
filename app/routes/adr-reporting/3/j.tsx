@@ -5,29 +5,10 @@ import FormLayout from "~/layouts/forms/adr-reporting";
 import { Form, Radio } from "antd";
 import NavigationPanel from "~/components/forms/NavigationPanel";
 
+// importing utilities
+import { radioOptions } from "~/utils/adr-reporting/3j";
+
 export default function Form1page3j() {
-  const radioOptions = [
-    {
-      label: "Fatal",
-      value: "fatal",
-    },
-    {
-      label: "Recovery",
-      value: "recovery",
-    },
-    {
-      label: "Continuing",
-      value: "continuing",
-    },
-    {
-      label: "Unknown",
-      value: "unknown",
-    },
-    {
-      label: "Other",
-      value: "other",
-    },
-  ];
   return (
     <FormLayout>
       <Form

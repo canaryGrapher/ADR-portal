@@ -1,61 +1,69 @@
-import { Radio, Checkbox, Input } from "antd";
-import InputDescription from "~/components/forms/inputDescription";
-const { TextArea } = Input;
+import { Radio, Checkbox, Input, Form } from "antd";
+
+// importing utilities
+import {
+  checkboxOptions,
+  checkboxOptions2,
+} from "~/utils/medical-device-reporting/3";
 
 const option3 = () => {
   return (
-    <div className="option3">
-      <div className="w-full shadow-xl p-10">
-        <div className="py-16 pb-8">
-          <div className="pl-4 text-[24px] text-[#E8590C]">
-            Equipment/Machines
+    <Form
+      name="Form3page3Option1"
+      initialValues={{ remember: true }}
+      onFinish={(value) => console.log(value)}
+      layout="vertical"
+    >
+      {" "}
+      <div className="option3">
+        <div className="w-full p-10 shadow-xl">
+          <div className="py-16 pb-8">
+            <div className="pb-4 text-[24px] text-[#E8590C]">
+              Equipment/Machines
+            </div>
+            <Form.Item
+              label="Equipment usage"
+              name="equipmentUsage"
+              className="w-full"
+            >
+              <Radio.Group
+                className="w-full"
+                buttonStyle="solid"
+                size="large"
+                optionType="button"
+                options={checkboxOptions}
+              />
+            </Form.Item>
+            <Form.Item
+              label="Invasibility"
+              name="invasibility"
+              className="w-full"
+            >
+              <Radio.Group
+                className="w-full"
+                buttonStyle="solid"
+                size="large"
+                optionType="button"
+                options={checkboxOptions2}
+              />
+            </Form.Item>
+            <Form.Item name="imaging" className="w-full">
+              <Checkbox> Imaging </Checkbox>
+            </Form.Item>
+            <Form.Item name="others" className="w-full">
+              <Checkbox> Others </Checkbox>
+            </Form.Item>
+            <Form.Item
+              label="Reporter's Comments"
+              name="reportersComments"
+              className="w-full"
+            >
+              <Input.TextArea rows={2} />
+            </Form.Item>
           </div>
-          <div className="mx-4 min-w-full pt-4">
-            <InputDescription
-              isRequired={false}
-              description="Equipment usage"
-            />
-            <Radio.Group className="w-full" buttonStyle="solid">
-              <Radio.Button value={0} className="w-1/3 text-center">
-                Therapeutic
-              </Radio.Button>
-              <Radio.Button value={1} className="w-1/3 text-center">
-                Diagnostic
-              </Radio.Button>
-              <Radio.Button value={2} className="w-1/3 text-center">
-                {" "}
-                Both{" "}
-              </Radio.Button>
-            </Radio.Group>
-          </div>
-          <div className="mx-4 min-w-full pt-4">
-            <InputDescription isRequired={false} description="Invasibility" />
-            <Radio.Group className="w-full" buttonStyle="solid">
-              <Radio.Button value={0} className="w-1/2 text-center">
-                Invasive
-              </Radio.Button>
-              <Radio.Button value={1} className="w-1/2 text-center">
-                Non-Invasive
-              </Radio.Button>
-            </Radio.Group>
-          </div>
-
-          <div className="col-span-1 mx-4 py-8">
-            <Checkbox> Imaging </Checkbox>
-          </div>
-          <div className="col-span-1 mx-4">
-            <Checkbox> Others </Checkbox>
-          </div>
-        </div>
-        <div className="mt-4 w-full px-4">
-          <InputDescription
-            isRequired={false}
-            description="Reporter's Comments"
-          />
-          <TextArea rows={2} />
         </div>
       </div>
-    </div>
+    </Form>
   );
 };
 
