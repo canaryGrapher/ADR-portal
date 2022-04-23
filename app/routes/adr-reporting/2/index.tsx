@@ -1,6 +1,5 @@
 // Import Form Layout
 import FormLayout from "~/layouts/forms/adr-reporting";
-
 // Import components
 import { Input, DatePicker, Form } from "antd";
 import NavigationPanel from "~/components/forms/NavigationPanel";

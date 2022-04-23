@@ -15,14 +15,14 @@ export default function Form1page1() {
   const dispatch = useDispatch();
   // converting date value to moment Object
   const formState = useSelector((state: RootState) => state.form1page1);
-
   let newFormState = { ...formState };
-  newFormState = {
-    ...formState,
-    DateOfBirth: moment(
-      formState.DateOfBirth ? formState.DateOfBirth : undefined
-    ),
-  };
+
+  if (formState.DateOfBirth != null) {
+    newFormState.DateOfBirth = moment(formState.DateOfBirth);
+  } else {
+    delete newFormState.DateOfBirth;
+  }
+
   // change the redux value whenever there is a change in the form
   const changeFormData = (value: any, fieldName: any) => {
     dispatch(setNewFormData({ fieldName, value }));
