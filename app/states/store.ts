@@ -2,10 +2,12 @@ import { configureStore } from '@reduxjs/toolkit'
 
 //importing slices here
 import form1page1Reducer from '~/states/Slices/AdrReportingForm/1'
+import form3page1Reducer from '~/states/Slices/MedicalDeviceReporting/1'
 
 export const store = configureStore({
     reducer: {
-        form1page1: form1page1Reducer
+        form1page1: form1page1Reducer,
+        form3page1: form3page1Reducer
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware({ serializableCheck: false }),
 })

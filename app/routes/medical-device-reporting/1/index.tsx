@@ -4,19 +4,43 @@ import FormLayout from "~/layouts/forms/adr-reporting";
 //importing components
 import { Input, DatePicker, Form, Radio } from "antd";
 import NavigationPanel from "~/components/forms/NavigationPanel";
+import moment from "moment";
 
 //importing utilities
 import { radioOptions } from "~/utils/medical-device-reporting/1";
 
+// importing redux reducers
+import { RootState } from "~/states/store";
+import { useSelector, useDispatch } from "react-redux";
+import { setNewFormData } from "~/states/Slices/MedicalDeviceReporting/1";
+
 export default function Form3page1() {
+  const dispatch = useDispatch();
+  // converting date value to moment object
+  const formState = useSelector((state: RootState) => state.form3page1);
+  let newFormState = { ...formState };
+  if(formState.dateOfReport != null) {
+    newFormState.dateOfReport = moment(formState.dateOfReport);
+  } else {  
+    delete newFormState.dateOfReport;
+  }
+
+  // change redux value whenever there is change in the form
+  const changeFormData = (value: any, fieldName: any) => {
+    dispatch(setNewFormData({ fieldName, value }));
+  };
+
   return (
     <FormLayout>
       <Form
         preserve={false}
         scrollToFirstError={true}
         name="Form3page1"
-        initialValues={{ remember: true }}
+        initialValues={newFormState}
         onFinish={(value) => console.log(value)}
+        onValuesChange={(values) => {
+          changeFormData(values[Object.keys(values)[0]], Object.keys(values)[0])
+        }}
         layout="vertical"
       >
         <div className="w-full rounded-md border p-10 shadow-xl">
