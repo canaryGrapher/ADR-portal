@@ -15,9 +15,9 @@ export default function Form1page3() {
         <div className="text-3xl">
           <h2 className="text-[#E8590C]">Medication</h2>
         </div>
-        <form onSubmit={onFormSubmit}>
+        <div>
           <Subform />
-        </form>
+        </div>
       </div>
       <NavigationPanel currentRoute="3" />
     </FormLayout>
@@ -99,7 +99,7 @@ function Subform() {
           Save
         </button>
         <button
-          type="submit"
+          type="button"
           className="bg-white text-[#6C567B] p-2 w-32 border border-[#6C567B] hover:bg-[#E8590C] hover:text-white hover:border-[#E8590C]"
         >
           Add more
