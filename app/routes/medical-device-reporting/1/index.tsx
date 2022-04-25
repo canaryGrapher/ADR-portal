@@ -16,12 +16,14 @@ import { setNewFormData } from "~/states/Slices/MedicalDeviceReporting/1";
 
 export default function Form3page1() {
   const dispatch = useDispatch();
+  
   // converting date value to moment object
   const formState = useSelector((state: RootState) => state.form3page1);
   let newFormState = { ...formState };
   if(formState.dateOfReport != null) {
     newFormState.dateOfReport = moment(formState.dateOfReport);
-  } else {  
+  }
+   else {  
     delete newFormState.dateOfReport;
   }
 

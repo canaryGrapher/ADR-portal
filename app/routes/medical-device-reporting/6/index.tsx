@@ -6,16 +6,32 @@ import FormLayout from "~/layouts/forms/medical-device-reporting";
 //importing components
 import { Input, Radio, DatePicker, Form } from "antd";
 import NavigationPanel from "~/components/forms/NavigationPanel";
-
+import moment from "moment";
 // importing utilities
 import {
   radioOptions1,
   radioOptions2,
 } from "~/utils/medical-device-reporting/6";
 
+
+// importing redux reducers
+import { RootState } from "~/states/store";
+import { useSelector, useDispatch } from "react-redux";
+
+
 export default function Form3page6() {
   const [isRecovered, setIsRecovered] = useState<boolean>();
   const [isDead, setIsDead] = useState<boolean>();
+  const dispatch = useDispatch();
+
+  const formState = useSelector((state: RootState) => state.form3page6);
+  let newFormState = { ...formState };
+  if(formState.dateOfRecovery != null) {
+    newFormState.dateOfRecovery = moment(formState.dateOfRecovery);
+  }
+   else {  
+    delete newFormState.dateOfRecovery;
+  }
 
   const changeDeathData = (e: any) => {
     if (e.target.value === "Yes") {
