@@ -15,7 +15,20 @@ import {
   radioOptions4,
 } from "~/utils/medical-device-reporting/4";
 
+// importing reduc reducers
+import { RootState } from "~/states/store";
+import { useSelector, useDispatch } from "react-redux";
+import { setNewFormData } from "~/states/Slices/MedicalDeviceReporting/4/d";
+
+
 export default function Form3page4d() {
+  const dispatch = useDispatch();
+  const formState = useSelector((state: RootState) => state.form3page4d);
+  let newFormState = { ...formState };
+  // change redux value whenever there is change in the form
+  const changeFormData = (value: any, fieldName: any) => {
+    dispatch(setNewFormData({ fieldName, value }));
+  };
   const [regulatedInIndia, setRegulatedInIndia] = useState<string>("");
   const [availabilityValue, setAvailabilityValue] = useState<string>("");
   const [usagePerManufacturer, setUsagePerManufacturer] = useState<string>("");
@@ -36,8 +49,11 @@ export default function Form3page4d() {
     <FormLayout>
       <Form
         name="Form3page4d"
-        initialValues={{ remember: true }}
+        initialValues={newFormState}
         onFinish={(value) => console.log(value)}
+        onValuesChange={(values) => {
+          changeFormData(values[Object.keys(values)[0]], Object.keys(values)[0])
+        }}
         layout="vertical"
       >
         <div className="w-full rounded-md border p-10 shadow-xl">

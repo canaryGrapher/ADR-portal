@@ -1,5 +1,3 @@
-import React from "react";
-
 //importing components
 import { Radio, Checkbox, Form } from "antd";
 
@@ -10,12 +8,27 @@ import {
   reusabilityOptions,
 } from "~/utils/medical-device-reporting/3";
 
+// importing reduc reducers
+import { RootState } from "~/states/store";
+import { useSelector, useDispatch } from "react-redux";
+import { setNewFormData } from "~/states/Slices/MedicalDeviceReporting/3/option1";
+
 function Option1() {
+  const dispatch = useDispatch();
+  const formState = useSelector((state: RootState) => state.form3page3Option1);
+  let newFormState = { ...formState };
+  // change redux value whenever there is change in the form
+  const changeFormData = (value: any, fieldName: any) => {
+    dispatch(setNewFormData({ fieldName, value }));
+  };
   return (
     <Form
       name="Form3page3Option1"
-      initialValues={{ remember: true }}
+      initialValues={newFormState}
       onFinish={(value) => console.log(value)}
+      onValuesChange={(values) => {
+        changeFormData(values[Object.keys(values)[0]], Object.keys(values)[0])
+      }}
       layout="vertical"
     >
       <div className="option1">
@@ -60,7 +73,7 @@ function Option1() {
                 options={reusabilityOptions}
               />
             </Form.Item>
-            <Form.Item name="personalUse/homecareUse">
+            <Form.Item name="personalUse">
               <Checkbox>Personal Use/Homecare Use</Checkbox>
             </Form.Item>
           </div>

@@ -1,14 +1,14 @@
 interface FormStateType {
-    name?: string | null,
-    licenseNumber?: string | null,
-    address?: string | null
+    therapeutic?: boolean | null,
+    diagnostic?: boolean | null,
+    both?: boolean | null
 }
 
 type PayloadKeys = keyof FormStateType;
 
 interface ActionType {
-    fieldName: PayloadKeys;
-    value: any;
+    fieldName: PayloadKeys,
+    value: any
 }
 
 export type { ActionType, FormStateType }

@@ -13,10 +13,22 @@ import {
   radioOptionsReporter,
 } from "~/utils/medical-device-reporting/2";
 
+// importing reduc reducers
+import { RootState } from "~/states/store";
+import { useSelector, useDispatch } from "react-redux";
+import { setNewFormData } from "~/states/Slices/MedicalDeviceReporting/2";
+
 export default function Form1() {
   const [reporterType, setReporterType] = useState<string>("manufacturer");
   const changedReporterType = (e: any) => {
     setReporterType(e.target.value);
+  };
+  const dispatch = useDispatch();
+  const formState = useSelector((state: RootState) => state.form3page1);
+  let newFormState = { ...formState };
+  // change redux value whenever there is change in the form
+  const changeFormData = (value: any, fieldName: any) => {
+    dispatch(setNewFormData({ fieldName, value }));
   };
   return (
     <FormLayout>
@@ -24,8 +36,11 @@ export default function Form1() {
         preserve={false}
         scrollToFirstError={true}
         name="Form3page2"
-        initialValues={{ remember: true }}
+        initialValues={newFormState}
         onFinish={(value) => console.log(value)}
+        onValuesChange={(values) => {
+          changeFormData(values[Object.keys(values)[0]], Object.keys(values)[0])
+        }}
         layout="vertical"
       >
         <div className="w-full rounded-md border p-10 shadow-xl">

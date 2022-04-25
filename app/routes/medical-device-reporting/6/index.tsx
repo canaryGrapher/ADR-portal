@@ -17,6 +17,7 @@ import {
 // importing redux reducers
 import { RootState } from "~/states/store";
 import { useSelector, useDispatch } from "react-redux";
+import { setNewFormData } from "~/states/Slices/MedicalDeviceReporting/6";
 
 
 export default function Form3page6() {
@@ -28,10 +29,19 @@ export default function Form3page6() {
   let newFormState = { ...formState };
   if(formState.dateOfRecovery != null) {
     newFormState.dateOfRecovery = moment(formState.dateOfRecovery);
-  }
-   else {  
+  } else {  
     delete newFormState.dateOfRecovery;
   }
+  if(formState.dateOfDeath != null) {
+    newFormState.dateOfDeath = moment(formState.dateOfDeath)
+  } else {  
+    delete newFormState.dateOfDeath;
+  }
+
+  // change redux value whenever there is change in the form
+  const changeFormData = (value: any, fieldName: any) => {
+    dispatch(setNewFormData({ fieldName, value }));
+  };
 
   const changeDeathData = (e: any) => {
     if (e.target.value === "Yes") {
@@ -53,8 +63,11 @@ export default function Form3page6() {
     <FormLayout>
       <Form
         name="Form3page6"
-        initialValues={{ remember: true }}
+        initialValues={newFormState}
         onFinish={(value) => console.log(value)}
+        onValuesChange={(values) => {
+          changeFormData(values[Object.keys(values)[0]], Object.keys(values)[0])
+        }}
         layout="vertical"
       >
         <div className="shadow-xl rounded-md w-full p-10 border">
