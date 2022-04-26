@@ -14,7 +14,7 @@ import { setNewFormData } from "~/states/Slices/MedicalDeviceReporting/7";
 export default function Form3page7() {
 
   const dispatch = useDispatch();
-  const formState = useSelector((state: RootState) => state.form3page6);
+  const formState = useSelector((state: RootState) => state.form3page7);
   let newFormState = { ...formState };
 
   

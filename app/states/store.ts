@@ -10,7 +10,9 @@ import form3page4bReducer from './Slices/MedicalDeviceReporting/4/b'
 import form3page4cReducer from './Slices/MedicalDeviceReporting/4/c'
 import form3page4dReducer from './Slices/MedicalDeviceReporting/4/d'
 import form3page6Reducer from '~/states/Slices/MedicalDeviceReporting/6'
-
+import form3page7Reducer from '~/states/Slices/MedicalDeviceReporting/7'
+import form3page8Reducer from '~/states/Slices/MedicalDeviceReporting/8'
+import form3page9Reducer from '~/states/Slices/MedicalDeviceReporting/9'
 export const store = configureStore({
     reducer: {
         form1page1: form1page1Reducer,
@@ -22,7 +24,10 @@ export const store = configureStore({
         form3page4b: form3page4bReducer,
         form3page4c: form3page4cReducer,
         form3page4d: form3page4dReducer,
-        form3page6: form3page6Reducer
+        form3page6: form3page6Reducer,
+        form3page7: form3page7Reducer,
+        form3page8: form3page8Reducer,
+        form3page9: form3page9Reducer
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware({ serializableCheck: false }),
 })
