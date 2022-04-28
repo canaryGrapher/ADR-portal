@@ -9,7 +9,9 @@ import form1page3f3Reducer from '~/states/Slices/AdrReportingForm/3/f/3'
 import form1page3f4Reducer from '~/states/Slices/AdrReportingForm/3/f/4'
 import form1page3f5Reducer from '~/states/Slices/AdrReportingForm/3/f/5'
 import form1page3gReducer from '~/states/Slices/AdrReportingForm/3/g'
-
+// missing styles go here
+import form1page3iReducer from '~/states/Slices/AdrReportingForm/3/i'
+import form1page3jReducer from '~/states/Slices/AdrReportingForm/3/j'
 
 export const store = configureStore({
         reducer: {
@@ -21,6 +23,8 @@ export const store = configureStore({
                 form1page3f4: form1page3f4Reducer,
                 form1page3f5: form1page3f5Reducer,
                 form1page3g: form1page3gReducer,
+                form1page3i: form1page3iReducer,
+                form1page3j: form1page3jReducer,
         },
         middleware: (getDefaultMiddleware) => getDefaultMiddleware({ serializableCheck: false }),
 })

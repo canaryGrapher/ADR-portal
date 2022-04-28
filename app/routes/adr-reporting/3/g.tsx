@@ -44,7 +44,7 @@ export default function Form1page3g() {
               Treatment Given
             </div>
             <Form.Item
-              name="treatmentGiven"
+              name="treatmentGiven2"
               label="Select the treatment given"
               className="w-full"
             >

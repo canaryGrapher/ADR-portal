@@ -11,6 +11,10 @@ import { CheckboxValueType } from "antd/lib/checkbox/Group";
 // importing utilities
 import { radioOptions, checkBoxOptions } from "~/utils/adr-reporting/3i";
 
+import { RootState } from "~/states/store";
+import { useSelector, useDispatch } from "react-redux";
+import { setNewFormData } from "~/states/Slices/AdrReportingForm/3/i";
+
 export default function Form1page3i() {
   const [seriousReaction, setSeriousReaction] = useState<boolean>(false);
   const [isApplicable, setIsApplicable] = useState<boolean>(false);
@@ -24,13 +28,28 @@ export default function Form1page3i() {
     setIsApplicable(checked);
   };
 
+  const dispatch = useDispatch();
+  // converting date value to moment Object
+  const formState = useSelector((state: RootState) => state.form1page3i);
+  let newFormState = { ...formState };
+
+  // change the redux value whenever there is a change in the form
+  const changeFormData = (value: any, fieldName: any) => {
+    dispatch(setNewFormData({ fieldName, value }));
+  };
+
   return (
     <FormLayout>
       {/* Anything between the <FormLayout> tag can be changed */}
       <Form
+        preserve={false}
+        scrollToFirstError={true}
         name="Form1Page3i"
-        initialValues={{ remember: true }}
+        initialValues={newFormState}
         onFinish={(values) => console.log(values)}
+        onValuesChange={(values) =>
+          changeFormData(values[Object.keys(values)[0]], Object.keys(values)[0])
+        }
         layout="vertical"
       >
         <div className="shadow-xl rounded-md w-full p-10 border">
