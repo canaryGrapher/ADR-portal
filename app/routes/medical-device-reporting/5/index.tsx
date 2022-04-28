@@ -6,6 +6,7 @@ import FormLayout from "~/layouts/forms/medical-device-reporting";
 //importing components
 import { DatePicker, Input, Radio, Form } from "antd";
 import NavigationPanel from "~/components/forms/NavigationPanel";
+import moment from "moment";
 
 // importing utilities
 import {
@@ -15,6 +16,11 @@ import {
   radioOptions4,
   radioOptions5,
 } from "~/utils/medical-device-reporting/5";
+
+// importing reduc reducers
+import { RootState } from "~/states/store";
+import { useSelector, useDispatch } from "react-redux";
+import { setNewFormData } from "~/states/Slices/MedicalDeviceReporting/5";
 
 export default function Form3page5() {
   const [isSeriousEvent, setIsSeriousEvent] = useState<boolean>();
@@ -43,12 +49,46 @@ export default function Form3page5() {
       setIsReturned(false);
     }
   };
+  const [reporterType, setReporterType] = useState<string>("manufacturer");
+  const changedReporterType = (e: any) => {
+    setReporterType(e.target.value);
+  };
+  const dispatch = useDispatch();
+  const formState = useSelector((state: RootState) => state.form3page5);
+  let newFormState = { ...formState };
+  if(formState.dateOfEvent != null) {
+    newFormState.dateOfEvent = moment(formState.dateOfEvent);
+  } else {  
+    delete newFormState.dateOfEvent;
+  }
+  if(formState.dateOfImplant != null) {
+    newFormState.dateOfImplant = moment(formState.dateOfImplant);
+  } else {  
+    delete newFormState.dateOfImplant;
+  }
+  if(formState.dateOfReturn != null) {
+    newFormState.dateOfReturn = moment(formState.dateOfReturn);
+  } else {  
+    delete newFormState.dateOfReturn;
+  }
+  if(formState.dateOfDeath != null) {
+    newFormState.dateOfDeath = moment(formState.dateOfDeath);
+  } else {  
+    delete newFormState.dateOfDeath;
+  }
+  // change redux value whenever there is change in the form
+  const changeFormData = (value: any, fieldName: any) => {
+    dispatch(setNewFormData({ fieldName, value }));
+  };
   return (
     <FormLayout>
       <Form
         name="Form3page5"
-        initialValues={{ remember: true }}
+        initialValues={newFormState}
         onFinish={(value) => console.log(value)}
+        onValuesChange={(values) => {
+          changeFormData(values[Object.keys(values)[0]], Object.keys(values)[0])
+        }}
         layout="vertical"
       >
         <div className="shadow-xl rounded-md w-full p-10 border">
@@ -227,7 +267,7 @@ export default function Form3page5() {
                 </div>
                 <div className="grid grid-cols-4 gap-5">
                   <div className="flex flex-col col-span-1">
-                    <Form.Item label={"Year"} name="year" className="w-full">
+                    <Form.Item label={"Year"} name="yearGlobal" className="w-full">
                       <DatePicker picker="year" className="w-full" />
                     </Form.Item>
                   </div>
