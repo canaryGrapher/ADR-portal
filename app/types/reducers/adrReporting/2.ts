@@ -1,7 +1,7 @@
 interface FormStateType {
-    dateOfReactionStarted?: Date;
-    dateOfRecovery?: Date | null;
-    describeReactionOrProblem?: String;
+    dateOfReactionStarted?: string;
+    dateOfRecovery?: string | null;
+    reactionDescription?: string;
 }
 
 type PayloadKeys = keyof FormStateType;

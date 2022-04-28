@@ -11,6 +11,10 @@ import { FiHelpCircle } from "react-icons/fi";
 // importing utilities
 import { options, radioOptions } from "~/utils/adr-reporting/3f5";
 
+import { RootState } from "~/states/store";
+import { useSelector, useDispatch } from "react-redux";
+import { setNewFormData } from "~/states/Slices/AdrReportingForm/3/f/5";
+
 export default function Form1page3f5() {
   const [predisposingFactorsValues, setPredisposingFactorsValues] = useState<
     string[]
@@ -20,12 +24,27 @@ export default function Form1page3f5() {
     setPredisposingFactorsValues(values);
   };
 
+  const dispatch = useDispatch();
+  // converting date value to moment Object
+  const formState = useSelector((state: RootState) => state.form1page3f5);
+  let newFormState = { ...formState };
+
+  // change the redux value whenever there is a change in the form
+  const changeFormData = (value: any, fieldName: any) => {
+    dispatch(setNewFormData({ fieldName, value }));
+  };
+
   return (
     <FormLayout>
       <Form
+        preserve={false}
+        scrollToFirstError={true}
         name="Form1Page3f5"
-        initialValues={{ remember: true }}
+        initialValues={newFormState}
         onFinish={(values) => console.log(values)}
+        onValuesChange={(values) =>
+          changeFormData(values[Object.keys(values)[0]], Object.keys(values)[0])
+        }
         layout="vertical"
       >
         {/* Anything between the <FormLayout> tag can be changed */}
@@ -46,7 +65,7 @@ export default function Form1page3f5() {
             <div className="my-4 text-[24px] text-[#E8590C]">
               Predisposing factors
             </div>
-            <Form.Item name="predisposingFactors" label="Predisposing factors">
+            <Form.Item name="preDisposingFactors" label="Predisposing factors">
               <Checkbox.Group
                 options={options}
                 onChange={(e) => onChangeCheckBoxGroup(e)}

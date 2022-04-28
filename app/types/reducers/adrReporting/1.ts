@@ -1,6 +1,6 @@
 interface FormStateType {
     patientInitials?: string;
-    DateOfBirth?: any | null;
+    DateOfBirth?: string | null;
     ageOfOnset: number | undefined;
     gender?: GenderTypes | null;
     weight?: number | null;

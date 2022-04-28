@@ -1,5 +1,5 @@
 interface FormStateType {
-    scaleValue: ScaleValueOptions | null
+    whoProbabiltyScale: ScaleValueOptions | null
 }
 
 type PayloadKeys = keyof FormStateType;

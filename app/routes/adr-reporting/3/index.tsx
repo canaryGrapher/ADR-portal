@@ -1,3 +1,4 @@
+import { useState } from "react";
 import FormLayout from "~/layouts/forms/adr-reporting";
 
 //importing components
@@ -5,9 +6,7 @@ import { Input, Form, DatePicker } from "antd";
 import NavigationPanel from "~/components/forms/NavigationPanel";
 
 export default function Form1page3() {
-  const onFormSubmit = (e: any) => {
-    e.preventDefault();
-  };
+  const [drugCount, setDrugCount] = useState<number>(0);
 
   return (
     <FormLayout>
@@ -15,9 +14,14 @@ export default function Form1page3() {
         <div className="text-3xl">
           <h2 className="text-[#E8590C]">Medication</h2>
         </div>
-        <div>
+        <Form
+          name="Form1Page3"
+          initialValues={{ remember: true }}
+          onFinish={(values) => console.log(values)}
+          layout="vertical"
+        >
           <Subform />
-        </div>
+        </Form>
       </div>
       <NavigationPanel currentRoute="3" />
     </FormLayout>
@@ -26,12 +30,7 @@ export default function Form1page3() {
 
 function Subform() {
   return (
-    <Form
-      name="Form1Page3"
-      initialValues={{ remember: true }}
-      onFinish={(values) => console.log(values)}
-      layout="vertical"
-    >
+    <div>
       <Form.Item
         className="w-full"
         label="Name (Brand/Generic)"
@@ -94,17 +93,11 @@ function Subform() {
       <Form.Item name="Indication" label="Indication" className="w-full">
         <Input />
       </Form.Item>
-      <div className="flex flex-row justify-between w-100">
+      <div className="flex flex-row-reverse w-100">
         <button className="bg-[#6C567B] text-white p-2 w-32 border hover:bg-white hover:text-[#6C567B] border-[#6C567B]">
-          Save
-        </button>
-        <button
-          type="button"
-          className="bg-white text-[#6C567B] p-2 w-32 border border-[#6C567B] hover:bg-[#E8590C] hover:text-white hover:border-[#E8590C]"
-        >
           Add more
         </button>
       </div>
-    </Form>
+    </div>
   );
 }

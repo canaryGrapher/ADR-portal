@@ -1,14 +1,15 @@
 interface FormStateType {
-    areTherePreviousConclusionReportsOnThisReaction?: BooleanOptions | null;
-    didTheAdverseRventAppearAfterTheSuspectDrugWasAdministered?: BooleanOptions | null;
-    didTheARImproveWhenTheDrugWasDiscontinuedOrASpecificAntagonistWasAdministered?: BooleanOptions | null;
-    didTheARReappearWhenDrugWasReAdministered?: BooleanOptions | null;
-    areThereAlternateCausesOtherThanTheDrugThatCouldSolelyHaveCausedTheReaction?: BooleanOptions | null;
-    didtheReactionReappearWhenAPlaceboWasGiven?: BooleanOptions | null;
-    wastheDrugDetectedInRheBloodOrOtherFluidsInAConcentrationKnownToBeToxic?: BooleanOptions | null;
-    wastheReactionMoreSevereWhenTheDoseWasIncreasedOrLessSevereWhenTheDoseWasDecreased?: BooleanOptions | null;
-    didthePatientHaveASimilarReactionToTheSameOrSimilarDrugsInAnyPreviousExposure?: BooleanOptions | null;
-    wasTheAdverseEventConfirmedByObjectiveEvidence?: BooleanOptions | null;
+    0?: BooleanOptions | null;
+    1?: BooleanOptions | null;
+    2?: BooleanOptions | null;
+    3?: BooleanOptions | null;
+    4?: BooleanOptions | null;
+    5?: BooleanOptions | null;
+    6?: BooleanOptions | null;
+    7?: BooleanOptions | null;
+    8?: BooleanOptions | null;
+    9?: BooleanOptions | null;
+    10?: BooleanOptions | null;
 }
 
 type PayloadKeys = keyof FormStateType;

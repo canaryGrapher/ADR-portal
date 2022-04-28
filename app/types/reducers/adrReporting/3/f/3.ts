@@ -1,5 +1,5 @@
 interface FormStateType {
-    level: LevelTypes | null;
+    hartwigseveritytest: LevelTypes | null;
 }
 
 type PayloadKeys = keyof FormStateType;

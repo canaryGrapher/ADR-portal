@@ -9,13 +9,32 @@ import NavigationPanel from "~/components/forms/NavigationPanel";
 // importing utilities
 import { options } from "~/utils/adr-reporting/3g";
 
+import { RootState } from "~/states/store";
+import { useSelector, useDispatch } from "react-redux";
+import { setNewFormData } from "~/states/Slices/AdrReportingForm/3/g";
+
 export default function Form1page3g() {
+  const dispatch = useDispatch();
+  // converting date value to moment Object
+  const formState = useSelector((state: RootState) => state.form1page3g);
+  let newFormState = { ...formState };
+
+  // change the redux value whenever there is a change in the form
+  const changeFormData = (value: any, fieldName: any) => {
+    dispatch(setNewFormData({ fieldName, value }));
+  };
+
   return (
     <FormLayout>
       <Form
+        preserve={false}
+        scrollToFirstError={true}
         name="Form1Page3g"
-        initialValues={{ remember: true }}
+        initialValues={newFormState}
         onFinish={(values) => console.log(values)}
+        onValuesChange={(values) =>
+          changeFormData(values[Object.keys(values)[0]], Object.keys(values)[0])
+        }
         layout="vertical"
       >
         {/* Anything between the <FormLayout> tag can be changed */}
@@ -25,7 +44,7 @@ export default function Form1page3g() {
               Treatment Given
             </div>
             <Form.Item
-              name="treatment given"
+              name="treatmentGiven"
               label="Select the treatment given"
               className="w-full"
             >

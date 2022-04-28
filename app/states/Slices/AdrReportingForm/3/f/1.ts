@@ -1,23 +1,19 @@
 
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import moment from "moment";
 import { FormStateType, ActionType } from "~/types/reducers/adrReporting/3/f/1";
 
 const initialState: FormStateType = {
-    areTherePreviousConclusionReportsOnThisReaction: null,
-    didTheAdverseRventAppearAfterTheSuspectDrugWasAdministered: null,
-    didTheARImproveWhenTheDrugWasDiscontinuedOrASpecificAntagonistWasAdministered:
-        null,
-    didTheARReappearWhenDrugWasReAdministered: null,
-    areThereAlternateCausesOtherThanTheDrugThatCouldSolelyHaveCausedTheReaction:
-        null,
-    didtheReactionReappearWhenAPlaceboWasGiven: null,
-    wastheDrugDetectedInRheBloodOrOtherFluidsInAConcentrationKnownToBeToxic: null,
-    wastheReactionMoreSevereWhenTheDoseWasIncreasedOrLessSevereWhenTheDoseWasDecreased:
-        null,
-    didthePatientHaveASimilarReactionToTheSameOrSimilarDrugsInAnyPreviousExposure:
-        null,
-    wasTheAdverseEventConfirmedByObjectiveEvidence: null,
+    0: null,
+    1: null,
+    2: null,
+    3: null,
+    4: null,
+    5: null,
+    6: null,
+    7: null,
+    8: null,
+    9: null,
+    10: null,
 };
 
 export const form1page3fSlice = createSlice({

@@ -1,6 +1,6 @@
 interface FormStateType {
-    treatmentGiven: TreatmentTypes | null;
-    details: String | null;
+    treatmentGiven: [TreatmentTypes] | [];
+    treatmentDetails: String | null;
 }
 
 type PayloadKeys = keyof FormStateType;

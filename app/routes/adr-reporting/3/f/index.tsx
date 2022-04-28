@@ -9,13 +9,31 @@ import { Form, Radio } from "antd";
 //importing utilities
 import { RadioOptions, formLayout } from "~/utils/adr-reporting/3f";
 
+import { RootState } from "~/states/store";
+import { useSelector, useDispatch } from "react-redux";
+import { setNewFormData } from "~/states/Slices/AdrReportingForm/3/f/1";
+
 export default function Form1page3f1() {
+  const dispatch = useDispatch();
+  // converting date value to moment Object
+  const formState = useSelector((state: RootState) => state.form1page3f);
+  let newFormState = { ...formState };
+
+  // change the redux value whenever there is a change in the form
+  const changeFormData = (value: any, fieldName: any) => {
+    dispatch(setNewFormData({ fieldName, value }));
+  };
   return (
     <FormLayout>
       <Form
-        name="Form1Page3f"
-        initialValues={{ remember: true }}
+        preserve={false}
+        scrollToFirstError={true}
+        name="Form1Page3"
+        initialValues={newFormState}
         onFinish={(values) => console.log(values)}
+        onValuesChange={(values) =>
+          changeFormData(values[Object.keys(values)[0]], Object.keys(values)[0])
+        }
         layout="vertical"
       >
         {/* Anything between the <FormLayout> tag can be changed */}

@@ -1,25 +1,13 @@
 // needs to be changed
-
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import moment from "moment";
-import { FormStateType, ActionType } from "~/types/reducers/adrReporting/4";
+import { FormStateType, ActionType } from "~/types/reducers/adrReporting/3/b";
 
 const initialState: FormStateType = {
-    name: undefined,
-    idNumber: null,
-    pin: null,
-    emailId: undefined,
-    telephoneNumber: undefined,
-    profAddress: null,
-    occupation: null,
-    department: null,
-    dateOfThisReport: null,
-    references: null,
-    reportersComments: null,
+    actionTaken: null
 };
 
 export const form1page3bSlice = createSlice({
-    name: "form1page4",
+    name: "form1page3b",
     initialState,
     reducers: {
         fetchIncompleteFormsFromUserProfile: (

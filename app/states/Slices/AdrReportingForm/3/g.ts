@@ -3,8 +3,8 @@ import moment from "moment";
 import { FormStateType, ActionType } from "~/types/reducers/adrReporting/3/g";
 
 const initialState: FormStateType = {
-    treatmentGiven: null,
-    details: null,
+    treatmentGiven: [],
+    treatmentDetails: null,
 };
 
 export const form1page3gSlice = createSlice({

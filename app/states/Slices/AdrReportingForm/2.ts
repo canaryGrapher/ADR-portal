@@ -1,11 +1,10 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import moment from "moment";
 import { FormStateType, ActionType } from "~/types/reducers/adrReporting/2";
 
 const initialState: FormStateType = {
     dateOfReactionStarted: undefined,
     dateOfRecovery: null,
-    describeReactionOrProblem: undefined,
+    reactionDescription: undefined,
 };
 
 export const form1page2Slice = createSlice({

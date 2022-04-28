@@ -8,10 +8,8 @@ import { Radio, Form } from "antd";
 // importing utilities
 import { radioOptions } from "~/utils/adr-reporting/3b";
 
-export default function Form1page3a() {
-  //temporary variable
-  const drugs = ["drug1", "drug2", "drug3"];
-
+export default function Form1page3b() {
+  const drugs = ["1", "2"];
   return (
     <FormLayout>
       <Form

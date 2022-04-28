@@ -1,7 +1,7 @@
 interface FormStateType {
     predictability: PredictabilityTypes | null;
     preDisposingFactors: Array<PreDisposingFactorsTypes> | null;
-    others: String | null;
+    otherInformation: String | null;
 }
 
 type PayloadKeys = keyof FormStateType;

@@ -1,18 +1,14 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import moment from "moment";
 import { FormStateType, ActionType } from "~/types/reducers/adrReporting/3/f/4";
 
 const initialState: FormStateType = {
-    wasThereAHistoryOfAllergyOrPreviousReactionsToTheDrug: null,
-    wasTheDrugInvolvedInappropriateForThePatientsClinicalCondition: null,
-    wasTheDoseRouteOrFrequencyOfAdministrationInappropriateForThePatientsAgeWeightOrDiseaseState:
-        null,
-    wasAToxicSerumDrugConcentrationOrLaboratoryMonitoringTestDocumented: null,
-    wasThereAKnownTreatmentForTheAdverseDrugReaction: null,
-    wasRequiredTherapeuticDrugMonitoringOrOtherNecessaryLabTestsPotPerformed:
-        null,
-    wasADrugInteractionInvolvedInTheADR: null,
-    finalResult: null,
+    0: null,
+    1: null,
+    2: null,
+    3: null,
+    4: null,
+    5: null,
+    6: null,
 };
 
 export const form1page3f4Slice = createSlice({
