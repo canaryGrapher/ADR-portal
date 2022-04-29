@@ -1,7 +1,7 @@
 interface FormStateType {
     typeOfDevice?: DeviceOptions | null,
     implantability?: Implantability | null,
-    reusability?: Reusability | null,
+    reuseability?: Reusability | null,
     personalUse?: boolean | null
 }
 

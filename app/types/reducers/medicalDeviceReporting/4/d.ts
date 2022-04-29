@@ -18,7 +18,7 @@ interface FormStateType {
     howLongWasDeviceInUse?: string | null,
     availabilityOfDeviceForEvaluation?: boolean | null,
     whatIsTheStatusOfTheDevice?: StatusTypes | null,
-    isTheUsageOfDeviceAsPerManufacturersClaims?: boolean | null,
+    "isTheUsageOfDeviceAsPerManufacturersClaims/instructionsForUse/userManual"?: boolean | null,
     specifyUsage?: string | null,
     "regulator/regulatoryStatusInCountryOfOrigin"?: string | null
 }

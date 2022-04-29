@@ -21,7 +21,7 @@ const initialState: FormStateType = {
     howLongWasDeviceInUse: undefined,
     availabilityOfDeviceForEvaluation: null,
     whatIsTheStatusOfTheDevice: null,
-    isTheUsageOfDeviceAsPerManufacturersClaims: null,
+    "isTheUsageOfDeviceAsPerManufacturersClaims/instructionsForUse/userManual": null,
     specifyUsage: undefined,
     "regulator/regulatoryStatusInCountryOfOrigin": undefined
 }

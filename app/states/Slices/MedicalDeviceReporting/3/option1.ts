@@ -4,7 +4,7 @@ import { FormStateType, ActionType } from "~/types/reducers/medicalDeviceReporti
 const initialState: FormStateType = {
     typeOfDevice: null,
     implantability: null,
-    reusability: null,
+    reuseability: null,
     personalUse: null 
 }
 

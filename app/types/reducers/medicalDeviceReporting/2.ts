@@ -1,6 +1,6 @@
 interface FormStateType {
     typeOfReporter?: ReporterTypes | null,
-    ifOthers?: string | null,
+    ifOthers?: String | null,
     hasTheReporterInformedTheIncidentToTheManufacturer?: ChoiceTypes | null,
     isTheReporterAlsoSubmittingTheReportOnBehalfOfTheManufacturer: ChoiceTypes | null,
     name?: string | null,
