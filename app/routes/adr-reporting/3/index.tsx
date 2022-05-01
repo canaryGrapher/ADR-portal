@@ -7,7 +7,7 @@ import { Input, Form, DatePicker } from "antd";
 import NavigationPanel from "~/components/forms/NavigationPanel";
 
 // importing types
-import { FormStateType } from "~/types/reducers/adrReporting/3/a";
+import { FormSubStateType } from "~/types/reducers/adrReporting/3/a";
 
 // importing redux
 import { RootState } from "~/states/store";
@@ -22,7 +22,7 @@ export default function Form1page3() {
   let newFormState = { ...formState };
   const [keyCount, setKeyCount] = useState<number>(0);
 
-  const submitFinishedForms = (values: FormStateType) => {
+  const submitFinishedForms = (values: FormSubStateType) => {
     dispatch(setAdditionalFormData({ id: keyCount, drugDetails: values }));
     setKeyCount(keyCount + 1);
   };
@@ -67,7 +67,7 @@ function AddedDrugs(props: any) {
 
 type PropTypes = {
   id: number;
-  submitAction: (arg0: FormStateType) => void;
+  submitAction: (arg0: FormSubStateType) => void;
 };
 
 const Subform = (props: PropTypes) => {

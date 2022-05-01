@@ -1,8 +1,8 @@
 // needs to be changed
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { FormStateType, ActionType } from "~/types/reducers/adrReporting/3/a";
+import { FormSubStateType, ActionType } from "~/types/reducers/adrReporting/3/a";
 
-const initialState: FormStateType = {
+const initialState: FormSubStateType = {
     nameOfDrug: undefined,
     manufacturer: null,
     BatchNo_LotNo: null,
@@ -23,7 +23,7 @@ export const form1page3Slice = createSlice({
     reducers: {
         fetchIncompleteFormsFromUserProfile: (
             state,
-            action: PayloadAction<FormStateType>
+            action: PayloadAction<FormSubStateType>
         ) => {
             // Add logic to fetch incomplete/complete form data from backend API
             state = action.payload;

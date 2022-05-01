@@ -1,4 +1,4 @@
-interface FormStateType {
+interface FormSubStateType {
     nameOfDrug?: String,
     manufacturer?: String | null,
     BatchNo_LotNo?: String | null,
@@ -13,7 +13,7 @@ interface FormStateType {
     indication?: String | null,
 }
 
-type PayloadKeys = keyof FormStateType;
+type PayloadKeys = keyof FormSubStateType;
 
 interface ActionType {
     fieldName: PayloadKeys;
@@ -21,4 +21,4 @@ interface ActionType {
 }
 
 
-export type { ActionType, FormStateType };
+export type { ActionType, FormSubStateType };
