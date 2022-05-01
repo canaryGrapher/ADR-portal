@@ -97,7 +97,7 @@ export default function Form3page6() {
               </Form.Item>
             </div>
             <div className="grid grid-cols-1">
-              <Form.Item label={"Sex"} name="sex" className="w-full">
+              <Form.Item label={"Sex"} name="gender" className="w-full">
                 <Radio.Group
                   size="large"
                   buttonStyle="solid"

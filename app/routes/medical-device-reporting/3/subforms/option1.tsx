@@ -51,7 +51,7 @@ function Option1() {
             </Form.Item>
             <Form.Item
               label="Implantability"
-              name="typeOfDevice"
+              name="implantability"
               className="w-full"
             >
               <Radio.Group

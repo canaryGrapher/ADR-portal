@@ -24,7 +24,7 @@ export default function Form1() {
     setReporterType(e.target.value);
   };
   const dispatch = useDispatch();
-  const formState = useSelector((state: RootState) => state.form3page1);
+  const formState = useSelector((state: RootState) => state.form3page2);
   let newFormState = { ...formState };
   // change redux value whenever there is change in the form
   const changeFormData = (value: any, fieldName: any) => {

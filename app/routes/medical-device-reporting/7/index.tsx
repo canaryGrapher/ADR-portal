@@ -17,7 +17,6 @@ export default function Form3page7() {
   const formState = useSelector((state: RootState) => state.form3page7);
   let newFormState = { ...formState };
 
-  
   // change redux value whenever there is change in the form
   const changeFormData = (value: any, fieldName: any) => {
     dispatch(setNewFormData({ fieldName, value }));
@@ -28,8 +27,11 @@ export default function Form3page7() {
     <FormLayout>
       <Form
         name="Form3page7"
-        initialValues={{ remember: true }}
+        initialValues={newFormState}
         onFinish={(value) => console.log(value)}
+        onValuesChange={(values) => {
+          changeFormData(values[Object.keys(values)[0]], Object.keys(values)[0])
+        }}
         layout="vertical"
       >
         <div className="shadow-xl rounded-md w-full p-10 border">
