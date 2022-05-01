@@ -1,9 +1,9 @@
 const radioOptions = [
-    { label: "Physician", value: "physician" },
-    { label: "Dentist", value: "dentist" },
-    { label: "Nurse", value: "nurse" },
-    { label: "Pharmacist", value: "pharmacist" },
-    { label: "Other", value: "other" },
+    { label: "Physician", value: "Physician" },
+    { label: "Dentist", value: "Dentist" },
+    { label: "Nurse", value: "Nurse" },
+    { label: "Pharmacist", value: "Pharmacist" },
+    { label: "Other", value: "Other" },
 ];
 
 export { radioOptions };

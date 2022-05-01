@@ -3,7 +3,7 @@ import FormLayout from "~/layouts/forms/adr-reporting";
 
 // importing components
 import NavigationPanel from "~/components/forms/NavigationPanel";
-import { Radio, Input, Form, Select } from "antd";
+import { Radio, Input, Form } from "antd";
 
 // importing icons
 import { FiHelpCircle } from "react-icons/fi";
@@ -30,8 +30,6 @@ export default function Form1page3e() {
               Reaction Reappeared After Re-introduction
             </div>
             <RadioGroupDrugs drugOptions={drugs} />
-            {/* Section to add drug information */}
-            <AddDrugsBox />
           </div>
         </div>
         <NavigationPanel currentRoute="3e" />
@@ -58,16 +56,4 @@ const RadioGroupDrugs = (props: { drugOptions: string[] }) => {
   ));
 
   return <>{componentsForDrugs}</>;
-};
-
-const AddDrugsBox = () => {
-  return (
-    <Form.Item
-      className="w-full pt-21"
-      name="additionalDrugs"
-      label="Add a drug"
-    >
-      <Select mode="tags" style={{ width: "100%" }} placeholder="Add a drug" />
-    </Form.Item>
-  );
 };

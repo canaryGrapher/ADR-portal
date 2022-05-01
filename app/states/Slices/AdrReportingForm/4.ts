@@ -6,14 +6,14 @@ const initialState: FormStateType = {
     name: undefined,
     idNumber: null,
     pin: null,
-    emailId: undefined,
+    email: undefined,
     telephoneNumber: undefined,
     profAddress: null,
     occupation: null,
     department: null,
-    dateOfThisReport: null,
+    dateOfReport: null,
     references: null,
-    reportersComments: null,
+    reportersComment: null,
 };
 
 export const form1page4Slice = createSlice({

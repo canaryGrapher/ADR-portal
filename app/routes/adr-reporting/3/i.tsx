@@ -32,10 +32,45 @@ export default function Form1page3i() {
   // converting date value to moment Object
   const formState = useSelector((state: RootState) => state.form1page3i);
   let newFormState = { ...formState };
-
+  if (formState.dateOfDeath != null) {
+    newFormState.dateOfDeath = moment(formState.dateOfDeath);
+  } else {
+    delete newFormState.dateOfDeath;
+  }
   // change the redux value whenever there is a change in the form
   const changeFormData = (value: any, fieldName: any) => {
     dispatch(setNewFormData({ fieldName, value }));
+  };
+
+  const onChangeFormEvent = (values: any) => {
+    changeFormData(values[Object.keys(values)[0]], Object.keys(values)[0]);
+    if (
+      Object.keys(values)[0] === "applicability" &&
+      values[Object.keys(values)[0]] === false
+    ) {
+      changeFormData(null, "amcReportNumber");
+      changeFormData(null, "worldwideUniqueNumber");
+    }
+    if (
+      Object.keys(values)[0] === "seriousnessOfTheReaction" &&
+      values[Object.keys(values)[0]] === false
+    ) {
+      changeFormData(null, "seriousnessLevel");
+      changeFormData(null, "dateOfDeath");
+      changeFormData(null, "otherDetails");
+    }
+    if (
+      Object.keys(values)[0] === "seriousnessLevel" &&
+      !values[Object.keys(values)[0]].includes("other")
+    ) {
+      changeFormData(null, "otherDetails");
+    }
+    if (
+      Object.keys(values)[0] === "seriousnessLevel" &&
+      !values[Object.keys(values)[0]].includes("death")
+    ) {
+      changeFormData(null, "dateOfDeath");
+    }
   };
 
   return (
@@ -47,9 +82,7 @@ export default function Form1page3i() {
         name="Form1Page3i"
         initialValues={newFormState}
         onFinish={(values) => console.log(values)}
-        onValuesChange={(values) =>
-          changeFormData(values[Object.keys(values)[0]], Object.keys(values)[0])
-        }
+        onValuesChange={(values) => onChangeFormEvent(values)}
         layout="vertical"
       >
         <div className="shadow-xl rounded-md w-full p-10 border">
@@ -159,11 +192,15 @@ export default function Form1page3i() {
               },
             ]}
           >
-            <DatePicker className="w-full" disabled={false} />
+            <DatePicker
+              clearable={true}
+              className="w-full"
+              disabled={!seriousReaction}
+            />
           </Form.Item>
           <Form.Item
             label="Mention details of other"
-            name="dateOfDeath"
+            name="otherDetails"
             className="w-full"
             hidden={
               !seriousReaction || !seriousnessLevelState?.includes("other")
@@ -176,7 +213,11 @@ export default function Form1page3i() {
               },
             ]}
           >
-            <Input className="my-auto col-span-10" />
+            <Input
+              className="my-auto col-span-10"
+              disabled={!seriousReaction}
+              clearable={true}
+            />
           </Form.Item>
 
           <Form.Item label="Outcome" name="outcome" className="w-full">

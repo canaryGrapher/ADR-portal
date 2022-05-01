@@ -1,15 +1,16 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import moment from "moment";
 import { FormStateType, ActionType } from "~/types/reducers/adrReporting/3/i";
 
 const initialState: FormStateType = {
     applicability: null,
-    amcreportnumber: null,
-    worldwidereportnumber: null,
-    relevantTestsLabDataWithDates: null,
-    relevantMedicalMedicationHistory: null,
-    wasItASeriousReaction: null,
+    amcReportNumber: null,
+    worldwideUniqueNumber: null,
+    relevantTests: null,
+    relevantMedicalHistory: null,
+    seriousnessOfTheReaction: null,
     seriousnessLevel: null,
+    dateOfDeath: null,
+    otherDetails: null,
     outcome: null,
 };
 

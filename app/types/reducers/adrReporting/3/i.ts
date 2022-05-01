@@ -1,11 +1,13 @@
 interface FormStateType {
     applicability: ApplicabilityTypes | null;
-    amcreportnumber: Number | null;
-    worldwidereportnumber: Number | null;
-    relevantTestsLabDataWithDates: String | null;
-    relevantMedicalMedicationHistory: String | null;
-    wasItASeriousReaction: SeriousReactionTypes | null;
+    amcReportNumber: Number | null;
+    worldwideUniqueNumber: Number | null;
+    relevantTests: String | null;
+    relevantMedicalHistory: String | null;
+    seriousnessOfTheReaction: SeriousReactionTypes | null;
     seriousnessLevel: SeriousnessLevelTypes | null;
+    dateOfDeath: String | null;
+    otherDetails: String | null;
     outcome: OutcomeTypes | null
 }
 

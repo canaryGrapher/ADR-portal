@@ -16,9 +16,9 @@ export default function Form1page1() {
   // converting date value to moment Object
   const formState = useSelector((state: RootState) => state.form1page1);
   let newFormState = { ...formState };
-
-  if (formState.DateOfBirth != null) {
-    newFormState.DateOfBirth = moment(formState.DateOfBirth);
+  if (formState.DateOfBirth) {
+    const dateOfBirth = moment(new Date(formState.DateOfBirth));
+    newFormState.DateOfBirth = dateOfBirth;
   } else {
     delete newFormState.DateOfBirth;
   }

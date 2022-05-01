@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import moment from "moment";
 
 // Import Form Layout
 import FormLayout from "~/layouts/forms/adr-reporting";
@@ -12,6 +13,10 @@ import { radioOptions } from "~/utils/adr-reporting/4";
 
 //Import Images
 import { FiHelpCircle } from "react-icons/fi";
+
+import { RootState } from "~/states/store";
+import { useSelector, useDispatch } from "react-redux";
+import { setNewFormData } from "~/states/Slices/AdrReportingForm/4";
 
 export default function Form1page4() {
   const [occupationState, setOccupationState] = useState<string>("");
@@ -27,14 +32,32 @@ export default function Form1page4() {
   }, [occupationState]);
 
   const [form] = Form.useForm();
+  const dispatch = useDispatch();
+  // converting date value to moment Object
+  const formState = useSelector((state: RootState) => state.form1page4);
+  let newFormState = { ...formState };
+  if (formState.dateOfReport != null) {
+    newFormState.dateOfReport = moment(formState.dateOfReport);
+  } else {
+    delete newFormState.dateOfReport;
+  }
+  // change the redux value whenever there is a change in the form
+  const changeFormData = (value: any, fieldName: any) => {
+    dispatch(setNewFormData({ fieldName, value }));
+  };
 
   return (
     <FormLayout>
+      {/* Anything between the <FormLayout> tag can be changed */}
       <Form
-        form={form}
+        preserve={false}
+        scrollToFirstError={true}
         name="Form1Page4"
-        initialValues={{ remember: true }}
+        initialValues={newFormState}
         onFinish={(values) => console.log(values)}
+        onValuesChange={(values) =>
+          changeFormData(values[Object.keys(values)[0]], Object.keys(values)[0])
+        }
         layout="vertical"
       >
         <div className="shadow-xl rounded-md w-full p-10 border">
