@@ -2,17 +2,17 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { FormStateType, ActionType } from "~/types/reducers/medicalDeviceReporting/6"
 
 const initialState: FormStateType = {
-    patientHospitalNumber: undefined,
-    patientInitials: undefined,
-    age: undefined,
+    patientHospitalNumber: null,
+    patientInitials: null,
+    age: null,
     weight: null,
-    gender: null, 
+    gender: null,
     history: null,
     patientRecovered: null,
     dateOfRecovery: null,
     patientDead: null,
     dateOfDeath: null,
-    otherPatientOutcomes: undefined
+    otherPatientOutcomes: null
 }
 
 export const form3page6Slice = createSlice({

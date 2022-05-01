@@ -12,14 +12,15 @@ const initialState: FormStateType = {
     reason: null,
     dateOfDeath: null,
     isDeviceInUse: null,
-    detailedDescription: undefined,
+    detailedDescription: null,
     year: null,
     numberOfSimilarIndia: null,
     totalNumberSuppliedIndia: null,
-    frequencyIndia: undefined,
+    frequencyIndia: null,
     numberOfSimilarGlobal: null,
     totalNumberSuppliedGlobal: null,
-    frequencyGlobal: undefined,
+    frequencyGlobal: null,
+    yearGlobal: null,
 }
 
 export const form3page5Slice = createSlice({

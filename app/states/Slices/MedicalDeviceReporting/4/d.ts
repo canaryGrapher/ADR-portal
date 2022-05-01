@@ -4,26 +4,26 @@ import { FormStateType, ActionType } from "~/types/reducers/medicalDeviceReporti
 const initialState: FormStateType = {
     "isTheDeviceNotified/regulatedInIndia": null,
     deviceRiskClassificationAsPerIndiaMDR2017: null,
-    licenseNumber: undefined,
-    catalogueNumber: undefined,
-    modelNumber: undefined,
-    batchNumber: undefined,
-    serialNumber: undefined,
-    softwareNumber: undefined,
-    "accessories/associatedDevices": undefined,
-    GMDNCodeGMDNTerm: undefined,
+    licenseNumber: null,
+    catalogueNumber: null,
+    modelNumber: null,
+    batchNumber: null,
+    serialNumber: null,
+    softwareNumber: null,
+    "accessories/associatedDevices": null,
+    GMDNCodeGMDNTerm: null,
     udiNumber: null,
     installationDate: null,
     expirationDate: null,
     lastExpirationDate: null,
     lastCalibration: null,
     ageOfDeviceFromDateOfManufacturing: null,
-    howLongWasDeviceInUse: undefined,
+    howLongWasDeviceInUse: null,
     availabilityOfDeviceForEvaluation: null,
     whatIsTheStatusOfTheDevice: null,
     "isTheUsageOfDeviceAsPerManufacturersClaims/instructionsForUse/userManual": null,
-    specifyUsage: undefined,
-    "regulator/regulatoryStatusInCountryOfOrigin": undefined
+    specifyUsage: null,
+    "regulator/regulatoryStatusInCountryOfOrigin": null
 }
 
 export const form3page4dSlice = createSlice({

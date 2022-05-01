@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { FormStateType, ActionType } from "~/types/reducers/medicalDeviceReporting/2";
 
 const initialState: FormStateType = {
-    typeOfReporter: null,
+    typeOfReporter: undefined,
     ifOthers: undefined,
     hasTheReporterInformedTheIncidentToTheManufacturer: null,
     isTheReporterAlsoSubmittingTheReportOnBehalfOfTheManufacturer: null,

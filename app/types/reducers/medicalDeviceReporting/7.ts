@@ -1,6 +1,6 @@
 interface FormStateType {
-    name?: string | undefined;
-    address?: string | undefined;
+    name?: string | null;
+    address?: string | null;
     contactNumber?: number | null;
     telephoneNumber?: number | null;
 }

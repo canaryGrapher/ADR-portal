@@ -1,7 +1,7 @@
 interface FormStateType {
-    productOwnersDeviceRiskAnalysisReport?: string | undefined;
-    correctiveActionTaken?: string | undefined;
-    deviceHistoryReview?: string | undefined;
+    productOwnersDeviceRiskAnalysisReport?: string | null;
+    correctiveActionTaken?: string | null;
+    deviceHistoryReview?: string | null;
 }
 
 type PayloadKeys = keyof FormStateType;
