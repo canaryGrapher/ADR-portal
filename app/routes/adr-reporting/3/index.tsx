@@ -15,6 +15,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { setNewFormData, addField } from "~/states/Slices/AdrReportingForm/3/a";
 import { setAdditionalFormData, editAdditionalFormData, removeAdditionalFormData } from "~/states/Slices/AdrReportingForm/3/a_filled";
 import { DeleteFilled, EditFilled } from "@ant-design/icons";
+import { useEffect } from "react";
 
 export default function Form1page3() {
   const dispatch = useDispatch();
@@ -49,9 +50,21 @@ export default function Form1page3() {
 }
 
 function AddedDrugs(props: any) {
-  console.log(props.current.drugDetails);
+  // delete the drug from the finalised list
   const deleteFormItem = (id: number) => {
     props.dispatch(removeAdditionalFormData({ id: id }));
+  }
+  const changeFormData = (value: any, fieldName: any) => {
+    props.dispatch(setNewFormData({ fieldName, value }));
+  };
+  const editFormData = (id: number, details: any) => {
+    let item = props.dispatch(editAdditionalFormData({id, drugDetails: details}))
+    // populate the form state with the drug details to be edited
+    Object.keys(item.payload.drugDetails).forEach((key) => {
+      changeFormData(item.payload.drugDetails[key], key)
+    })    
+    // remove the drug from the list fo finalised drugs
+    deleteFormItem(id);
   }
   return props.current.drugDetails.length > 0 ? (
     <React.Fragment>
@@ -64,7 +77,7 @@ function AddedDrugs(props: any) {
               <p className="my-auto">{drug.nameOfDrug}</p>
               <div className="flex justify-center items-center gap-4 text-lg">
                 <div className="hover:text-neutral-500 cursor-pointer">
-                  {/* <EditFilled onClick={editFormData}/> */}
+                  <EditFilled onClick={() => editFormData(drug.key, drug)}/>
                 </div>
                 <div className="hover:text-neutral-500 cursor-pointer">
                   <DeleteFilled onClick={() => deleteFormItem(drug.key)} />
@@ -113,6 +126,10 @@ const Subform = (props: PropTypes) => {
     dispatch(setNewFormData({ fieldName, value }));
   };
   const [form] = Form.useForm();
+  // update the initial state for editing a drug
+  useEffect(() => {
+    form.setFieldsValue(newFormState)
+  }, [form, newFormState])
   return (
     <Form
       form={form}
