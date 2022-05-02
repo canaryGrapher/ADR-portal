@@ -1,5 +1,5 @@
 /*
-! tailwindcss v3.0.24 | MIT License | https://tailwindcss.com
+! tailwindcss v3.0.23 | MIT License | https://tailwindcss.com
 */
 
 /*
@@ -813,12 +813,12 @@ Ensure the default browser behavior of the `hidden` attribute.
   padding: 0.25rem;
 }
 
-.p-5 {
-  padding: 1.25rem;
-}
-
 .p-0 {
   padding: 0px;
+}
+
+.p-5 {
+  padding: 1.25rem;
 }
 
 .p-8 {
@@ -850,14 +850,19 @@ Ensure the default browser behavior of the `hidden` attribute.
   padding-bottom: 0px;
 }
 
-.px-5 {
-  padding-left: 1.25rem;
-  padding-right: 1.25rem;
-}
-
 .px-4 {
   padding-left: 1rem;
   padding-right: 1rem;
+}
+
+.py-3 {
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+}
+
+.px-5 {
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
 }
 
 .py-16 {
@@ -871,14 +876,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .pl-8 {
   padding-left: 2rem;
-}
-
-.pb-4 {
-  padding-bottom: 1rem;
-}
-
-.pt-2 {
-  padding-top: 0.5rem;
 }
 
 .pr-3 {
@@ -895,6 +892,14 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .pr-2 {
   padding-right: 0.5rem;
+}
+
+.pb-4 {
+  padding-bottom: 1rem;
+}
+
+.pt-2 {
+  padding-top: 0.5rem;
 }
 
 .pr-1 {
@@ -947,10 +952,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   font-size: 35px;
 }
 
-.text-\[10px\] {
-  font-size: 10px;
-}
-
 .text-base {
   font-size: 1rem;
   line-height: 1.5rem;
@@ -959,6 +960,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 .text-xs {
   font-size: 0.75rem;
   line-height: 1rem;
+}
+
+.text-\[10px\] {
+  font-size: 10px;
 }
 
 .text-\[16px\] {
@@ -979,13 +984,13 @@ Ensure the default browser behavior of the `hidden` attribute.
   line-height: 1.25rem;
 }
 
-.text-\[22px\] {
-  font-size: 22px;
-}
-
 .text-lg {
   font-size: 1.125rem;
   line-height: 1.75rem;
+}
+
+.text-\[22px\] {
+  font-size: 22px;
 }
 
 .text-4xl {
@@ -1039,11 +1044,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   color: rgb(126 126 126 / var(--tw-text-opacity));
 }
 
-.text-red-500 {
-  --tw-text-opacity: 1;
-  color: rgb(239 68 68 / var(--tw-text-opacity));
-}
-
 .text-\[\#E8590C\] {
   --tw-text-opacity: 1;
   color: rgb(232 89 12 / var(--tw-text-opacity));
@@ -1052,6 +1052,11 @@ Ensure the default browser behavior of the `hidden` attribute.
 .text-\[\#ebebeb\] {
   --tw-text-opacity: 1;
   color: rgb(235 235 235 / var(--tw-text-opacity));
+}
+
+.text-red-500 {
+  --tw-text-opacity: 1;
+  color: rgb(239 68 68 / var(--tw-text-opacity));
 }
 
 .text-gray-600 {
@@ -1131,6 +1136,11 @@ Ensure the default browser behavior of the `hidden` attribute.
 .hover\:text-white:hover {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+.hover\:text-neutral-500:hover {
+  --tw-text-opacity: 1;
+  color: rgb(115 115 115 / var(--tw-text-opacity));
 }
 
 .hover\:underline:hover {

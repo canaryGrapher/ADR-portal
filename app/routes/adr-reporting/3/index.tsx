@@ -13,7 +13,8 @@ import { FormSubStateType } from "~/types/reducers/adrReporting/3/a";
 import { RootState } from "~/states/store";
 import { useSelector, useDispatch } from "react-redux";
 import { setNewFormData, addField } from "~/states/Slices/AdrReportingForm/3/a";
-import { setAdditionalFormData } from "~/states/Slices/AdrReportingForm/3/a_filled";
+import { setAdditionalFormData, editAdditionalFormData, removeAdditionalFormData } from "~/states/Slices/AdrReportingForm/3/a_filled";
+import { DeleteFilled, EditFilled } from "@ant-design/icons";
 
 export default function Form1page3() {
   const dispatch = useDispatch();
@@ -32,7 +33,10 @@ export default function Form1page3() {
           <h2 className="text-[#E8590C]">Medication</h2>
         </div>
         <div className="mb-5">
-          <AddedDrugs current={formState} />
+          <AddedDrugs 
+            current={formState} 
+            dispatch={dispatch}
+          />
         </div>
         <div>
           <h2 className="text-[#e1763c]">Add more drugs</h2>
@@ -46,19 +50,31 @@ export default function Form1page3() {
 
 function AddedDrugs(props: any) {
   console.log(props.current.drugDetails);
+  const deleteFormItem = (id: number) => {
+    props.dispatch(removeAdditionalFormData({ id: id }));
+  }
   return props.current.drugDetails.length > 0 ? (
     <React.Fragment>
       <h2 className="text-[#e1763c]">Drugs Added</h2>
+      <div className="grid grid-cols-2 gap-2">
       {props.current.drugDetails.map((drug: any, index: number) => {
-        console.log(drug);
         return (
-          <div key={index} className="flex flex-col border">
-            <div className="flex flex-row">
-              <p>{drug.nameOfDrug}</p>
+          <div key={index} className="border">
+            <div className="flex flex-row px-4 py-3 justify-between items-center">
+              <p className="my-auto">{drug.nameOfDrug}</p>
+              <div className="flex justify-center items-center gap-4 text-lg">
+                <div className="hover:text-neutral-500 cursor-pointer">
+                  {/* <EditFilled onClick={editFormData}/> */}
+                </div>
+                <div className="hover:text-neutral-500 cursor-pointer">
+                  <DeleteFilled onClick={() => deleteFormItem(drug.key)} />
+                </div>
+              </div>
             </div>
           </div>
         );
       })}
+      </div>
     </React.Fragment>
   ) : null;
 }
