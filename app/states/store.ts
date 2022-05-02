@@ -4,18 +4,22 @@ import form1page1Reducer from '~/states/Slices/AdrReportingForm/1'
 import form1page2Reducer from '~/states/Slices/AdrReportingForm/2'
 import form1page3Reducer from '~/states/Slices/AdrReportingForm/3/a'
 import form1page3_filledReducer from '~/states/Slices/AdrReportingForm/3/a_filled'
-// missing styles go here
+import Form1page3b from '~/routes/adr-reporting/3/b'
+import Form1page3c from '~/routes/adr-reporting/3/c'
+import Form1page3d from '~/routes/adr-reporting/3/d'
+import Form1page3e from '~/routes/adr-reporting/3/e'
 import form1page3fReducer from '~/states/Slices/AdrReportingForm/3/f/1'
 import form1page3f2Reducer from '~/states/Slices/AdrReportingForm/3/f/2'
 import form1page3f3Reducer from '~/states/Slices/AdrReportingForm/3/f/3'
 import form1page3f4Reducer from '~/states/Slices/AdrReportingForm/3/f/4'
 import form1page3f5Reducer from '~/states/Slices/AdrReportingForm/3/f/5'
 import form1page3gReducer from '~/states/Slices/AdrReportingForm/3/g'
-// missing styles go here
+import form1page3hReducer from '~/states/Slices/AdrReportingForm/3/h'
+import form1page3h_filledReducer from '~/states/Slices/AdrReportingForm/3/h_filled'
 import form1page3iReducer from '~/states/Slices/AdrReportingForm/3/i'
 import form1page3jReducer from '~/states/Slices/AdrReportingForm/3/j'
 import form1page4Reducer from '~/states/Slices/AdrReportingForm/4'
-// form 2 resux states
+// form 2 redux states
 import form3page1Reducer from '~/states/Slices/MedicalDeviceReporting/1'
 import form3page2Reducer from '~/states/Slices/MedicalDeviceReporting/2'
 import form3page3Option1Reducer from './Slices/MedicalDeviceReporting/3/option1'
@@ -37,12 +41,18 @@ export const store = configureStore({
                 form1page2: form1page2Reducer,
                 form1page3: form1page3Reducer,
                 form1page3_filled: form1page3_filledReducer,
+                form1page3b: Form1page3b,
+                form1page3c: Form1page3c,
+                form1page3d: Form1page3d,
+                form1page3e: Form1page3e,
                 form1page3f: form1page3fReducer,
                 form1page3f2: form1page3f2Reducer,
                 form1page3f3: form1page3f3Reducer,
                 form1page3f4: form1page3f4Reducer,
                 form1page3f5: form1page3f5Reducer,
                 form1page3g: form1page3gReducer,
+                form1page3h: form1page3hReducer,
+                form1page3h_filled: form1page3h_filledReducer,
                 form1page3i: form1page3iReducer,
                 form1page3j: form1page3jReducer,
                 form1page4: form1page4Reducer,

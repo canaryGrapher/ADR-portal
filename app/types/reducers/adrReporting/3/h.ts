@@ -1,17 +1,18 @@
-interface FormStateType {
-    name?: String;
-    doseUsed?: String | null;
-    routeUsed?: String | null;
-    frequency?: String | null;
-    dateStarted?: Date;
-    indication?: String | null;
+interface FormSubStateType {
+    name?: string;
+    doseUsed?: string | null;
+    routeUsed?: string | null;
+    frequency?: string | null;
+    startDate?: string;
+    stopDate?: string;
+    indication?: string | null;
 }
 
-type PayloadKeys = keyof FormStateType;
+type PayloadKeys = keyof FormSubStateType;
 
 interface ActionType {
     fieldName: PayloadKeys;
     value: any;
 }
 
-export type { ActionType, FormStateType };
+export type { ActionType, FormSubStateType };

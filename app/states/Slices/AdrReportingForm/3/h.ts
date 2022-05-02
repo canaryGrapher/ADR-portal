@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import moment from "moment";
 import { FormStateType, ActionType } from "~/types/reducers/adrReporting/3/h";
 
 const initialState: FormStateType = {
@@ -29,6 +28,9 @@ export const form1page3hSlice = createSlice({
             // logic to set the new form data in this slice. This changes everytime the form is updated
             state[action.payload.fieldName] = action.payload.value;
         },
+        addField: () => {
+            return initialState;
+        }
     },
 });
 
@@ -37,6 +39,7 @@ export const {
     fetchIncompleteFormsFromUserProfile,
     submitFormDataToTheBackend,
     setNewFormData,
+    addField
 } = form1page3hSlice.actions;
 
 export default form1page3hSlice.reducer;

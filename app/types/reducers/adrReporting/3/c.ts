@@ -4,7 +4,7 @@ type actionTakenState = {
 }
 
 interface FormStateType {
-    actionTaken: [actionTakenState] | [];
+    dechallenge: [actionTakenState] | [];
 }
 
 enum AvailableActions {

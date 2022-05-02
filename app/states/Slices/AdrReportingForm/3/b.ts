@@ -3,7 +3,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { FormStateType, ActionType } from "~/types/reducers/adrReporting/3/b";
 
 const initialState: FormStateType = {
-    actionTaken: null
+    actionTaken: [],
 };
 
 export const form1page3bSlice = createSlice({

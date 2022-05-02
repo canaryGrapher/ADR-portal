@@ -1,10 +1,8 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import moment from "moment";
 import { FormStateType, ActionType } from "~/types/reducers/adrReporting/3/e";
 
 const initialState: FormStateType = {
-    drug: null,
-    dose: null,
+    reactionAfterReintroduction: []
 };
 
 export const form1page3eSlice = createSlice({

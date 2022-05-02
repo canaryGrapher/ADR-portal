@@ -18,8 +18,6 @@ import { setAdditionalFormData } from "~/states/Slices/AdrReportingForm/3/a_fill
 export default function Form1page3() {
   const dispatch = useDispatch();
   const formState = useSelector((state: RootState) => state.form1page3_filled);
-
-  let newFormState = { ...formState };
   const [keyCount, setKeyCount] = useState<number>(0);
 
   const submitFinishedForms = (values: FormSubStateType) => {
@@ -37,7 +35,7 @@ export default function Form1page3() {
           <AddedDrugs current={formState} />
         </div>
         <div>
-          <h2 className="text-[#e1763c]">Drugs more drugs</h2>
+          <h2 className="text-[#e1763c]">Add more drugs</h2>
           <Subform id={keyCount} submitAction={submitFinishedForms} />
         </div>
       </div>
