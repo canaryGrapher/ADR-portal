@@ -31,6 +31,6 @@ export const form1page3hFilledSlice = createSlice({
 })
 
 // Action creators are generated for each case reducer function
-export const { setAdditionalFormData, removeAdditionalFormData } = form1page3hFilledSlice.actions;
+export const { setAdditionalFormData, editAdditionalFormData, removeAdditionalFormData } = form1page3hFilledSlice.actions;
 
 export default form1page3hFilledSlice.reducer

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import FormLayout from "~/layouts/forms/adr-reporting";
 import moment from "moment";
 
@@ -13,7 +13,8 @@ import { FormSubStateType } from "~/types/reducers/adrReporting/3/a";
 import { RootState } from "~/states/store";
 import { useSelector, useDispatch } from "react-redux";
 import { setNewFormData, addField } from "~/states/Slices/AdrReportingForm/3/h";
-import { setAdditionalFormData } from "~/states/Slices/AdrReportingForm/3/h_filled";
+import { setAdditionalFormData, editAdditionalFormData, removeAdditionalFormData } from "~/states/Slices/AdrReportingForm/3/h_filled";
+import { DeleteFilled, EditFilled } from "@ant-design/icons";
 
 export default function Form1page3h() {
   const dispatch = useDispatch();
@@ -35,7 +36,7 @@ export default function Form1page3h() {
           </p>
         </div>
         <div className="mb-5">
-          <AddedDrugs current={formState} />
+          <AddedDrugs current={formState} dispatch={dispatch}/>
         </div>
         <div>
           <h2 className="text-[#e1763c]">Add more drugs</h2>
@@ -48,20 +49,44 @@ export default function Form1page3h() {
 }
 
 function AddedDrugs(props: any) {
-  console.log(props.current.drugDetails);
+  // delete the drug from the finalised list
+  const deleteFormItem = (id: number) => {
+    props.dispatch(removeAdditionalFormData({ id: id }));
+  }
+  const changeFormData = (value: any, fieldName: any) => {
+    props.dispatch(setNewFormData({ fieldName, value }));
+  };
+  const editFormData = (id: number, details: any) => {
+    let item = props.dispatch(editAdditionalFormData({id, drugDetails: details}))
+    // populate the form state with the drug details to be edited
+    Object.keys(item.payload.drugDetails).forEach((key) => {
+      changeFormData(item.payload.drugDetails[key], key)
+    })    
+    // remove the drug from the list fo finalised drugs
+    deleteFormItem(id);
+  }
   return props.current.drugDetails.length > 0 ? (
     <React.Fragment>
       <h2 className="text-[#e1763c]">Drugs Added</h2>
+      <div className="grid grid-cols-2 gap-2">
       {props.current.drugDetails.map((drug: any, index: number) => {
-        console.log(drug);
         return (
-          <div key={index} className="flex flex-col border">
-            <div className="flex flex-row">
-              <p>{drug.name}</p>
+          <div key={index} className="border">
+            <div className="flex flex-row px-4 py-3 justify-between items-center">
+              <p className="my-auto">{drug.name}</p>
+              <div className="flex justify-center items-center gap-4 text-lg">
+                <div className="hover:text-neutral-500 cursor-pointer">
+                  <EditFilled onClick={() => editFormData(drug.key, drug)}/>
+                </div>
+                <div className="hover:text-neutral-500 cursor-pointer">
+                  <DeleteFilled onClick={() => deleteFormItem(drug.key)} />
+                </div>
+              </div>
             </div>
           </div>
         );
       })}
+      </div>
     </React.Fragment>
   ) : null;
 }
@@ -93,6 +118,9 @@ const Subform = (props: PropTypes) => {
     dispatch(setNewFormData({ fieldName, value }));
   };
   const [form] = Form.useForm();
+  useEffect(() => {
+    form.setFieldsValue(newFormState)
+  }, [form, newFormState])
   return (
     <Form
       form={form}
