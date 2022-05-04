@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 // importing layouts
 import FormLayout from "~/layouts/forms/medical-device-reporting";
@@ -22,6 +22,9 @@ export default function Form1() {
   const [reporterType, setReporterType] = useState<string>("manufacturer");
   const changedReporterType = (e: any) => {
     setReporterType(e.target.value);
+    if(e.target.value !== "other" ) {
+      handleNull(e.target.value === "manufacturer");
+    }
   };
   const dispatch = useDispatch();
   const formState = useSelector((state: RootState) => state.form3page2);
@@ -30,9 +33,22 @@ export default function Form1() {
   const changeFormData = (value: any, fieldName: any) => {
     dispatch(setNewFormData({ fieldName, value }));
   };
+  const handleNull = (isManufacturer: boolean) => {
+    changeFormData(null, "ifOthers");
+    if(isManufacturer) {
+      setReporterType("manufacturer");
+      changeFormData(null, "hasTheReporterInformedTheIncidentToTheManufacturer");
+      changeFormData(null, "isTheReporterAlsoSubmittingTheReportOnBehalfOfTheManufacturer");
+    }
+  }
+  const [form] = Form.useForm();
+  useEffect(() => {
+    form.setFieldsValue(newFormState)
+  }, [form, newFormState])
   return (
     <FormLayout>
       <Form
+        form={form}
         preserve={false}
         scrollToFirstError={true}
         name="Form3page2"
