@@ -10,7 +10,7 @@ interface FormStateType {
 enum AvailableActions {
     doseReduced = "Dose reduced",
     doseIncreased = "Dose increased",
-    drugWithdrawn = "Drig withdrawn",
+    drugWithdrawn = "Drug withdrawn",
     doseNotChanged = "Dose not changed",
     notApplicable = "Not applicable",
     unknown = "Unknown",

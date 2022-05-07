@@ -11,6 +11,15 @@ import { RootState } from "~/states/store";
 import { useSelector, useDispatch } from "react-redux";
 import { setNewFormData } from "~/states/Slices/AdrReportingForm/1";
 
+// importing models
+// import { intializeForms } from "~/models/services/forms.service";
+
+// export let loader: any = async () => {
+//   const message = await intializeForms();
+//   console.log(message);
+//   return message;
+// };
+
 export default function Form1page1() {
   const dispatch = useDispatch();
   // converting date value to moment Object
@@ -18,6 +27,7 @@ export default function Form1page1() {
   let newFormState = { ...formState };
   if (formState.DateOfBirth) {
     const dateOfBirth = moment(new Date(formState.DateOfBirth));
+    // @ts-ignore
     newFormState.DateOfBirth = dateOfBirth;
   } else {
     delete newFormState.DateOfBirth;

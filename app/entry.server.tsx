@@ -1,14 +1,14 @@
 import { renderToString } from "react-dom/server";
 import { RemixServer } from "remix";
 import type { EntryContext } from "remix";
-// import mongoose from "mongoose";
+import { connect } from "mongoose";
 
-// mongoose
-//   .connect("mongodb://localhost:27017/ADRPortal")
-//   .then(() => console.log({ mongoDb: "Connected" }))
-//   .catch((err) => {
-//     console.log({ mongoErr: err });
-//   });
+// @ts-ignore
+connect(`mongodb://localhost:27017/adrportal`)
+  .then(() => console.log({ mongoDb: "Connected" }))
+  .catch((err) => {
+    console.log({ mongoErr: err });
+  });
 
 export default function handleRequest(
   request: Request,

@@ -50,7 +50,7 @@ const Sidebar = () => {
         </div>
         <div className="col-span-3 text-center">
           <h2 className="text-[#6C567B] dark:text-[#a262cf] text-xl m-0 mb-3">
-            MANIPAL COLLEGE OF PHARMACY
+            MANIPAL COLLEGE OF PHARMACEUTICAL SCIENCES
           </h2>
           <p className="text-[10px] border-t-2 border-[#6C567B] pt-2 font-medium">
             Manipal Academy of Higer Education
