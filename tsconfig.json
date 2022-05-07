@@ -4,7 +4,7 @@
     "**/*.ts",
     "**/*.tsx",
     "app/models/forms/form1page1.ts",
-    "app/models/forms.model.ts"
+    "app/models/forms1.model.ts"
   ],
   "compilerOptions": {
     "lib": [

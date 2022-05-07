@@ -2,7 +2,7 @@ import { prop } from "@typegoose/typegoose";
 
 const options = ["Yes", "No", "Don't Know"]
 
-export default class Form1Page3b {
+export default class Form1Page3b1 {
     @prop({ type: String, enum: options })
     public areTherePreviousConclusionReportsOnThisReaction?: String;
 

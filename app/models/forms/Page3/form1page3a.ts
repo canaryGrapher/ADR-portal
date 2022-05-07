@@ -1,10 +1,9 @@
-import { prop } from "@typegoose/typegoose";
+import { prop } from "@typegoose/typegoose"
 
 const availableActions = ["Dose reduced", "Dose increased", "Drug withdrawn", "Dose not changed", "Not applicable", "Unknown"]
-
 const availableActions2 = ["No rechallenge", "Recurrence of symptoms", "No occurance of symptomps", "Unknown"]
 
-export default class Form1Page3 {
+export default class Form1Page3a {
     @prop({ type: String, required: true })
     public nameOfDrug!: String;
 

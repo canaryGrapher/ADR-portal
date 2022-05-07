@@ -1,5 +1,5 @@
 import { getModelForClass } from "@typegoose/typegoose";
-import Forms from "../forms.model";
+import Forms from "../forms1.model";
 
 const FormModel = getModelForClass(Forms);
 
