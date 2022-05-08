@@ -38,7 +38,7 @@ export default function Form1page3j() {
         layout="vertical"
       >
         {/* Anything between the <FormLayout> tag can be changed */}
-        <div className="shadow-xl rounded-md w-full p-10 border">
+        <div className="w-full rounded-md border p-10 shadow-xl">
           <div>
             <div className="text-[24px] text-[#E8590C]">Outcome</div>
             <Form.Item name="outcome" className="w-full pt-4">
