@@ -3,17 +3,28 @@ import FormLayout from "~/layouts/forms/adr-reporting";
 import moment from "moment";
 
 //importing components
-import { Input, Form, DatePicker } from "antd";
+import { Input, Form, DatePicker, Radio } from "antd";
 import NavigationPanel from "~/components/forms/NavigationPanel";
 
 // importing types
 import { FormSubStateType } from "~/types/reducers/adrReporting/3/a";
 
+import {
+  actionTakenOptions,
+  dechallengeOptions,
+  rechallengeOptions,
+} from "~/utils/adr-reporting/3";
+
 // importing redux
 import { RootState } from "~/states/store";
 import { useSelector, useDispatch } from "react-redux";
 import { setNewFormData, addField } from "~/states/Slices/AdrReportingForm/3/a";
-import { setAdditionalFormData, editAdditionalFormData, removeAdditionalFormData } from "~/states/Slices/AdrReportingForm/3/a_filled";
+import {
+  setAdditionalFormData,
+  editAdditionalFormData,
+  removeAdditionalFormData,
+} from "~/states/Slices/AdrReportingForm/3/a_filled";
+
 import { DeleteFilled, EditFilled } from "@ant-design/icons";
 import { useEffect } from "react";
 
@@ -29,15 +40,12 @@ export default function Form1page3() {
 
   return (
     <FormLayout>
-      <div className="shadow-xl rounded-md w-full p-10 border">
+      <div className="w-full rounded-md border p-10 shadow-xl">
         <div className="text-3xl">
           <h2 className="text-[#E8590C]">Medication</h2>
         </div>
         <div className="mb-5">
-          <AddedDrugs 
-            current={formState} 
-            dispatch={dispatch}
-          />
+          <AddedDrugs current={formState} dispatch={dispatch} />
         </div>
         <div>
           <h2 className="text-[#e1763c]">Add more drugs</h2>
@@ -53,40 +61,42 @@ function AddedDrugs(props: any) {
   // delete the drug from the finalised list
   const deleteFormItem = (id: number) => {
     props.dispatch(removeAdditionalFormData({ id: id }));
-  }
+  };
   const changeFormData = (value: any, fieldName: any) => {
     props.dispatch(setNewFormData({ fieldName, value }));
   };
   const editFormData = (id: number, details: any) => {
-    let item = props.dispatch(editAdditionalFormData({id, drugDetails: details}))
+    let item = props.dispatch(
+      editAdditionalFormData({ id, drugDetails: details })
+    );
     // populate the form state with the drug details to be edited
     Object.keys(item.payload.drugDetails).forEach((key) => {
-      changeFormData(item.payload.drugDetails[key], key)
-    })    
+      changeFormData(item.payload.drugDetails[key], key);
+    });
     // remove the drug from the list fo finalised drugs
     deleteFormItem(id);
-  }
+  };
   return props.current.drugDetails.length > 0 ? (
     <React.Fragment>
       <h2 className="text-[#e1763c]">Drugs Added</h2>
       <div className="grid grid-cols-2 gap-2">
-      {props.current.drugDetails.map((drug: any, index: number) => {
-        return (
-          <div key={index} className="border">
-            <div className="flex flex-row px-4 py-3 justify-between items-center">
-              <p className="my-auto">{drug.nameOfDrug}</p>
-              <div className="flex justify-center items-center gap-4 text-lg">
-                <div className="hover:text-neutral-500 cursor-pointer">
-                  <EditFilled onClick={() => editFormData(drug.key, drug)}/>
-                </div>
-                <div className="hover:text-neutral-500 cursor-pointer">
-                  <DeleteFilled onClick={() => deleteFormItem(drug.key)} />
+        {props.current.drugDetails.map((drug: any, index: number) => {
+          return (
+            <div key={index} className="border">
+              <div className="flex flex-row items-center justify-between px-4 py-3">
+                <p className="my-auto">{drug.nameOfDrug}</p>
+                <div className="flex items-center justify-center gap-4 text-lg">
+                  <div className="cursor-pointer hover:text-neutral-500">
+                    <EditFilled onClick={() => editFormData(drug.key, drug)} />
+                  </div>
+                  <div className="cursor-pointer hover:text-neutral-500">
+                    <DeleteFilled onClick={() => deleteFormItem(drug.key)} />
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        );
-      })}
+          );
+        })}
       </div>
     </React.Fragment>
   ) : null;
@@ -128,8 +138,8 @@ const Subform = (props: PropTypes) => {
   const [form] = Form.useForm();
   // update the initial state for editing a drug
   useEffect(() => {
-    form.setFieldsValue(newFormState)
-  }, [form, newFormState])
+    form.setFieldsValue(newFormState);
+  }, [form, newFormState]);
   return (
     <Form
       form={form}
@@ -212,11 +222,53 @@ const Subform = (props: PropTypes) => {
       <Form.Item name="indication" label="Indication" className="w-full">
         <Input />
       </Form.Item>
-      <div className="flex flex-row-reverse w-100">
-        <button className="bg-[#6C567B] text-white p-2 w-32 border hover:bg-white hover:text-[#6C567B] border-[#6C567B]">
+      <ActionTakenGroup />
+      <DechallengeGroup />
+      <RechallengeOptions />
+      <div className="w-100 flex flex-row-reverse">
+        <button className="w-32 border border-[#6C567B] bg-[#6C567B] p-2 text-white hover:bg-white hover:text-[#6C567B]">
           Add more
         </button>
       </div>
     </Form>
+  );
+};
+
+const ActionTakenGroup = () => {
+  return (
+    <Form.Item name="actionTaken" label="Action Taken" className="w-full">
+      <Radio.Group
+        size="large"
+        buttonStyle="solid"
+        options={actionTakenOptions}
+        optionType="button"
+      />
+    </Form.Item>
+  );
+};
+
+const DechallengeGroup = () => {
+  return (
+    <Form.Item name="dechallenge" label="Dechallenge" className="w-full">
+      <Radio.Group
+        size="large"
+        buttonStyle="solid"
+        options={dechallengeOptions}
+        optionType="button"
+      />
+    </Form.Item>
+  );
+};
+
+const RechallengeOptions = () => {
+  return (
+    <Form.Item name="rechallenge" label="Rechallenge" className="w-full">
+      <Radio.Group
+        size="large"
+        buttonStyle="solid"
+        options={rechallengeOptions}
+        optionType="button"
+      />
+    </Form.Item>
   );
 };
