@@ -11,9 +11,9 @@ interface FormSubStateType {
   dateStarted?: String;
   dateStopped?: String | null;
   indication?: String | null;
-  actionTaken?: actionTakenState | null;
-  dechallenge?: actionTakenState | null;
-  rechallenge?: actionTakenState | null;
+  actionTaken?: AvailableActions | null;
+  dechallenge?: AvailableActions | null;
+  rechallenge?: AvailableActions | null;
 }
 
 type PayloadKeys = keyof FormSubStateType;
@@ -22,11 +22,6 @@ interface ActionType {
   fieldName: PayloadKeys;
   value: any;
 }
-
-type actionTakenState = {
-  drugName: string;
-  action: AvailableActions;
-};
 
 enum AvailableActions {
   doseReduced = "Dose reduced",

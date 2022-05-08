@@ -147,9 +147,10 @@ const Subform = (props: PropTypes) => {
       scrollToFirstError={true}
       name="Form1Page3"
       initialValues={newFormState}
-      onValuesChange={(values) =>
-        changeFormData(values[Object.keys(values)[0]], Object.keys(values)[0])
-      }
+      onValuesChange={(values) => {
+        changeFormData(values[Object.keys(values)[0]], Object.keys(values)[0]);
+        console.log(Object.keys(values));
+      }}
       onFinish={(values) => {
         dispatch(addField());
         form.resetFields();
