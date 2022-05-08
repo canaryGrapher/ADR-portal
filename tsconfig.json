@@ -3,8 +3,8 @@
     "remix.env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "app/models/forms/form1page1.ts",
-    "app/models/forms1.model.ts"
+    "app/models/form1/form1page1.ts",
+    "app/models/form1.model.ts"
   ],
   "compilerOptions": {
     "lib": [
