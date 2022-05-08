@@ -11,7 +11,7 @@ import { options } from "~/utils/adr-reporting/3g";
 
 import { RootState } from "~/states/store";
 import { useSelector, useDispatch } from "react-redux";
-import { setNewFormData } from "~/states/Slices/AdrReportingForm/3/g";
+import { setNewFormData } from "~/states/Slices/AdrReportingForm/3/c";
 
 export default function Form1page3g() {
   const dispatch = useDispatch();

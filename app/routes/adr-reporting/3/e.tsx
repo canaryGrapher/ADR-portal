@@ -13,7 +13,7 @@ import { radioOptions, checkBoxOptions } from "~/utils/adr-reporting/3i";
 
 import { RootState } from "~/states/store";
 import { useSelector, useDispatch } from "react-redux";
-import { setNewFormData } from "~/states/Slices/AdrReportingForm/3/i";
+import { setNewFormData } from "~/states/Slices/AdrReportingForm/3/e";
 
 export default function Form1page3i() {
   const [seriousReaction, setSeriousReaction] = useState<boolean>(false);
