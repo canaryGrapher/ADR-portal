@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 //importing layouts
 import FormLayout from "~/layouts/forms/adr-reporting";
@@ -45,9 +45,25 @@ export default function Form3page4d() {
     }
   };
 
+  const handleNull = (e:any) => {
+    if(e.target.value === "No") {
+      setAvailabilityValue("No")
+      changeFormData(null, "whatIsTheStatusOfTheDevice")
+    } else {
+      changeStateOfRadio("2", e)
+    }
+  }
+
+  const [form] = Form.useForm();
+  // update the initial state for editing a drug
+  useEffect(() => {
+    form.setFieldsValue(newFormState)
+  }, [form, newFormState])
+
   return (
     <FormLayout>
       <Form
+        form={form}
         name="Form3page4d"
         initialValues={newFormState}
         onFinish={(value) => console.log(value)}
@@ -211,7 +227,8 @@ export default function Form3page4d() {
                 options={radioOptions3}
                 optionType="button"
                 value={availabilityValue}
-                onChange={(e) => changeStateOfRadio("2", e)}
+                // onChange={(e) => changeStateOfRadio("2", e)}
+                onChange={(e) => handleNull(e)}
               />
             </Form.Item>
             <Form.Item

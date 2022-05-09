@@ -1,6 +1,7 @@
 type actionTakenState = {
     drugName: string,
-    action: AvailableActions
+    action: string,
+    dose: string,
 }
 
 interface FormStateType {

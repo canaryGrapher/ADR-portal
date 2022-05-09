@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
 
 // Import Form Layout
 import FormLayout from "~/layouts/forms/medical-device-reporting";
@@ -49,6 +49,8 @@ export default function Form3page5() {
       setIsReturned(false);
     }
   };
+
+
   const [reporterType, setReporterType] = useState<string>("manufacturer");
   const changedReporterType = (e: any) => {
     setReporterType(e.target.value);
@@ -80,9 +82,47 @@ export default function Form3page5() {
   const changeFormData = (value: any, fieldName: any) => {
     dispatch(setNewFormData({ fieldName, value }));
   };
+
+  const setDateNull = (e:any) => {
+    if (e.target.value === "Returned to the company") {
+      setIsReturned(true);
+      changeDeviceLocation(e)
+    } else {
+      setIsReturned(false);
+      changeFormData(null, "dateOfReturn");
+    }
+  }
+
+  const DeathDateNull2 = (e:any) => {
+    if (e.target.value === "Death") {
+      setIsDead(true);
+      changeSeriousEventValue(e)
+    } else {
+      setIsDead(false);
+      changeFormData(null, "dateOfDeath");
+    }
+  }
+
+  const handleNull = (e:any) => {
+    if(e.target.value === "No") {
+      setIsSeriousEvent(false);
+      changeFormData(null, "reason")
+    } else {
+      setIsSeriousEvent(true);
+      changeSeriousEventValue(e)
+    }
+  }
+
+  const [form] = Form.useForm();
+   // update the initial state for editing a drug
+   useEffect(() => {
+    form.setFieldsValue(newFormState)
+  }, [form, newFormState])
+
   return (
     <FormLayout>
       <Form
+        form={form}
         name="Form3page5"
         initialValues={newFormState}
         onFinish={(value) => console.log(value)}
@@ -150,9 +190,10 @@ export default function Form3page5() {
                     buttonStyle="solid"
                     options={radioOptions3}
                     optionType="button"
-                    onChange={(e) => {
-                      changeDeviceLocation(e);
-                    }}
+                    //onChange={(e) => {
+                      //changeDeviceLocation(e);
+                    //}}
+                    onChange={(e) => setDateNull(e)}
                   />
                 </Form.Item>
               </div>
@@ -168,9 +209,10 @@ export default function Form3page5() {
                     buttonStyle="solid"
                     options={radioOptions4}
                     optionType="button"
-                    onChange={(e) => {
+                    onChange={(e) => handleNull(e)}
+                    /*onChange={(e) => {
                       changeSeriousEventState(e);
-                    }}
+                    }}*/
                   />
                 </Form.Item>
               </div>
@@ -187,9 +229,7 @@ export default function Form3page5() {
                     options={radioOptions5}
                     optionType="button"
                     disabled={!isSeriousEvent}
-                    onChange={(e) => {
-                      changeSeriousEventValue(e);
-                    }}
+                    onChange={(e) => DeathDateNull2(e)}
                   />
                 </Form.Item>
               </div>

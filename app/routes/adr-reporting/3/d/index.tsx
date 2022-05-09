@@ -11,7 +11,7 @@ import { RadioOptions, formLayout } from "~/utils/adr-reporting/3f";
 
 import { RootState } from "~/states/store";
 import { useSelector, useDispatch } from "react-redux";
-import { setNewFormData } from "~/states/Slices/AdrReportingForm/3/f/1";
+import { setNewFormData } from "~/states/Slices/AdrReportingForm/3/d/1";
 
 export default function Form1page3f1() {
   const dispatch = useDispatch();
