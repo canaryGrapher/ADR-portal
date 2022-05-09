@@ -1,8 +1,29 @@
+import { Links, Meta, Scripts } from "remix";
+
 //importing components
 import Sidebar from "~/components/common/sidebar";
 
 // importing types
 import { LayoutProps } from "~/types/general";
+
+export function ErrorBoundary({ error }: any) {
+  console.error(error);
+  return (
+    <html>
+      <head>
+        <title>Oh no!</title>
+        <Meta />
+        <Links />
+      </head>
+      <body>
+        {/* add the UI you want your users to see */}
+        <h1>Oh no! The application is facing issues.</h1>
+        <pre>{error.message}</pre>
+        <Scripts />
+      </body>
+    </html>
+  );
+}
 
 const FormLayout = ({ children }: LayoutProps) => {
   return (

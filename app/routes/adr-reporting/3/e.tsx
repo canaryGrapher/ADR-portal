@@ -1,108 +1,236 @@
-import { useState } from "react";
+import React, { useState } from "react";
 
 // importing layouts
 import FormLayout from "~/layouts/forms/adr-reporting";
 
 // importing components
-import InputDescription from "~/components/forms/inputDescription";
 import NavigationPanel from "~/components/forms/NavigationPanel";
+import { Form, Input, DatePicker, Switch, Checkbox, Radio } from "antd";
+import { CheckboxValueType } from "antd/lib/checkbox/Group";
 
-// importing icons
-import { FiHelpCircle, FiPlus, FiX } from "react-icons/fi";
+// importing utilities
+import { radioOptions, checkBoxOptions } from "~/utils/adr-reporting/3i";
 
-import { Radio, Input } from "antd";
+import { RootState } from "~/states/store";
+import { useSelector, useDispatch } from "react-redux";
+import { setNewFormData } from "~/states/Slices/AdrReportingForm/3/e";
 
-export default function Form1page3e() {
+export default function Form1page3i() {
+  const [seriousReaction, setSeriousReaction] = useState<boolean>(false);
+  const [isApplicable, setIsApplicable] = useState<boolean>(false);
+  const [seriousnessLevelState, setSeriousnessLevelState] =
+    useState<CheckboxValueType[]>();
+
+  const changeSeriousness = (checked: boolean) => {
+    setSeriousReaction(checked);
+  };
+  const changeApplicability = (checked: boolean) => {
+    setIsApplicable(checked);
+  };
+
+  const dispatch = useDispatch();
+  // converting date value to moment Object
+  const formState = useSelector((state: RootState) => state.form1page3i);
+  let newFormState = { ...formState };
+  if (formState.dateOfDeath != null) {
+    newFormState.dateOfDeath = moment(formState.dateOfDeath);
+  } else {
+    delete newFormState.dateOfDeath;
+  }
+  // change the redux value whenever there is a change in the form
+  const changeFormData = (value: any, fieldName: any) => {
+    dispatch(setNewFormData({ fieldName, value }));
+  };
+
+  const onChangeFormEvent = (values: any) => {
+    changeFormData(values[Object.keys(values)[0]], Object.keys(values)[0]);
+    if (
+      Object.keys(values)[0] === "applicability" &&
+      values[Object.keys(values)[0]] === false
+    ) {
+      changeFormData(null, "amcReportNumber");
+      changeFormData(null, "worldwideUniqueNumber");
+    }
+    if (
+      Object.keys(values)[0] === "seriousnessOfTheReaction" &&
+      values[Object.keys(values)[0]] === false
+    ) {
+      changeFormData(null, "seriousnessLevel");
+      changeFormData(null, "dateOfDeath");
+      changeFormData(null, "otherDetails");
+    }
+    if (
+      Object.keys(values)[0] === "seriousnessLevel" &&
+      !values[Object.keys(values)[0]].includes("other")
+    ) {
+      changeFormData(null, "otherDetails");
+    }
+    if (
+      Object.keys(values)[0] === "seriousnessLevel" &&
+      !values[Object.keys(values)[0]].includes("death")
+    ) {
+      changeFormData(null, "dateOfDeath");
+    }
+  };
+
   return (
     <FormLayout>
       {/* Anything between the <FormLayout> tag can be changed */}
-      <div className="shadow-xl rounded-md w-full p-10 border">
-        <div className="mx-auto">
-          <div className="text-[24px] text-[#E8590C]">
-            Reaction Reappeared After Re-introduction
+      <Form
+        preserve={false}
+        scrollToFirstError={true}
+        name="Form1Page3i"
+        initialValues={newFormState}
+        onFinish={(values) => console.log(values)}
+        onValuesChange={(values) => onChangeFormEvent(values)}
+        layout="vertical"
+      >
+        <div className="shadow-xl rounded-md w-full p-10 border">
+          <div className="text-[24px] text-[#E8590C] mb-5">AMC/NCC Section</div>
+          <Form.Item
+            name="applicability"
+            label="Applicability"
+            className="w-full flex"
+          >
+            <Switch
+              checkedChildren="Applicable"
+              unCheckedChildren="Not applicable"
+              onChange={changeApplicability}
+              checked={isApplicable}
+            />
+          </Form.Item>
+          <div className="grid grid-cols-2 gap-5">
+            <Form.Item
+              className="w-full"
+              name="amcReportNumber"
+              label="AMC Report Number"
+              rules={[
+                {
+                  required: isApplicable,
+                  message: "AMC Report number is mandatory",
+                },
+              ]}
+              hidden={!isApplicable}
+            >
+              <Input disabled={!isApplicable} />
+            </Form.Item>
+            <Form.Item
+              label="Worldwide Unique Number"
+              name="worldwideUniqueNumber"
+              className="w-full"
+              rules={[
+                {
+                  required: isApplicable,
+                  message: "Worldwide Unique number is mandatory",
+                },
+              ]}
+              hidden={!isApplicable}
+            >
+              <Input disabled={!isApplicable} />
+            </Form.Item>
           </div>
-          <RadioGroupDrugs />
-          {/* Section to add drug information */}
-          <AddDrugsBox />
+          <Form.Item
+            className="w-full"
+            label="Relevant tests/ laboratory data with dates"
+            name="relevantTests"
+          >
+            <Input.TextArea rows={2} placeholder="" />
+          </Form.Item>
+          <Form.Item
+            className="w-full"
+            label="Relevant medical/ medication history (e.g. allergies, race, 
+                pregnancy, smoking, alcohol use, hepatic/renal dysfunction etc.)"
+            name="relevantMedicalHistory"
+          >
+            <Input.TextArea rows={2} placeholder="" />
+          </Form.Item>
+          <Form.Item
+            label="Was it a serious reaction?"
+            name="seriousnessOfTheReaction"
+            className="w-full"
+          >
+            <Switch
+              checkedChildren="Yes"
+              unCheckedChildren="No"
+              onChange={changeSeriousness}
+              checked={seriousReaction}
+            />
+          </Form.Item>
+          <Form.Item
+            label="Seriousness level"
+            name="seriousnessLevel"
+            className="w-full"
+            hidden={!seriousReaction}
+            rules={[
+              {
+                required: seriousReaction,
+                message: "Selecting an option is mandatory",
+              },
+            ]}
+          >
+            <Checkbox.Group
+              disabled={!seriousReaction}
+              options={checkBoxOptions}
+              onChange={(value: CheckboxValueType[]) =>
+                setSeriousnessLevelState(value)
+              }
+            />
+          </Form.Item>
+
+          <Form.Item
+            label="Date of death"
+            name="dateOfDeath"
+            className="w-full"
+            hidden={
+              !seriousReaction || !seriousnessLevelState?.includes("death")
+            }
+            rules={[
+              {
+                required:
+                  seriousReaction && seriousnessLevelState?.includes("death"),
+                message: "Date of death is required",
+              },
+            ]}
+          >
+            <DatePicker
+              clearable={true}
+              className="w-full"
+              disabled={!seriousReaction}
+            />
+          </Form.Item>
+          <Form.Item
+            label="Mention details of other"
+            name="otherDetails"
+            className="w-full"
+            hidden={
+              !seriousReaction || !seriousnessLevelState?.includes("other")
+            }
+            rules={[
+              {
+                required:
+                  seriousReaction && seriousnessLevelState?.includes("other"),
+                message: "You need to mention other details",
+              },
+            ]}
+          >
+            <Input
+              className="my-auto col-span-10"
+              disabled={!seriousReaction}
+              clearable={true}
+            />
+          </Form.Item>
+
+          <Form.Item label="Outcome" name="outcome" className="w-full">
+            <Radio.Group
+              size="large"
+              buttonStyle="solid"
+              optionType="button"
+              options={radioOptions}
+            />
+          </Form.Item>
         </div>
-      </div>
-      <NavigationPanel currentRoute="3e" />
+        <NavigationPanel currentRoute="3i" />
+      </Form>
     </FormLayout>
   );
 }
-
-const RadioGroupDrugs = () => {
-  const radioOptions = [
-    "No rechallenge",
-    "Recurrance of symptoms",
-    "No occurance of symptoms",
-    "Unknown",
-  ];
-  return (
-    <div className="w-full pt-2">
-      {/* Make description dynamic */}
-      <InputDescription isRequired={true} description="Drug 1" />
-      <Radio.Group
-        size="large"
-        buttonStyle="solid"
-        options={radioOptions}
-        optionType="button"
-      />
-      <div className="flex flex-row pt-4">
-        <p className="pl-1 pr-7 my-auto">Dose</p>
-        <Input suffix={<FiHelpCircle />} />
-      </div>
-    </div>
-  );
-};
-
-const AddDrugsBox = () => {
-  const [drugsAdded, setDrugsAdded] = useState<readonly String[]>([]);
-  const [inputValue, setInputValue] = useState<string>("");
-
-  const onChangeInput = (e: any) => {
-    setInputValue(e.target.value);
-  };
-
-  const onClickAddDrug = (e: any) => {
-    e.preventDefault();
-    setDrugsAdded([...drugsAdded, inputValue]);
-    setInputValue("");
-  };
-
-  const onClickRemoveDrug = (drug: String) => {
-    setDrugsAdded(drugsAdded.filter((d) => d !== drug));
-  };
-
-  return (
-    <div className="w-full pt-16">
-      <form
-        className="grid grid-cols-12 gap-1 gap-y-3"
-        onSubmit={onClickAddDrug}
-      >
-        <Input
-          className="col-span-11"
-          placeholder="Add a drug"
-          onChange={onChangeInput}
-          value={inputValue}
-        />
-        <button
-          type="submit"
-          className="col-span-1 bg-[#6C567B] text-white p-2 border hover:bg-white hover:text-[#6C567B] border-[#6C567B]"
-        >
-          <FiPlus className="mx-auto" />
-        </button>
-      </form>
-      <div className="grid grid-cols-12 gap-1 pt-2">
-        {drugsAdded.map((drug: String) => (
-          <div className="border border-gray-400 col-span-11 flex flex-row justify-between px-5 py-1">
-            <p className="my-auto">{drug}</p>
-            <button className="my-auto" onClick={() => onClickRemoveDrug(drug)}>
-              <FiX />
-            </button>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-};

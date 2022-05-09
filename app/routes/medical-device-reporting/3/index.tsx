@@ -1,10 +1,17 @@
 import { useState } from "react";
+
+// importing layouts
 import FormLayout from "~/layouts/forms/medical-device-reporting";
+
+// importing components
 import { Radio } from "antd";
+import NavigationPanel from "~/components/forms/NavigationPanel";
+
+//Importing subforms
 import Option1 from "./subforms/option1";
 import Option2 from "./subforms/option2";
 import Option3 from "./subforms/option3";
-import NavigationPanel from "~/components/forms/NavigationPanel";
+
 export default function Form3page9() {
   const [opt1, setOpt1] = useState(false);
   const [opt2, setOpt2] = useState(false);
