@@ -1,19 +1,11 @@
 type actionTakenState = {
     drugName: string,
-    action: AvailableActions
+    action: string,
+    dose: string,
 }
 
 interface FormStateType {
-    actionTaken: [actionTakenState] | [];
-}
-
-enum AvailableActions {
-    doseReduced = "Dose reduced",
-    doseIncreased = "Dose increased",
-    drugWithdrawn = "Drig withdrawn",
-    doseNotChanged = "Dose not changed",
-    notApplicable = "Not applicable",
-    unknown = "Unknown",
+    reactionAfterReintroduction: [actionTakenState] | [];
 }
 
 type PayloadKeys = keyof FormStateType;

@@ -13,7 +13,7 @@ import { options, radioOptions } from "~/utils/adr-reporting/3f5";
 
 import { RootState } from "~/states/store";
 import { useSelector, useDispatch } from "react-redux";
-import { setNewFormData } from "~/states/Slices/AdrReportingForm/3/f/5";
+import { setNewFormData } from "~/states/Slices/AdrReportingForm/3/d/5";
 
 export default function Form1page3f5() {
   const [predisposingFactorsValues, setPredisposingFactorsValues] = useState<
