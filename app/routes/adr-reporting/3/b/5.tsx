@@ -15,7 +15,7 @@ import { RootState } from "~/states/store";
 import { useSelector, useDispatch } from "react-redux";
 import { setNewFormData } from "~/states/Slices/AdrReportingForm/3/f/5";
 
-export default function Form1page3f5() {
+export default function Form1page3b5() {
   const [predisposingFactorsValues, setPredisposingFactorsValues] = useState<
     string[]
   >([""]);
@@ -82,7 +82,7 @@ export default function Form1page3f5() {
             </Form.Item>
           </div>
         </div>
-        <NavigationPanel currentRoute="3f5" />
+        <NavigationPanel currentRoute="3b5" />
       </Form>
     </FormLayout>
   );

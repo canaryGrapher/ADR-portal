@@ -4,10 +4,6 @@ import form1page1Reducer from '~/states/Slices/AdrReportingForm/1'
 import form1page2Reducer from '~/states/Slices/AdrReportingForm/2'
 import form1page3Reducer from '~/states/Slices/AdrReportingForm/3/a'
 import form1page3_filledReducer from '~/states/Slices/AdrReportingForm/3/a_filled'
-import Form1page3b from '~/routes/adr-reporting/3/b'
-import Form1page3c from '~/routes/adr-reporting/3/c'
-import Form1page3d from '~/routes/adr-reporting/3/d'
-import Form1page3e from '~/routes/adr-reporting/3/e'
 import form1page3fReducer from '~/states/Slices/AdrReportingForm/3/f/1'
 import form1page3f2Reducer from '~/states/Slices/AdrReportingForm/3/f/2'
 import form1page3f3Reducer from '~/states/Slices/AdrReportingForm/3/f/3'
@@ -41,10 +37,6 @@ export const store = configureStore({
                 form1page2: form1page2Reducer,
                 form1page3: form1page3Reducer,
                 form1page3_filled: form1page3_filledReducer,
-                form1page3b: Form1page3b,
-                form1page3c: Form1page3c,
-                form1page3d: Form1page3d,
-                form1page3e: Form1page3e,
                 form1page3f: form1page3fReducer,
                 form1page3f2: form1page3f2Reducer,
                 form1page3f3: form1page3f3Reducer,

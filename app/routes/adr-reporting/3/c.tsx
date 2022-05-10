@@ -2,29 +2,60 @@
 import FormLayout from "~/layouts/forms/adr-reporting";
 
 // importing components
-import { Form, Radio } from "antd";
+import { Checkbox, Form } from "antd";
+import TextArea from "antd/lib/input/TextArea";
 import NavigationPanel from "~/components/forms/NavigationPanel";
 
-//importing utilities
-import { radioOptions } from "~/utils/adr-reporting/3c";
+// importing utilities
+import { options } from "~/utils/adr-reporting/3g";
 
-export default function Form1page3a() {
-  //temporary variable
-  const drugs = ["drug1", "drug2", "drug3"];
+import { RootState } from "~/states/store";
+import { useSelector, useDispatch } from "react-redux";
+import { setNewFormData } from "~/states/Slices/AdrReportingForm/3/g";
+
+export default function Form1page3c() {
+  const dispatch = useDispatch();
+  // converting date value to moment Object
+  const formState = useSelector((state: RootState) => state.form1page3g);
+  let newFormState = { ...formState };
+
+  // change the redux value whenever there is a change in the form
+  const changeFormData = (value: any, fieldName: any) => {
+    dispatch(setNewFormData({ fieldName, value }));
+  };
 
   return (
     <FormLayout>
       <Form
-        name="Form1Page3c"
-        initialValues={{ remember: true }}
+        preserve={false}
+        scrollToFirstError={true}
+        name="Form1Page3g"
+        initialValues={newFormState}
         onFinish={(values) => console.log(values)}
+        onValuesChange={(values) =>
+          changeFormData(values[Object.keys(values)[0]], Object.keys(values)[0])
+        }
         layout="vertical"
       >
         {/* Anything between the <FormLayout> tag can be changed */}
         <div className="shadow-xl rounded-md w-full p-10 border">
-          <div className="mx-auto">
-            <div className="text-[24px] text-[#E8590C]">Dechallenge</div>
-            <RadioGroupDrugs drugOptions={drugs} />
+          <div>
+            <div className="text-[24px] text-[#E8590C] pb-5">
+              Treatment Given
+            </div>
+            <Form.Item
+              name="treatmentGiven2"
+              label="Select the treatment given"
+              className="w-full"
+            >
+              <Checkbox.Group options={options} />
+            </Form.Item>
+            <Form.Item
+              label="Treatment details (if any)"
+              name="treatmentDetails"
+            >
+              <TextArea rows={4} />
+            </Form.Item>
           </div>
         </div>
         <NavigationPanel currentRoute="3c" />
@@ -32,18 +63,3 @@ export default function Form1page3a() {
     </FormLayout>
   );
 }
-
-const RadioGroupDrugs = (props: { drugOptions: string[] }) => {
-  const radioFields = props.drugOptions.map((drug, index) => (
-    <Form.Item name={drug} label={drug} className="w-full" key={index}>
-      <Radio.Group
-        size="large"
-        buttonStyle="solid"
-        options={radioOptions}
-        optionType="button"
-      />
-    </Form.Item>
-  ));
-
-  return <>{radioFields}</>;
-};

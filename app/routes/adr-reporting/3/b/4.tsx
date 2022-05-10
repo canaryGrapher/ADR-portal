@@ -16,7 +16,7 @@ import { RootState } from "~/states/store";
 import { useSelector, useDispatch } from "react-redux";
 import { setNewFormData } from "~/states/Slices/AdrReportingForm/3/f/4";
 
-export default function Form1page3f4() {
+export default function Form1page3b4() {
   const dispatch = useDispatch();
   // converting date value to moment Object
   const formState = useSelector((state: RootState) => state.form1page3f4);
@@ -65,7 +65,7 @@ export default function Form1page3f4() {
             </div>
           </div>
         </div>
-        <NavigationPanel currentRoute="3f4" />
+        <NavigationPanel currentRoute="3b4" />
       </Form>
     </FormLayout>
   );

@@ -2,21 +2,20 @@
 import FormLayout from "~/layouts/forms/adr-reporting";
 
 // importing components
-import { Checkbox, Form } from "antd";
-import TextArea from "antd/lib/input/TextArea";
+import { Form, Radio } from "antd";
 import NavigationPanel from "~/components/forms/NavigationPanel";
 
 // importing utilities
-import { options } from "~/utils/adr-reporting/3g";
+import { radioOptions } from "~/utils/adr-reporting/3j";
 
 import { RootState } from "~/states/store";
 import { useSelector, useDispatch } from "react-redux";
-import { setNewFormData } from "~/states/Slices/AdrReportingForm/3/g";
+import { setNewFormData } from "~/states/Slices/AdrReportingForm/3/j";
 
-export default function Form1page3g() {
+export default function Form1page3f() {
   const dispatch = useDispatch();
   // converting date value to moment Object
-  const formState = useSelector((state: RootState) => state.form1page3g);
+  const formState = useSelector((state: RootState) => state.form1page3j);
   let newFormState = { ...formState };
 
   // change the redux value whenever there is a change in the form
@@ -26,10 +25,11 @@ export default function Form1page3g() {
 
   return (
     <FormLayout>
+      {/* Anything between the <FormLayout> tag can be changed */}
       <Form
         preserve={false}
         scrollToFirstError={true}
-        name="Form1Page3g"
+        name="Form1Page3j"
         initialValues={newFormState}
         onFinish={(values) => console.log(values)}
         onValuesChange={(values) =>
@@ -40,25 +40,18 @@ export default function Form1page3g() {
         {/* Anything between the <FormLayout> tag can be changed */}
         <div className="shadow-xl rounded-md w-full p-10 border">
           <div>
-            <div className="text-[24px] text-[#E8590C] pb-5">
-              Treatment Given
-            </div>
-            <Form.Item
-              name="treatmentGiven2"
-              label="Select the treatment given"
-              className="w-full"
-            >
-              <Checkbox.Group options={options} />
-            </Form.Item>
-            <Form.Item
-              label="Treatment details (if any)"
-              name="treatmentDetails"
-            >
-              <TextArea rows={4} />
+            <div className="text-[24px] text-[#E8590C]">Outcome</div>
+            <Form.Item name="outcome" className="w-full pt-4">
+              <Radio.Group
+                options={radioOptions}
+                optionType="button"
+                buttonStyle="solid"
+                size="large"
+              />
             </Form.Item>
           </div>
         </div>
-        <NavigationPanel currentRoute="3g" />
+        <NavigationPanel currentRoute="3f" />
       </Form>
     </FormLayout>
   );
