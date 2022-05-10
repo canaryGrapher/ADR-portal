@@ -1,12 +1,12 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { FormStateType, ActionType } from "~/types/reducers/medicalDeviceReporting/3/option2";
+import { FormStateType, ActionType } from "~/types/reducers/medicalDeviceReporting/3";
 
 const initialState: FormStateType = {
-    inVitroDiagnostic: null
+    deviceCategory: null
 }
 
-export const form3page3Option2Slice = createSlice({
-    name: 'form3page3Option2',
+export const form3page3Slice = createSlice({
+    name: 'form3page3',
     initialState,
     reducers: {
         fetchIncompleteFormsFromUserProfile: (state, action: PayloadAction<FormStateType>) => {
@@ -24,6 +24,6 @@ export const form3page3Option2Slice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { fetchIncompleteFormsFromUserProfile, submitFormDataToTheBackend, setNewFormData } = form3page3Option2Slice.actions
+export const { fetchIncompleteFormsFromUserProfile, submitFormDataToTheBackend, setNewFormData } = form3page3Slice.actions
 
-export default form3page3Option2Slice.reducer
+export default form3page3Slice.reducer

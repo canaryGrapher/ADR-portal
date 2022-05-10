@@ -5,7 +5,8 @@ const initialState: FormStateType = {
     typeOfDevice: null,
     implantability: null,
     reuseability: null,
-    personalUse: null 
+    sterilization: null,
+    personalUse: null
 }
 
 export const form3page3Option1Slice = createSlice({

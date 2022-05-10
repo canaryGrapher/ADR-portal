@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect } from "react";
 
 // importing layouts
 import FormLayout from "~/layouts/forms/medical-device-reporting";
@@ -12,10 +12,57 @@ import Option1 from "./subforms/option1";
 import Option2 from "./subforms/option2";
 import Option3 from "./subforms/option3";
 
+// importing reduc reducers
+import { RootState } from "~/states/store";
+import { useSelector, useDispatch } from "react-redux";
+import { setNewFormData } from "~/states/Slices/MedicalDeviceReporting/3";
+import { setNewFormData as setNewFormDataOption1 } from "~/states/Slices/MedicalDeviceReporting/3/option1";
+import { setNewFormData as setNewFormDataOption2 } from "~/states/Slices/MedicalDeviceReporting/3/option2";
+import { setNewFormData as setNewFormDataOption3 } from "~/states/Slices/MedicalDeviceReporting/3/option3";
+
 export default function Form3page9() {
-  const [opt1, setOpt1] = useState(false);
-  const [opt2, setOpt2] = useState(false);
-  const [opt3, setOpt3] = useState(false);
+  const dispatch = useDispatch();
+  const formState = useSelector((state: RootState) => state.form3page3);
+
+  useEffect(() => {
+    if (formState.deviceCategory != "medicalDevice") {
+      dispatch(
+        setNewFormDataOption1({ fieldName: "typeOfDevice", value: null })
+      );
+      dispatch(
+        setNewFormDataOption1({ fieldName: "implantability", value: null })
+      );
+      dispatch(
+        setNewFormDataOption1({ fieldName: "reuseability", value: null })
+      );
+      dispatch(
+        setNewFormDataOption1({ fieldName: "sterilization", value: null })
+      );
+      dispatch(
+        setNewFormDataOption1({ fieldName: "personalUse", value: null })
+      );
+    }
+    if (formState.deviceCategory != "inVitroDiagnostic") {
+      dispatch(
+        setNewFormDataOption2({ fieldName: "inVitroDiagnostic", value: null })
+      );
+    }
+    if (formState.deviceCategory != "equipment_machine") {
+      dispatch(
+        setNewFormDataOption3({ fieldName: "equipmentUsage", value: null })
+      );
+      dispatch(
+        setNewFormDataOption3({ fieldName: "invasibility", value: null })
+      );
+      dispatch(setNewFormDataOption3({ fieldName: "imaging", value: null }));
+      dispatch(setNewFormDataOption3({ fieldName: "others", value: null }));
+      dispatch(
+        setNewFormDataOption3({ fieldName: "reportersComments", value: null })
+      );
+    }
+  }, [formState]);
+  let newFormState = { ...formState };
+  // change redux value whenever there is change in the form
 
   return (
     <FormLayout>
@@ -28,9 +75,12 @@ export default function Form3page9() {
                 value={0}
                 className="w-1/3 text-center"
                 onClick={() => {
-                  setOpt1(true);
-                  setOpt2(false);
-                  setOpt3(false);
+                  dispatch(
+                    setNewFormData({
+                      fieldName: "deviceCategory",
+                      value: "medicalDevice",
+                    })
+                  );
                 }}
               >
                 Medical Device
@@ -40,9 +90,12 @@ export default function Form3page9() {
                 value={1}
                 className="w-1/3 text-center"
                 onClick={() => {
-                  setOpt1(false);
-                  setOpt2(true);
-                  setOpt3(false);
+                  dispatch(
+                    setNewFormData({
+                      fieldName: "deviceCategory",
+                      value: "inVitroDiagnostic",
+                    })
+                  );
                 }}
               >
                 In Vitro Diagnostics
@@ -52,9 +105,12 @@ export default function Form3page9() {
                 value={2}
                 className="w-1/3 text-center"
                 onClick={() => {
-                  setOpt1(false);
-                  setOpt2(false);
-                  setOpt3(true);
+                  dispatch(
+                    setNewFormData({
+                      fieldName: "deviceCategory",
+                      value: "equipment_machine",
+                    })
+                  );
                 }}
               >
                 Equipment/Machines
@@ -64,19 +120,19 @@ export default function Form3page9() {
         </div>
       </div>
 
-      {opt1 && (
+      {formState.deviceCategory === "medicalDevice" && (
         <div className="Option1">
           <Option1 />
         </div>
       )}
 
-      {opt2 && (
+      {formState.deviceCategory === "inVitroDiagnostic" && (
         <div className="Option2">
           <Option2 />
         </div>
       )}
 
-      {opt3 && (
+      {formState.deviceCategory === "equipment_machine" && (
         <div className="Option3">
           <Option3 />
         </div>

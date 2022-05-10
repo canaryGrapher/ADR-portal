@@ -1,9 +1,9 @@
-import { Radio, Checkbox, Input, Form } from "antd";
+import { Radio, Input, Form, Switch } from "antd";
 
 // importing utilities
 import {
-  checkboxOptions,
-  checkboxOptions2,
+  radioOptions2,
+  typeOfDeviceOptions,
 } from "~/utils/medical-device-reporting/3";
 
 // importing reduc reducers
@@ -11,7 +11,7 @@ import { RootState } from "~/states/store";
 import { useSelector, useDispatch } from "react-redux";
 import { setNewFormData } from "~/states/Slices/MedicalDeviceReporting/3/option3";
 
-const option3 = () => {
+const Option3 = () => {
   const dispatch = useDispatch();
   const formState = useSelector((state: RootState) => state.form3page3Option3);
   let newFormState = { ...formState };
@@ -25,7 +25,7 @@ const option3 = () => {
       initialValues={newFormState}
       onFinish={(value) => console.log(value)}
       onValuesChange={(values) => {
-        changeFormData(values[Object.keys(values)[0]], Object.keys(values)[0])
+        changeFormData(values[Object.keys(values)[0]], Object.keys(values)[0]);
       }}
       layout="vertical"
     >
@@ -46,7 +46,7 @@ const option3 = () => {
                 buttonStyle="solid"
                 size="large"
                 optionType="button"
-                options={checkboxOptions}
+                options={typeOfDeviceOptions}
               />
             </Form.Item>
             <Form.Item
@@ -59,15 +59,25 @@ const option3 = () => {
                 buttonStyle="solid"
                 size="large"
                 optionType="button"
-                options={checkboxOptions2}
+                options={radioOptions2}
               />
             </Form.Item>
-            <Form.Item name="imaging" className="w-full">
-              <Checkbox> Imaging </Checkbox>
-            </Form.Item>
-            <Form.Item name="others" className="w-full">
-              <Checkbox> Others </Checkbox>
-            </Form.Item>
+            <div className="grid grid-cols-2">
+              <Form.Item
+                name="imaging"
+                label="Imaging"
+                className="w-full mx-auto"
+              >
+                <Switch />
+              </Form.Item>
+              <Form.Item
+                name="others"
+                label="Others"
+                className="w-full mx-auto"
+              >
+                <Switch />
+              </Form.Item>
+            </div>
             <Form.Item
               label="Reporter's Comments"
               name="reportersComments"
@@ -82,4 +92,4 @@ const option3 = () => {
   );
 };
 
-export default option3;
+export default Option3;

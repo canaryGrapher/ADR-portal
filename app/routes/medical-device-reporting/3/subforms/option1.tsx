@@ -1,11 +1,12 @@
 //importing components
-import { Radio, Checkbox, Form } from "antd";
+import { Radio, Form, Switch } from "antd";
 
 //importing utilities
 import {
   typeOfDeviceOptions,
   implantabilityOptions,
   reusabilityOptions,
+  sterilityOptions,
 } from "~/utils/medical-device-reporting/3";
 
 // importing reduc reducers
@@ -13,7 +14,7 @@ import { RootState } from "~/states/store";
 import { useSelector, useDispatch } from "react-redux";
 import { setNewFormData } from "~/states/Slices/MedicalDeviceReporting/3/option1";
 
-function Option1() {
+const Option1 = () => {
   const dispatch = useDispatch();
   const formState = useSelector((state: RootState) => state.form3page3Option1);
   let newFormState = { ...formState };
@@ -27,7 +28,7 @@ function Option1() {
       initialValues={newFormState}
       onFinish={(value) => console.log(value)}
       onValuesChange={(values) => {
-        changeFormData(values[Object.keys(values)[0]], Object.keys(values)[0])
+        changeFormData(values[Object.keys(values)[0]], Object.keys(values)[0]);
       }}
       layout="vertical"
     >
@@ -73,14 +74,29 @@ function Option1() {
                 options={reusabilityOptions}
               />
             </Form.Item>
-            <Form.Item name="personalUse">
-              <Checkbox>Personal Use/Homecare Use</Checkbox>
+            <Form.Item
+              label="Sterilization"
+              name="sterilization"
+              className="w-full"
+            >
+              <Radio.Group
+                buttonStyle="solid"
+                size="large"
+                optionType="button"
+                options={sterilityOptions}
+              />
+            </Form.Item>
+            <Form.Item
+              name="personalUse"
+              label="Being used for personal/homecare use?"
+            >
+              <Switch checkedChildren="Yes" unCheckedChildren="No" />
             </Form.Item>
           </div>
         </div>
       </div>
     </Form>
   );
-}
+};
 
 export default Option1;

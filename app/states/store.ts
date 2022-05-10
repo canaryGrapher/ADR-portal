@@ -19,6 +19,7 @@ import form1page4Reducer from '~/states/Slices/AdrReportingForm/4'
 // form 2 redux states
 import form3page1Reducer from '~/states/Slices/MedicalDeviceReporting/1'
 import form3page2Reducer from '~/states/Slices/MedicalDeviceReporting/2'
+import form3page3Reducer from '~/states/Slices/MedicalDeviceReporting/3'
 import form3page3Option1Reducer from './Slices/MedicalDeviceReporting/3/option1'
 import form3page3Option2Reducer from './Slices/MedicalDeviceReporting/3/option2'
 import form3page3Option3Reducer from './Slices/MedicalDeviceReporting/3/option3'
@@ -53,6 +54,7 @@ export const store = configureStore({
 
                 form3page1: form3page1Reducer,
                 form3page2: form3page2Reducer,
+                form3page3: form3page3Reducer,
                 form3page3Option1: form3page3Option1Reducer,
                 form3page3Option2: form3page3Option2Reducer,
                 form3page3Option3: form3page3Option3Reducer,

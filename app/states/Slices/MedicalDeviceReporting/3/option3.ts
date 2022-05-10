@@ -6,7 +6,7 @@ const initialState: FormStateType = {
     invasibility: null,
     imaging: null,
     others: null,
-    reportersComments: undefined
+    reportersComments: null
 }
 
 export const form3page3Option3Slice = createSlice({
