@@ -1,18 +1,22 @@
+
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { FormStateType, ActionType } from "~/types/reducers/adrReporting/3/f/4";
+import { FormStateType, ActionType } from "~/types/reducers/adrReporting/3/b/1";
 
 const initialState: FormStateType = {
-    0: null,
-    1: null,
-    2: null,
-    3: null,
-    4: null,
-    5: null,
-    6: null,
+    areTherePreviousConclusionReportsOnThisReaction: null,
+    didTheAdverseEventAppearAfterTheSuspectDrugWasAdministered: null,
+    didTheARImproveWhenTheDrugWasDiscontinuedOrASpecificAntagonistWasAdministered: null,
+    didTheARReappearWhenDrugWasReadministered: null,
+    areThereAlternateCausesThatCouldSolelyHaveCausedTheReaction: null,
+    didTheReactionReappearWhenAPlaceboWasGiven: null,
+    wasTheDrugDetectedInTheBloodInAConcentrationKnownToBeToxic: null,
+    wasTheReactionMoreSevereWhenTheDoseWasIncreasedOrLessSevereWhenTheDoseWasDecreased: null,
+    didThePatientHaveASimilarReactionToTheSameOrSimilarDrugsInAnyPreviousExposure: null,
+    wasTheAdverseEventConfirmedByObjectiveEvidence: null,
 };
 
-export const form1page3f4Slice = createSlice({
-    name: "form1page3f4",
+export const form1page3b1Slice = createSlice({
+    name: "form1page3b1",
     initialState,
     reducers: {
         fetchIncompleteFormsFromUserProfile: (
@@ -37,6 +41,6 @@ export const {
     fetchIncompleteFormsFromUserProfile,
     submitFormDataToTheBackend,
     setNewFormData,
-} = form1page3f4Slice.actions;
+} = form1page3b1Slice.actions;
 
-export default form1page3f4Slice.reducer;
+export default form1page3b1Slice.reducer;

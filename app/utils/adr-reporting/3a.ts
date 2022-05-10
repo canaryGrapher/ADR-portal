@@ -1,35 +1,17 @@
-const actionTakenOptions = [
-    "Drug withdrawn",
-    "Dose increased",
-    "Dose reduced",
-    "Dose not changed",
-    "Not applicable",
-    "Unknown",
-];
-
-const dechallengeOptions = [
-    "Drug withdrawn",
-    "Dose increased",
-    "Dose reduced",
-    "Dose not changed",
-    "Not applicable",
-    "Unknown",
-];
-
-const rechallengeOptions = [
-    "Drug withdrawn",
-    "Dose increased",
-    "Dose reduced",
-    "Dose not changed",
-    "Not applicable",
-    "Unknown",
+const actionOptions = [
+    { label: "Drug withdrawn", value: "drugWithdrawn" },
+    { label: "Dose increased", value: "doseIncreased" },
+    { label: "Dose reduced", value: "doseReduced" },
+    { label: "Dose not changed", value: "doseNotChanged" },
+    { label: "Not applicable", value: "notApplicable" },
+    { label: "Unknown", value: "unknown" },
 ];
 
 const reintroductionOptions = [
-    "No rechallenge",
-    "Recurrance of symptoms",
-    "No occurance of symptoms",
-    "Unknown",
+    { label: "No rechallenge", value: "noRechallenge" },
+    { label: "Recurrance of symptoms", value: "recurranceOfSymptoms" },
+    { label: "No occurance of symptoms", value: "noOccuranceOfSymptoms" },
+    { label: "Unknown", value: "unknown" },
 ];
 
-export { actionTakenOptions, dechallengeOptions, rechallengeOptions, reintroductionOptions };
+export { actionOptions, reintroductionOptions };

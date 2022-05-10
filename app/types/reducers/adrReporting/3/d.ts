@@ -1,26 +1,18 @@
-type actionTakenState = {
-    drugName: string,
-    action: AvailableActions
+interface FormSubStateType {
+    name?: String;
+    doseUsed?: String | null;
+    routeUsed?: String | null;
+    frequency?: String | null;
+    startDate?: String;
+    stopDate?: String | null;
+    indication?: String | null;
 }
 
-interface FormStateType {
-    rechallenge: [actionTakenState] | [];
-}
-
-enum AvailableActions {
-    doseReduced = "Dose reduced",
-    doseIncreased = "Dose increased",
-    drugWithdrawn = "Drig withdrawn",
-    doseNotChanged = "Dose not changed",
-    notApplicable = "Not applicable",
-    unknown = "Unknown",
-}
-
-type PayloadKeys = keyof FormStateType;
+type PayloadKeys = keyof FormSubStateType;
 
 interface ActionType {
     fieldName: PayloadKeys;
     value: any;
 }
 
-export type { ActionType, FormStateType };
+export type { ActionType, FormSubStateType };

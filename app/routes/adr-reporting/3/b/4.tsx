@@ -10,16 +10,16 @@ import {
   formLayout,
   formRadioOptions,
   formRadioOptions2,
-} from "~/utils/adr-reporting/3f4";
+} from "~/utils/adr-reporting/3b4";
 
 import { RootState } from "~/states/store";
 import { useSelector, useDispatch } from "react-redux";
-import { setNewFormData } from "~/states/Slices/AdrReportingForm/3/f/4";
+import { setNewFormData } from "~/states/Slices/AdrReportingForm/3/b/4";
 
 export default function Form1page3b4() {
   const dispatch = useDispatch();
   // converting date value to moment Object
-  const formState = useSelector((state: RootState) => state.form1page3f4);
+  const formState = useSelector((state: RootState) => state.form1page3b4);
   let newFormState = { ...formState };
 
   // change the redux value whenever there is a change in the form
@@ -32,7 +32,7 @@ export default function Form1page3b4() {
       <Form
         preserve={false}
         scrollToFirstError={true}
-        name="Form1Page3f4"
+        name="Form1Page3b4"
         initialValues={newFormState}
         onFinish={(values) => console.log(values)}
         onValuesChange={(values) =>

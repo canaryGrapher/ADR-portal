@@ -1,6 +1,6 @@
 // needs to be changed
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { FormStateType, ActionType, ActionType1, FormStateTypeAdditional } from "~/types/reducers/adrReporting/3/a_filled";
+import { FormStateType, ActionType, ActionType1 } from "~/types/reducers/adrReporting/3/a_filled";
 
 const initialState: FormStateType = {
     drugDetails: []

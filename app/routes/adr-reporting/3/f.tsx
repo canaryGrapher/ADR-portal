@@ -6,16 +6,16 @@ import { Form, Radio } from "antd";
 import NavigationPanel from "~/components/forms/NavigationPanel";
 
 // importing utilities
-import { radioOptions } from "~/utils/adr-reporting/3j";
+import { radioOptions } from "~/utils/adr-reporting/3f";
 
 import { RootState } from "~/states/store";
 import { useSelector, useDispatch } from "react-redux";
-import { setNewFormData } from "~/states/Slices/AdrReportingForm/3/j";
+import { setNewFormData } from "~/states/Slices/AdrReportingForm/3/f";
 
 export default function Form1page3f() {
   const dispatch = useDispatch();
   // converting date value to moment Object
-  const formState = useSelector((state: RootState) => state.form1page3j);
+  const formState = useSelector((state: RootState) => state.form1page3f);
   let newFormState = { ...formState };
 
   // change the redux value whenever there is a change in the form

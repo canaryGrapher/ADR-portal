@@ -18,4 +18,9 @@ const advisedMedicineOptions = [
   },
 ];
 
-export { advisedMedicineOptions, genderOptions };
+const ip_op = [
+  { label: "In-patient", value: "inPatient" },
+  { label: "Out-patient", value: "outPatient" }
+]
+
+export { advisedMedicineOptions, genderOptions, ip_op };

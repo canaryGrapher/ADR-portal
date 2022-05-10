@@ -1,12 +1,12 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { FormStateType, ActionType } from "~/types/reducers/adrReporting/3/f/3";
+import { FormStateType, ActionType } from "~/types/reducers/adrReporting/3/b/3";
 
 const initialState: FormStateType = {
     hartwigseveritytest: null,
 };
 
-export const form1page3f3Slice = createSlice({
-    name: "form1page3f3",
+export const form1page3b3Slice = createSlice({
+    name: "form1page3b3",
     initialState,
     reducers: {
         fetchIncompleteFormsFromUserProfile: (
@@ -31,6 +31,6 @@ export const {
     fetchIncompleteFormsFromUserProfile,
     submitFormDataToTheBackend,
     setNewFormData,
-} = form1page3f3Slice.actions;
+} = form1page3b3Slice.actions;
 
-export default form1page3f3Slice.reducer;
+export default form1page3b3Slice.reducer;

@@ -4,21 +4,16 @@ import NavigationPanel from "~/components/forms/NavigationPanel";
 import moment from "moment";
 
 // importing utilities
-import { genderOptions, advisedMedicineOptions } from "~/utils/adr-reporting/1";
+import {
+  genderOptions,
+  advisedMedicineOptions,
+  ip_op,
+} from "~/utils/adr-reporting/1";
 
 // importing redux reducers
 import { RootState } from "~/states/store";
 import { useSelector, useDispatch } from "react-redux";
 import { setNewFormData } from "~/states/Slices/AdrReportingForm/1";
-
-// importing models
-// import { intializeForms } from "~/models/services/forms.service";
-
-// export let loader: any = async () => {
-//   const message = await intializeForms();
-//   console.log(message);
-//   return message;
-// };
 
 export default function Form1page1() {
   const dispatch = useDispatch();
@@ -100,7 +95,7 @@ export default function Form1page1() {
             </div>
             <div className="grid grid-cols-2 gap-5">
               <Form.Item label="IP/OP" name="ip_op" className="w-full">
-                <Input />
+                <Select allowClear={true} options={ip_op} />
               </Form.Item>
               <Form.Item label="Unit" name="unit" className="w-full">
                 <Input />

@@ -9,11 +9,11 @@ import { Radio, Checkbox, Input, Form } from "antd";
 import { FiHelpCircle } from "react-icons/fi";
 
 // importing utilities
-import { options, radioOptions } from "~/utils/adr-reporting/3f5";
+import { options, radioOptions } from "~/utils/adr-reporting/3b5";
 
 import { RootState } from "~/states/store";
 import { useSelector, useDispatch } from "react-redux";
-import { setNewFormData } from "~/states/Slices/AdrReportingForm/3/f/5";
+import { setNewFormData } from "~/states/Slices/AdrReportingForm/3/b/5";
 
 export default function Form1page3b5() {
   const [predisposingFactorsValues, setPredisposingFactorsValues] = useState<
@@ -26,7 +26,7 @@ export default function Form1page3b5() {
 
   const dispatch = useDispatch();
   // converting date value to moment Object
-  const formState = useSelector((state: RootState) => state.form1page3f5);
+  const formState = useSelector((state: RootState) => state.form1page3b5);
   let newFormState = { ...formState };
 
   // change the redux value whenever there is a change in the form
@@ -39,7 +39,7 @@ export default function Form1page3b5() {
       <Form
         preserve={false}
         scrollToFirstError={true}
-        name="Form1Page3f5"
+        name="Form1Page3b5"
         initialValues={newFormState}
         onFinish={(values) => console.log(values)}
         onValuesChange={(values) =>

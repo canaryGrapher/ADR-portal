@@ -1,23 +1,21 @@
-
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { FormStateType, ActionType } from "~/types/reducers/adrReporting/3/f/1";
+import { FormStateType, ActionType } from "~/types/reducers/adrReporting/3/e";
 
 const initialState: FormStateType = {
-    0: null,
-    1: null,
-    2: null,
-    3: null,
-    4: null,
-    5: null,
-    6: null,
-    7: null,
-    8: null,
-    9: null,
-    10: null,
+    applicability: false,
+    amcReportNumber: null,
+    worldwideUniqueNumber: null,
+    relevantTests: null,
+    relevantMedicalHistory: null,
+    seriousnessOfTheReaction: false,
+    seriousnessLevel: null,
+    dateOfDeath: null,
+    otherDetails: null,
+    outcome: null,
 };
 
-export const form1page3fSlice = createSlice({
-    name: "form1page3f",
+export const form1page3iSlice = createSlice({
+    name: "form1page3i",
     initialState,
     reducers: {
         fetchIncompleteFormsFromUserProfile: (
@@ -32,6 +30,7 @@ export const form1page3fSlice = createSlice({
         },
         setNewFormData: (state, action: PayloadAction<ActionType>) => {
             // logic to set the new form data in this slice. This changes everytime the form is updated
+            // @ts-ignore
             state[action.payload.fieldName] = action.payload.value;
         },
     },
@@ -42,6 +41,6 @@ export const {
     fetchIncompleteFormsFromUserProfile,
     submitFormDataToTheBackend,
     setNewFormData,
-} = form1page3fSlice.actions;
+} = form1page3iSlice.actions;
 
-export default form1page3fSlice.reducer;
+export default form1page3iSlice.reducer;

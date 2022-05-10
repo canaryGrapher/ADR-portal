@@ -1,10 +1,3 @@
-const radioOptions = [
-    "Drug withdrawn",
-    "Dose increased",
-    "Dose reduced",
-    "Dose not changed",
-    "Not applicable",
-    "Unknown",
-];
+const options = ["Specific", "Symptomatic", "None"];
 
-export { radioOptions };
+export { options };

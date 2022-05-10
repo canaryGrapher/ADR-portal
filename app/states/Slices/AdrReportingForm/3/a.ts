@@ -15,6 +15,11 @@ const initialState: FormSubStateType = {
     dateStarted: undefined,
     dateStopped: null,
     indication: null,
+    actionTaken: null,
+    dechallenge: null,
+    rechallenge: null,
+    reactionCategorization: null,
+    doseAfterReintroduction: null,
 }
 
 export const form1page3Slice = createSlice({

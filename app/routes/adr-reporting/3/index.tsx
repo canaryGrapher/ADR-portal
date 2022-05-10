@@ -9,12 +9,7 @@ import NavigationPanel from "~/components/forms/NavigationPanel";
 // importing types
 import { FormSubStateType } from "~/types/reducers/adrReporting/3/a";
 
-import {
-  actionTakenOptions,
-  dechallengeOptions,
-  rechallengeOptions,
-  reintroductionOptions,
-} from "~/utils/adr-reporting/3a";
+import { actionOptions, reintroductionOptions } from "~/utils/adr-reporting/3a";
 
 // importing redux
 import { RootState } from "~/states/store";
@@ -25,7 +20,9 @@ import {
   editAdditionalFormData,
   removeAdditionalFormData,
 } from "~/states/Slices/AdrReportingForm/3/a_filled";
+
 import { DeleteFilled, EditFilled } from "@ant-design/icons";
+import { useEffect } from "react";
 
 export default function Form1page3() {
   const dispatch = useDispatch();
@@ -39,7 +36,7 @@ export default function Form1page3() {
 
   return (
     <FormLayout>
-      <div className="shadow-xl rounded-md w-full p-10 border">
+      <div className="w-full rounded-md border p-10 shadow-xl">
         <div className="text-3xl">
           <h2 className="text-[#E8590C]">Medication</h2>
         </div>
@@ -141,6 +138,10 @@ const Subform = (props: PropTypes) => {
     dispatch(setNewFormData({ fieldName, value }));
   };
   const [form] = Form.useForm();
+  // update the initial state for editing a drug
+  useEffect(() => {
+    form.setFieldsValue(newFormState);
+  }, [form, newFormState]);
   return (
     <Form
       form={form}
@@ -148,9 +149,10 @@ const Subform = (props: PropTypes) => {
       scrollToFirstError={true}
       name="Form1Page3"
       initialValues={newFormState}
-      onValuesChange={(values) =>
-        changeFormData(values[Object.keys(values)[0]], Object.keys(values)[0])
-      }
+      onValuesChange={(values) => {
+        changeFormData(values[Object.keys(values)[0]], Object.keys(values)[0]);
+        console.log(Object.keys(values));
+      }}
       onFinish={(values) => {
         dispatch(addField());
         form.resetFields();
@@ -227,7 +229,7 @@ const Subform = (props: PropTypes) => {
         <Radio.Group
           size="large"
           buttonStyle="solid"
-          options={actionTakenOptions}
+          options={actionOptions}
           optionType="button"
         />
       </Form.Item>
@@ -235,7 +237,7 @@ const Subform = (props: PropTypes) => {
         <Radio.Group
           size="large"
           buttonStyle="solid"
-          options={dechallengeOptions}
+          options={actionOptions}
           optionType="button"
         />
       </Form.Item>
@@ -243,16 +245,16 @@ const Subform = (props: PropTypes) => {
         <Radio.Group
           size="large"
           buttonStyle="solid"
-          options={rechallengeOptions}
+          options={actionOptions}
           optionType="button"
         />
       </Form.Item>
-      <h2 className="text-[#E8590C]">
-        Reaction reappeared after reintroduction
+      <h2 className="text-[#e1763c]">
+        Reaction Reappeared after reintroduction
       </h2>
       <Form.Item
         name="reactionCategorization"
-        label="Reaction Reappeared"
+        label="Reaction reappeared"
         className="w-full"
       >
         <Radio.Group
@@ -262,11 +264,15 @@ const Subform = (props: PropTypes) => {
           optionType="button"
         />
       </Form.Item>
-      <Form.Item name="doseAfterReintroduction" label="Dose" className="w-full">
+      <Form.Item
+        name="doseAfterReintroduction"
+        label="Dose used after reintroduction"
+        className="w-full"
+      >
         <Input />
       </Form.Item>
-      <div className="flex flex-row-reverse w-100">
-        <button className="bg-[#6C567B] text-white p-2 w-32 border hover:bg-white hover:text-[#6C567B] border-[#6C567B]">
+      <div className="w-100 flex flex-row-reverse">
+        <button className="w-32 border border-[#6C567B] bg-[#6C567B] p-2 text-white hover:bg-white hover:text-[#6C567B]">
           Add more
         </button>
       </div>

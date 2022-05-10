@@ -7,16 +7,16 @@ import { FiHelpCircle } from "react-icons/fi";
 import { Form, Radio } from "antd";
 
 //importing utilities
-import { RadioOptions, formLayout } from "~/utils/adr-reporting/3f";
+import { RadioOptions, formLayout } from "~/utils/adr-reporting/3b1";
 
 import { RootState } from "~/states/store";
 import { useSelector, useDispatch } from "react-redux";
-import { setNewFormData } from "~/states/Slices/AdrReportingForm/3/f/1";
+import { setNewFormData } from "~/states/Slices/AdrReportingForm/3/b/1";
 
 export default function Form1page3b1() {
   const dispatch = useDispatch();
   // converting date value to moment Object
-  const formState = useSelector((state: RootState) => state.form1page3f);
+  const formState = useSelector((state: RootState) => state.form1page3b1);
   let newFormState = { ...formState };
 
   // change the redux value whenever there is a change in the form
@@ -28,7 +28,7 @@ export default function Form1page3b1() {
       <Form
         preserve={false}
         scrollToFirstError={true}
-        name="Form1Page3"
+        name="Form1Page3b"
         initialValues={newFormState}
         onFinish={(values) => console.log(values)}
         onValuesChange={(values) =>
@@ -45,8 +45,8 @@ export default function Form1page3b1() {
             {formLayout.map((field, index) => (
               <Form.Item
                 key={index}
-                name={index}
-                label={field}
+                name={field.name}
+                label={field.label}
                 className="w-full pt-4"
               >
                 <Radio.Group options={RadioOptions} optionType="button" />

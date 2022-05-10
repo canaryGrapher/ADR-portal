@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 // importing layouts
 import FormLayout from "~/layouts/forms/adr-reporting";
@@ -9,11 +9,11 @@ import { Form, Input, DatePicker, Switch, Checkbox, Radio } from "antd";
 import { CheckboxValueType } from "antd/lib/checkbox/Group";
 
 // importing utilities
-import { radioOptions, checkBoxOptions } from "~/utils/adr-reporting/3i";
+import { radioOptions, checkBoxOptions } from "~/utils/adr-reporting/3e";
 
 import { RootState } from "~/states/store";
 import { useSelector, useDispatch } from "react-redux";
-import { setNewFormData } from "~/states/Slices/AdrReportingForm/3/i";
+import { setNewFormData } from "~/states/Slices/AdrReportingForm/3/e";
 
 export default function Form1page3e() {
   const [seriousReaction, setSeriousReaction] = useState<boolean>(false);
@@ -30,13 +30,24 @@ export default function Form1page3e() {
 
   const dispatch = useDispatch();
   // converting date value to moment Object
-  const formState = useSelector((state: RootState) => state.form1page3i);
+  const formState = useSelector((state: RootState) => state.form1page3e);
   let newFormState = { ...formState };
-  if (formState.dateOfDeath != null) {
-    newFormState.dateOfDeath = moment(formState.dateOfDeath);
-  } else {
-    delete newFormState.dateOfDeath;
-  }
+  useEffect(() => {
+    if (formState.dateOfDeath != null) {
+      //@ts-ignore
+      newFormState.dateOfDeath = moment(formState.dateOfDeath);
+    } else {
+      //@ts-ignore
+      delete newFormState.dateOfDeath;
+    }
+    if (formState.applicability) {
+      setIsApplicable(true);
+    }
+    if (formState.seriousnessOfTheReaction) {
+      setSeriousReaction(true);
+    }
+  }, [formState]);
+
   // change the redux value whenever there is a change in the form
   const changeFormData = (value: any, fieldName: any) => {
     dispatch(setNewFormData({ fieldName, value }));
@@ -79,7 +90,7 @@ export default function Form1page3e() {
       <Form
         preserve={false}
         scrollToFirstError={true}
-        name="Form1Page3i"
+        name="Form1Page3e"
         initialValues={newFormState}
         onFinish={(values) => console.log(values)}
         onValuesChange={(values) => onChangeFormEvent(values)}
@@ -193,7 +204,7 @@ export default function Form1page3e() {
             ]}
           >
             <DatePicker
-              clearable={true}
+              allowClear={true}
               className="w-full"
               disabled={!seriousReaction}
             />
@@ -216,7 +227,7 @@ export default function Form1page3e() {
             <Input
               className="my-auto col-span-10"
               disabled={!seriousReaction}
-              clearable={true}
+              allowClear={true}
             />
           </Form.Item>
 

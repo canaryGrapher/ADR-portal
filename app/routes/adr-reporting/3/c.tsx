@@ -7,16 +7,16 @@ import TextArea from "antd/lib/input/TextArea";
 import NavigationPanel from "~/components/forms/NavigationPanel";
 
 // importing utilities
-import { options } from "~/utils/adr-reporting/3g";
+import { options } from "~/utils/adr-reporting/3c";
 
 import { RootState } from "~/states/store";
 import { useSelector, useDispatch } from "react-redux";
-import { setNewFormData } from "~/states/Slices/AdrReportingForm/3/g";
+import { setNewFormData } from "~/states/Slices/AdrReportingForm/3/c";
 
 export default function Form1page3c() {
   const dispatch = useDispatch();
   // converting date value to moment Object
-  const formState = useSelector((state: RootState) => state.form1page3g);
+  const formState = useSelector((state: RootState) => state.form1page3c);
   let newFormState = { ...formState };
 
   // change the redux value whenever there is a change in the form
@@ -29,7 +29,7 @@ export default function Form1page3c() {
       <Form
         preserve={false}
         scrollToFirstError={true}
-        name="Form1Page3g"
+        name="Form1Page3c"
         initialValues={newFormState}
         onFinish={(values) => console.log(values)}
         onValuesChange={(values) =>
@@ -44,7 +44,7 @@ export default function Form1page3c() {
               Treatment Given
             </div>
             <Form.Item
-              name="treatmentGiven2"
+              name="treatmentGiven"
               label="Select the treatment given"
               className="w-full"
             >
