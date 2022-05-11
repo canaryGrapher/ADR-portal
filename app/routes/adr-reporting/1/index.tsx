@@ -87,7 +87,7 @@ export default function Form1page1() {
                 <Select allowClear options={genderOptions} />
               </Form.Item>
               <Form.Item className="w-full" label="Weight" name="weight">
-                <InputNumber addonAfter={"mgs"} />
+                <InputNumber addonAfter={"kgs"} />
               </Form.Item>
               <Form.Item name="patientID" label="Patient ID" className="w-full">
                 <Input />
