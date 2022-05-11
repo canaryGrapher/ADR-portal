@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 // Import Form Layout
 import FormLayout from "~/layouts/forms/medical-device-reporting";
@@ -13,60 +13,57 @@ import {
   radioOptions2,
 } from "~/utils/medical-device-reporting/6";
 
-
 // importing redux reducers
 import { RootState } from "~/states/store";
 import { useSelector, useDispatch } from "react-redux";
 import { setNewFormData } from "~/states/Slices/MedicalDeviceReporting/6";
 
-
-export default function Form3page6() {
-  const [isRecovered, setIsRecovered] = useState<boolean>();
-  const [isDead, setIsDead] = useState<boolean>();
+export default function Form2page6() {
+  const [form] = Form.useForm();
   const dispatch = useDispatch();
 
-  const formState = useSelector((state: RootState) => state.form3page6);
+  const formState = useSelector((state: RootState) => state.form2page6);
   let newFormState = { ...formState };
-  if(formState.dateOfRecovery != null) {
+  if (formState.dateOfRecovery != null) {
     newFormState.dateOfRecovery = moment(formState.dateOfRecovery);
-  } else {  
+  } else {
     delete newFormState.dateOfRecovery;
   }
-  if(formState.dateOfDeath != null) {
-    newFormState.dateOfDeath = moment(formState.dateOfDeath)
-  } else {  
+  if (formState.dateOfDeath != null) {
+    newFormState.dateOfDeath = moment(formState.dateOfDeath);
+  } else {
     delete newFormState.dateOfDeath;
   }
 
   // change redux value whenever there is change in the form
   const changeFormData = (value: any, fieldName: any) => {
+    if (fieldName === "patientRecovered" && value != "Yes") {
+      dispatch(setNewFormData({ fieldName: "dateOfRecovery", value: null }));
+      form.setFieldsValue({ dateOfRecovery: null });
+    }
+    if (fieldName === "patientDead" && value != "Yes") {
+      dispatch(setNewFormData({ fieldName: "dateOfDeath", value: null }));
+      form.setFieldsValue({ dateOfDeath: null });
+    }
     dispatch(setNewFormData({ fieldName, value }));
   };
 
-  const changeDeathData = (e: any) => {
-    if (e.target.value === "Yes") {
-      setIsDead(true);
-    } else {
-      setIsDead(false);
-    }
-  };
-
-  const changeRecoveryData = (e: any) => {
-    if (e.target.value === "Yes") {
-      setIsRecovered(true);
-    } else {
-      setIsRecovered(false);
-    }
-  };
-
+  // update the initial state for editing a drug
+  useEffect(() => {
+    form.setFieldsValue(newFormState);
+  }, [form, newFormState]);
   return (
     <FormLayout>
       <Form
-        name="Form3page6"
+        form={form}
+        name="Form2page6"
         initialValues={newFormState}
         onFinish={(value) => console.log(value)}
         onValuesChange={(values) => {
-          changeFormData(values[Object.keys(values)[0]], Object.keys(values)[0])
+          changeFormData(
+            values[Object.keys(values)[0]],
+            Object.keys(values)[0]
+          );
         }}
         layout="vertical"
       >
@@ -125,9 +122,6 @@ export default function Form3page6() {
                   buttonStyle="solid"
                   options={radioOptions2}
                   optionType="button"
-                  onChange={(e) => {
-                    changeRecoveryData(e);
-                  }}
                 />
               </Form.Item>
             </div>
@@ -136,9 +130,12 @@ export default function Form3page6() {
                 label={"Date of recovery"}
                 name="dateOfRecovery"
                 className="w-full"
-                required={isRecovered}
+                required={formState.patientRecovered === "Yes"}
               >
-                <DatePicker className="w-full" disabled={!isRecovered} />
+                <DatePicker
+                  className="w-full"
+                  disabled={formState.patientRecovered != "Yes"}
+                />
               </Form.Item>
             </div>
             <div className="col-span-2">
@@ -152,9 +149,6 @@ export default function Form3page6() {
                   buttonStyle="solid"
                   options={radioOptions2}
                   optionType="button"
-                  onChange={(e) => {
-                    changeDeathData(e);
-                  }}
                   className="w-full"
                 />
               </Form.Item>
@@ -164,9 +158,12 @@ export default function Form3page6() {
                 label={"Date of death"}
                 name="dateOfDeath"
                 className="w-full"
-                required={isDead}
+                required={formState.patientDead === "Yes"}
               >
-                <DatePicker className="w-full" disabled={!isDead} />
+                <DatePicker
+                  className="w-full"
+                  disabled={!(formState.patientDead === "Yes")}
+                />
               </Form.Item>
             </div>
             <div className="col-span-2">

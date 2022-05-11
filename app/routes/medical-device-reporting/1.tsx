@@ -14,16 +14,15 @@ import { RootState } from "~/states/store";
 import { useSelector, useDispatch } from "react-redux";
 import { setNewFormData } from "~/states/Slices/MedicalDeviceReporting/1";
 
-export default function Form3page1() {
+export default function Form2page1() {
   const dispatch = useDispatch();
-  
+
   // converting date value to moment object
-  const formState = useSelector((state: RootState) => state.form3page1);
+  const formState = useSelector((state: RootState) => state.form2page1);
   let newFormState = { ...formState };
-  if(formState.dateOfReport != null) {
+  if (formState.dateOfReport != null) {
     newFormState.dateOfReport = moment(formState.dateOfReport);
-  }
-   else {  
+  } else {
     delete newFormState.dateOfReport;
   }
 
@@ -37,11 +36,14 @@ export default function Form3page1() {
       <Form
         preserve={false}
         scrollToFirstError={true}
-        name="Form3page1"
+        name="Form2page1"
         initialValues={newFormState}
         onFinish={(value) => console.log(value)}
         onValuesChange={(values) => {
-          changeFormData(values[Object.keys(values)[0]], Object.keys(values)[0])
+          changeFormData(
+            values[Object.keys(values)[0]],
+            Object.keys(values)[0]
+          );
         }}
         layout="vertical"
       >

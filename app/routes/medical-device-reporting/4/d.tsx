@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import moment from "moment";
 
 //importing layouts
 import FormLayout from "~/layouts/forms/adr-reporting";
@@ -20,15 +21,39 @@ import { RootState } from "~/states/store";
 import { useSelector, useDispatch } from "react-redux";
 import { setNewFormData } from "~/states/Slices/MedicalDeviceReporting/4/d";
 
-
-export default function Form3page4d() {
+export default function Form2page4d() {
   const dispatch = useDispatch();
-  const formState = useSelector((state: RootState) => state.form3page4d);
+  const formState = useSelector((state: RootState) => state.form2page4d);
   let newFormState = { ...formState };
+  if (formState.installationDate) {
+    const installationDate = moment(new Date(formState.installationDate));
+    // @ts-ignore
+    newFormState.installationDate = installationDate;
+  } else {
+    newFormState.installationDate = null;
+  }
+  if (formState.expirationDate) {
+    const expirationDate = moment(new Date(formState.expirationDate));
+    // @ts-ignore
+    newFormState.expirationDate = expirationDate;
+  } else {
+    newFormState.expirationDate = null;
+  }
+  if (formState.lastExpirationDate) {
+    const lastExpirationDate = moment(new Date(formState.lastExpirationDate));
+    // @ts-ignore
+    newFormState.lastExpirationDate = lastExpirationDate;
+  } else {
+    newFormState.lastExpirationDate = null;
+  }
+  if (formState.lastCalibration) {
+    const lastCalibration = moment(new Date(formState.lastCalibration));
+    // @ts-ignore
+    newFormState.lastCalibration = lastCalibration;
+  } else {
+    newFormState.lastCalibration = null;
+  }
   // change redux value whenever there is change in the form
-  const changeFormData = (value: any, fieldName: any) => {
-    dispatch(setNewFormData({ fieldName, value }));
-  };
   const [regulatedInIndia, setRegulatedInIndia] = useState<string>("");
   const [availabilityValue, setAvailabilityValue] = useState<string>("");
   const [usagePerManufacturer, setUsagePerManufacturer] = useState<string>("");
@@ -45,14 +70,56 @@ export default function Form3page4d() {
     }
   };
 
+  const [form] = Form.useForm();
+  // update the initial state for editing a drug
+  useEffect(() => {
+    form.setFieldsValue(newFormState);
+  }, [form, newFormState]);
+
+  const changeFormData = (value: any, fieldName: any) => {
+    if (fieldName === "availabilityOfDeviceForEvaluation" && value === "No") {
+      dispatch(
+        setNewFormData({ fieldName: "whatIsTheStatusOfTheDevice", value: null })
+      );
+    }
+    if (
+      fieldName === "isTheDeviceNotified_regulatedInIndia" &&
+      (value === "Yes" || value === "Don't know")
+    ) {
+      dispatch(
+        setNewFormData({
+          fieldName: "regulator_regulatoryStatusInCountryOfOrigin",
+          value: null,
+        })
+      );
+    }
+    if (
+      fieldName ===
+        "isTheUsageOfDeviceAsPerManufacturersClaims_instructionsForUse_userManual" &&
+      value === "Yes"
+    ) {
+      dispatch(
+        setNewFormData({
+          fieldName: "specifyUsage",
+          value: null,
+        })
+      );
+    }
+    dispatch(setNewFormData({ fieldName, value }));
+  };
+
   return (
     <FormLayout>
       <Form
-        name="Form3page4d"
+        form={form}
+        name="Form2page4d"
         initialValues={newFormState}
         onFinish={(value) => console.log(value)}
         onValuesChange={(values) => {
-          changeFormData(values[Object.keys(values)[0]], Object.keys(values)[0])
+          changeFormData(
+            values[Object.keys(values)[0]],
+            Object.keys(values)[0]
+          );
         }}
         layout="vertical"
       >
@@ -63,7 +130,7 @@ export default function Form3page4d() {
           <div className="w-full">
             <Form.Item
               label="Is the device notified/regulated in India?"
-              name="isTheDeviceNotified/regulatedInIndia"
+              name="isTheDeviceNotified_regulatedInIndia"
               className="w-full"
             >
               <Radio.Group
@@ -73,6 +140,22 @@ export default function Form3page4d() {
                 optionType="button"
                 value={regulatedInIndia}
                 onChange={(e) => changeStateOfRadio("1", e)}
+              />
+            </Form.Item>
+            <Form.Item
+              label="Regulator / Regulatory status in country of origin"
+              name="regulator_regulatoryStatusInCountryOfOrigin"
+              className="w-full"
+            >
+              <Input.TextArea
+                rows={3}
+                placeholder=""
+                disabled={
+                  formState.isTheDeviceNotified_regulatedInIndia === "Yes" ||
+                  !formState.isTheDeviceNotified_regulatedInIndia ||
+                  formState.isTheDeviceNotified_regulatedInIndia ===
+                    "Don't know"
+                }
               />
             </Form.Item>
             <Form.Item
@@ -137,7 +220,7 @@ export default function Form3page4d() {
             </div>
             <Form.Item
               label="Accessories/Associated Devices"
-              name="accessories/associatedDevices"
+              name="accessories_associatedDevices"
               className="w-full"
             >
               <Input />
@@ -211,7 +294,6 @@ export default function Form3page4d() {
                 options={radioOptions3}
                 optionType="button"
                 value={availabilityValue}
-                onChange={(e) => changeStateOfRadio("2", e)}
               />
             </Form.Item>
             <Form.Item
@@ -224,12 +306,15 @@ export default function Form3page4d() {
                 buttonStyle="solid"
                 options={radioOptions4}
                 optionType="button"
-                disabled={availabilityValue === "No"}
+                disabled={
+                  formState.availabilityOfDeviceForEvaluation === "No" ||
+                  !formState.availabilityOfDeviceForEvaluation
+                }
               />
             </Form.Item>
             <Form.Item
               label="Is the usage of device as per manufacturer’s claims/instructions for use/user manual"
-              name="isTheUsageOfDeviceAsPerManufacturersClaims/instructionsForUse/userManual"
+              name="isTheUsageOfDeviceAsPerManufacturersClaims_instructionsForUse_userManual"
               className="w-full"
             >
               <Radio.Group
@@ -249,18 +334,10 @@ export default function Form3page4d() {
               <Input.TextArea
                 rows={3}
                 placeholder=""
-                disabled={usagePerManufacturer === "No"}
-              />
-            </Form.Item>
-            <Form.Item
-              label="Regulator / Regulatory status in country of origin"
-              name="regulator/regulatoryStatusInCountryOfOrigin"
-              className="w-full"
-            >
-              <Input.TextArea
-                rows={3}
-                placeholder=""
-                disabled={regulatedInIndia === "Yes"}
+                disabled={
+                  usagePerManufacturer === "Yes" ||
+                  !formState.isTheUsageOfDeviceAsPerManufacturersClaims_instructionsForUse_userManual
+                }
               />
             </Form.Item>
           </div>

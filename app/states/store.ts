@@ -17,21 +17,23 @@ import form1page3fReducer from '~/states/Slices/AdrReportingForm/3/f'
 import form1page4Reducer from '~/states/Slices/AdrReportingForm/4'
 
 // form 2 redux states
-import form3page1Reducer from '~/states/Slices/MedicalDeviceReporting/1'
-import form3page2Reducer from '~/states/Slices/MedicalDeviceReporting/2'
-import form3page3Reducer from '~/states/Slices/MedicalDeviceReporting/3'
-import form3page3Option1Reducer from './Slices/MedicalDeviceReporting/3/option1'
-import form3page3Option2Reducer from './Slices/MedicalDeviceReporting/3/option2'
-import form3page3Option3Reducer from './Slices/MedicalDeviceReporting/3/option3'
-import form3page4aReducer from './Slices/MedicalDeviceReporting/4/index'
-import form3page4bReducer from './Slices/MedicalDeviceReporting/4/b'
-import form3page4cReducer from './Slices/MedicalDeviceReporting/4/c'
-import form3page4dReducer from './Slices/MedicalDeviceReporting/4/d'
-import form3page5Reducer from './Slices/MedicalDeviceReporting/5'
-import form3page6Reducer from '~/states/Slices/MedicalDeviceReporting/6'
-import form3page7Reducer from '~/states/Slices/MedicalDeviceReporting/7'
-import form3page8Reducer from '~/states/Slices/MedicalDeviceReporting/8'
-import form3page9Reducer from '~/states/Slices/MedicalDeviceReporting/9'
+import form2page1Reducer from '~/states/Slices/MedicalDeviceReporting/1'
+import form2page2Reducer from '~/states/Slices/MedicalDeviceReporting/2'
+import form2page3Reducer from '~/states/Slices/MedicalDeviceReporting/3'
+import form2page3Option1Reducer from './Slices/MedicalDeviceReporting/3/option1'
+import form2page3Option2Reducer from './Slices/MedicalDeviceReporting/3/option2'
+import form2page3Option3Reducer from './Slices/MedicalDeviceReporting/3/option3'
+import form2page4aReducer from './Slices/MedicalDeviceReporting/4/index'
+import form2page4bReducer from './Slices/MedicalDeviceReporting/4/b'
+import form2page4cReducer from './Slices/MedicalDeviceReporting/4/c'
+import form2page4dReducer from './Slices/MedicalDeviceReporting/4/d'
+
+
+import form2page5Reducer from './Slices/MedicalDeviceReporting/5'
+import form2page6Reducer from '~/states/Slices/MedicalDeviceReporting/6'
+import form2page7Reducer from '~/states/Slices/MedicalDeviceReporting/7'
+import form2page8Reducer from '~/states/Slices/MedicalDeviceReporting/8'
+import form2page9Reducer from '~/states/Slices/MedicalDeviceReporting/9'
 
 export const store = configureStore({
         reducer: {
@@ -50,23 +52,22 @@ export const store = configureStore({
                 form1page3e: form1page3eReducer,
                 form1page3f: form1page3fReducer,
                 form1page4: form1page4Reducer,
-
-
-                form3page1: form3page1Reducer,
-                form3page2: form3page2Reducer,
-                form3page3: form3page3Reducer,
-                form3page3Option1: form3page3Option1Reducer,
-                form3page3Option2: form3page3Option2Reducer,
-                form3page3Option3: form3page3Option3Reducer,
-                form3page4a: form3page4aReducer,
-                form3page4b: form3page4bReducer,
-                form3page4c: form3page4cReducer,
-                form3page4d: form3page4dReducer,
-                form3page5: form3page5Reducer,
-                form3page6: form3page6Reducer,
-                form3page7: form3page7Reducer,
-                form3page8: form3page8Reducer,
-                form3page9: form3page9Reducer
+                // form 2 redux states
+                form2page1: form2page1Reducer,
+                form2page2: form2page2Reducer,
+                form2page3: form2page3Reducer,
+                form2page3Option1: form2page3Option1Reducer,
+                form2page3Option2: form2page3Option2Reducer,
+                form2page3Option3: form2page3Option3Reducer,
+                form2page4a: form2page4aReducer,
+                form2page4b: form2page4bReducer,
+                form2page4c: form2page4cReducer,
+                form2page4d: form2page4dReducer,
+                form2page5: form2page5Reducer,
+                form2page6: form2page6Reducer,
+                form2page7: form2page7Reducer,
+                form2page8: form2page8Reducer,
+                form2page9: form2page9Reducer
         },
         middleware: (getDefaultMiddleware) => getDefaultMiddleware({ serializableCheck: false }),
 })

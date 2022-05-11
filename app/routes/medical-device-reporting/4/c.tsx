@@ -10,9 +10,9 @@ import { RootState } from "~/states/store";
 import { useSelector, useDispatch } from "react-redux";
 import { setNewFormData } from "~/states/Slices/MedicalDeviceReporting/4/c";
 
-export default function Form3page4c() {
+export default function Form2page4c() {
   const dispatch = useDispatch();
-  const formState = useSelector((state: RootState) => state.form3page4c);
+  const formState = useSelector((state: RootState) => state.form2page4c);
   let newFormState = { ...formState };
   // change redux value whenever there is change in the form
   const changeFormData = (value: any, fieldName: any) => {
@@ -21,11 +21,14 @@ export default function Form3page4c() {
   return (
     <FormLayout>
       <Form
-        name="Form3page4c"
+        name="Form2page4c"
         initialValues={newFormState}
         onFinish={(value) => console.log(value)}
         onValuesChange={(values) => {
-          changeFormData(values[Object.keys(values)[0]], Object.keys(values)[0])
+          changeFormData(
+            values[Object.keys(values)[0]],
+            Object.keys(values)[0]
+          );
         }}
         layout="vertical"
       >

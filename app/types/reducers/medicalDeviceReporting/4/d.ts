@@ -1,13 +1,14 @@
 interface FormStateType {
-    "isTheDeviceNotified/regulatedInIndia"?: BooleanTypes | null,
-    deviceRiskClassificationAsPerIndiaMDR2017?: RiskClassificationTypes | null,
+    isTheDeviceNotified_regulatedInIndia?: "Yes" | "No" | "Don't know" | null,
+    regulator_regulatoryStatusInCountryOfOrigin?: string | null,
+    deviceRiskClassificationAsPerIndiaMDR2017?: "A" | "B" | "C" | "D" | null,
     licenseNumber?: string | null,
     catalogueNumber?: string | null,
     modelNumber?: string | null,
     batchNumber?: string | null,
     serialNumber?: string | null,
     softwareNumber?: string | null,
-    "accessories/associatedDevices"?: string | null,
+    accessories_associatedDevices?: string | null,
     GMDNCodeGMDNTerm?: string | null,
     udiNumber?: number | null,
     installationDate?: string | null,
@@ -16,11 +17,10 @@ interface FormStateType {
     lastCalibration: string | null,
     ageOfDeviceFromDateOfManufacturing?: number | null,
     howLongWasDeviceInUse?: string | null,
-    availabilityOfDeviceForEvaluation?: boolean | null,
-    whatIsTheStatusOfTheDevice?: StatusTypes | null,
-    "isTheUsageOfDeviceAsPerManufacturersClaims/instructionsForUse/userManual"?: boolean | null,
+    availabilityOfDeviceForEvaluation?: "Yes" | "No" | null,
+    whatIsTheStatusOfTheDevice?: "Still in use" | "Destroyed" | "Returned to manufacturer or importer" | null,
+    isTheUsageOfDeviceAsPerManufacturersClaims_instructionsForUse_userManual?: boolean | null,
     specifyUsage?: string | null,
-    "regulator/regulatoryStatusInCountryOfOrigin"?: string | null
 }
 
 type PayloadKeys = keyof FormStateType;
@@ -28,25 +28,6 @@ type PayloadKeys = keyof FormStateType;
 interface ActionType {
     fieldName: PayloadKeys;
     value: any;
-}
-
-enum BooleanTypes {
-    Yes = "Yes",
-    No = "No",
-    DontKnow = "Don't Know"
-}
-
-enum RiskClassificationTypes {
-    A = "A",
-    B = "B",
-    C = "C",
-    D = "D"
-}
-
-enum StatusTypes {
-    Destroyed = "Destroyed",
-    StillInUse = "Still in use",
-    ReturnedToManufacturerOrImporter = "Returned to manufacturer or importer"
 }
 
 export type { ActionType, FormStateType }

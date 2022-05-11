@@ -20,9 +20,9 @@ import { setNewFormData as setNewFormDataOption1 } from "~/states/Slices/Medical
 import { setNewFormData as setNewFormDataOption2 } from "~/states/Slices/MedicalDeviceReporting/3/option2";
 import { setNewFormData as setNewFormDataOption3 } from "~/states/Slices/MedicalDeviceReporting/3/option3";
 
-export default function Form3page9() {
+export default function Form2page3() {
   const dispatch = useDispatch();
-  const formState = useSelector((state: RootState) => state.form3page3);
+  const formState = useSelector((state: RootState) => state.form2page3);
 
   useEffect(() => {
     if (formState.deviceCategory != "medicalDevice") {

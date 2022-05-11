@@ -15,8 +15,8 @@ const initialState: FormStateType = {
     otherPatientOutcomes: null
 }
 
-export const form3page6Slice = createSlice({
-    name: 'form3page6',
+export const form2page6Slice = createSlice({
+    name: 'form2page6',
     initialState,
     reducers: {
         fetchIncompleteFormsFromUserProfile: (state, action: PayloadAction<FormStateType>) => {
@@ -34,6 +34,6 @@ export const form3page6Slice = createSlice({
 })
 
 // Action creators are generated for each case reducer function
-export const { fetchIncompleteFormsFromUserProfile, submitFormDataToTheBackend, setNewFormData } = form3page6Slice.actions
+export const { fetchIncompleteFormsFromUserProfile, submitFormDataToTheBackend, setNewFormData } = form2page6Slice.actions
 
-export default form3page6Slice.reducer
+export default form2page6Slice.reducer

@@ -18,7 +18,7 @@ import { RootState } from "~/states/store";
 import { useSelector, useDispatch } from "react-redux";
 import { setNewFormData } from "~/states/Slices/MedicalDeviceReporting/2";
 
-export default function Form1() {
+export default function Form2Page2() {
   const [reporterType, setReporterType] = useState<string>("manufacturer");
   const changedReporterType = (e: any) => {
     setReporterType(e.target.value);
@@ -27,7 +27,7 @@ export default function Form1() {
     }
   };
   const dispatch = useDispatch();
-  const formState = useSelector((state: RootState) => state.form3page2);
+  const formState = useSelector((state: RootState) => state.form2page2);
   let newFormState = { ...formState };
   // change redux value whenever there is change in the form
   const changeFormData = (value: any, fieldName: any) => {
@@ -57,7 +57,7 @@ export default function Form1() {
         form={form}
         preserve={false}
         scrollToFirstError={true}
-        name="Form3page2"
+        name="Form2page2"
         initialValues={newFormState}
         onFinish={(value) => console.log(value)}
         onValuesChange={(values) => {

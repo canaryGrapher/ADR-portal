@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect } from "react";
 
 // Import Form Layout
 import FormLayout from "~/layouts/forms/medical-device-reporting";
@@ -22,72 +22,75 @@ import { RootState } from "~/states/store";
 import { useSelector, useDispatch } from "react-redux";
 import { setNewFormData } from "~/states/Slices/MedicalDeviceReporting/5";
 
-export default function Form3page5() {
-  const [isSeriousEvent, setIsSeriousEvent] = useState<boolean>();
-  const [isDead, setIsDead] = useState<boolean>();
-  const [isReturned, setIsReturned] = useState<boolean>();
-  const changeSeriousEventState = (e: any) => {
-    if (e.target.value === "Yes") {
-      setIsSeriousEvent(true);
-    } else {
-      setIsSeriousEvent(false);
-    }
-  };
-
-  const changeSeriousEventValue = (e: any) => {
-    if (e.target.value === "Death") {
-      setIsDead(true);
-    } else {
-      setIsDead(false);
-    }
-  };
-
-  const changeDeviceLocation = (e: any) => {
-    if (e.target.value === "Returned to the company") {
-      setIsReturned(true);
-    } else {
-      setIsReturned(false);
-    }
-  };
-  const [reporterType, setReporterType] = useState<string>("manufacturer");
-  const changedReporterType = (e: any) => {
-    setReporterType(e.target.value);
-  };
+export default function Form2page5() {
+  const [form] = Form.useForm();
   const dispatch = useDispatch();
-  const formState = useSelector((state: RootState) => state.form3page5);
+  const formState = useSelector((state: RootState) => state.form2page5);
   let newFormState = { ...formState };
-  if(formState.dateOfEvent != null) {
+  if (formState.dateOfEvent != null) {
     newFormState.dateOfEvent = moment(formState.dateOfEvent);
-  } else {  
+  } else {
     delete newFormState.dateOfEvent;
   }
-  if(formState.dateOfImplant != null) {
+  if (formState.dateOfImplant != null) {
     newFormState.dateOfImplant = moment(formState.dateOfImplant);
-  } else {  
+  } else {
     delete newFormState.dateOfImplant;
   }
-  if(formState.dateOfReturn != null) {
+  if (formState.dateOfReturn != null) {
     newFormState.dateOfReturn = moment(formState.dateOfReturn);
-  } else {  
+  } else {
     delete newFormState.dateOfReturn;
   }
-  if(formState.dateOfDeath != null) {
+  if (formState.dateOfDeath != null) {
     newFormState.dateOfDeath = moment(formState.dateOfDeath);
-  } else {  
+  } else {
     delete newFormState.dateOfDeath;
+  }
+  if (formState.year != null) {
+    newFormState.year = moment(formState.year);
+  } else {
+    delete newFormState.year;
+  }
+  if (formState.yearGlobal != null) {
+    newFormState.yearGlobal = moment(formState.yearGlobal);
+  } else {
+    delete newFormState.yearGlobal;
   }
   // change redux value whenever there is change in the form
   const changeFormData = (value: any, fieldName: any) => {
+    if (fieldName === "deviceLocation" && value != "Returned to the company") {
+      dispatch(setNewFormData({ fieldName: "dateOfReturn", value: null }));
+      form.setFieldsValue({ ["dateOfReturn"]: null });
+    }
+    if (fieldName === "seriousEvent" && !(value === "Yes")) {
+      form.setFieldsValue({ ["dateOfDeath"]: null, ["reason"]: null });
+      dispatch(setNewFormData({ fieldName: "reason", value: null }));
+      dispatch(setNewFormData({ fieldName: "dateOfDeath", value: null }));
+    }
+    if (fieldName === "reason" && value != "Death") {
+      form.setFieldsValue({ ["dateOfDeath"]: null });
+      dispatch(setNewFormData({ fieldName: "dateOfDeath", value: null }));
+    }
     dispatch(setNewFormData({ fieldName, value }));
   };
+
+  // update the initial state for editing a drug
+  useEffect(() => {
+    form.setFieldsValue(newFormState);
+  }, [form, newFormState]);
   return (
     <FormLayout>
       <Form
-        name="Form3page5"
+        form={form}
+        name="Form2page5"
         initialValues={newFormState}
         onFinish={(value) => console.log(value)}
         onValuesChange={(values) => {
-          changeFormData(values[Object.keys(values)[0]], Object.keys(values)[0])
+          changeFormData(
+            values[Object.keys(values)[0]],
+            Object.keys(values)[0]
+          );
         }}
         layout="vertical"
       >
@@ -150,27 +153,26 @@ export default function Form3page5() {
                     buttonStyle="solid"
                     options={radioOptions3}
                     optionType="button"
-                    onChange={(e) => {
-                      changeDeviceLocation(e);
-                    }}
                   />
                 </Form.Item>
               </div>
               <div className="col-span-1">
-                <Form.Item label={"Date of return"} name="dateOfReturn">
-                  <DatePicker disabled={!isReturned} className="w-full" />
+                <Form.Item label="Date of return" name="dateOfReturn">
+                  <DatePicker
+                    disabled={
+                      formState.deviceLocation != "Returned to the company"
+                    }
+                    className="w-full"
+                  />
                 </Form.Item>
               </div>
               <div className="col-span-2 flex flex-col">
-                <Form.Item label={"Serious event?"} name="seriousEvent">
+                <Form.Item label="Serious event?" name="seriousEvent">
                   <Radio.Group
                     size="large"
                     buttonStyle="solid"
                     options={radioOptions4}
                     optionType="button"
-                    onChange={(e) => {
-                      changeSeriousEventState(e);
-                    }}
                   />
                 </Form.Item>
               </div>
@@ -179,29 +181,35 @@ export default function Form3page5() {
                   label={"Reason"}
                   name="reason"
                   className="w-full"
-                  required={isSeriousEvent}
+                  required={formState.seriousEvent === "Yes"}
                 >
                   <Radio.Group
                     size="large"
                     buttonStyle="solid"
                     options={radioOptions5}
                     optionType="button"
-                    disabled={!isSeriousEvent}
-                    onChange={(e) => {
-                      changeSeriousEventValue(e);
-                    }}
+                    disabled={formState.seriousEvent != "Yes"}
                   />
                 </Form.Item>
               </div>
-              <div className="col-span-1">
-                <Form.Item
-                  label={"Date of death"}
-                  name="dateOfDeath"
-                  required={isDead}
-                >
-                  <DatePicker disabled={!isDead} className="w-full" />
-                </Form.Item>
-              </div>
+              <Form.Item
+                label="Date of death"
+                name="dateOfDeath"
+                required={
+                  formState.reason === "Death" &&
+                  formState.seriousEvent === "Yes"
+                }
+              >
+                <DatePicker
+                  disabled={
+                    !(
+                      formState.reason === "Death" &&
+                      formState.seriousEvent === "Yes"
+                    )
+                  }
+                  className="w-full"
+                />
+              </Form.Item>
               <div className="col-span-2 flex flex-col">
                 <Form.Item
                   label={"Is device in use after the incident?"}
@@ -227,7 +235,7 @@ export default function Form3page5() {
                 <div className="text-[22px] text-[#E8590C]">
                   Frequency of occurrence of similar adverse events in India
                 </div>
-                <div className="grid grid-cols-4 gap-5">
+                <div className="grid grid-cols-2 gap-5">
                   <div className="flex flex-col col-span-1">
                     <Form.Item label={"Year"} name="year" className="w-full">
                       <DatePicker picker="year" className="w-full" />
@@ -265,9 +273,13 @@ export default function Form3page5() {
                 <div className="text-[22px] text-[#E8590C]">
                   Frequency of occurrence of similar adverse events globally
                 </div>
-                <div className="grid grid-cols-4 gap-5">
+                <div className="grid grid-cols-2 gap-5">
                   <div className="flex flex-col col-span-1">
-                    <Form.Item label={"Year"} name="yearGlobal" className="w-full">
+                    <Form.Item
+                      label={"Year"}
+                      name="yearGlobal"
+                      className="w-full"
+                    >
                       <DatePicker picker="year" className="w-full" />
                     </Form.Item>
                   </div>

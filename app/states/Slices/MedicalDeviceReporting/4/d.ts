@@ -2,7 +2,8 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { FormStateType, ActionType } from "~/types/reducers/medicalDeviceReporting/4/d";
 
 const initialState: FormStateType = {
-    "isTheDeviceNotified/regulatedInIndia": null,
+    isTheDeviceNotified_regulatedInIndia: null,
+    regulator_regulatoryStatusInCountryOfOrigin: null,
     deviceRiskClassificationAsPerIndiaMDR2017: null,
     licenseNumber: null,
     catalogueNumber: null,
@@ -10,7 +11,7 @@ const initialState: FormStateType = {
     batchNumber: null,
     serialNumber: null,
     softwareNumber: null,
-    "accessories/associatedDevices": null,
+    accessories_associatedDevices: null,
     GMDNCodeGMDNTerm: null,
     udiNumber: null,
     installationDate: null,
@@ -21,13 +22,12 @@ const initialState: FormStateType = {
     howLongWasDeviceInUse: null,
     availabilityOfDeviceForEvaluation: null,
     whatIsTheStatusOfTheDevice: null,
-    "isTheUsageOfDeviceAsPerManufacturersClaims/instructionsForUse/userManual": null,
+    isTheUsageOfDeviceAsPerManufacturersClaims_instructionsForUse_userManual: null,
     specifyUsage: null,
-    "regulator/regulatoryStatusInCountryOfOrigin": null
 }
 
-export const form3page4dSlice = createSlice({
-    name: 'form3page4d',
+export const form2page4dSlice = createSlice({
+    name: 'form2page4d',
     initialState,
     reducers: {
         fetchIncompleteFormsFromUserProfile: (state, action: PayloadAction<FormStateType>) => {
@@ -44,6 +44,6 @@ export const form3page4dSlice = createSlice({
     }
 });
 
-export const { fetchIncompleteFormsFromUserProfile, submitFormDataToTheBackend, setNewFormData } = form3page4dSlice.actions
+export const { fetchIncompleteFormsFromUserProfile, submitFormDataToTheBackend, setNewFormData } = form2page4dSlice.actions
 
-export default form3page4dSlice.reducer;
+export default form2page4dSlice.reducer;

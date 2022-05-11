@@ -10,7 +10,7 @@ import { setNewFormData } from "~/states/Slices/MedicalDeviceReporting/3/option2
 
 const Option2 = () => {
   const dispatch = useDispatch();
-  const formState = useSelector((state: RootState) => state.form3page3Option2);
+  const formState = useSelector((state: RootState) => state.form2page3Option2);
   let newFormState = { ...formState };
   // change redux value whenever there is change in the form
   const changeFormData = (value: any, fieldName: any) => {
@@ -18,7 +18,7 @@ const Option2 = () => {
   };
   return (
     <Form
-      name="Form3page3Option2"
+      name="Form2page3Option2"
       initialValues={newFormState}
       onFinish={(value) => console.log(value)}
       onValuesChange={(values) => {

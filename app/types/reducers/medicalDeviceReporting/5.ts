@@ -1,16 +1,16 @@
 interface FormStateType {
     dateOfEvent?: any | null,
     dateOfImplant?: any | null,
-    locationOfEvent?: LocationTypes | null,
-    deviceOperator?: DeviceOperatorTypes | null,
-    deviceLocation?: DeviceLocationTypes | null,
+    locationOfEvent?: "Hospital Premise" | "Manufacturer Premise" | "Home" | "Others" | null,
+    deviceOperator?: "Healthcare professional" | "Patient" | "Problem noted before use" | "Others" | null,
+    deviceLocation?: "Returned to the company" | "Implanted in patient" | "Within the facility" | "At patient home" | "Destroyed" | "Others" | null,
     dateOfReturn?: any | null,
-    seriousEvent?: boolean | null,
-    reason?: ReasonTypes | null,
+    seriousEvent?: "Yes" | "No" | null,
+    reason?: "Death" | "Life Threatening" | "Disability" | "Hospitalization" | "Congenital Anomaly" | "Any medical event" | "Permanent Impairment" | null,
     dateOfDeath?: any | null,
-    isDeviceInUse?: boolean | null,
+    isDeviceInUse?: "Yes" | "No" | null,
     detailedDescription?: string | null,
-    year?:  any | null,
+    year?: any | null,
     numberOfSimilarIndia?: number | null,
     totalNumberSuppliedIndia?: number | null,
     frequencyIndia?: string | null,
@@ -25,39 +25,6 @@ type PayloadKeys = keyof FormStateType;
 interface ActionType {
     fieldName: PayloadKeys;
     value: any;
-}
-
-enum LocationTypes {
-    HospitalPremise = "Hospital Premise",
-    ManufacturerPremise = "Manufacturer Premise",
-    Home = "Home",
-    Others = "Others"
-}
-
-enum DeviceOperatorTypes {
-    HealthcareProfessional = "Healthcare professional",
-    Patient = "Patient",
-    ProblemNotedBeforeUse = "Problem noted before use",
-    Others = "Others"
-}
-
-enum DeviceLocationTypes {
-    ReturnedToTheCompany = "Returned to the company",
-    ImplantedInPatient = "Implanted in patient",
-    WithinTheFacility = "Within the facility",
-    AtPatientHome = "At patient home",
-    Destroyed = "Destroyed",
-    Others = "Others"
-}
-
-enum ReasonTypes {
-    Death = "Death",
-    LifeThreatening = "Life Threatening",
-    Disability = "Disability",
-    Hospitalization = "Hospitalization",
-    CongenitalAnomaly = "Congenital Anomaly",
-    AnyMedicalEvent = "Any medical event",
-    PermanentImpairment = "Permanent Impairment"
 }
 
 export type { ActionType, FormStateType }
