@@ -22,7 +22,7 @@ import { DeleteFilled, EditFilled } from "@ant-design/icons";
 
 export default function Form1page3h() {
   const dispatch = useDispatch();
-  const formState = useSelector((state: RootState) => state.form1page3h_filled);
+  const formState = useSelector((state: RootState) => state.form1page3d_filled);
   const [keyCount, setKeyCount] = useState<number>(0);
 
   const submitFinishedForms = (values: FormSubStateType) => {
@@ -47,7 +47,7 @@ export default function Form1page3h() {
           <Subform id={keyCount} submitAction={submitFinishedForms} />
         </div>
       </div>
-      <NavigationPanel currentRoute="3d" />
+      <NavigationPanel currentRoute="3" />
     </FormLayout>
   );
 }
@@ -104,7 +104,7 @@ type PropTypes = {
 
 const Subform = (props: PropTypes) => {
   const dispatch = useDispatch();
-  const formState = useSelector((state: RootState) => state.form1page3h);
+  const formState = useSelector((state: RootState) => state.form1page3d);
   let newFormState = { ...formState };
 
   if (formState.startDate) {
@@ -132,7 +132,7 @@ const Subform = (props: PropTypes) => {
       form={form}
       preserve={false}
       scrollToFirstError={true}
-      name="Form1Page3d"
+      name="Form1Page3h"
       initialValues={newFormState}
       onValuesChange={(values) =>
         changeFormData(values[Object.keys(values)[0]], Object.keys(values)[0])
@@ -156,7 +156,7 @@ const Subform = (props: PropTypes) => {
         <Input />
       </Form.Item>
       <div className="grid grid-cols-2 gap-5 pt-4">
-        <Form.Item className="col-span-1" label="Dose used" name="doseUsed">
+        <Form.Item className="col-span-1" label="Dose used" name="doseUsage">
           <Input />
         </Form.Item>
         <Form.Item className="col-span-1" label="Route used" name="routeUsed">

@@ -15,7 +15,7 @@ const initialState: FormSubStateType = {
     indication: null,
 };
 
-export const form1page3hSlice = createSlice({
+export const form1page3dSlice = createSlice({
     name: "form1page3d",
     initialState,
     reducers: {
@@ -45,6 +45,6 @@ export const {
     submitFormDataToTheBackend,
     setNewFormData,
     addField,
-} = form1page3hSlice.actions;
+} = form1page3dSlice.actions;
 
-export default form1page3hSlice.reducer;
+export default form1page3dSlice.reducer;
