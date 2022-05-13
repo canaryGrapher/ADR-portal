@@ -47,7 +47,7 @@ export default function Form1page3h() {
           <Subform id={keyCount} submitAction={submitFinishedForms} />
         </div>
       </div>
-      <NavigationPanel currentRoute="3" />
+      <NavigationPanel currentRoute="3d" />
     </FormLayout>
   );
 }
