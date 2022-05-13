@@ -76,7 +76,7 @@ const NavigationPanel = (props: NavigationPanelProps) => {
         </button>
         <Link to={nextPage}>
           <button className="bg-[#E8590C] text-white hover:shadow-xl p-2 w-32 border border-[#E8590C] font-bold hover:bg-transparent">
-            {isLastPage ? "Submit" : "Next"}
+            {isLastPage ? <Link to="/submit">Submit</Link> : "Next"}
           </button>
         </Link>
       </div>
