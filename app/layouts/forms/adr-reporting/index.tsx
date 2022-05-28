@@ -1,4 +1,4 @@
-import { Links, Meta, Scripts } from "remix";
+import { Links, Meta, Scripts, Outlet } from "remix";
 
 //importing components
 import Sidebar from "~/components/common/sidebar";
@@ -35,7 +35,7 @@ const FormLayout = ({ children }: LayoutProps) => {
           </div>
         </div>
         <div className="col-span-3 p-2">
-          <div className="flex w-screen pt-8 pb-4 text-[35px] text-[#E8590C]">
+          <div className="flex w-screen pt-8 pb-4 text-[35px] font-bold text-[#6C567B]">
             ADR Reporting Form
           </div>
           {children}

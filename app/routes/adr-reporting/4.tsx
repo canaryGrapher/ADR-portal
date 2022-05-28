@@ -17,6 +17,14 @@ import { FiHelpCircle } from "react-icons/fi";
 import { RootState } from "~/states/store";
 import { useSelector, useDispatch } from "react-redux";
 import { setNewFormData } from "~/states/Slices/AdrReportingForm/4";
+import { LoaderFunction } from "remix";
+import authenticator from "~/server/authentication/auth.server";
+
+export let loader: LoaderFunction = async ({ request }) => {
+  return await authenticator.isAuthenticated(request, {
+    failureRedirect: "/login",
+  });
+};
 
 export default function Form1page4() {
   const [occupationState, setOccupationState] = useState<string>("");
@@ -37,6 +45,7 @@ export default function Form1page4() {
   const formState = useSelector((state: RootState) => state.form1page4);
   let newFormState = { ...formState };
   if (formState.dateOfReport != null) {
+    // @ts-ignore
     newFormState.dateOfReport = moment(formState.dateOfReport);
   } else {
     delete newFormState.dateOfReport;

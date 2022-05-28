@@ -11,7 +11,14 @@ import { radioOptions } from "~/utils/adr-reporting/3f";
 import { RootState } from "~/states/store";
 import { useSelector, useDispatch } from "react-redux";
 import { setNewFormData } from "~/states/Slices/AdrReportingForm/3/f";
+import { LoaderFunction } from "remix";
+import authenticator from "~/server/authentication/auth.server";
 
+export let loader: LoaderFunction = async ({ request }) => {
+  return await authenticator.isAuthenticated(request, {
+    failureRedirect: "/login",
+  });
+};
 export default function Form1page3f() {
   const dispatch = useDispatch();
   // converting date value to moment Object

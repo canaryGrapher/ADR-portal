@@ -1,4 +1,4 @@
-import { mongoose, prop } from "@typegoose/typegoose";
+import { getModelForClass, mongoose, prop } from "@typegoose/typegoose";
 
 // importing subform models
 import Form1Page1 from './form2/form2page1';
@@ -11,7 +11,7 @@ import Form1Page7 from "./form2/form2page7";
 import Form1Page8 from "./form2/form2page8";
 import Form1Page9 from "./form2/form2page9";
 
-export default class Forms2 {
+class Forms2 {
     _id?: mongoose.Types.ObjectId;
 
     @prop({ type: String, required: true })
@@ -48,5 +48,5 @@ export default class Forms2 {
     public form1Page9?: Form1Page9;
 }
 
-
-
+const Forms2Model = getModelForClass(Forms2);
+export default Forms2Model;

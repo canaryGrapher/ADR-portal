@@ -19,7 +19,14 @@ import { setNewFormData } from "~/states/Slices/MedicalDeviceReporting/3";
 import { setNewFormData as setNewFormDataOption1 } from "~/states/Slices/MedicalDeviceReporting/3/option1";
 import { setNewFormData as setNewFormDataOption2 } from "~/states/Slices/MedicalDeviceReporting/3/option2";
 import { setNewFormData as setNewFormDataOption3 } from "~/states/Slices/MedicalDeviceReporting/3/option3";
+import { LoaderFunction } from "remix";
+import authenticator from "~/server/authentication/auth.server";
 
+export let loader: LoaderFunction = async ({ request }) => {
+  return await authenticator.isAuthenticated(request, {
+    failureRedirect: "/login",
+  });
+};
 export default function Form2page3() {
   const dispatch = useDispatch();
   const formState = useSelector((state: RootState) => state.form2page3);

@@ -19,7 +19,14 @@ import {
   removeAdditionalFormData,
 } from "~/states/Slices/AdrReportingForm/3/d_filled";
 import { DeleteFilled, EditFilled } from "@ant-design/icons";
+import { LoaderFunction } from "remix";
+import authenticator from "~/server/authentication/auth.server";
 
+export let loader: LoaderFunction = async ({ request }) => {
+  return await authenticator.isAuthenticated(request, {
+    failureRedirect: "/login",
+  });
+};
 export default function Form1page3h() {
   const dispatch = useDispatch();
   const formState = useSelector((state: RootState) => state.form1page3d_filled);
@@ -108,13 +115,17 @@ const Subform = (props: PropTypes) => {
   let newFormState = { ...formState };
 
   if (formState.startDate) {
+    // @ts-ignore
     const startDate = moment(new Date(formState.startDate));
+    // @ts-ignore
     newFormState.startDate = startDate;
   } else {
     delete newFormState.startDate;
   }
   if (formState.stopDate) {
+    // @ts-ignore
     const startDate = moment(new Date(formState.stopDate));
+    // @ts-ignore
     newFormState.stopDate = startDate;
   } else {
     delete newFormState.stopDate;

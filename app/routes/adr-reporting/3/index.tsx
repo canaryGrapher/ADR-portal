@@ -24,6 +24,15 @@ import {
 import { DeleteFilled, EditFilled } from "@ant-design/icons";
 import { useEffect } from "react";
 
+import { LoaderFunction } from "remix";
+import authenticator from "~/server/authentication/auth.server";
+
+export let loader: LoaderFunction = async ({ request }) => {
+  return await authenticator.isAuthenticated(request, {
+    failureRedirect: "/login",
+  });
+};
+
 export default function Form1page3() {
   const dispatch = useDispatch();
   const formState = useSelector((state: RootState) => state.form1page3_filled);

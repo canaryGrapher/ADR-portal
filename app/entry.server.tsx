@@ -1,21 +1,20 @@
 import { renderToString } from "react-dom/server";
 import { RemixServer } from "remix";
 import type { EntryContext } from "remix";
-import { connect } from "mongoose";
 
-// @ts-ignore
-connect(`mongodb://localhost:27017/adrportal`)
-  .then(() => console.log({ mongoDb: "Connected" }))
-  .catch((err) => {
-    console.log({ mongoErr: err });
-  });
+import dbConnect from "./server/mongo.server";
 
-export default function handleRequest(
+const connectDatabase = async () => {
+  await dbConnect();
+};
+
+export default async function handleRequest(
   request: Request,
   responseStatusCode: number,
   responseHeaders: Headers,
   remixContext: EntryContext
 ) {
+  connectDatabase();
   const markup = renderToString(
     <RemixServer context={remixContext} url={request.url} />
   );

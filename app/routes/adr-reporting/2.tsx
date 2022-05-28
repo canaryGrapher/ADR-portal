@@ -10,6 +10,15 @@ import { RootState } from "~/states/store";
 import { useSelector, useDispatch } from "react-redux";
 import { setNewFormData } from "~/states/Slices/AdrReportingForm/2";
 
+import { LoaderFunction } from "remix";
+import authenticator from "~/server/authentication/auth.server";
+
+export let loader: LoaderFunction = async ({ request }) => {
+  return await authenticator.isAuthenticated(request, {
+    failureRedirect: "/login",
+  });
+};
+
 export default function Form1page2() {
   const dispatch = useDispatch();
   // converting date value to moment Object
@@ -17,6 +26,7 @@ export default function Form1page2() {
   let newFormState = { ...formState };
 
   if (formState.dateOfReactionStarted != null) {
+    // @ts-ignore
     newFormState.dateOfReactionStarted = moment(
       formState.dateOfReactionStarted
     );
@@ -24,6 +34,7 @@ export default function Form1page2() {
     delete newFormState.dateOfReactionStarted;
   }
   if (formState.dateOfRecovery != null) {
+    // @ts-ignore
     newFormState.dateOfRecovery = moment(formState.dateOfRecovery);
   } else {
     delete newFormState.dateOfRecovery;

@@ -1,5 +1,5 @@
 //importing layouts
-import FormLayout from "~/layouts/forms/adr-reporting";
+import FormLayout from "~/layouts/forms/medical-device-reporting";
 
 //importing components
 import { Input, DatePicker, Form, Radio } from "antd";
@@ -13,6 +13,14 @@ import { radioOptions } from "~/utils/medical-device-reporting/1";
 import { RootState } from "~/states/store";
 import { useSelector, useDispatch } from "react-redux";
 import { setNewFormData } from "~/states/Slices/MedicalDeviceReporting/1";
+import { LoaderFunction } from "remix";
+import authenticator from "~/server/authentication/auth.server";
+
+export let loader: LoaderFunction = async ({ request }) => {
+  return await authenticator.isAuthenticated(request, {
+    failureRedirect: "/login",
+  });
+};
 
 export default function Form2page1() {
   const dispatch = useDispatch();

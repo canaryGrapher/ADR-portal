@@ -1,6 +1,14 @@
 // Import Form Layout
 import FormLayout from "~/layouts/forms/medical-device-reporting";
 import { Link } from "remix";
+import { LoaderFunction } from "remix";
+import authenticator from "~/server/authentication/auth.server";
+
+export let loader: LoaderFunction = async ({ request }) => {
+  return await authenticator.isAuthenticated(request, {
+    failureRedirect: "/login",
+  });
+};
 
 export default function SubmitPage() {
   return (

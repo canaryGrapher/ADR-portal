@@ -11,5 +11,4 @@ export default class Form2Page1 {
 
     @prop({ type: String, enum: options })
     public typeOfReport?: String;
-
 }

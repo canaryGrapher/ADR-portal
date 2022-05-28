@@ -3,6 +3,15 @@ import { Input, Form, InputNumber, DatePicker, Select, Checkbox } from "antd";
 import NavigationPanel from "~/components/forms/NavigationPanel";
 import moment from "moment";
 
+import { LoaderFunction } from "remix";
+import authenticator from "~/server/authentication/auth.server";
+
+export let loader: LoaderFunction = async ({ request }) => {
+  return await authenticator.isAuthenticated(request, {
+    failureRedirect: "/login",
+  });
+};
+
 // importing utilities
 import {
   genderOptions,

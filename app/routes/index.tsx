@@ -1,10 +1,18 @@
 import { Link } from "remix";
+import { LoaderFunction, useLoaderData } from "remix";
+import authenticator from "~/server/authentication/auth.server";
+
+export let loader: LoaderFunction = async ({ request }) => {
+  return await authenticator.isAuthenticated(request, {
+    failureRedirect: "/login",
+  });
+};
 
 export default function Home() {
   return (
     <div className="w-screen h-screen flex flex-col">
       <div className="rounded-lg w-3/4 min-h-3/4 mx-auto p-10 text-left">
-        <h2 className="text-gray-500 text-2xl">Select a form to fill</h2>
+        <h2 className="text-gray-500 text-2xl">Select a form to fill:</h2>
 
         <div className="grid grid-cols-2 grid-rows-1 gap-5">
           <CardSelect
