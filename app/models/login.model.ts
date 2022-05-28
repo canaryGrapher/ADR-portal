@@ -15,8 +15,14 @@ class Login {
     @prop({ type: String, required: true })
     public lastName!: String;
 
-    @prop({ type: String | null, required: true })
+    @prop({ type: String })
+    public currentForm?: String;
 
+    @prop({ type: [String] })
+    public completedPages?: [String];
+
+    @prop({ type: [String] })
+    public completedForms?: [String];
 }
 
 const LoginModel = getModelForClass(Login);
