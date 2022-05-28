@@ -4,6 +4,9 @@ const availableActions = ["Dose reduced", "Dose increased", "Drug withdrawn", "D
 const availableActions2 = ["No rechallenge", "Recurrence of symptoms", "No occurance of symptomps", "Unknown"]
 
 export default class Form1Page3a {
+    @prop({ type: Boolean, required: true })
+    public isComplete!: Boolean;
+
     @prop({ type: String, required: true })
     public nameOfDrug!: String;
 

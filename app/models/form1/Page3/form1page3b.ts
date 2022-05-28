@@ -7,6 +7,9 @@ import Form1Page3b4 from "./Page3b/form1page3b4";
 import Form1Page3b5 from "./Page3b/form1page3b5";
 
 export default class Form1Page3b {
+    @prop({ type: Boolean, required: true })
+    public isComplete!: Boolean;
+
     @prop({ type: Form1Page3b1 })
     public form1page3b1?: Form1Page3b1;
 

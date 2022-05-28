@@ -15,6 +15,8 @@ class Login {
     @prop({ type: String, required: true })
     public lastName!: String;
 
+    @prop({ type: String | null, required: true })
+
 }
 
 const LoginModel = getModelForClass(Login);

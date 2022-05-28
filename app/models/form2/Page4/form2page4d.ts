@@ -6,6 +6,9 @@ const options3 = ["Destroyed", "Still in use", "Returned to manufacturer or impo
 const options4 = ["Yes", "No"];
 
 export default class Form2Page1 {
+    @prop({ type: Boolean, required: true })
+    public isComplete!: Boolean;
+
     @prop({ type: String, enum: options })
     public isTheDeviceNotified_regulatedInIndia?: String;
 

@@ -4,6 +4,9 @@ const options = ["Congenital-anomaly", "Life Threatening", "Hospitalized/Prolong
 const options2 = ["Recovered", "Recovering", "Not recovered", "Fatal", "Recovered with sequelae", "Unknown"]
 
 export default class Form1Page3e {
+    @prop({ type: Boolean, required: true })
+    public isComplete!: Boolean;
+
     @prop({ type: Boolean })
     public applicability?: Boolean;
 

@@ -4,6 +4,9 @@ const options = ["Manufacturer", "Importer", "Distributor", "Patients", "Healthc
 const options2 = ["Yes", "No", "Don't Know"];
 
 export default class Form2Page2 {
+    @prop({ type: Boolean, required: true })
+    public isComplete!: Boolean;
+
     @prop({ type: String, enum: options })
     public typeOfReporter?: String;
 

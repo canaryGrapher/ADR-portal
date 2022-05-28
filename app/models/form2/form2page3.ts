@@ -9,6 +9,9 @@ const InvasibilityTypes = ["Invasive", "Non-Invasive"]
 
 
 export default class Form2Page3 {
+    @prop({ type: Boolean, required: true })
+    public isComplete!: Boolean;
+
     @prop({ type: String, enum: DeviceOptions })
     typeOfDevice?: String;
 

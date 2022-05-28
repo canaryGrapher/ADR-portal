@@ -8,6 +8,9 @@ import Form1Page3e from "./Page3/form1page3e";
 import Form1Page3f from "./Page3/form1page3f";
 
 export default class Form1Page3 {
+    @prop({ type: Boolean, required: true })
+    public isComplete!: Boolean;
+
     @prop({ type: Form1Page3a })
     public Form1Page3a?: Form1Page3a[];
 

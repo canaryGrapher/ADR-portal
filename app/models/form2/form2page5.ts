@@ -6,6 +6,9 @@ const reason = ["Death", "Life Threatening", "Disability", "Hospitalization", "C
 const deviceOperator = ["Healthcare professional", "Patient", "Problem noted before use", "Others"];
 
 export default class Form2Page5 {
+    @prop({ type: Boolean, required: true })
+    public isComplete!: Boolean;
+
     @prop({ type: Date })
     public dateOfEvent?: Date;
 

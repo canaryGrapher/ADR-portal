@@ -4,6 +4,9 @@ const gender = ["Male", "Female", "Other"]
 const options = ["Yes", "No"]
 
 export default class Form2Page6 {
+    @prop({ type: Boolean, required: true })
+    public isComplete!: Boolean;
+
     @prop({ type: Number })
     public patientHospitalNumber?: Number;
 

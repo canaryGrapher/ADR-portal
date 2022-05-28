@@ -4,6 +4,9 @@ const options = ["Yes", "No"]
 const options2 = ["Definitely Preventable", "Probably Preventable", "Not Preventable"]
 
 export default class Form1Page3b4 {
+    @prop({ type: Boolean, required: true })
+    public isComplete!: Boolean;
+
     @prop({ type: String, enum: options })
     public wasThereAHistoryOfAllergyOrPreviousReactionsToTheDrug?: String;
 

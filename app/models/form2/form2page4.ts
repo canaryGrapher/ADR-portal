@@ -6,6 +6,9 @@ import Form2Page4c from "./Page4/form2page4c";
 import Form2Page4d from "./Page4/form2page4d";
 
 export default class Form2Page4 {
+    @prop({ type: Boolean, required: true })
+    public isComplete!: Boolean;
+
     @prop({ type: Form2Page4a })
     public form2page4a?: Form2Page4a;
 

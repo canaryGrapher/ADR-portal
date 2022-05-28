@@ -1,6 +1,9 @@
 import { prop } from "@typegoose/typegoose";
 
 export default class Form1Page4 {
+    @prop({ type: Boolean, required: true })
+    public isComplete!: Boolean;
+
     @prop({ type: String, required: true })
     public name!: String;
 
