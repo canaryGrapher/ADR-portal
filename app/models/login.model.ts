@@ -15,14 +15,17 @@ class Login {
     @prop({ type: String, required: true })
     public lastName!: String;
 
-    @prop({ type: String })
-    public currentForm?: String;
+    @prop({ type: String || null, default: null })
+    public currentFormOne?: String | null;
 
-    @prop({ type: [String] })
-    public completedPages?: [String];
+    @prop({ type: [mongoose.Types.ObjectId] })
+    public completedFormsOne?: [mongoose.Types.ObjectId];
 
-    @prop({ type: [String] })
-    public completedForms?: [String];
+    @prop({ type: String || null, default: null })
+    public currentFormTwo?: String | null;
+
+    @prop({ type: [mongoose.Types.ObjectId] })
+    public completedFormsTwo?: [mongoose.Types.ObjectId];
 }
 
 const LoginModel = getModelForClass(Login);

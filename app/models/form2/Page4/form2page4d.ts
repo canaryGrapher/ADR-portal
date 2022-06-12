@@ -60,8 +60,8 @@ export default class Form2Page1 {
     @prop({ type: String })
     public howLongWasDeviceInUse?: String;
 
-    @prop({ type: Boolean, enum: options4 })
-    public availabilityOfDeviceForEvaluation?: Boolean;
+    @prop({ type: String, enum: options4 })
+    public availabilityOfDeviceForEvaluation?: String;
 
     @prop({ type: String, enum: options3 })
     public whatIsTheStatusOfTheDevice?: String;

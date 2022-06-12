@@ -1,4 +1,4 @@
-import { Input, Checkbox } from "antd";
+import { Input } from "antd";
 import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
 import { sessionStorage } from "~/server/authentication/session.server";
 

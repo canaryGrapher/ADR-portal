@@ -1,5 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit'
 //importing slices here
+
+// form 1 redux states
 import form1page1Reducer from '~/states/Slices/AdrReportingForm/1'
 import form1page2Reducer from '~/states/Slices/AdrReportingForm/2'
 import form1page3Reducer from '~/states/Slices/AdrReportingForm/3/a'
@@ -20,20 +22,21 @@ import form1page4Reducer from '~/states/Slices/AdrReportingForm/4'
 import form2page1Reducer from '~/states/Slices/MedicalDeviceReporting/1'
 import form2page2Reducer from '~/states/Slices/MedicalDeviceReporting/2'
 import form2page3Reducer from '~/states/Slices/MedicalDeviceReporting/3'
-import form2page3Option1Reducer from './Slices/MedicalDeviceReporting/3/option1'
-import form2page3Option2Reducer from './Slices/MedicalDeviceReporting/3/option2'
-import form2page3Option3Reducer from './Slices/MedicalDeviceReporting/3/option3'
-import form2page4aReducer from './Slices/MedicalDeviceReporting/4/index'
-import form2page4bReducer from './Slices/MedicalDeviceReporting/4/b'
-import form2page4cReducer from './Slices/MedicalDeviceReporting/4/c'
-import form2page4dReducer from './Slices/MedicalDeviceReporting/4/d'
-
-
-import form2page5Reducer from './Slices/MedicalDeviceReporting/5'
+import form2page3Option1Reducer from '~/states/Slices/MedicalDeviceReporting/3/option1'
+import form2page3Option2Reducer from '~/states/Slices/MedicalDeviceReporting/3/option2'
+import form2page3Option3Reducer from '~/states/Slices/MedicalDeviceReporting/3/option3'
+import form2page4aReducer from '~/states/Slices/MedicalDeviceReporting/4/index'
+import form2page4bReducer from '~/states/Slices/MedicalDeviceReporting/4/b'
+import form2page4cReducer from '~/states/Slices/MedicalDeviceReporting/4/c'
+import form2page4dReducer from '~/states/Slices/MedicalDeviceReporting/4/d'
+import form2page5Reducer from '~/states/Slices/MedicalDeviceReporting/5'
 import form2page6Reducer from '~/states/Slices/MedicalDeviceReporting/6'
 import form2page7Reducer from '~/states/Slices/MedicalDeviceReporting/7'
 import form2page8Reducer from '~/states/Slices/MedicalDeviceReporting/8'
 import form2page9Reducer from '~/states/Slices/MedicalDeviceReporting/9'
+
+// user data redux states
+import userReducer from '~/states/Slices/User/user'
 
 export const store = configureStore({
         reducer: {
@@ -67,7 +70,9 @@ export const store = configureStore({
                 form2page6: form2page6Reducer,
                 form2page7: form2page7Reducer,
                 form2page8: form2page8Reducer,
-                form2page9: form2page9Reducer
+                form2page9: form2page9Reducer,
+                // user data redux states
+                user: userReducer
         },
         middleware: (getDefaultMiddleware) => getDefaultMiddleware({ serializableCheck: false }),
 })

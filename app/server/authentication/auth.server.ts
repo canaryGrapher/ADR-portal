@@ -2,7 +2,7 @@ import { Authenticator, AuthorizationError } from 'remix-auth';
 import { FormStrategy } from 'remix-auth-form';
 import { sessionStorage, User } from './session.server';
 
-import LoginModel from "../../models/login.model"
+import LoginModel from "~/models/login.model"
 
 // Create an instance of the authenticator, pass a Type, User,  with what
 // strategies will return and will store in the session
@@ -32,10 +32,10 @@ authenticator.use(
         const userDetails = await LoginModel.findOne({ email: email, password: password })
         if (userDetails) {
             user = {
-                firstName: userDetails.firstName,
-                lastName: userDetails.lastName,
                 email: userDetails.email,
-                token: `${password}-${new Date().getTime()}`,
+                currentFormOne: userDetails.currentFormOne?.toString(),
+                currentFormTwo: userDetails.currentFormTwo?.toString(),
+                token: `${email}-${userDetails._id}-${new Date().getTime()}`,
             };
 
             return await Promise.resolve({ ...user });
