@@ -1,14 +1,13 @@
 import { LoaderFunction, redirect } from "remix";
-import { addUser } from "~/server/services/mutations/user/user.server";
+// import { addUser } from "~/server/services/mutations/user/user.server";
 import authenticator from "~/server/authentication/auth.server";
+import { getUserDetails } from "~/server/services/mutations/user/get-details.server";
 
 export let loader: LoaderFunction = async ({ request }) => {
     const user = await authenticator.isAuthenticated(request);
-    console.log("Here is the user details: ", user);
     if (user) {
-        console.log("Here is the user details of the user: ", user);
         // @ts-ignore
-        return addUser(user.email);
+        return getUserDetails(user.email);
     }
     else {
         return redirect("/login");

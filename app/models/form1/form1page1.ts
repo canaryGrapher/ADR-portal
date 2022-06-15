@@ -1,10 +1,10 @@
-import { prop } from '@typegoose/typegoose';
-
-const genders = ["Male", "Female", "Other"]
+import { prop, mongoose } from '@typegoose/typegoose';
 
 export default class Form1Page1 {
-    @prop({ type: Boolean, required: true })
-    public isComplete!: Boolean;
+    _id?: mongoose.Types.ObjectId;
+
+    @prop({ type: Boolean, default: false })
+    public isComplete?: Boolean;
 
     @prop({ type: String, required: true })
     public patientInitials!: String;
@@ -15,7 +15,7 @@ export default class Form1Page1 {
     @prop({ type: String, required: true })
     public ageOfOnset!: String;
 
-    @prop({ type: String, enum: genders })
+    @prop({ type: String })
     public gender?: String;
 
     @prop({ type: Number })

@@ -1,17 +1,10 @@
-import FormLayout from "~/layouts/forms/adr-reporting";
-import { Input, Form, InputNumber, DatePicker, Select, Checkbox } from "antd";
-import NavigationPanel from "~/components/forms/NavigationPanel";
-import moment from "moment";
-
+import { useEffect } from "react";
 import { LoaderFunction } from "remix";
 import authenticator from "~/server/authentication/auth.server";
-
-export let loader: LoaderFunction = async ({ request }) => {
-  return await authenticator.isAuthenticated(request, {
-    failureRedirect: "/login",
-  });
-};
-
+import FormLayout from "~/layouts/forms/adr-reporting";
+import { Input, Form, InputNumber, DatePicker, Select, message } from "antd";
+import NavigationPanel from "~/components/forms/NavigationPanel";
+import moment from "moment";
 // importing utilities
 import {
   genderOptions,
@@ -19,23 +12,42 @@ import {
   ip_op,
 } from "~/utils/adr-reporting/1";
 
-// importing redux reducers
+export let loader: LoaderFunction = async ({ request }) => {
+  return await authenticator.isAuthenticated(request, {
+    failureRedirect: "/login",
+  });
+};
+
 import { RootState } from "~/states/store";
 import { useSelector, useDispatch } from "react-redux";
-import { setNewFormData } from "~/states/Slices/AdrReportingForm/1";
+import {
+  setNewFormData,
+  getFormData,
+} from "~/states/Slices/AdrReportingForm/1";
 
 export default function Form1page1() {
+  const info = () => {
+    message.success("Form successfully submitted");
+  };
+  const error = () => {
+    message.error("Form submission failed");
+  };
+
+  const [form] = Form.useForm();
   const dispatch = useDispatch();
-  // converting date value to moment Object
   const formState = useSelector((state: RootState) => state.form1page1);
-  let newFormState = { ...formState };
-  if (formState.DateOfBirth) {
-    const dateOfBirth = moment(new Date(formState.DateOfBirth));
-    // @ts-ignore
-    newFormState.DateOfBirth = dateOfBirth;
-  } else {
-    delete newFormState.DateOfBirth;
-  }
+  useEffect(() => {
+    dispatch(getFormData());
+  }, []);
+
+  useEffect(() => {
+    let newFormState = {
+      ...formState.data,
+      // @ts-ignore
+      DateOfBirth: moment(new Date(formState.data.DateOfBirth)),
+    };
+    form.setFieldsValue(newFormState);
+  }, [formState.status]);
 
   // change the redux value whenever there is a change in the form
   const changeFormData = (value: any, fieldName: any) => {
@@ -45,11 +57,25 @@ export default function Form1page1() {
   return (
     <FormLayout>
       <Form
+        form={form}
         preserve={false}
         scrollToFirstError={true}
         name="Form1Page1"
-        initialValues={newFormState}
-        onFinish={(values) => console.log(values)}
+        onFinish={(values) => {
+          fetch("/api/forms/form1/page1", {
+            method: "post",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ ...values }),
+          })
+            .then((res) => {
+              info();
+            })
+            .catch((err) => {
+              error();
+            });
+        }}
         onValuesChange={(values) =>
           changeFormData(values[Object.keys(values)[0]], Object.keys(values)[0])
         }
@@ -121,13 +147,9 @@ export default function Form1page1() {
             <Form.Item
               label="Medicines/vaccines advised by"
               name="medicineAdvised"
-              className="w-3/4"
+              className="w-full"
             >
-              <Checkbox.Group
-                className="w-full grid grid-cols-3 gap-x-5 gap-y-2"
-                options={advisedMedicineOptions}
-                name="medicineAdvised"
-              />
+              <Select allowClear options={advisedMedicineOptions} />
             </Form.Item>
 
             <Form.Item

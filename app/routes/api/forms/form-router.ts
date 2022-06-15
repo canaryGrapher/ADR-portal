@@ -1,8 +1,8 @@
-import { LoaderFunction, redirect, json, Session } from "remix"
+import { LoaderFunction, redirect, Session } from "remix"
 import { intiateForm1 } from "~/server/services/mutations/form1/initiate.server"
 import { intiateForm2 } from "~/server/services/mutations/form2/initiate.server"
 import authenticator from "~/server/authentication/auth.server";
-import { sessionStorage, commitSession, getSession } from '~/server/authentication/session.server';
+import { commitSession, getSession } from '~/server/authentication/session.server';
 
 export const loader: LoaderFunction = async ({ request }) => {
     const user = await authenticator.isAuthenticated(request);

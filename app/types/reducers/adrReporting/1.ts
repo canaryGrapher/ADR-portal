@@ -8,7 +8,7 @@ interface FormStateType {
     ip_op?: "inPatient" | "outPatient" | null;
     unit?: string | null;
     reasonForTakingMedication?: string | null;
-    medicineAdvised?: string[] | null;
+    medicineAdvised?: string | null;
     knownAllergies?: string | null;
     socialHistory?: string | null;
 }
