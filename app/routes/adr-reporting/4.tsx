@@ -5,7 +5,7 @@ import moment from "moment";
 import FormLayout from "~/layouts/forms/adr-reporting";
 
 // Importing components
-import { Input, Radio, DatePicker, Form } from "antd";
+import { Input, Radio, DatePicker, Form, message } from "antd";
 import NavigationPanel from "~/components/forms/NavigationPanel";
 
 // importing utilities
@@ -16,7 +16,10 @@ import { FiHelpCircle } from "react-icons/fi";
 
 import { RootState } from "~/states/store";
 import { useSelector, useDispatch } from "react-redux";
-import { setNewFormData } from "~/states/Slices/AdrReportingForm/4";
+import {
+  setNewFormData,
+  getFormData,
+} from "~/states/Slices/AdrReportingForm/4";
 import { LoaderFunction } from "remix";
 import authenticator from "~/server/authentication/auth.server";
 
@@ -27,6 +30,13 @@ export let loader: LoaderFunction = async ({ request }) => {
 };
 
 export default function Form1page4() {
+  const info = () => {
+    message.success("Form successfully submitted");
+  };
+  const error = () => {
+    message.error("Form submission failed");
+  };
+  const [form] = Form.useForm();
   const [occupationState, setOccupationState] = useState<string>("");
   const [isOccupationApplicable, setIsOccupationApplicable] =
     useState<boolean>(false);
@@ -39,31 +49,55 @@ export default function Form1page4() {
     }
   }, [occupationState]);
 
-  const [form] = Form.useForm();
   const dispatch = useDispatch();
   // converting date value to moment Object
   const formState = useSelector((state: RootState) => state.form1page4);
-  let newFormState = { ...formState };
-  if (formState.dateOfReport != null) {
-    // @ts-ignore
-    newFormState.dateOfReport = moment(formState.dateOfReport);
-  } else {
-    delete newFormState.dateOfReport;
-  }
   // change the redux value whenever there is a change in the form
   const changeFormData = (value: any, fieldName: any) => {
     dispatch(setNewFormData({ fieldName, value }));
   };
+  useEffect(() => {
+    dispatch(getFormData());
+  }, []);
+
+  useEffect(() => {
+    const ReportDate = formState.data.dateOfThisReport
+      ? moment(formState.data.dateOfThisReport)
+      : null;
+    let newFormState = {
+      ...formState.data,
+      dateOfThisReport: ReportDate,
+    };
+    if (!newFormState.dateOfThisReport) {
+      // @ts-ignore
+      delete newFormState.dateOfThisReport;
+    }
+    form.setFieldsValue(newFormState);
+  }, [formState.status]);
 
   return (
     <FormLayout>
       {/* Anything between the <FormLayout> tag can be changed */}
       <Form
+        form={form}
         preserve={false}
         scrollToFirstError={true}
         name="Form1Page4"
-        initialValues={newFormState}
-        onFinish={(values) => console.log(values)}
+        onFinish={(values) => {
+          fetch("/api/forms/form1/page4", {
+            method: "post",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ ...values }),
+          })
+            .then((res) => {
+              info();
+            })
+            .catch((err) => {
+              error();
+            });
+        }}
         onValuesChange={(values) =>
           changeFormData(values[Object.keys(values)[0]], Object.keys(values)[0])
         }
@@ -167,7 +201,7 @@ export default function Form1page4() {
               <Input />
             </Form.Item>
             {/* Seventh */}
-            <Form.Item label="Date of this report" name="dateOfReport">
+            <Form.Item label="Date of this report" name="dateOfThisReport">
               <DatePicker className="w-full" />
             </Form.Item>
           </div>

@@ -8,16 +8,16 @@ export default class Form1Page4 {
     public name!: String;
 
     @prop({ type: String })
-    public IDnumber?: String;
+    public idNumber?: String;
 
     @prop({ type: String })
-    public PIN?: String;
+    public pin?: String;
 
     @prop({ type: String, required: true })
-    public emailID!: String;
+    public email!: String;
 
     @prop({ type: Number, required: true })
-    public TelephoneNumber!: Number;
+    public telephoneNumber!: Number;
 
     @prop({ type: String })
     public profAddress?: String;

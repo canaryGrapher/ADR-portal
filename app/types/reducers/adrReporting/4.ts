@@ -7,7 +7,7 @@ interface FormStateType {
     profAddress?: String | null;
     occupation?: "Physician" | "Dentist" | "Nurse" | "Pharmacist" | "Other" | null;
     department?: String | null;
-    dateOfReport?: string | null;
+    dateOfThisReport?: string | null;
     references?: String | null;
     reportersComment?: String | null;
 }
