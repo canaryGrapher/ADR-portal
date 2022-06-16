@@ -9,8 +9,7 @@ export const getFormData = createAsyncThunk(
                 const data = await response.json();
                 console.log("Here is the data: ", data)
                 return data;
-            }
-            )
+            })
     })
 
 const initialStateData: FormStateType = {

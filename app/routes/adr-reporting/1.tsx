@@ -11,19 +11,18 @@ import {
   advisedMedicineOptions,
   ip_op,
 } from "~/utils/adr-reporting/1";
-
-export let loader: LoaderFunction = async ({ request }) => {
-  return await authenticator.isAuthenticated(request, {
-    failureRedirect: "/login",
-  });
-};
-
 import { RootState } from "~/states/store";
 import { useSelector, useDispatch } from "react-redux";
 import {
   setNewFormData,
   getFormData,
 } from "~/states/Slices/AdrReportingForm/1";
+
+export let loader: LoaderFunction = async ({ request }) => {
+  return await authenticator.isAuthenticated(request, {
+    failureRedirect: "/login",
+  });
+};
 
 export default function Form1page1() {
   const info = () => {
@@ -41,11 +40,18 @@ export default function Form1page1() {
   }, []);
 
   useEffect(() => {
+    const BirthDate = formState.data.DateOfBirth
+      ? moment(formState.data.DateOfBirth)
+      : null;
     let newFormState = {
       ...formState.data,
       // @ts-ignore
-      DateOfBirth: moment(new Date(formState.data.DateOfBirth)),
+      DateOfBirth: BirthDate,
     };
+    if (!newFormState.DateOfBirth) {
+      // @ts-ignore
+      delete newFormState.DateOfBirth;
+    }
     form.setFieldsValue(newFormState);
   }, [formState.status]);
 

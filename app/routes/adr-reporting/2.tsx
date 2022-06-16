@@ -1,14 +1,18 @@
 // Import Form Layout
+import { useEffect } from "react";
 import FormLayout from "~/layouts/forms/adr-reporting";
 import moment from "moment";
 // Import components
-import { Input, DatePicker, Form } from "antd";
+import { Input, DatePicker, Form, message } from "antd";
 import NavigationPanel from "~/components/forms/NavigationPanel";
 
 // importing redux reducers
 import { RootState } from "~/states/store";
 import { useSelector, useDispatch } from "react-redux";
-import { setNewFormData } from "~/states/Slices/AdrReportingForm/2";
+import {
+  getFormData,
+  setNewFormData,
+} from "~/states/Slices/AdrReportingForm/2";
 
 import { LoaderFunction } from "remix";
 import authenticator from "~/server/authentication/auth.server";
@@ -20,25 +24,43 @@ export let loader: LoaderFunction = async ({ request }) => {
 };
 
 export default function Form1page2() {
+  const info = () => {
+    message.success("Form successfully submitted");
+  };
+  const error = () => {
+    message.error("Form submission failed");
+  };
+  const [form] = Form.useForm();
   const dispatch = useDispatch();
   // converting date value to moment Object
   const formState = useSelector((state: RootState) => state.form1page2);
-  let newFormState = { ...formState };
+  useEffect(() => {
+    dispatch(getFormData());
+  }, []);
 
-  if (formState.dateOfReactionStarted != null) {
-    // @ts-ignore
-    newFormState.dateOfReactionStarted = moment(
-      formState.dateOfReactionStarted
-    );
-  } else {
-    delete newFormState.dateOfReactionStarted;
-  }
-  if (formState.dateOfRecovery != null) {
-    // @ts-ignore
-    newFormState.dateOfRecovery = moment(formState.dateOfRecovery);
-  } else {
-    delete newFormState.dateOfRecovery;
-  }
+  useEffect(() => {
+    const ReactionStarted = formState.data.dateOfReactionStarted
+      ? moment(formState.data.dateOfReactionStarted)
+      : null;
+    const RecoveryDate = formState.data.dateOfRecovery
+      ? moment(formState.data.dateOfRecovery)
+      : null;
+    let newFormState = {
+      ...formState.data,
+      // @ts-ignore
+      dateOfRecovery: RecoveryDate,
+      dateOfReactionStarted: ReactionStarted,
+    };
+    if (!newFormState.dateOfReactionStarted) {
+      // @ts-ignore
+      delete newFormState.dateOfReactionStarted;
+    }
+    if (!newFormState.dateOfRecovery) {
+      // @ts-ignore
+      delete newFormState.dateOfRecovery;
+    }
+    form.setFieldsValue(newFormState);
+  }, [formState.status]);
 
   // change the redux value whenever there is a change in the form
   const changeFormData = (value: any, fieldName: any) => {
@@ -47,11 +69,25 @@ export default function Form1page2() {
   return (
     <FormLayout>
       <Form
+        form={form}
         preserve={false}
         scrollToFirstError={true}
         name="Form1Page2"
-        initialValues={newFormState}
-        onFinish={(values) => console.log(values)}
+        onFinish={(values) => {
+          fetch("/api/forms/form1/page2", {
+            method: "post",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ ...values }),
+          })
+            .then((res) => {
+              info();
+            })
+            .catch((err) => {
+              error();
+            });
+        }}
         onValuesChange={(values) =>
           changeFormData(values[Object.keys(values)[0]], Object.keys(values)[0])
         }

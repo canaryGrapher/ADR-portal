@@ -8,14 +8,14 @@ const addToForm = async (user: string, formID: string, formInput: any) => {
         if (form1Pointer) {
             // update form1.form1Page1 based on formInput
             const sanitizedFormInput = { ...formInput, isComplete: true };
-            form1Pointer.form1Page1 = sanitizedFormInput;
+            form1Pointer.form1Page2 = sanitizedFormInput;
             form1Pointer.save().then(() => {
-                console.log("Form 1 page 1 updated")
+                console.log("Form 1 page 2 updated")
             }
             ).catch(error => {
                 console.log(error)
             })
-            return "Form 1 Page 1 modified successfully"
+            return "Form 1 Page 2 modified successfully"
         } else {
             return "Form 1 does not exist"
         }
@@ -31,9 +31,9 @@ const getForm = async (user: string, formID: string) => {
     try {
         const form1Pointer = await Forms1Model.findOne({ user: user, _id: formID })
         if (form1Pointer) {
-            return form1Pointer.form1Page1
+            return form1Pointer.form1Page2
         } else {
-            return "Form 1 Page 1 does not exist"
+            return "Form 1 Page 2 does not exist"
         }
     }
     catch (error) {
