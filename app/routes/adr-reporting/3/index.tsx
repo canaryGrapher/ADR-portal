@@ -3,7 +3,7 @@ import FormLayout from "~/layouts/forms/adr-reporting";
 import moment from "moment";
 
 //importing components
-import { Input, Form, DatePicker, Radio } from "antd";
+import { Input, Form, DatePicker, Radio, message } from "antd";
 import NavigationPanel from "~/components/forms/NavigationPanel";
 
 // importing types
@@ -34,6 +34,12 @@ export let loader: LoaderFunction = async ({ request }) => {
 };
 
 export default function Form1page3() {
+  const info = () => {
+    message.success("Form successfully submitted");
+  };
+  const error = () => {
+    message.error("Form submission failed");
+  };
   const dispatch = useDispatch();
   const formState = useSelector((state: RootState) => state.form1page3_filled);
   const [keyCount, setKeyCount] = useState<number>(0);
@@ -57,7 +63,25 @@ export default function Form1page3() {
           <Subform id={keyCount} submitAction={submitFinishedForms} />
         </div>
       </div>
-      <NavigationPanel currentRoute="3" />
+      <Form
+        onFinish={() => {
+          fetch("/api/forms/form1/page3/a", {
+            method: "post",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ ...formState.data }),
+          })
+            .then((res) => {
+              info();
+            })
+            .catch((err) => {
+              error();
+            });
+        }}
+      >
+        <NavigationPanel currentRoute="3" />
+      </Form>
     </FormLayout>
   );
 }
@@ -81,11 +105,11 @@ function AddedDrugs(props: any) {
     // remove the drug from the list fo finalised drugs
     deleteFormItem(id);
   };
-  return props.current.drugDetails.length > 0 ? (
+  return props.current.data.drugDetails ? (
     <React.Fragment>
       <h2 className="text-[#e1763c]">Drugs Added</h2>
       <div className="grid grid-cols-2 gap-2">
-        {props.current.drugDetails.map((drug: any, index: number) => {
+        {props.current.data.drugDetails.map((drug: any, index: number) => {
           return (
             <div key={index} className="border">
               <div className="flex flex-row items-center justify-between px-4 py-3">
@@ -281,7 +305,10 @@ const Subform = (props: PropTypes) => {
         <Input />
       </Form.Item>
       <div className="w-100 flex flex-row-reverse">
-        <button className="w-32 border border-[#6C567B] bg-[#6C567B] p-2 text-white hover:bg-white hover:text-[#6C567B]">
+        <button
+          className="w-32 border border-[#6C567B] bg-[#6C567B] p-2 text-white hover:bg-white hover:text-[#6C567B]"
+          type="submit"
+        >
           Add more
         </button>
       </div>

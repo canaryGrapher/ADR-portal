@@ -1,34 +1,57 @@
 // needs to be changed
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit'
 import { FormStateType, ActionType, ActionType1 } from "~/types/reducers/adrReporting/3/a_filled";
 
-const initialState: FormStateType = {
+export const getFormData = createAsyncThunk(
+    'adrReporting/1/getFormData',
+    async (dispatch, getState) => {
+        return await fetch("/api/forms/form1/page3/a")
+            .then(async response => {
+                const data = await response.json();
+                console.log("Here is the data: ", data)
+                return data;
+            })
+    })
+
+const initialStateData: FormStateType = {
     drugDetails: []
 }
 
 export const form1page3FilledSlice = createSlice({
     name: "form1page3Filled",
-    initialState,
+    initialState: {
+        data: initialStateData,
+        status: "idle",
+    },
     reducers: {
         setAdditionalFormData: (state, action: PayloadAction<ActionType>) => {
             // logic to set the new form data in this slice. This changes everytime the form is updated
-            // @ts-ignore
-            state.drugDetails = [...state.drugDetails, { key: action.payload.id, ...action.payload.drugDetails }]
+            state.data.drugDetails = [...state.data.drugDetails, { identifier: action.payload.id, ...action.payload.drugDetails }]
         },
         removeAdditionalFormData: (state, action: PayloadAction<ActionType1>) => {
             // logic to remove the form data in this slice. This changes everytime the form is updated
-            // @ts-ignore
-            state.drugDetails = state.drugDetails?.filter((item: any) => item.key !== action.payload.id)
+            state.data.drugDetails = state.data.drugDetails?.filter((item: any) => item.key !== action.payload.id)
         },
         editAdditionalFormData: (state, action: PayloadAction<ActionType>) => {
             // logic to edit the form data in this slice. This changes everytime the form is updated
-            // @ts-ignore
-            state.drugDetails = state.drugDetails?.map((item: any) => {
-                if (item.key === action.payload.id) {
+            state.data.drugDetails = state.data.drugDetails?.map((item: any) => {
+                if (item.identifier === action.payload.id) {
                     return { key: action.payload.id, ...action.payload.drugDetails }
                 }
                 return item
             })
+        },
+    },
+    extraReducers: {
+        [getFormData.fulfilled.toString()]: (state, action: PayloadAction<FormStateType>) => {
+            state.status = "success"
+            state.data = action.payload
+        },
+        [getFormData.rejected.toString()]: (state, action: PayloadAction<FormStateType>) => {
+            state.status = "failed";
+        },
+        [getFormData.pending.toString()]: (state, action: PayloadAction<FormStateType>) => {
+            state.status = "loading";
         },
     }
 })

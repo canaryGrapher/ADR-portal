@@ -1,4 +1,4 @@
-import { prop } from "@typegoose/typegoose";
+import { prop, mongoose } from "@typegoose/typegoose";
 
 import Form1Page3a from "./Page3/form1page3a";
 import Form1Page3b from "./Page3/form1page3b";
@@ -8,11 +8,10 @@ import Form1Page3e from "./Page3/form1page3e";
 import Form1Page3f from "./Page3/form1page3f";
 
 export default class Form1Page3 {
-    @prop({ type: Boolean, required: true })
-    public isComplete!: Boolean;
+    _id?: mongoose.Types.ObjectId;
 
     @prop({ type: Form1Page3a })
-    public Form1Page3a?: Form1Page3a[];
+    public Form1Page3a?: Form1Page3a;
 
     @prop({ type: Form1Page3b })
     public Form1Page3b?: Form1Page3b;

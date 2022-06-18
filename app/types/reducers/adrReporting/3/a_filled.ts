@@ -5,7 +5,7 @@ interface FormStateType {
 }
 
 interface FormStateTypeAdditional extends FormSubStateType {
-    key: number;
+    identifier: number;
 }
 
 interface ActionType {
