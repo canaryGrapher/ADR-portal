@@ -2,7 +2,6 @@ import Forms1Model from "~/models/form1.model"
 
 const addToForm = async (user: string, formID: string, formInput: any) => {
     try {
-        // console.log("Incoming form data: ")
         console.log(user, formID, formInput)
         let form1Pointer = await Forms1Model.findOne({ user: user, _id: formID })
         if (form1Pointer) {
@@ -15,9 +14,7 @@ const addToForm = async (user: string, formID: string, formInput: any) => {
                 form1Pointer.form1Page3.Form1Page3a = {}
             }
             form1Pointer.form1Page3.Form1Page3a = { isComplete: true, drugDetails: formInput.drugDetails }
-            console.log("Idhar se shuru")
             console.log("Forms1Model.form1Page3.Form1Page3a", Forms1Model.schema.path("form1Page3.Form1Page3a"));
-            console.log("Idhar pe khatam")
             // form1Pointer.save()
             //     .then(() => {
             //         console.log("Form 1 page 3 updated")
