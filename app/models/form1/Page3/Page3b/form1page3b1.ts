@@ -1,6 +1,6 @@
 import { prop } from "@typegoose/typegoose";
 
-const options = ["Yes", "No", "Don't Know"]
+const options = ["Yes", "No", "Don't know"]
 
 export default class Form1Page3b1 {
     @prop({ type: Boolean, required: true })

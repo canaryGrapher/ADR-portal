@@ -106,27 +106,31 @@ function AddedDrugs(props: any) {
     // remove the drug from the list fo finalised drugs
     deleteFormItem(id);
   };
-  return props.current.data.drugDetails ? (
+  return props.current.status === "success" &&
+    props.current.data.drugDetails.length > 0 ? (
     <React.Fragment>
       <h2 className="text-[#e1763c]">Drugs Added</h2>
       <div className="grid grid-cols-2 gap-2">
-        {props.current.data.drugDetails.map((drug: any, index: number) => {
-          return (
-            <div key={index} className="border">
-              <div className="flex flex-row items-center justify-between px-4 py-3">
-                <p className="my-auto">{drug.nameOfDrug}</p>
-                <div className="flex items-center justify-center gap-4 text-lg">
-                  <div className="cursor-pointer hover:text-neutral-500">
-                    <EditFilled onClick={() => editFormData(drug.key, drug)} />
-                  </div>
-                  <div className="cursor-pointer hover:text-neutral-500">
-                    <DeleteFilled onClick={() => deleteFormItem(drug.key)} />
+        {props.current.data &&
+          props.current.data.drugDetails.map((drug: any, index: number) => {
+            return (
+              <div key={index} className="border">
+                <div className="flex flex-row items-center justify-between px-4 py-3">
+                  <p className="my-auto">{drug.nameOfDrug}</p>
+                  <div className="flex items-center justify-center gap-4 text-lg">
+                    <div className="cursor-pointer hover:text-neutral-500">
+                      <EditFilled
+                        onClick={() => editFormData(drug.identifier, drug)}
+                      />
+                    </div>
+                    <div className="cursor-pointer hover:text-neutral-500">
+                      <DeleteFilled onClick={() => deleteFormItem(drug.key)} />
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          );
-        })}
+            );
+          })}
       </div>
     </React.Fragment>
   ) : null;
@@ -313,7 +317,7 @@ const Subform = (props: PropTypes) => {
           className="w-32 border border-[#6C567B] bg-[#6C567B] p-2 text-white hover:bg-white hover:text-[#6C567B]"
           type="submit"
         >
-          Add more
+          Add
         </button>
       </div>
     </Form>
