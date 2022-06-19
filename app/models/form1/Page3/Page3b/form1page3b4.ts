@@ -1,7 +1,7 @@
 import { prop } from "@typegoose/typegoose";
 
-const options = ["Yes", "No"]
-const options2 = ["Definitely Preventable", "Probably Preventable", "Not Preventable"]
+const options = ["Yes", "No", null]
+const options2 = ["Definitely Preventable", "Probably Preventable", "Not Preventable", null]
 
 export default class Form1Page3b4 {
     @prop({ type: Boolean, required: true })
@@ -27,7 +27,4 @@ export default class Form1Page3b4 {
 
     @prop({ type: String, enum: options })
     public wasADrugInteractionInvolvedInTheAdr?: String;
-
-    @prop({ type: String, enum: options2 })
-    public finalResult?: String
 }

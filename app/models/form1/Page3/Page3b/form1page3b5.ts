@@ -1,7 +1,7 @@
-import { prop } from "@typegoose/typegoose";
+import { prop, PropType } from "@typegoose/typegoose";
 
-const options = ["Predictable", "Not Predictable"]
-const options2 = ["Age", "Gender", "Genetic", "Inter-current disease", "Multiple Drug Therapy", "Other"]
+const options = ["predictable", "notPredictable"]
+
 
 export default class Form1Page3b5 {
     @prop({ type: Boolean, required: true })
@@ -10,9 +10,9 @@ export default class Form1Page3b5 {
     @prop({ type: String, enum: options })
     public predictability?: String;
 
-    @prop({ type: String, enum: options2 })
-    public predisposingFactors?: String[];
+    @prop({ type: () => String }, PropType.ARRAY)
+    public preDisposingFactors?: String[];
 
     @prop({ type: String })
-    public others?: String;
+    public otherInformation?: String;
 }

@@ -1,9 +1,9 @@
 // importing layouts
 import FormLayout from "~/layouts/forms/adr-reporting";
-
+import { useEffect } from "react";
 // importing components
 import NavigationPanel from "~/components/forms/NavigationPanel";
-import { Radio, Form } from "antd";
+import { Radio, Form, message } from "antd";
 
 //importing utilities
 import {
@@ -14,7 +14,10 @@ import {
 
 import { RootState } from "~/states/store";
 import { useSelector, useDispatch } from "react-redux";
-import { setNewFormData } from "~/states/Slices/AdrReportingForm/3/b/4";
+import {
+  setNewFormData,
+  getFormData,
+} from "~/states/Slices/AdrReportingForm/3/b/4";
 import { LoaderFunction } from "remix";
 import authenticator from "~/server/authentication/auth.server";
 
@@ -25,10 +28,21 @@ export let loader: LoaderFunction = async ({ request }) => {
 };
 export default function Form1page3b4() {
   const dispatch = useDispatch();
-  // converting date value to moment Object
+  const [form] = Form.useForm();
+  const info = () => {
+    message.success("Form successfully submitted");
+  };
+  const error = () => {
+    message.error("Form submission failed");
+  };
   const formState = useSelector((state: RootState) => state.form1page3b4);
-  let newFormState = { ...formState };
+  useEffect(() => {
+    dispatch(getFormData());
+  }, []);
 
+  useEffect(() => {
+    form.setFieldsValue(formState.data);
+  }, [formState.status]);
   // change the redux value whenever there is a change in the form
   const changeFormData = (value: any, fieldName: any) => {
     dispatch(setNewFormData({ fieldName, value }));
@@ -38,10 +52,24 @@ export default function Form1page3b4() {
     <FormLayout>
       <Form
         preserve={false}
+        form={form}
         scrollToFirstError={true}
         name="Form1Page3b4"
-        initialValues={newFormState}
-        onFinish={(values) => console.log(values)}
+        onFinish={(values) => {
+          fetch("/api/forms/form1/page3/b/iv", {
+            method: "post",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ ...values }),
+          })
+            .then((res) => {
+              info();
+            })
+            .catch((err) => {
+              error();
+            });
+        }}
         onValuesChange={(values) =>
           changeFormData(values[Object.keys(values)[0]], Object.keys(values)[0])
         }
@@ -56,8 +84,8 @@ export default function Form1page3b4() {
             {formLayout.map((field, index) => (
               <Form.Item
                 key={index}
-                name={index}
-                label={field}
+                name={field.value}
+                label={field.label}
                 className="w-full pt-4"
               >
                 <Radio.Group options={formRadioOptions} optionType="button" />

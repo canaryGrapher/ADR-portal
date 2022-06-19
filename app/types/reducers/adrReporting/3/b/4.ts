@@ -1,11 +1,11 @@
 interface FormStateType {
-    0?: BooleanTypes | null;
-    1?: BooleanTypes | null;
-    2?: BooleanTypes | null;
-    3?: BooleanTypes | null;
-    4?: BooleanTypes | null;
-    5?: BooleanTypes | null;
-    6?: BooleanTypes | null;
+    wasThereAHistoryOfAllergyOrPreviousReactionsToTheDrug?: BooleanTypes | null;
+    wasTheDrugInvolvedInappropriateForThePatientSClinicalCondition?: BooleanTypes | null;
+    wasTheDoseRouteOrFrequencyOfAdministrationInappropriateForThePatientSAgeWeightOrDiseaseState?: BooleanTypes | null;
+    wasAToxicSerumDrugConcentrationOrLaboratoryMonitoringTestDocumented?: BooleanTypes | null;
+    wasThereAKnownTreatmentForTheAdverseDrugReaction?: BooleanTypes | null;
+    wasRequiredTherapeuticDrugMonitoringOrOtherNecessaryLabTestsNotPerformed?: BooleanTypes | null;
+    wasADrugInteractionInvolvedInTheAdr?: BooleanTypes | null;
 }
 
 type PayloadKeys = keyof FormStateType;
