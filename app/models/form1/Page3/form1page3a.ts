@@ -1,4 +1,4 @@
-import { prop, mongoose } from "@typegoose/typegoose"
+import { prop, mongoose, PropType } from "@typegoose/typegoose"
 
 // const availableActions = ["Dose reduced", "Dose increased", "Drug withdrawn", "Dose not changed", "Not applicable", "Unknown"]
 // const availableActions2 = ["No rechallenge", "Recurrence of symptoms", "No occurance of symptomps", "Unknown"]
@@ -19,12 +19,6 @@ class Form1Page3aData {
     public BatchNo_LotNo?: String;
 
     @prop({ type: String })
-    public expDate?: String;
-
-    @prop({ type: Number })
-    public doseUsed?: number;
-
-    @prop({ type: String })
     public routeUsed?: String;
 
     @prop({ type: String })
@@ -38,9 +32,6 @@ class Form1Page3aData {
 
     @prop({ type: String, required: true })
     public dateStarted!: String;
-
-    @prop({ type: String })
-    public dateStopped?: String;
 
     @prop({ type: String })
     public indication?: String;
@@ -59,6 +50,18 @@ class Form1Page3aData {
 
     @prop({ type: String })
     public doseAfterReintroduction?: String;
+
+
+
+    @prop({ type: String })
+    public expDate?: String;
+
+    @prop({ type: Number })
+    public doseUsed?: number;
+
+
+    @prop({ type: String })
+    public dateStopped?: String;
 }
 
 export default class Form1Page3a {
@@ -67,7 +70,7 @@ export default class Form1Page3a {
     @prop({ type: Boolean, default: false })
     public isComplete?: Boolean;
 
-    @prop({ type: () => Form1Page3aData })
+    @prop({ type: () => Form1Page3aData }, PropType.ARRAY)
     public drugDetails?: Form1Page3aData[];
 
 }

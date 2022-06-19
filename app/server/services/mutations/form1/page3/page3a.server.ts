@@ -6,22 +6,21 @@ const addToForm = async (user: string, formID: string, formInput: any) => {
         let form1Pointer = await Forms1Model.findOne({ user: user, _id: formID })
         if (form1Pointer) {
             if (!form1Pointer.form1Page3) {
-                // creating empty object is Page3 does not exist
+                // creating empty object if Page3 does not exist
                 form1Pointer.form1Page3 = {}
             }
             if (!form1Pointer.form1Page3.Form1Page3a) {
-                // creating empty object is Page3a does not exist
+                // creating empty object if Page3a does not exist
                 form1Pointer.form1Page3.Form1Page3a = {}
             }
             form1Pointer.form1Page3.Form1Page3a = { isComplete: true, drugDetails: formInput.drugDetails }
-            console.log("Forms1Model.form1Page3.Form1Page3a", Forms1Model.schema.path("form1Page3.Form1Page3a"));
-            // form1Pointer.save()
-            //     .then(() => {
-            //         console.log("Form 1 page 3 updated")
-            //     }
-            //     ).catch(error => {
-            //         console.log(error)
-            //     })
+            form1Pointer.save()
+                .then(() => {
+                    console.log("Form 1 page 3 updated")
+                }
+                ).catch(error => {
+                    console.log(error)
+                })
             return "Form 1 Page 3a modified successfully"
         } else {
             return "Form 1 does not exist"

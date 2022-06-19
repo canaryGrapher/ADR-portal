@@ -19,6 +19,7 @@ import {
   setAdditionalFormData,
   editAdditionalFormData,
   removeAdditionalFormData,
+  getFormData,
 } from "~/states/Slices/AdrReportingForm/3/a_filled";
 
 import { DeleteFilled, EditFilled } from "@ant-design/icons";
@@ -175,6 +176,9 @@ const Subform = (props: PropTypes) => {
   useEffect(() => {
     form.setFieldsValue(newFormState);
   }, [form, newFormState]);
+  useEffect(() => {
+    dispatch(getFormData());
+  }, []);
   return (
     <Form
       form={form}
