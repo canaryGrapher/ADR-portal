@@ -1,8 +1,8 @@
 //importing layouts
 import FormLayout from "~/layouts/forms/medical-device-reporting";
-
+import { useEffect } from "react";
 //importing components
-import { Input, DatePicker, Form, Radio } from "antd";
+import { Input, DatePicker, Form, Radio, message } from "antd";
 import NavigationPanel from "~/components/forms/NavigationPanel";
 import moment from "moment";
 
@@ -12,7 +12,10 @@ import { radioOptions } from "~/utils/medical-device-reporting/1";
 // importing redux reducers
 import { RootState } from "~/states/store";
 import { useSelector, useDispatch } from "react-redux";
-import { setNewFormData } from "~/states/Slices/MedicalDeviceReporting/1";
+import {
+  setNewFormData,
+  getFormData,
+} from "~/states/Slices/MedicalDeviceReporting/1";
 import { LoaderFunction } from "remix";
 import authenticator from "~/server/authentication/auth.server";
 
@@ -24,15 +27,35 @@ export let loader: LoaderFunction = async ({ request }) => {
 
 export default function Form2page1() {
   const dispatch = useDispatch();
+  const [form] = Form.useForm();
+  const info = () => {
+    message.success("Form successfully submitted");
+  };
+  const error = () => {
+    message.error("Form submission failed");
+  };
 
   // converting date value to moment object
   const formState = useSelector((state: RootState) => state.form2page1);
-  let newFormState = { ...formState };
-  if (formState.dateOfReport != null) {
-    newFormState.dateOfReport = moment(formState.dateOfReport);
-  } else {
-    delete newFormState.dateOfReport;
-  }
+
+  useEffect(() => {
+    dispatch(getFormData());
+  }, []);
+
+  useEffect(() => {
+    const _DateOfReport = formState.data.dateOfReport
+      ? moment(formState.data.dateOfReport)
+      : null;
+    let newFormState = {
+      ...formState.data,
+      dateOfReport: _DateOfReport,
+    };
+    if (!newFormState.dateOfReport) {
+      // @ts-ignore
+      delete newFormState.dateOfReport;
+    }
+    form.setFieldsValue(newFormState);
+  }, [formState.status]);
 
   // change redux value whenever there is change in the form
   const changeFormData = (value: any, fieldName: any) => {
@@ -45,8 +68,22 @@ export default function Form2page1() {
         preserve={false}
         scrollToFirstError={true}
         name="Form2page1"
-        initialValues={newFormState}
-        onFinish={(value) => console.log(value)}
+        form={form}
+        onFinish={(values) => {
+          fetch("/api/forms/form2/page1", {
+            method: "post",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ ...values }),
+          })
+            .then((res) => {
+              info();
+            })
+            .catch((err) => {
+              error();
+            });
+        }}
         onValuesChange={(values) => {
           changeFormData(
             values[Object.keys(values)[0]],

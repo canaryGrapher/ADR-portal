@@ -1,4 +1,4 @@
-import { prop } from "@typegoose/typegoose";
+import { prop, mongoose } from "@typegoose/typegoose";
 
 import Form2Page4a from "./Page4/form2page4a";
 import Form2Page4b from "./Page4/form2page4b";
@@ -6,8 +6,7 @@ import Form2Page4c from "./Page4/form2page4c";
 import Form2Page4d from "./Page4/form2page4d";
 
 export default class Form2Page4 {
-    @prop({ type: Boolean, required: true })
-    public isComplete!: Boolean;
+    _id?: mongoose.Types.ObjectId;
 
     @prop({ type: Form2Page4a })
     public form2page4a?: Form2Page4a;

@@ -1,11 +1,10 @@
 import { useState, useEffect } from "react";
 import moment from "moment";
-
 //importing layouts
 import FormLayout from "~/layouts/forms/adr-reporting";
 
 //importing components
-import { Input, DatePicker, Radio, Form } from "antd";
+import { Input, DatePicker, Radio, Form, message } from "antd";
 import NavigationPanel from "~/components/forms/NavigationPanel";
 
 // importing utilities
@@ -19,7 +18,10 @@ import {
 // importing reduc reducers
 import { RootState } from "~/states/store";
 import { useSelector, useDispatch } from "react-redux";
-import { setNewFormData } from "~/states/Slices/MedicalDeviceReporting/4/d";
+import {
+  setNewFormData,
+  getFormData,
+} from "~/states/Slices/MedicalDeviceReporting/4/d";
 import { LoaderFunction } from "remix";
 import authenticator from "~/server/authentication/auth.server";
 
@@ -29,37 +31,64 @@ export let loader: LoaderFunction = async ({ request }) => {
   });
 };
 export default function Form2page4d() {
+  const info = () => {
+    message.success("Form successfully submitted");
+  };
+  const error = () => {
+    message.error("Form submission failed");
+  };
   const dispatch = useDispatch();
   const formState = useSelector((state: RootState) => state.form2page4d);
-  let newFormState = { ...formState };
-  if (formState.installationDate) {
-    const installationDate = moment(new Date(formState.installationDate));
-    // @ts-ignore
-    newFormState.installationDate = installationDate;
-  } else {
-    newFormState.installationDate = null;
-  }
-  if (formState.expirationDate) {
-    const expirationDate = moment(new Date(formState.expirationDate));
-    // @ts-ignore
-    newFormState.expirationDate = expirationDate;
-  } else {
-    newFormState.expirationDate = null;
-  }
-  if (formState.lastExpirationDate) {
-    const lastExpirationDate = moment(new Date(formState.lastExpirationDate));
-    // @ts-ignore
-    newFormState.lastExpirationDate = lastExpirationDate;
-  } else {
-    newFormState.lastExpirationDate = null;
-  }
-  if (formState.lastCalibration) {
-    const lastCalibration = moment(new Date(formState.lastCalibration));
-    // @ts-ignore
-    newFormState.lastCalibration = lastCalibration;
-  } else {
-    newFormState.lastCalibration = null;
-  }
+  // if (formState.lastCalibration) {
+  //   const lastCalibration = moment(new Date(formState.lastCalibration));
+  //   // @ts-ignore
+  //   newFormState.lastCalibration = lastCalibration;
+  // } else {
+  //   newFormState.lastCalibration = null;
+  // }
+  useEffect(() => {
+    dispatch(getFormData());
+  }, []);
+
+  useEffect(() => {
+    const _DateOfInstallation = formState.data.installationDate
+      ? moment(formState.data.installationDate)
+      : null;
+    const _DateOfExpiration = formState.data.expirationDate
+      ? moment(formState.data.expirationDate)
+      : null;
+    const _DateOfLastExpiration = formState.data.lastExpirationDate
+      ? moment(formState.data.lastExpirationDate)
+      : null;
+    const _DateOfLastCalibration = formState.data.lastCalibration
+      ? moment(formState.data.lastCalibration)
+      : null;
+
+    let newFormState = {
+      ...formState.data,
+      installationDate: _DateOfInstallation,
+      expirationDate: _DateOfExpiration,
+      lastExpirationDate: _DateOfLastExpiration,
+      lastCalibration: _DateOfLastCalibration,
+    };
+    if (!newFormState.installationDate) {
+      // @ts-ignore
+      delete newFormState.installationDate;
+    }
+    if (!newFormState.expirationDate) {
+      // @ts-ignore
+      delete newFormState.expirationDate;
+    }
+    if (!newFormState.lastExpirationDate) {
+      // @ts-ignore
+      delete newFormState.lastExpirationDate;
+    }
+    if (!newFormState.lastCalibration) {
+      // @ts-ignore
+      delete newFormState.lastCalibration;
+    }
+    form.setFieldsValue(newFormState);
+  }, [formState.status]);
   // change redux value whenever there is change in the form
   const [regulatedInIndia, setRegulatedInIndia] = useState<string>("");
   const [availabilityValue, setAvailabilityValue] = useState<string>("");
@@ -79,9 +108,6 @@ export default function Form2page4d() {
 
   const [form] = Form.useForm();
   // update the initial state for editing a drug
-  useEffect(() => {
-    form.setFieldsValue(newFormState);
-  }, [form, newFormState]);
 
   const changeFormData = (value: any, fieldName: any) => {
     if (fieldName === "availabilityOfDeviceForEvaluation" && value === "No") {
@@ -120,8 +146,21 @@ export default function Form2page4d() {
       <Form
         form={form}
         name="Form2page4d"
-        initialValues={newFormState}
-        onFinish={(value) => console.log(value)}
+        onFinish={(values) => {
+          fetch("/api/forms/form2/page4/d", {
+            method: "post",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ ...values }),
+          })
+            .then((res) => {
+              info();
+            })
+            .catch((err) => {
+              error();
+            });
+        }}
         onValuesChange={(values) => {
           changeFormData(
             values[Object.keys(values)[0]],
@@ -158,9 +197,10 @@ export default function Form2page4d() {
                 rows={3}
                 placeholder=""
                 disabled={
-                  formState.isTheDeviceNotified_regulatedInIndia === "Yes" ||
-                  !formState.isTheDeviceNotified_regulatedInIndia ||
-                  formState.isTheDeviceNotified_regulatedInIndia ===
+                  formState.data.isTheDeviceNotified_regulatedInIndia ===
+                    "Yes" ||
+                  !formState.data.isTheDeviceNotified_regulatedInIndia ||
+                  formState.data.isTheDeviceNotified_regulatedInIndia ===
                     "Don't know"
                 }
               />
@@ -314,8 +354,8 @@ export default function Form2page4d() {
                 options={radioOptions4}
                 optionType="button"
                 disabled={
-                  formState.availabilityOfDeviceForEvaluation === "No" ||
-                  !formState.availabilityOfDeviceForEvaluation
+                  formState.data.availabilityOfDeviceForEvaluation === "No" ||
+                  !formState.data.availabilityOfDeviceForEvaluation
                 }
               />
             </Form.Item>
@@ -343,7 +383,8 @@ export default function Form2page4d() {
                 placeholder=""
                 disabled={
                   usagePerManufacturer === "Yes" ||
-                  !formState.isTheUsageOfDeviceAsPerManufacturersClaims_instructionsForUse_userManual
+                  !formState.data
+                    .isTheUsageOfDeviceAsPerManufacturersClaims_instructionsForUse_userManual
                 }
               />
             </Form.Item>

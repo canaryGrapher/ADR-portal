@@ -1,4 +1,5 @@
-import { Radio, Input, Form, Switch } from "antd";
+import { Radio, Input, Form, Switch, message } from "antd";
+import { useEffect } from "react";
 
 // importing utilities
 import {
@@ -9,12 +10,28 @@ import {
 // importing reduc reducers
 import { RootState } from "~/states/store";
 import { useSelector, useDispatch } from "react-redux";
-import { setNewFormData } from "~/states/Slices/MedicalDeviceReporting/3/option3";
+import {
+  setNewFormData,
+  getFormData,
+} from "~/states/Slices/MedicalDeviceReporting/3/option3";
 
 const Option3 = () => {
+  const info = () => {
+    message.success("Form successfully submitted");
+  };
+  const error = () => {
+    message.error("Form submission failed");
+  };
   const dispatch = useDispatch();
+  const [form] = Form.useForm();
   const formState = useSelector((state: RootState) => state.form2page3Option3);
-  let newFormState = { ...formState };
+  useEffect(() => {
+    dispatch(getFormData());
+  }, []);
+
+  useEffect(() => {
+    form.setFieldsValue(formState.data);
+  }, [formState.status]);
   // change redux value whenever there is change in the form
   const changeFormData = (value: any, fieldName: any) => {
     dispatch(setNewFormData({ fieldName, value }));
@@ -22,8 +39,7 @@ const Option3 = () => {
   return (
     <Form
       name="Form2page3Option1"
-      initialValues={newFormState}
-      onFinish={(value) => console.log(value)}
+      form={form}
       onValuesChange={(values) => {
         changeFormData(values[Object.keys(values)[0]], Object.keys(values)[0]);
       }}
@@ -31,8 +47,8 @@ const Option3 = () => {
     >
       {" "}
       <div className="option3">
-        <div className="w-full p-10 shadow-xl">
-          <div className="py-16 pb-8">
+        <div className="w-full shadow-xl">
+          <div className="mx-8 py-16 pb-8">
             <div className="pb-4 text-[24px] text-[#E8590C]">
               Equipment/Machines
             </div>

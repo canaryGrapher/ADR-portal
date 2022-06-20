@@ -1,6 +1,6 @@
 import { prop } from "@typegoose/typegoose";
 
-const options = ["Manufacturer", "Importer", "Distributor", "Patients", "Healthcare Professionals", "Other"];
+const options = ["manufacturer", "importer", "distributor", "patients", "healthcareProfessionals", "other"];
 const options2 = ["Yes", "No", "Don't Know"];
 
 export default class Form2Page2 {

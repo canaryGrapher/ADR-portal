@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import FormLayout from "~/layouts/forms/medical-device-reporting";
 
 // importing components
-import { Radio } from "antd";
+import { Radio, Form } from "antd";
 import NavigationPanel from "~/components/forms/NavigationPanel";
 
 //Importing subforms
@@ -32,7 +32,7 @@ export default function Form2page3() {
   const formState = useSelector((state: RootState) => state.form2page3);
 
   useEffect(() => {
-    if (formState.deviceCategory != "medicalDevice") {
+    if (formState.data.deviceCategory != "medicalDevice") {
       dispatch(
         setNewFormDataOption1({ fieldName: "typeOfDevice", value: null })
       );
@@ -49,12 +49,12 @@ export default function Form2page3() {
         setNewFormDataOption1({ fieldName: "personalUse", value: null })
       );
     }
-    if (formState.deviceCategory != "inVitroDiagnostic") {
+    if (formState.data.deviceCategory != "inVitroDiagnostic") {
       dispatch(
         setNewFormDataOption2({ fieldName: "inVitroDiagnostic", value: null })
       );
     }
-    if (formState.deviceCategory != "equipment_machine") {
+    if (formState.data.deviceCategory != "equipment_machine") {
       dispatch(
         setNewFormDataOption3({ fieldName: "equipmentUsage", value: null })
       );
@@ -127,24 +127,36 @@ export default function Form2page3() {
         </div>
       </div>
 
-      {formState.deviceCategory === "medicalDevice" && (
+      {formState.data.deviceCategory === "medicalDevice" && (
         <div className="Option1">
           <Option1 />
         </div>
       )}
 
-      {formState.deviceCategory === "inVitroDiagnostic" && (
+      {formState.data.deviceCategory === "inVitroDiagnostic" && (
         <div className="Option2">
           <Option2 />
         </div>
       )}
 
-      {formState.deviceCategory === "equipment_machine" && (
+      {formState.data.deviceCategory === "equipment_machine" && (
         <div className="Option3">
           <Option3 />
         </div>
       )}
-      <NavigationPanel currentRoute="3" />
+      <Form
+        onFinish={() => {
+          if (formState.data.deviceCategory === "medicalDevice") {
+            alert("medical device");
+          } else if (formState.data.deviceCategory === "inVitroDiagnostic") {
+            alert("in vitro");
+          } else if (formState.data.deviceCategory === "equipment_machine") {
+            alert("equipment");
+          }
+        }}
+      >
+        <NavigationPanel currentRoute="3" />
+      </Form>
     </FormLayout>
   );
 }

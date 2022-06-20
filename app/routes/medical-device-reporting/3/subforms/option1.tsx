@@ -1,6 +1,6 @@
 //importing components
-import { Radio, Form, Switch } from "antd";
-
+import { Radio, Form, Switch, message } from "antd";
+import { useEffect } from "react";
 //importing utilities
 import {
   typeOfDeviceOptions,
@@ -12,12 +12,28 @@ import {
 // importing reduc reducers
 import { RootState } from "~/states/store";
 import { useSelector, useDispatch } from "react-redux";
-import { setNewFormData } from "~/states/Slices/MedicalDeviceReporting/3/option1";
+import {
+  setNewFormData,
+  getFormData,
+} from "~/states/Slices/MedicalDeviceReporting/3/option1";
 
 const Option1 = () => {
+  const info = () => {
+    message.success("Form successfully submitted");
+  };
+  const error = () => {
+    message.error("Form submission failed");
+  };
   const dispatch = useDispatch();
+  const [form] = Form.useForm();
   const formState = useSelector((state: RootState) => state.form2page3Option1);
-  let newFormState = { ...formState };
+  useEffect(() => {
+    dispatch(getFormData());
+  }, []);
+
+  useEffect(() => {
+    form.setFieldsValue(formState.data);
+  }, [formState.status]);
   // change redux value whenever there is change in the form
   const changeFormData = (value: any, fieldName: any) => {
     dispatch(setNewFormData({ fieldName, value }));
@@ -25,8 +41,24 @@ const Option1 = () => {
   return (
     <Form
       name="Form2page3Option1"
-      initialValues={newFormState}
-      onFinish={(value) => console.log(value)}
+      form={form}
+      // onFinish={(values) => {
+      //   alert("Hi");
+      //   console.log(values);
+      //   fetch("/api/forms/form2/page3", {
+      //     method: "post",
+      //     headers: {
+      //       "Content-Type": "application/json",
+      //     },
+      //     body: JSON.stringify({ ...values }),
+      //   })
+      //     .then((res) => {
+      //       info();
+      //     })
+      //     .catch((err) => {
+      //       error();
+      //     });
+      // }}
       onValuesChange={(values) => {
         changeFormData(values[Object.keys(values)[0]], Object.keys(values)[0]);
       }}

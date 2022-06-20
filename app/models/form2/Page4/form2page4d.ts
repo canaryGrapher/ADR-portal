@@ -6,8 +6,8 @@ const options3 = ["Destroyed", "Still in use", "Returned to manufacturer or impo
 const options4 = ["Yes", "No"];
 
 export default class Form2Page1 {
-    @prop({ type: Boolean, required: true })
-    public isComplete!: Boolean;
+    @prop({ type: Boolean, default: false })
+    public isComplete?: Boolean;
 
     @prop({ type: String, enum: options })
     public isTheDeviceNotified_regulatedInIndia?: String;
@@ -42,17 +42,17 @@ export default class Form2Page1 {
     @prop({ type: Number })
     public udiNumber?: Number;
 
-    @prop({ type: Date })
-    public installationDate?: Date;
+    @prop({ type: String })
+    public installationDate?: String;
 
-    @prop({ type: Date })
-    public expirationDate?: Date;
+    @prop({ type: String })
+    public expirationDate?: String;
 
-    @prop({ type: Date })
-    public lastExpirationDate: Date;
+    @prop({ type: String })
+    public lastExpirationDate: String;
 
-    @prop({ type: Date })
-    public lastCalibration: Date;
+    @prop({ type: String })
+    public lastCalibration: String;
 
     @prop({ type: String })
     public ageOfDeviceFromDateOfManufacturing?: Number;
@@ -66,7 +66,7 @@ export default class Form2Page1 {
     @prop({ type: String, enum: options3 })
     public whatIsTheStatusOfTheDevice?: String;
 
-    @prop({ type: Boolean })
+    @prop({ type: String, enum: options4 })
     public isTheUsageOfDeviceAsPerManufacturersClaims_instructionsForUse_userManual?: Boolean;
 
     @prop({ type: String })

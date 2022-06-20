@@ -1,4 +1,5 @@
-import { Checkbox, Form } from "antd";
+import { Checkbox, Form, message } from "antd";
+import { useEffect } from "react";
 
 // importing utilities
 import { checkboxOptions } from "~/utils/medical-device-reporting/3";
@@ -6,12 +7,28 @@ import { checkboxOptions } from "~/utils/medical-device-reporting/3";
 // importing reduc reducers
 import { RootState } from "~/states/store";
 import { useSelector, useDispatch } from "react-redux";
-import { setNewFormData } from "~/states/Slices/MedicalDeviceReporting/3/option2";
+import {
+  setNewFormData,
+  getFormData,
+} from "~/states/Slices/MedicalDeviceReporting/3/option2";
 
 const Option2 = () => {
+  const info = () => {
+    message.success("Form successfully submitted");
+  };
+  const error = () => {
+    message.error("Form submission failed");
+  };
   const dispatch = useDispatch();
+  const [form] = Form.useForm();
   const formState = useSelector((state: RootState) => state.form2page3Option2);
-  let newFormState = { ...formState };
+  useEffect(() => {
+    dispatch(getFormData());
+  }, []);
+
+  useEffect(() => {
+    form.setFieldsValue(formState.data);
+  }, [formState.status]);
   // change redux value whenever there is change in the form
   const changeFormData = (value: any, fieldName: any) => {
     dispatch(setNewFormData({ fieldName, value }));
@@ -19,8 +36,7 @@ const Option2 = () => {
   return (
     <Form
       name="Form2page3Option2"
-      initialValues={newFormState}
-      onFinish={(value) => console.log(value)}
+      form={form}
       onValuesChange={(values) => {
         changeFormData(values[Object.keys(values)[0]], Object.keys(values)[0]);
       }}
