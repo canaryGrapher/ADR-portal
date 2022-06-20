@@ -1,6 +1,6 @@
 import { prop } from "@typegoose/typegoose";
 
-const locations = ["Hospital Premises", "Manufacturer Premise", "Home", "Others"];
+const locations = ["Hospital Premise", "Manufacturer Premise", "Home", "Others"];
 const deviceLocation = ["Returned to the company", "Implanted in patient", "Within the facility", "At patient home", "Destroyed", "Others"];
 const reason = ["Death", "Life Threatening", "Disability", "Hospitalization", "Congenital Anomaly", "Any medical event", "Permanent Impairment"];
 const deviceOperator = ["Healthcare professional", "Patient", "Problem noted before use", "Others"];
@@ -27,8 +27,8 @@ export default class Form2Page5 {
     @prop({ type: Date })
     public dateOfReturn?: Date;
 
-    @prop({ type: Boolean })
-    public seriousEvent?: Boolean;
+    @prop({ type: String })
+    public seriousEvent?: String;
 
     @prop({ type: String, enum: reason })
     public reason?: String;
@@ -36,8 +36,8 @@ export default class Form2Page5 {
     @prop({ type: Date })
     public dateOfDeath?: Date;
 
-    @prop({ type: Boolean })
-    public isDeviceInUse?: Boolean;
+    @prop({ type: String })
+    public isDeviceInUse?: String;
 
     @prop({ type: String })
     public detailedDescription?: string;

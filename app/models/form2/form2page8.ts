@@ -5,7 +5,7 @@ export default class Form2Page8 {
     public isComplete!: Boolean;
 
     @prop({ type: String })
-    public investgationAction?: String;
+    public investigationAction?: String;
 
     @prop({ type: String })
     public rootCause?: String;

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 
 // Import Form Layout
 import FormLayout from "~/layouts/forms/medical-device-reporting";
@@ -16,7 +16,10 @@ import {
 // importing redux reducers
 import { RootState } from "~/states/store";
 import { useSelector, useDispatch } from "react-redux";
-import { setNewFormData } from "~/states/Slices/MedicalDeviceReporting/6";
+import {
+  setNewFormData,
+  getFormData,
+} from "~/states/Slices/MedicalDeviceReporting/6";
 import { LoaderFunction } from "remix";
 import authenticator from "~/server/authentication/auth.server";
 
@@ -26,6 +29,12 @@ export let loader: LoaderFunction = async ({ request }) => {
   });
 };
 export default function Form2page6() {
+  const info = () => {
+    message.success("Form successfully submitted");
+  };
+  const error = () => {
+    message.error("Form submission failed");
+  };
   const [form] = Form.useForm();
   const dispatch = useDispatch();
 
@@ -57,15 +66,32 @@ export default function Form2page6() {
 
   // update the initial state for editing a drug
   useEffect(() => {
-    form.setFieldsValue(newFormState);
-  }, [form, newFormState]);
+    dispatch(getFormData());
+  }, []);
+  useEffect(() => {
+    form.setFieldsValue(formState.data);
+  }, [formState.status]);
   return (
     <FormLayout>
       <Form
         form={form}
+        preserve={false}
         name="Form2page6"
-        initialValues={newFormState}
-        onFinish={(value) => console.log(value)}
+        onFinish={(values) => {
+          fetch("/api/forms/form2/page6", {
+            method: "post",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ ...values }),
+          })
+            .then((res) => {
+              info();
+            })
+            .catch((err) => {
+              error();
+            });
+        }}
         onValuesChange={(values) => {
           changeFormData(
             values[Object.keys(values)[0]],

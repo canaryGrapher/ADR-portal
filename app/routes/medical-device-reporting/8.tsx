@@ -8,7 +8,10 @@ import NavigationPanel from "~/components/forms/NavigationPanel";
 // importing redux reducers
 import { RootState } from "~/states/store";
 import { useSelector, useDispatch } from "react-redux";
-import { setNewFormData } from "~/states/Slices/MedicalDeviceReporting/8";
+import {
+  setNewFormData,
+  getFormData,
+} from "~/states/Slices/MedicalDeviceReporting/8";
 import { LoaderFunction } from "remix";
 import authenticator from "~/server/authentication/auth.server";
 
@@ -18,6 +21,13 @@ export let loader: LoaderFunction = async ({ request }) => {
   });
 };
 export default function Form2page8() {
+  const info = () => {
+    message.success("Form successfully submitted");
+  };
+  const error = () => {
+    message.error("Form submission failed");
+  };
+  const [form] = Form.useForm();
   const dispatch = useDispatch();
   const formState = useSelector((state: RootState) => state.form2page8);
   let newFormState = { ...formState };
@@ -25,13 +35,32 @@ export default function Form2page8() {
   const changeFormData = (value: any, fieldName: any) => {
     dispatch(setNewFormData({ fieldName, value }));
   };
-
+  useEffect(() => {
+    dispatch(getFormData());
+  }, []);
+  useEffect(() => {
+    form.setFieldsValue(formState.data);
+  }, [formState.status]);
   return (
     <FormLayout>
       <Form
+        form={form}
         name="Form2page8"
-        initialValues={newFormState}
-        onFinish={(value) => console.log(value)}
+        onFinish={(values) => {
+          fetch("/api/forms/form2/page8", {
+            method: "post",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ ...values }),
+          })
+            .then((res) => {
+              info();
+            })
+            .catch((err) => {
+              error();
+            });
+        }}
         onValuesChange={(values) => {
           changeFormData(
             values[Object.keys(values)[0]],
