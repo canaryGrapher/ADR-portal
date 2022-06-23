@@ -1,5 +1,5 @@
 //importing components
-import { Radio, Form, Switch, message } from "antd";
+import { Radio, Form, Switch, Checkbox } from "antd";
 import { useEffect } from "react";
 //importing utilities
 import {
@@ -12,24 +12,12 @@ import {
 // importing reduc reducers
 import { RootState } from "~/states/store";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  setNewFormData,
-  getFormData,
-} from "~/states/Slices/MedicalDeviceReporting/3/option1";
+import { setNewFormData } from "~/states/Slices/MedicalDeviceReporting/3";
 
 const Option1 = () => {
-  const info = () => {
-    message.success("Form successfully submitted");
-  };
-  const error = () => {
-    message.error("Form submission failed");
-  };
   const dispatch = useDispatch();
   const [form] = Form.useForm();
-  const formState = useSelector((state: RootState) => state.form2page3Option1);
-  useEffect(() => {
-    dispatch(getFormData());
-  }, []);
+  const formState = useSelector((state: RootState) => state.form2page3);
 
   useEffect(() => {
     form.setFieldsValue(formState.data);
@@ -42,23 +30,6 @@ const Option1 = () => {
     <Form
       name="Form2page3Option1"
       form={form}
-      // onFinish={(values) => {
-      //   alert("Hi");
-      //   console.log(values);
-      //   fetch("/api/forms/form2/page3", {
-      //     method: "post",
-      //     headers: {
-      //       "Content-Type": "application/json",
-      //     },
-      //     body: JSON.stringify({ ...values }),
-      //   })
-      //     .then((res) => {
-      //       info();
-      //     })
-      //     .catch((err) => {
-      //       error();
-      //     });
-      // }}
       onValuesChange={(values) => {
         changeFormData(values[Object.keys(values)[0]], Object.keys(values)[0]);
       }}
@@ -122,7 +93,13 @@ const Option1 = () => {
               name="personalUse"
               label="Being used for personal/homecare use?"
             >
-              <Switch checkedChildren="Yes" unCheckedChildren="No" />
+              <Switch
+                checkedChildren="Yes"
+                unCheckedChildren="No"
+                checked={
+                  formState.data && formState.data.personalUse ? true : false
+                }
+              />
             </Form.Item>
           </div>
         </div>

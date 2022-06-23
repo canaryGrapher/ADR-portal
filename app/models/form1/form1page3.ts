@@ -20,7 +20,7 @@ export default class Form1Page3 {
     public Form1Page3c?: Form1Page3c;
 
     @prop({ type: Form1Page3d })
-    public Form1Page3d?: Form1Page3d[];
+    public Form1Page3d?: Form1Page3d;
 
     @prop({ type: Form1Page3e })
     public Form1Page3e?: Form1Page3e;

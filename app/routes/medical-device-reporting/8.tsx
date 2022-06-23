@@ -30,7 +30,6 @@ export default function Form2page8() {
   const [form] = Form.useForm();
   const dispatch = useDispatch();
   const formState = useSelector((state: RootState) => state.form2page8);
-  let newFormState = { ...formState };
   // change redux value whenever there is change in the form
   const changeFormData = (value: any, fieldName: any) => {
     dispatch(setNewFormData({ fieldName, value }));

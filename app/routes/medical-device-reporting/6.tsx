@@ -39,17 +39,6 @@ export default function Form2page6() {
   const dispatch = useDispatch();
 
   const formState = useSelector((state: RootState) => state.form2page6);
-  let newFormState = { ...formState };
-  if (formState.dateOfRecovery != null) {
-    newFormState.dateOfRecovery = moment(formState.dateOfRecovery);
-  } else {
-    delete newFormState.dateOfRecovery;
-  }
-  if (formState.dateOfDeath != null) {
-    newFormState.dateOfDeath = moment(formState.dateOfDeath);
-  } else {
-    delete newFormState.dateOfDeath;
-  }
 
   // change redux value whenever there is change in the form
   const changeFormData = (value: any, fieldName: any) => {
@@ -69,7 +58,27 @@ export default function Form2page6() {
     dispatch(getFormData());
   }, []);
   useEffect(() => {
-    form.setFieldsValue(formState.data);
+    const _DateOfRecovery = formState.data.dateOfRecovery
+      ? moment(formState.data.dateOfRecovery)
+      : null;
+    const _DateOfDeath = formState.data.dateOfDeath
+      ? moment(formState.data.dateOfDeath)
+      : null;
+
+    let newFormState = {
+      ...formState.data,
+      dateOfRecovery: _DateOfRecovery,
+      dateOfDeath: _DateOfDeath,
+    };
+    if (!newFormState.dateOfRecovery) {
+      // @ts-ignore
+      delete newFormState.dateOfRecovery;
+    }
+    if (!newFormState.dateOfDeath) {
+      // @ts-ignore
+      delete newFormState.dateOfDeath;
+    }
+    form.setFieldsValue(newFormState);
   }, [formState.status]);
   return (
     <FormLayout>
@@ -163,11 +172,11 @@ export default function Form2page6() {
                 label={"Date of recovery"}
                 name="dateOfRecovery"
                 className="w-full"
-                required={formState.patientRecovered === "Yes"}
+                required={formState.data.patientRecovered === "Yes"}
               >
                 <DatePicker
                   className="w-full"
-                  disabled={formState.patientRecovered != "Yes"}
+                  disabled={formState.data.patientRecovered != "Yes"}
                 />
               </Form.Item>
             </div>
@@ -191,11 +200,11 @@ export default function Form2page6() {
                 label={"Date of death"}
                 name="dateOfDeath"
                 className="w-full"
-                required={formState.patientDead === "Yes"}
+                required={formState.data.patientDead === "Yes"}
               >
                 <DatePicker
                   className="w-full"
-                  disabled={!(formState.patientDead === "Yes")}
+                  disabled={!(formState.data.patientDead === "Yes")}
                 />
               </Form.Item>
             </div>

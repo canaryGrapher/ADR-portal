@@ -4,8 +4,6 @@ import { prop, mongoose, PropType } from "@typegoose/typegoose"
 // const availableActions2 = ["No rechallenge", "Recurrence of symptoms", "No occurance of symptomps", "Unknown"]
 
 class Form1Page3aData {
-    _id?: mongoose.Types.ObjectId;
-
     @prop({ type: Number, required: true, unique: true })
     public identifier: number;
 
@@ -51,14 +49,11 @@ class Form1Page3aData {
     @prop({ type: String })
     public doseAfterReintroduction?: String;
 
-
-
     @prop({ type: String })
     public expDate?: String;
 
     @prop({ type: Number })
     public doseUsed?: number;
-
 
     @prop({ type: String })
     public dateStopped?: String;

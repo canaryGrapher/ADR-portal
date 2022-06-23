@@ -1,19 +1,19 @@
 import { prop } from "@typegoose/typegoose";
 
-const locations = ["Hospital Premise", "Manufacturer Premise", "Home", "Others"];
-const deviceLocation = ["Returned to the company", "Implanted in patient", "Within the facility", "At patient home", "Destroyed", "Others"];
-const reason = ["Death", "Life Threatening", "Disability", "Hospitalization", "Congenital Anomaly", "Any medical event", "Permanent Impairment"];
-const deviceOperator = ["Healthcare professional", "Patient", "Problem noted before use", "Others"];
+const locations = ["Hospital Premise", "Manufacturer Premise", "Home", "Others", null];
+const deviceLocation = ["Returned to the company", "Implanted in patient", "Within the facility", "At patient home", "Destroyed", "Others", null];
+const reason = ["Death", "Life Threatening", "Disability", "Hospitalization", "Congenital Anomaly", "Any medical event", "Permanent Impairment", null];
+const deviceOperator = ["Healthcare professional", "Patient", "Problem noted before use", "Others", null];
 
 export default class Form2Page5 {
     @prop({ type: Boolean, required: true })
     public isComplete!: Boolean;
 
-    @prop({ type: Date })
-    public dateOfEvent?: Date;
+    @prop({ type: String })
+    public dateOfEvent?: String;
 
-    @prop({ type: Date })
-    public dateOfImplant?: Date;
+    @prop({ type: String })
+    public dateOfImplant?: String;
 
     @prop({ type: String, enum: locations })
     public locationOfEvent?: String;
@@ -24,8 +24,8 @@ export default class Form2Page5 {
     @prop({ type: String, enum: deviceLocation })
     public deviceLocation?: String;
 
-    @prop({ type: Date })
-    public dateOfReturn?: Date;
+    @prop({ type: String })
+    public dateOfReturn?: String;
 
     @prop({ type: String })
     public seriousEvent?: String;
@@ -33,8 +33,8 @@ export default class Form2Page5 {
     @prop({ type: String, enum: reason })
     public reason?: String;
 
-    @prop({ type: Date })
-    public dateOfDeath?: Date;
+    @prop({ type: String })
+    public dateOfDeath?: String;
 
     @prop({ type: String })
     public isDeviceInUse?: String;
@@ -42,8 +42,8 @@ export default class Form2Page5 {
     @prop({ type: String })
     public detailedDescription?: string;
 
-    @prop({ type: Number })
-    public year?: Number;
+    @prop({ type: String })
+    public year?: String;
 
     @prop({ type: Number })
     public numberOfSimilarIndia?: Number;
@@ -54,8 +54,8 @@ export default class Form2Page5 {
     @prop({ type: String })
     public frequencyIndia?: String;
 
-    @prop({ type: Number })
-    public yearGlobal?: Number;
+    @prop({ type: String })
+    public yearGlobal?: String;
 
     @prop({ type: Number })
     public numberOfSimilarGlobal?: Number;

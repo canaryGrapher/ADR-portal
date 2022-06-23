@@ -39,13 +39,6 @@ export default function Form2page4d() {
   };
   const dispatch = useDispatch();
   const formState = useSelector((state: RootState) => state.form2page4d);
-  // if (formState.lastCalibration) {
-  //   const lastCalibration = moment(new Date(formState.lastCalibration));
-  //   // @ts-ignore
-  //   newFormState.lastCalibration = lastCalibration;
-  // } else {
-  //   newFormState.lastCalibration = null;
-  // }
   useEffect(() => {
     dispatch(getFormData());
   }, []);

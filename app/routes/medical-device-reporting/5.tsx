@@ -20,7 +20,10 @@ import {
 // importing reduc reducers
 import { RootState } from "~/states/store";
 import { useSelector, useDispatch } from "react-redux";
-import { setNewFormData } from "~/states/Slices/MedicalDeviceReporting/5";
+import {
+  setNewFormData,
+  getFormData,
+} from "~/states/Slices/MedicalDeviceReporting/5";
 import { LoaderFunction } from "remix";
 import authenticator from "~/server/authentication/auth.server";
 
@@ -31,39 +34,14 @@ export let loader: LoaderFunction = async ({ request }) => {
 };
 export default function Form2page5() {
   const [form] = Form.useForm();
+  const info = () => {
+    message.success("Form successfully submitted");
+  };
+  const error = () => {
+    message.error("Form submission failed");
+  };
   const dispatch = useDispatch();
   const formState = useSelector((state: RootState) => state.form2page5);
-  let newFormState = { ...formState };
-  if (formState.dateOfEvent != null) {
-    newFormState.dateOfEvent = moment(formState.dateOfEvent);
-  } else {
-    delete newFormState.dateOfEvent;
-  }
-  if (formState.dateOfImplant != null) {
-    newFormState.dateOfImplant = moment(formState.dateOfImplant);
-  } else {
-    delete newFormState.dateOfImplant;
-  }
-  if (formState.dateOfReturn != null) {
-    newFormState.dateOfReturn = moment(formState.dateOfReturn);
-  } else {
-    delete newFormState.dateOfReturn;
-  }
-  if (formState.dateOfDeath != null) {
-    newFormState.dateOfDeath = moment(formState.dateOfDeath);
-  } else {
-    delete newFormState.dateOfDeath;
-  }
-  if (formState.year != null) {
-    newFormState.year = moment(formState.year);
-  } else {
-    delete newFormState.year;
-  }
-  if (formState.yearGlobal != null) {
-    newFormState.yearGlobal = moment(formState.yearGlobal);
-  } else {
-    delete newFormState.yearGlobal;
-  }
   // change redux value whenever there is change in the form
   const changeFormData = (value: any, fieldName: any) => {
     if (fieldName === "deviceLocation" && value != "Returned to the company") {
@@ -84,16 +62,84 @@ export default function Form2page5() {
 
   // update the initial state for editing a drug
   useEffect(() => {
+    dispatch(getFormData());
+  }, []);
+  useEffect(() => {
+    const _DateOfEvent = formState.data.dateOfEvent
+      ? moment(formState.data.dateOfEvent)
+      : null;
+    const _DateOfImplant = formState.data.dateOfImplant
+      ? moment(formState.data.dateOfImplant)
+      : null;
+
+    const _DateOfReturn = formState.data.dateOfReturn
+      ? moment(formState.data.dateOfReturn)
+      : null;
+    const _DateOfDeath = formState.data.dateOfDeath
+      ? moment(formState.data.dateOfDeath)
+      : null;
+    const _Year = formState.data.year ? moment(formState.data.year) : null;
+    const _YearGlobal = formState.data.yearGlobal
+      ? moment(formState.data.yearGlobal)
+      : null;
+
+    let newFormState = {
+      ...formState.data,
+      dateOfEvent: _DateOfEvent,
+      dateOfImplant: _DateOfImplant,
+      dateOfReturn: _DateOfReturn,
+      dateOfDeath: _DateOfDeath,
+      year: _Year,
+      yearGlobal: _YearGlobal,
+    };
+    if (!newFormState.dateOfEvent) {
+      // @ts-ignore
+      delete newFormState.dateOfRecovery;
+    }
+    if (!newFormState.dateOfImplant) {
+      // @ts-ignore
+      delete newFormState.dateOfImplant;
+    }
+    if (!newFormState.dateOfReturn) {
+      // @ts-ignore
+      delete newFormState.dateOfReturn;
+    }
+    if (!newFormState.dateOfDeath) {
+      // @ts-ignore
+      delete newFormState.dateOfDeath;
+    }
+    if (!newFormState.year) {
+      // @ts-ignore
+      delete newFormState.year;
+    }
+    if (!newFormState.yearGlobal) {
+      // @ts-ignore
+      delete newFormState.yearGlobal;
+    }
     form.setFieldsValue(newFormState);
-  }, [form, newFormState]);
+  }, [formState.status]);
   return (
     <FormLayout>
       <Form
         form={form}
         name="Form2page5"
-        initialValues={newFormState}
-        onFinish={(value) => console.log(value)}
+        onFinish={(values) => {
+          fetch("/api/forms/form2/page5", {
+            method: "post",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ ...values }),
+          })
+            .then((res) => {
+              info();
+            })
+            .catch((err) => {
+              error();
+            });
+        }}
         onValuesChange={(values) => {
+          console.log(values);
           changeFormData(
             values[Object.keys(values)[0]],
             Object.keys(values)[0]
@@ -167,7 +213,7 @@ export default function Form2page5() {
                 <Form.Item label="Date of return" name="dateOfReturn">
                   <DatePicker
                     disabled={
-                      formState.deviceLocation != "Returned to the company"
+                      formState.data.deviceLocation != "Returned to the company"
                     }
                     className="w-full"
                   />
@@ -188,14 +234,14 @@ export default function Form2page5() {
                   label={"Reason"}
                   name="reason"
                   className="w-full"
-                  required={formState.seriousEvent === "Yes"}
+                  required={formState.data.seriousEvent === "Yes"}
                 >
                   <Radio.Group
                     size="large"
                     buttonStyle="solid"
                     options={radioOptions5}
                     optionType="button"
-                    disabled={formState.seriousEvent != "Yes"}
+                    disabled={formState.data.seriousEvent != "Yes"}
                   />
                 </Form.Item>
               </div>
@@ -203,15 +249,15 @@ export default function Form2page5() {
                 label="Date of death"
                 name="dateOfDeath"
                 required={
-                  formState.reason === "Death" &&
-                  formState.seriousEvent === "Yes"
+                  formState.data.reason === "Death" &&
+                  formState.data.seriousEvent === "Yes"
                 }
               >
                 <DatePicker
                   disabled={
                     !(
-                      formState.reason === "Death" &&
-                      formState.seriousEvent === "Yes"
+                      formState.data.reason === "Death" &&
+                      formState.data.seriousEvent === "Yes"
                     )
                   }
                   className="w-full"

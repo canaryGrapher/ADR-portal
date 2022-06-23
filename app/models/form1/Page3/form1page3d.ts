@@ -1,6 +1,6 @@
-import { prop } from "@typegoose/typegoose";
+import { prop, PropType, mongoose } from "@typegoose/typegoose";
 
-export default class Form1Page3d {
+class Form1Page3dData {
     @prop({ type: Boolean, required: true })
     public isComplete!: Boolean;
 
@@ -24,4 +24,14 @@ export default class Form1Page3d {
 
     @prop({ type: String })
     public Indication?: String;
+}
+
+export default class Form1Page3d {
+    _id?: mongoose.Types.ObjectId;
+
+    @prop({ type: Boolean, default: false })
+    public isComplete?: Boolean;
+
+    @prop({ type: () => Form1Page3dData }, PropType.ARRAY)
+    public drugDetails?: Form1Page3dData[];
 }

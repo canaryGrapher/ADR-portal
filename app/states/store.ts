@@ -22,9 +22,6 @@ import form1page4Reducer from '~/states/Slices/AdrReportingForm/4'
 import form2page1Reducer from '~/states/Slices/MedicalDeviceReporting/1'
 import form2page2Reducer from '~/states/Slices/MedicalDeviceReporting/2'
 import form2page3Reducer from '~/states/Slices/MedicalDeviceReporting/3'
-import form2page3Option1Reducer from '~/states/Slices/MedicalDeviceReporting/3/option1'
-import form2page3Option2Reducer from '~/states/Slices/MedicalDeviceReporting/3/option2'
-import form2page3Option3Reducer from '~/states/Slices/MedicalDeviceReporting/3/option3'
 import form2page4aReducer from '~/states/Slices/MedicalDeviceReporting/4/index'
 import form2page4bReducer from '~/states/Slices/MedicalDeviceReporting/4/b'
 import form2page4cReducer from '~/states/Slices/MedicalDeviceReporting/4/c'
@@ -59,9 +56,6 @@ export const store = configureStore({
                 form2page1: form2page1Reducer,
                 form2page2: form2page2Reducer,
                 form2page3: form2page3Reducer,
-                form2page3Option1: form2page3Option1Reducer,
-                form2page3Option2: form2page3Option2Reducer,
-                form2page3Option3: form2page3Option3Reducer,
                 form2page4a: form2page4aReducer,
                 form2page4b: form2page4bReducer,
                 form2page4c: form2page4cReducer,

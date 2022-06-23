@@ -1,14 +1,14 @@
 import { prop } from "@typegoose/typegoose";
 
-const gender = ["Male", "Female", "Other"]
-const options = ["Yes", "No"]
+const gender = ["Male", "Female", "Other", null]
+const options = ["Yes", "No", null]
 
 export default class Form2Page6 {
     @prop({ type: Boolean, required: true })
     public isComplete!: Boolean;
 
-    @prop({ type: Number })
-    public patientHospitalNumber?: Number;
+    @prop({ type: String })
+    public patientHospitalNumber?: String;
 
     @prop({ type: String })
     public patientInitials?: String;

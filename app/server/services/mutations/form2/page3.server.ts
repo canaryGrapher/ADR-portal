@@ -2,8 +2,8 @@ import Forms2Model from "~/models/form2.model"
 
 const addToForm = async (user: string, formID: string, formInput: any) => {
     try {
-        // console.log("Incoming form data: ")
-        // console.log(user, formID, formInput)
+        console.log("Incoming form data: ")
+        console.log(user, formID, formInput)
         const form2Pointer = await Forms2Model.findOne({ user: user, _id: formID })
         if (form2Pointer) {
             // update form2.form2Page3 based on formInput

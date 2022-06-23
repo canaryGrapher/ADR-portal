@@ -1,37 +1,35 @@
-import { prop } from "@typegoose/typegoose";
-
-const DeviceOptions = ["Therapeutic", "Diagnostic", "Both"]
-const Implantability = ["Implantable", "Non Implantable"]
-const Reusability = ["Single Use Device", "Reusable Device", "Reuse of manufactured marked single use"]
-const InVitroDiagnostic = ["Therapeutic", "Diagnostic", "Both"]
-const EquipmentUsageTypes = ["Therapeutic", "Diagnostic", "Both"]
-const InvasibilityTypes = ["Invasive", "Non-Invasive"]
-
+import { prop, PropType } from "@typegoose/typegoose";
 
 export default class Form2Page3 {
     @prop({ type: Boolean, required: true })
     public isComplete!: Boolean;
 
-    @prop({ type: String, enum: DeviceOptions })
+    @prop({ type: String, required: true })
+    public deviceCategory!: String;
+
+    @prop({ type: String })
     typeOfDevice?: String;
 
-    @prop({ type: String, enum: Implantability })
+    @prop({ type: String })
     implantability?: String;
 
-    @prop({ type: String, enum: Reusability })
+    @prop({ type: String })
     reuseability?: String;
+
+    @prop({ type: String })
+    sterilization?: String;
 
     @prop({ type: Boolean })
     public personalUse?: Boolean;
 
-    @prop({ type: String, enum: InVitroDiagnostic })
+    @prop({ type: () => String }, PropType.ARRAY)
     public inVitroDiagnostic?: String[];
 
-    @prop({ type: String, enum: EquipmentUsageTypes })
-    public equipmentUsage?: String[];
+    @prop({ type: String },)
+    public equipmentUsage?: String;
 
-    @prop({ type: String, enum: InvasibilityTypes })
-    public invasibility?: String[];
+    @prop({ type: String })
+    public invasibility?: String;
 
     @prop({ type: Boolean })
     imaging?: Boolean;

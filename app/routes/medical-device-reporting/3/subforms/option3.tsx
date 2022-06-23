@@ -10,24 +10,12 @@ import {
 // importing reduc reducers
 import { RootState } from "~/states/store";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  setNewFormData,
-  getFormData,
-} from "~/states/Slices/MedicalDeviceReporting/3/option3";
+import { setNewFormData } from "~/states/Slices/MedicalDeviceReporting/3";
 
 const Option3 = () => {
-  const info = () => {
-    message.success("Form successfully submitted");
-  };
-  const error = () => {
-    message.error("Form submission failed");
-  };
   const dispatch = useDispatch();
   const [form] = Form.useForm();
-  const formState = useSelector((state: RootState) => state.form2page3Option3);
-  useEffect(() => {
-    dispatch(getFormData());
-  }, []);
+  const formState = useSelector((state: RootState) => state.form2page3);
 
   useEffect(() => {
     form.setFieldsValue(formState.data);
@@ -84,14 +72,22 @@ const Option3 = () => {
                 label="Imaging"
                 className="w-full mx-auto"
               >
-                <Switch />
+                <Switch
+                  checked={
+                    formState.data && formState.data.imaging ? true : false
+                  }
+                />
               </Form.Item>
               <Form.Item
                 name="others"
                 label="Others"
                 className="w-full mx-auto"
               >
-                <Switch />
+                <Switch
+                  checked={
+                    formState.data && formState.data.others ? true : false
+                  }
+                />
               </Form.Item>
             </div>
             <Form.Item

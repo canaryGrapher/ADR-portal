@@ -1,158 +1,119 @@
-import { useEffect } from "react";
-
+import { useEffect, useState } from "react";
 // importing layouts
 import FormLayout from "~/layouts/forms/medical-device-reporting";
-
 // importing components
-import { Radio, Form } from "antd";
+import { Radio, Form, message } from "antd";
 import NavigationPanel from "~/components/forms/NavigationPanel";
-
 //Importing subforms
 import Option1 from "./subforms/option1";
 import Option2 from "./subforms/option2";
 import Option3 from "./subforms/option3";
-
-// importing reduc reducers
+// importing redux reducers
 import { RootState } from "~/states/store";
 import { useSelector, useDispatch } from "react-redux";
-import { setNewFormData } from "~/states/Slices/MedicalDeviceReporting/3";
-import { setNewFormData as setNewFormDataOption1 } from "~/states/Slices/MedicalDeviceReporting/3/option1";
-import { setNewFormData as setNewFormDataOption2 } from "~/states/Slices/MedicalDeviceReporting/3/option2";
-import { setNewFormData as setNewFormDataOption3 } from "~/states/Slices/MedicalDeviceReporting/3/option3";
+import {
+  getFormData,
+  setNewFormData,
+  resetFormData,
+} from "~/states/Slices/MedicalDeviceReporting/3";
 import { LoaderFunction } from "remix";
 import authenticator from "~/server/authentication/auth.server";
+
+const options = [
+  { label: "Medical Device", value: "medicalDevice" },
+  { label: "In-Vitro Diagnostics", value: "inVitroDiagnostic" },
+  { label: "Equipment/Machines", value: "equipmentMachine" },
+];
 
 export let loader: LoaderFunction = async ({ request }) => {
   return await authenticator.isAuthenticated(request, {
     failureRedirect: "/login",
   });
 };
+
 export default function Form2page3() {
+  const [formOptionSelector, setFormOptionSelector] = useState<
+    string | null | undefined
+  >();
   const dispatch = useDispatch();
   const formState = useSelector((state: RootState) => state.form2page3);
+  const info = () => {
+    message.success("Form successfully submitted");
+  };
+  const error = () => {
+    message.error("Form submission failed");
+  };
+  useEffect(() => {
+    dispatch(getFormData());
+  }, []);
 
   useEffect(() => {
-    if (formState.data.deviceCategory != "medicalDevice") {
-      dispatch(
-        setNewFormDataOption1({ fieldName: "typeOfDevice", value: null })
-      );
-      dispatch(
-        setNewFormDataOption1({ fieldName: "implantability", value: null })
-      );
-      dispatch(
-        setNewFormDataOption1({ fieldName: "reuseability", value: null })
-      );
-      dispatch(
-        setNewFormDataOption1({ fieldName: "sterilization", value: null })
-      );
-      dispatch(
-        setNewFormDataOption1({ fieldName: "personalUse", value: null })
-      );
-    }
-    if (formState.data.deviceCategory != "inVitroDiagnostic") {
-      dispatch(
-        setNewFormDataOption2({ fieldName: "inVitroDiagnostic", value: null })
-      );
-    }
-    if (formState.data.deviceCategory != "equipment_machine") {
-      dispatch(
-        setNewFormDataOption3({ fieldName: "equipmentUsage", value: null })
-      );
-      dispatch(
-        setNewFormDataOption3({ fieldName: "invasibility", value: null })
-      );
-      dispatch(setNewFormDataOption3({ fieldName: "imaging", value: null }));
-      dispatch(setNewFormDataOption3({ fieldName: "others", value: null }));
-      dispatch(
-        setNewFormDataOption3({ fieldName: "reportersComments", value: null })
-      );
-    }
-  }, [formState]);
-  let newFormState = { ...formState };
+    const initialCategoryValue = formState.data.deviceCategory;
+    setFormOptionSelector(formState.data.deviceCategory);
+    dispatch(resetFormData());
+    dispatch(
+      setNewFormData({
+        fieldName: "deviceCategory",
+        value: initialCategoryValue,
+      })
+    );
+  }, [formState.data.deviceCategory]);
   // change redux value whenever there is change in the form
-
   return (
     <FormLayout>
       <div className="w-full shadow-xl">
         <div className="mx-8 py-4 pb-8">
           <div className="pl-4 text-[24px] text-[#E8590C]">Device Category</div>
           <div className="mx-4 min-w-full pt-4">
-            <Radio.Group buttonStyle="solid" className="w-full">
-              <Radio.Button
-                value={0}
-                className="w-1/3 text-center"
-                onClick={() => {
-                  dispatch(
-                    setNewFormData({
-                      fieldName: "deviceCategory",
-                      value: "medicalDevice",
-                    })
-                  );
-                }}
-              >
-                Medical Device
-              </Radio.Button>
-
-              <Radio.Button
-                value={1}
-                className="w-1/3 text-center"
-                onClick={() => {
-                  dispatch(
-                    setNewFormData({
-                      fieldName: "deviceCategory",
-                      value: "inVitroDiagnostic",
-                    })
-                  );
-                }}
-              >
-                In Vitro Diagnostics
-              </Radio.Button>
-
-              <Radio.Button
-                value={2}
-                className="w-1/3 text-center"
-                onClick={() => {
-                  dispatch(
-                    setNewFormData({
-                      fieldName: "deviceCategory",
-                      value: "equipment_machine",
-                    })
-                  );
-                }}
-              >
-                Equipment/Machines
-              </Radio.Button>
-            </Radio.Group>
+            <Radio.Group
+              buttonStyle="solid"
+              className="w-full"
+              options={options}
+              optionType="button"
+              value={formOptionSelector}
+              onChange={(e) => {
+                dispatch(
+                  setNewFormData({
+                    fieldName: "deviceCategory",
+                    value: e.target.value,
+                  })
+                );
+              }}
+            ></Radio.Group>
           </div>
         </div>
       </div>
-
-      {formState.data.deviceCategory === "medicalDevice" && (
+      {formState.data.deviceCategory === "medicalDevice" ? (
         <div className="Option1">
           <Option1 />
         </div>
-      )}
-
-      {formState.data.deviceCategory === "inVitroDiagnostic" && (
+      ) : null}
+      {formState.data.deviceCategory === "inVitroDiagnostic" ? (
         <div className="Option2">
           <Option2 />
         </div>
-      )}
-
-      {formState.data.deviceCategory === "equipment_machine" && (
+      ) : null}
+      {formState.data.deviceCategory === "equipmentMachine" ? (
         <div className="Option3">
           <Option3 />
         </div>
-      )}
+      ) : null}
       <Form
         onFinish={() => {
-          if (formState.data.deviceCategory === "medicalDevice") {
-            alert("medical device");
-          } else if (formState.data.deviceCategory === "inVitroDiagnostic") {
-            alert("in vitro");
-          } else if (formState.data.deviceCategory === "equipment_machine") {
-            alert("equipment");
-          }
+          const data = { ...formState.data };
+          fetch("/api/forms/form2/page3", {
+            method: "post",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ ...data }),
+          })
+            .then((res) => {
+              info();
+            })
+            .catch((err) => {
+              error();
+            });
         }}
       >
         <NavigationPanel currentRoute="3" />

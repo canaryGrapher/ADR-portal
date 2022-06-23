@@ -7,24 +7,12 @@ import { checkboxOptions } from "~/utils/medical-device-reporting/3";
 // importing reduc reducers
 import { RootState } from "~/states/store";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  setNewFormData,
-  getFormData,
-} from "~/states/Slices/MedicalDeviceReporting/3/option2";
+import { setNewFormData } from "~/states/Slices/MedicalDeviceReporting/3";
 
 const Option2 = () => {
-  const info = () => {
-    message.success("Form successfully submitted");
-  };
-  const error = () => {
-    message.error("Form submission failed");
-  };
   const dispatch = useDispatch();
   const [form] = Form.useForm();
-  const formState = useSelector((state: RootState) => state.form2page3Option2);
-  useEffect(() => {
-    dispatch(getFormData());
-  }, []);
+  const formState = useSelector((state: RootState) => state.form2page3);
 
   useEffect(() => {
     form.setFieldsValue(formState.data);

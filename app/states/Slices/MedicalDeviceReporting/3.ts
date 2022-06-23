@@ -13,7 +13,19 @@ export const getFormData = createAsyncThunk(
     })
 
 const initialStateData: FormStateType = {
-    deviceCategory: null
+    deviceCategory: null,
+    typeOfDevice: null,
+    implantability: null,
+    reuseability: null,
+    sterilization: null,
+    personalUse: null,
+    inVitroDiagnostic: null,
+    equipmentUsage: null,
+    invasibility: null,
+    imaging: null,
+    others: null,
+    reportersComments: null
+
 }
 
 export const form2page3Slice = createSlice({
@@ -31,6 +43,10 @@ export const form2page3Slice = createSlice({
             // logic to set the new form data in this slice. This changes everytime the form is updated
             state.data[action.payload.fieldName] = action.payload.value
         },
+        resetFormData: (state) => {
+            // logic to reset the form data in this slice. This changes everytime the device category is changed
+            state.data = initialStateData
+        }
     },
     extraReducers: {
         [getFormData.fulfilled.toString()]: (state, action: PayloadAction<FormStateType>) => {
@@ -47,6 +63,6 @@ export const form2page3Slice = createSlice({
 })
 
 // Action creators are generated for each case reducer function
-export const { setNewFormData } = form2page3Slice.actions
+export const { setNewFormData, resetFormData } = form2page3Slice.actions
 
 export default form2page3Slice.reducer
