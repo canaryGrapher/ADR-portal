@@ -1,8 +1,5 @@
 import { prop, mongoose, PropType } from "@typegoose/typegoose"
 
-// const availableActions = ["Dose reduced", "Dose increased", "Drug withdrawn", "Dose not changed", "Not applicable", "Unknown"]
-// const availableActions2 = ["No rechallenge", "Recurrence of symptoms", "No occurance of symptomps", "Unknown"]
-
 class Form1Page3aData {
     @prop({ type: Number, required: true, unique: true })
     public identifier: number;

@@ -32,10 +32,10 @@ export default class Form2Page3 {
     public invasibility?: String;
 
     @prop({ type: Boolean })
-    imaging?: Boolean;
+    imaging?: boolean;
 
     @prop({ type: Boolean })
-    others?: Boolean;
+    others?: boolean;
 
     @prop({ type: String })
     reportersComments?: String;

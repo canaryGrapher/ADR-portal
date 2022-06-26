@@ -46,11 +46,12 @@ export default function Form2page3() {
   useEffect(() => {
     dispatch(getFormData());
   }, []);
-
+  //user flow while initial fill >
+  // 1) The user selects a device category
+  // 2) Save this state
   useEffect(() => {
     const initialCategoryValue = formState.data.deviceCategory;
     setFormOptionSelector(formState.data.deviceCategory);
-    dispatch(resetFormData());
     dispatch(
       setNewFormData({
         fieldName: "deviceCategory",
@@ -72,6 +73,7 @@ export default function Form2page3() {
               optionType="button"
               value={formOptionSelector}
               onChange={(e) => {
+                dispatch(resetFormData());
                 dispatch(
                   setNewFormData({
                     fieldName: "deviceCategory",
