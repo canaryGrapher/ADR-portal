@@ -1,23 +1,23 @@
 const radioOptions = [
     {
         label: "Fatal",
-        value: "fatal",
+        value: "Fatal",
     },
     {
         label: "Recovery",
-        value: "recovery",
+        value: "Recovery",
     },
     {
         label: "Continuing",
-        value: "continuing",
+        value: "Continuing",
     },
     {
         label: "Unknown",
-        value: "unknown",
+        value: "Unknown",
     },
     {
         label: "Other",
-        value: "other",
+        value: "Other",
     },
 ];
 

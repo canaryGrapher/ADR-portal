@@ -1,24 +1,24 @@
 
 const radioOptions = [
-    { label: "Recovered", value: "recovered" },
-    { label: "Recovering", value: "recovering" },
-    { label: "Not recovered", value: "notRecovered" },
-    { label: "Fatal", value: "fatal" },
-    { label: "Recovered with sequelae", value: "recoveredWithSequelae" },
-    { label: "Unknown", value: "unknown" },
+    { label: "Recovered", value: "Recovered" },
+    { label: "Recovering", value: "Recovering" },
+    { label: "Not recovered", value: "Not Recovered" },
+    { label: "Fatal", value: "Fatal" },
+    { label: "Recovered with sequelae", value: "Recovered with sequelae" },
+    { label: "Unknown", value: "Unknown" },
 ];
 
 const checkBoxOptions = [
-    { label: "Congenital-anomaly", value: "congenitalAnamoly" },
-    { label: "Life Threatening", value: "lifeThreatening" },
-    { label: "Hospitalized/Prolonged", value: "Disability" },
-    { label: "Disability", value: "disability" },
+    { label: "Congenital-anomaly", value: "Congenital-anomaly" },
+    { label: "Life Threatening", value: "Life Threatening" },
+    { label: "Hospitalized/Prolonged", value: "Hospitalized/Prolonged" },
+    { label: "Disability", value: "Disability" },
     {
         label: "Required intervention to Prevent permanent impairment/damage",
-        value: "requiredIntervention",
+        value: "Required intervention to Prevent permanent impairment/damage",
     },
-    { label: "Death", value: "death" },
-    { label: "Other (Mention below)", value: "other" },
+    { label: "Death", value: "Death" },
+    { label: "Other (Mention below)", value: "Other (Mention below)r" },
 ];
 
 export { radioOptions, checkBoxOptions };

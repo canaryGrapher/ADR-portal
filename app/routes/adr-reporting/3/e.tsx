@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 // importing layouts
 import FormLayout from "~/layouts/forms/adr-reporting";
 
 // importing components
 import NavigationPanel from "~/components/forms/NavigationPanel";
-import { Form, Input, DatePicker, Switch, Checkbox, Radio } from "antd";
+import { Form, Input, DatePicker, Switch, Checkbox, Radio, message } from "antd";
 import { CheckboxValueType } from "antd/lib/checkbox/Group";
 
 // importing utilities
@@ -13,7 +13,10 @@ import { radioOptions, checkBoxOptions } from "~/utils/adr-reporting/3e";
 
 import { RootState } from "~/states/store";
 import { useSelector, useDispatch } from "react-redux";
-import { setNewFormData } from "~/states/Slices/AdrReportingForm/3/e";
+import {
+  setNewFormData,
+  getFormData,
+} from "~/states/Slices/AdrReportingForm/3/e";
 import { LoaderFunction } from "remix";
 import authenticator from "~/server/authentication/auth.server";
 
@@ -23,6 +26,13 @@ export let loader: LoaderFunction = async ({ request }) => {
   });
 };
 export default function Form1page3e() {
+  const info = () => {
+    message.success("Form successfully submitted");
+  };
+  const error = () => {
+    message.error("Form submission failed");
+  };
+  const [form] = Form.useForm();
   const [seriousReaction, setSeriousReaction] = useState<boolean>(false);
   const [isApplicable, setIsApplicable] = useState<boolean>(false);
   const [seriousnessLevelState, setSeriousnessLevelState] =
@@ -40,20 +50,32 @@ export default function Form1page3e() {
   const formState = useSelector((state: RootState) => state.form1page3e);
   let newFormState = { ...formState };
   useEffect(() => {
-    if (formState.dateOfDeath != null) {
+    if (formState.data.dateOfDeath != null) {
       //@ts-ignore
       newFormState.dateOfDeath = moment(formState.dateOfDeath);
     } else {
       //@ts-ignore
       delete newFormState.dateOfDeath;
     }
-    if (formState.applicability) {
+    if (formState.data.applicability) {
       setIsApplicable(true);
     }
-    if (formState.seriousnessOfTheReaction) {
+    if (formState.data.seriousnessOfTheReaction) {
       setSeriousReaction(true);
     }
   }, [formState]);
+  useEffect(() => {
+    let newFormState = {
+      ...formState.data,
+    };
+    form.setFieldsValue(newFormState);
+  }, [formState.status]);
+  useEffect(() => {
+    dispatch(getFormData());
+  }, []);
+  useEffect(() => {
+    form.setFieldsValue(formState.data);
+  }, [formState.status]);
 
   // change the redux value whenever there is a change in the form
   const changeFormData = (value: any, fieldName: any) => {
@@ -95,11 +117,25 @@ export default function Form1page3e() {
     <FormLayout>
       {/* Anything between the <FormLayout> tag can be changed */}
       <Form
+        form={form}
         preserve={false}
         scrollToFirstError={true}
         name="Form1Page3e"
-        initialValues={newFormState}
-        onFinish={(values) => console.log(values)}
+        onFinish={(values) => {
+          fetch("/api/forms/form1/page3/e", {
+            method: "post",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ ...values }),
+          })
+            .then((res) => {
+              info();
+            })
+            .catch((err) => {
+              error();
+            });
+        }}
         onValuesChange={(values) => onChangeFormEvent(values)}
         layout="vertical"
       >
