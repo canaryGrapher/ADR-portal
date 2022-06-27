@@ -9,14 +9,11 @@ const addToForm = async (user: string, formID: string, formInput: any) => {
                 // creating empty object if Page3 does not exist
                 form1Pointer.form1Page3 = {}
             }
-            if (!form1Pointer.form1Page3.Form1Page3c) {
-                // creating empty object if Page3a does not exist
-                form1Pointer.form1Page3.Form1Page3c = { isComplete: true }
+            if (!form1Pointer.form1Page3.Form1Page3d) {
+                // creating empty object if Page3d does not exist
+                form1Pointer.form1Page3.Form1Page3d = {}
             }
-            form1Pointer.form1Page3.Form1Page3c = {
-                ...formInput,
-                isComplete: true
-            }
+            form1Pointer.form1Page3.Form1Page3d = { isComplete: true, drugDetails: formInput.drugDetails }
             form1Pointer.save()
                 .then(() => {
                     console.log("Form 1 page 3 updated")
@@ -24,7 +21,7 @@ const addToForm = async (user: string, formID: string, formInput: any) => {
                 ).catch(error => {
                     console.log(error)
                 })
-            return "Form 1 Page 3c modified successfully"
+            return "Form 1 Page 3d modified successfully"
         } else {
             return "Form 1 does not exist"
         }
@@ -40,9 +37,10 @@ const getForm = async (user: string, formID: string) => {
     try {
         const form1Pointer = await Forms1Model.findOne({ user: user, _id: formID })
         if (form1Pointer) {
-            return form1Pointer.form1Page3?.Form1Page3c
+            const data = form1Pointer.form1Page3
+            return data?.Form1Page3d?.drugDetails
         } else {
-            return "Form 1 Page 3c does not exist"
+            return "Form 1 Page 3d does not exist"
         }
     }
     catch (error) {

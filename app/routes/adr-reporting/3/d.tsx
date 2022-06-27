@@ -3,7 +3,7 @@ import FormLayout from "~/layouts/forms/adr-reporting";
 import moment from "moment";
 
 // importing components
-import { Input, DatePicker, Form } from "antd";
+import { Input, DatePicker, Form, message } from "antd";
 import NavigationPanel from "~/components/forms/NavigationPanel";
 
 // importing types
@@ -17,6 +17,7 @@ import {
   setAdditionalFormData,
   editAdditionalFormData,
   removeAdditionalFormData,
+  getFormData,
 } from "~/states/Slices/AdrReportingForm/3/d_filled";
 import { DeleteFilled, EditFilled } from "@ant-design/icons";
 import { LoaderFunction } from "remix";
@@ -27,7 +28,14 @@ export let loader: LoaderFunction = async ({ request }) => {
     failureRedirect: "/login",
   });
 };
-export default function Form1page3h() {
+
+export default function Form1page3d() {
+  const info = () => {
+    message.success("Form successfully submitted");
+  };
+  const error = () => {
+    message.error("Form submission failed");
+  };
   const dispatch = useDispatch();
   const formState = useSelector((state: RootState) => state.form1page3d_filled);
   const [keyCount, setKeyCount] = useState<number>(0);
@@ -54,7 +62,25 @@ export default function Form1page3h() {
           <Subform id={keyCount} submitAction={submitFinishedForms} />
         </div>
       </div>
-      <NavigationPanel currentRoute="3d" />
+      <Form
+        onFinish={() => {
+          fetch("/api/forms/form1/page3/d", {
+            method: "post",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ ...formState.data }),
+          })
+            .then((res) => {
+              info();
+            })
+            .catch((err) => {
+              error();
+            });
+        }}
+      >
+        <NavigationPanel currentRoute="3d" />
+      </Form>
     </FormLayout>
   );
 }
@@ -78,27 +104,30 @@ function AddedDrugs(props: any) {
     // remove the drug from the list fo finalised drugs
     deleteFormItem(id);
   };
-  return props.current.drugDetails.length > 0 ? (
+  return props.current.data.drugDetails.length > 0 ? (
     <React.Fragment>
       <h2 className="text-[#e1763c]">Drugs Added</h2>
       <div className="grid grid-cols-2 gap-2">
-        {props.current.drugDetails.map((drug: any, index: number) => {
-          return (
-            <div key={index} className="border">
-              <div className="flex flex-row px-4 py-3 justify-between items-center">
-                <p className="my-auto">{drug.name}</p>
-                <div className="flex justify-center items-center gap-4 text-lg">
-                  <div className="hover:text-neutral-500 cursor-pointer">
-                    <EditFilled onClick={() => editFormData(drug.key, drug)} />
-                  </div>
-                  <div className="hover:text-neutral-500 cursor-pointer">
-                    <DeleteFilled onClick={() => deleteFormItem(drug.key)} />
+        {props.current.data &&
+          props.current.data.drugDetails.map((drug: any, index: number) => {
+            return (
+              <div key={index} className="border">
+                <div className="flex flex-row px-4 py-3 justify-between items-center">
+                  <p className="my-auto">{drug.name}</p>
+                  <div className="flex justify-center items-center gap-4 text-lg">
+                    <div className="hover:text-neutral-500 cursor-pointer">
+                      <EditFilled
+                        onClick={() => editFormData(drug.key, drug)}
+                      />
+                    </div>
+                    <div className="hover:text-neutral-500 cursor-pointer">
+                      <DeleteFilled onClick={() => deleteFormItem(drug.key)} />
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          );
-        })}
+            );
+          })}
       </div>
     </React.Fragment>
   ) : null;
@@ -138,12 +167,15 @@ const Subform = (props: PropTypes) => {
   useEffect(() => {
     form.setFieldsValue(newFormState);
   }, [form, newFormState]);
+  useEffect(() => {
+    dispatch(getFormData());
+  }, []);
   return (
     <Form
       form={form}
       preserve={false}
       scrollToFirstError={true}
-      name="Form1Page3h"
+      name="Form1Page3d"
       initialValues={newFormState}
       onValuesChange={(values) =>
         changeFormData(values[Object.keys(values)[0]], Object.keys(values)[0])

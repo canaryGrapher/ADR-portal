@@ -34,7 +34,7 @@ export default function Form1page3b5() {
     message.error("Form submission failed");
   };
   const [predisposingFactorsValues, setPredisposingFactorsValues] = useState<
-    string[]
+    string[] | null
   >([""]);
 
   const onChangeCheckBoxGroup = (values: any[]) => {
@@ -51,7 +51,6 @@ export default function Form1page3b5() {
   useEffect(() => {
     form.setFieldsValue(formState.data);
     if (formState.status === "success") {
-      // @ts-ignore
       setPredisposingFactorsValues(formState.data.preDisposingFactors);
     }
   }, [formState.status]);
@@ -83,9 +82,18 @@ export default function Form1page3b5() {
               error();
             });
         }}
-        onValuesChange={(values) =>
-          changeFormData(values[Object.keys(values)[0]], Object.keys(values)[0])
-        }
+        onValuesChange={(values) => {
+          if (Object.keys(values)[0] === "preDisposingFactors") {
+            if (!values[Object.keys(values)[0]].includes("other")) {
+              changeFormData("otherInformation", null);
+              form.setFields([{ name: "otherInformation", value: null }]);
+            }
+          }
+          changeFormData(
+            values[Object.keys(values)[0]],
+            Object.keys(values)[0]
+          );
+        }}
         layout="vertical"
       >
         {/* Anything between the <FormLayout> tag can be changed */}
@@ -115,11 +123,11 @@ export default function Form1page3b5() {
             <Form.Item
               name="otherInformation"
               label="If other, mention the factor"
-              required={predisposingFactorsValues.includes("other")}
+              required={predisposingFactorsValues?.includes("other")}
             >
               <Input
                 suffix={<FiHelpCircle />}
-                disabled={!predisposingFactorsValues.includes("other")}
+                disabled={!predisposingFactorsValues?.includes("other")}
               />
             </Form.Item>
           </div>

@@ -45,7 +45,6 @@ export const form1page3FilledSlice = createSlice({
     extraReducers: {
         [getFormData.fulfilled.toString()]: (state, action: PayloadAction<FormStateType>) => {
             state.status = "success"
-            console.log("Payload: ", action.payload)
             state.data.drugDetails = action.payload
         },
         [getFormData.rejected.toString()]: (state, action: PayloadAction<FormStateType>) => {

@@ -106,8 +106,7 @@ function AddedDrugs(props: any) {
     // remove the drug from the list fo finalised drugs
     deleteFormItem(id);
   };
-  return props.current.status === "success" &&
-    props.current.data.drugDetails.length > 0 ? (
+  return props.current.data.drugDetails.length > 0 ? (
     <React.Fragment>
       <h2 className="text-[#e1763c]">Drugs Added</h2>
       <div className="grid grid-cols-2 gap-2">
