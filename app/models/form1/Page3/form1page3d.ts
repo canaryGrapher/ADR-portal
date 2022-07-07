@@ -1,8 +1,6 @@
 import { prop, PropType, mongoose } from "@typegoose/typegoose";
 
 class Form1Page3dData {
-    @prop({ type: Boolean, required: true })
-    public isComplete!: Boolean;
 
     @prop({ type: String, required: true })
     public name!: String;
@@ -17,10 +15,10 @@ class Form1Page3dData {
     public frequency?: String;
 
     @prop({ type: Date, required: true })
-    public dateStarted!: Date;
+    public startDate!: Date;
 
     @prop({ type: Date })
-    public dateStopped?: Date;
+    public stopDate?: Date;
 
     @prop({ type: String })
     public Indication?: String;
