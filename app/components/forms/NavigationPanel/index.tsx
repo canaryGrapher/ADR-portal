@@ -74,14 +74,26 @@ const NavigationPanel = (props: NavigationPanelProps) => {
         >
           Save
         </button>
-        <Link to={nextPage}>
-          <button
-            className="bg-[#E8590C] text-white hover:shadow-xl p-2 w-32 border border-[#E8590C] font-bold hover:bg-transparent"
-            type="button"
-          >
-            {isLastPage ? <Link to="/submit">Submit</Link> : "Next"}
-          </button>
-        </Link>
+        {!isLastPage ? (
+          <Link to={nextPage}>
+            <button
+              className="bg-[#E8590C] text-white hover:shadow-xl p-2 w-32 border border-[#E8590C] font-bold hover:bg-transparent"
+              type="button"
+            >
+              Next
+            </button>
+          </Link>
+        ) : (
+          <Link to="/submit">
+            {" "}
+            <button
+              className="bg-[#E8590C] text-white hover:shadow-xl p-2 w-32 border border-[#E8590C] font-bold hover:bg-transparent"
+              type="button"
+            >
+              Submit
+            </button>
+          </Link>
+        )}
       </div>
     </div>
   );

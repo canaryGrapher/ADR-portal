@@ -123,7 +123,12 @@ export default function Form1page4() {
               <Input />
             </Form.Item>
             {/* Second */}
-            <Form.Item name="idNumber" label="ID Number" className="col-span-1">
+            <Form.Item
+              name="idNumber"
+              label="Registration Number"
+              className="col-span-1"
+              required={true}
+            >
               <Input />
             </Form.Item>
             <Form.Item name="pin" label="Pin" className="col-span-1">

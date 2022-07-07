@@ -106,7 +106,7 @@ export default function Form1page3b3() {
                   />
                 </div>
               </div>
-              <div className="w-full pt-5">
+              <div className="w-full pt-5 dark:text-white">
                 <div className="text-[24px] max-w-fit mx-auto mt-10 px-5 py-1 border-2 flex flex-row rounded-md mb-5">
                   <h2 className="text-[#E8590C] my-auto mr-2">
                     Assesment criteria

@@ -1,79 +1,32 @@
-const modelValues = [
-    {
-        name: "Form1Page1",
-        subForms: []
-    },
-    {
-        name: "Form1Page2",
-        subForms: []
-    },
-    {
-        name: "Form1Page3",
-        subForms: [
-            {
-                name: "Form1Page3a",
-                subForms: []
-            },
-            {
-                name: "Form1Page3b",
-                subForms: [
-                    {
-                        name: "form1page3b1",
-                        subForms: []
-                    },
-                    {
-                        name: "form1page3b2",
-                        subForms: []
-                    },
-                    {
-                        name: "form1page3b3",
-                        subForms: []
-                    },
-                    {
-                        name: "form1page3b4",
-                        subForms: []
-                    },
-                    {
-                        name: "form1page3b5",
-                        subForms: []
-                    }
-                ]
-            },
-            {
-                name: "Form1Page3c",
-                subForms: []
-            },
-            {
-                name: "Form1Page3d",
-                subForms: []
-            },
-            {
-                name: "Form1Page3e",
-                subForms: []
-            },
-            {
-                name: "Form1Page3f",
-                subForms: []
-            },
-        ]
-    },
-    {
-        name: "Form1Page4",
-        subForms: []
+import Forms1Model from "~/models/form1.model"
+
+const submitAction = async (user: string, formID: string) => {
+    const form1Pointer = await Forms1Model.findOne({ user: user, _id: formID })
+    if (!form1Pointer) {
+        throw new Error("Form not found")
     }
-]
+    const Form1Page1 = form1Pointer.form1Page1?.isComplete;
+    const Form1Page2 = form1Pointer.form1Page2?.isComplete;
+    const Form1Page3 = form1Pointer.form1Page3;
+    const form1page3a = Form1Page3?.Form1Page3a?.isComplete;
+    const form1page3b3 = Form1Page3?.Form1Page3b?.form1page3b3?.isComplete;
+    const form1page3d = Form1Page3?.Form1Page3d?.isComplete;
+    const form1page3e = Form1Page3?.Form1Page3e?.isComplete;
+    const Form1Page4 = form1Pointer.form1Page4?.isComplete;
 
-const submitAction = async () => {
-
+    if (Form1Page1 && Form1Page2 && form1page3a && form1page3d && form1page3e && Form1Page4 && form1page3b3) {
+        form1Pointer.isComplete = true;
+        await form1Pointer.save();
+        return {
+            status: "success",
+            message: "Form submitted successfully"
+        }
+    } else {
+        return {
+            status: "error",
+            message: "Form not complete"
+        }
+    }
 }
 
-
-// loop through each item in the array and 
-// if the subform array is not empty, go to the that model
-// check each model for isComplete and if all are true, only then run the 
-// submit function
-const loopThrough = async (modelsArr: any[]) => {
-    // if ()
-}
-
-export { modelValues }
+export { submitAction }
