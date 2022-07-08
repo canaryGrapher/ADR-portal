@@ -84,7 +84,7 @@ const NavigationPanel = (props: NavigationPanelProps) => {
             </button>
           </Link>
         ) : (
-          <Link to="/submit">
+          <Link to={`/submit?type=${currentLocation[1]}`}>
             {" "}
             <button
               className="bg-[#E8590C] text-white hover:shadow-xl p-2 w-32 border border-[#E8590C] font-bold hover:bg-transparent"
