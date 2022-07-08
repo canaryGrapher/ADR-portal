@@ -231,7 +231,7 @@ const Subform = (props: PropTypes) => {
       </Form.Item>
       <div className="flex flex-row-reverse w-100">
         <button className="bg-[#6C567B] text-white p-2 w-32 border hover:bg-white hover:text-[#6C567B] border-[#6C567B]">
-          Add more
+          Add
         </button>
       </div>
     </Form>
