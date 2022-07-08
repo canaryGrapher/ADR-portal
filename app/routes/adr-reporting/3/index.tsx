@@ -112,6 +112,7 @@ function AddedDrugs(props: any) {
       <div className="grid grid-cols-2 gap-2">
         {props.current.data &&
           props.current.data.drugDetails.map((drug: any, index: number) => {
+            console.log(drug)
             return (
               <div key={index} className="border">
                 <div className="flex flex-row items-center justify-between px-4 py-3">
@@ -123,7 +124,7 @@ function AddedDrugs(props: any) {
                       />
                     </div>
                     <div className="cursor-pointer hover:text-neutral-500">
-                      <DeleteFilled onClick={() => deleteFormItem(drug.key)} />
+                      <DeleteFilled onClick={() => deleteFormItem(drug.identifier)} />
                     </div>
                   </div>
                 </div>
