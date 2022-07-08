@@ -101,7 +101,7 @@ function AddedDrugs(props: any) {
     Object.keys(item.payload.drugDetails).forEach((key) => {
       changeFormData(item.payload.drugDetails[key], key);
     });
-    // remove the drug from the list fo finalised drugs
+    // remove the drug from the list of finalised drugs
     deleteFormItem(id);
   };
   return props.current.data.drugDetails.length > 0 ? (
@@ -117,11 +117,11 @@ function AddedDrugs(props: any) {
                   <div className="flex justify-center items-center gap-4 text-lg">
                     <div className="hover:text-neutral-500 cursor-pointer">
                       <EditFilled
-                        onClick={() => editFormData(drug.key, drug)}
+                        onClick={() => editFormData(drug._id, drug)}
                       />
                     </div>
                     <div className="hover:text-neutral-500 cursor-pointer">
-                      <DeleteFilled onClick={() => deleteFormItem(drug.key)} />
+                      <DeleteFilled onClick={() => deleteFormItem(drug._id)} />
                     </div>
                   </div>
                 </div>
