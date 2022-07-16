@@ -1,11 +1,13 @@
 import { renderToString } from "react-dom/server";
 import { RemixServer } from "remix";
 import type { EntryContext } from "remix";
-// import { setLogLevel } from "@typegoose/typegoose";
-// setLogLevel("DEBUG");
 
 import dbConnect from "./server/mongo.server";
 
+/**
+ * @function connectDatabase
+ * @description Connect to the database
+ */
 const connectDatabase = async () => {
   await dbConnect();
 };

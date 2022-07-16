@@ -3,7 +3,7 @@ import { FormStateType, ActionType } from "~/types/reducers/adrReporting/1"
 
 export const getFormData = createAsyncThunk(
     'adrReporting/1/getFormData',
-    async (dispatch, getState) => {
+    async () => {
         return await fetch("/api/forms/form1/page1")
             .then(async response => {
                 const data = await response.json();
@@ -48,10 +48,10 @@ export const form1page1Slice = createSlice({
             state.status = "success"
             state.data = action.payload
         },
-        [getFormData.rejected.toString()]: (state, action: PayloadAction<FormStateType>) => {
+        [getFormData.rejected.toString()]: (state) => {
             state.status = "failed";
         },
-        [getFormData.pending.toString()]: (state, action: PayloadAction<FormStateType>) => {
+        [getFormData.pending.toString()]: (state) => {
             state.status = "loading";
         },
     }

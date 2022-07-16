@@ -25,15 +25,12 @@ export const loader: LoaderFunction = async ({ request }) => {
 };
 
 export const action: ActionFunction = async ({ request, context }) => {
-  // call my authenticator
-  const resp = await authenticator.authenticate("form", request, {
+  return await authenticator.authenticate("form", request, {
     successRedirect: "/",
     failureRedirect: "/login",
     throwOnError: true,
     context,
   });
-  console.log(resp);
-  return resp;
 };
 
 export default function Login() {
@@ -57,9 +54,6 @@ export default function Login() {
               }
             />
           </div>
-          {/* <div className="text-left mb-5 flex flex-row justify-center"> */}
-          {/* <Checkbox className="font-medium">Remember me</Checkbox> */}
-          {/* </div> */}
           <div className="mb-10">
             <button className="w-1/2 bg-[#6C567B] text-white rounded-lg p-2">
               Login

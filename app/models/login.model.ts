@@ -4,25 +4,28 @@ class Login {
     _id?: mongoose.Types.ObjectId;
 
     @prop({ type: String, required: true })
-    public email!: String;
+    public email!: string;
 
     @prop({ type: String, required: true })
-    public password!: String;
+    public type!: string;
 
     @prop({ type: String, required: true })
-    public firstName!: String;
+    public password!: string;
 
     @prop({ type: String, required: true })
-    public lastName!: String;
+    public firstName!: string;
+
+    @prop({ type: String, required: true })
+    public lastName!: string;
 
     @prop({ type: String || null, default: null })
-    public currentFormOne?: String | null;
+    public currentFormOne?: string | null;
 
     @prop({ type: [mongoose.Types.ObjectId] })
     public completedFormsOne?: [mongoose.Types.ObjectId];
 
     @prop({ type: String || null, default: null })
-    public currentFormTwo?: String | null;
+    public currentFormTwo?: string | null;
 
     @prop({ type: [mongoose.Types.ObjectId] })
     public completedFormsTwo?: [mongoose.Types.ObjectId];
