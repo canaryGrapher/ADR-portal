@@ -5,55 +5,55 @@ class Form1Page3aData {
     public identifier: number;
 
     @prop({ type: String, required: true })
-    public nameOfDrug!: String;
+    public nameOfDrug!: string;
 
     @prop({ type: String })
-    public manufacturer?: String;
+    public manufacturer?: string;
 
     @prop({ type: String })
-    public BatchNo_LotNo?: String;
+    public BatchNo_LotNo?: string;
 
     @prop({ type: String })
-    public routeUsed?: String;
+    public routeUsed?: string;
 
     @prop({ type: String })
-    public ip_op?: String;
+    public ip_op?: string;
 
     @prop({ type: String })
-    public unit?: String;
+    public unit?: string;
 
     @prop({ type: String })
-    public frequency?: String;
+    public frequency?: string;
 
     @prop({ type: String, required: true })
-    public dateStarted!: String;
+    public dateStarted!: string;
 
     @prop({ type: String })
-    public indication?: String;
+    public expDate?: string;
 
     @prop({ type: String })
-    public actionTaken?: String;
+    public dateStopped?: string;
 
     @prop({ type: String })
-    public dechallenge?: String;
+    public indication?: string;
 
     @prop({ type: String })
-    public rechallenge?: String;
+    public actionTaken?: string;
 
     @prop({ type: String })
-    public reactionCategorization?: String;
+    public dechallenge?: string;
 
     @prop({ type: String })
-    public doseAfterReintroduction?: String;
+    public rechallenge?: string;
 
     @prop({ type: String })
-    public expDate?: String;
+    public reactionCategorization?: string;
+
+    @prop({ type: String })
+    public doseAfterReintroduction?: string;
 
     @prop({ type: Number })
     public doseUsed?: number;
-
-    @prop({ type: String })
-    public dateStopped?: String;
 }
 
 export default class Form1Page3a {

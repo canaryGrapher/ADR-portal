@@ -15,26 +15,33 @@ export const loader: LoaderFunction = async ({ request }) => {
         );
         const formId = url.searchParams.get("formName")
 
-        // formId -> 1 corresponds to form 1: ADR reporting
-        if (formId === "1") {
-            const formID = await intiateForm1(user.email)
+        // Case I: formId -> new-1 corresponds to a new form 1: ADR reporting
+        if (formId === "new-1") {
+            const ObjectId = await intiateForm1(user.email)
+            console.log("This is the formId: ", ObjectId)
             const newSession = {
                 ...session, data: {
-                    ...session.data, sessionKey: { ...session.data.sessionKey, currentFormOne: formID }
+                    ...session.data, sessionKey: { ...session.data.sessionKey, currentFormOne: ObjectId }
                 }
             }
             return redirect("/adr-reporting/1", { headers: { "set-cookie": await commitSession(newSession) } });
         }
 
-        // Else case: formId -> 2 corresponds to form 2: Medical device reporting
-        else {
-            const formID = await intiateForm2(user.email)
+        // Case II: formId -> new-2 corresponds to a new form 2: Medical device reporting
+        else if (formId === "new-2") {
+            const ObjectId = await intiateForm2(user.email)
             const newSession = {
                 ...session, data: {
-                    ...session.data, sessionKey: { ...session.data.sessionKey, currentFormTwo: formID }
+                    ...session.data, sessionKey: { ...session.data.sessionKey, currentFormTwo: ObjectId }
                 }
             }
             return redirect("/medical-device-reporting/1", { headers: { "set-cookie": await commitSession(newSession) } });
+        }
+
+        // Case III: formId -> formID corresponds to a form that is already in progress
+        // To be implemented
+        else {
+            return redirect("/");
         }
     }
     // if user is logged out

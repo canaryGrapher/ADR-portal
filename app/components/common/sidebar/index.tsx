@@ -42,17 +42,13 @@ const Sidebar = () => {
     <div className="flex flex-col">
       <div className="grid grid-cols-4 pb-4">
         <div className="col-span-1">
-          <img
-            alt="Picture of Indian National Emblem"
-            src="/emblem.png"
-            className="p-1"
-          />
+          <img alt="Logo of KMC" src="/KMCLogo.png" className="p-1" />
         </div>
         <div className="col-span-3 text-center">
-          <h2 className="text-[#6C567B] dark:text-[#a262cf] text-xl m-0 mb-3">
+          <h2 className="text-[#6C567B] dark:text-[#a262cf] text-lg m-0 mb-3">
             MANIPAL COLLEGE OF PHARMACEUTICAL SCIENCES
           </h2>
-          <p className="text-[10px] border-t-2 border-[#6C567B] pt-2 font-medium">
+          <p className="text-[11px] border-t-2 border-[#6C567B] pt-2 font-normal">
             Manipal Academy of Higer Education
             <br />
             (Institution of Eminence Deemed to be University)

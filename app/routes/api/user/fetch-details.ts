@@ -1,5 +1,4 @@
 import { LoaderFunction, redirect } from "remix";
-// import { addUser } from "~/server/services/mutations/user/user.server";
 import authenticator from "~/server/authentication/auth.server";
 import { getUserDetails } from "~/server/services/mutations/user/get-details.server";
 

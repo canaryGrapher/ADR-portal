@@ -21,4 +21,14 @@ const checkBoxOptions = [
     { label: "Other (Mention below)", value: "Other (Mention below)r" },
 ];
 
-export { radioOptions, checkBoxOptions };
+const applicabilityOptions = [
+    { label: "Applicable", value: "yes" },
+    { label: "Not applicable", value: "no" },
+]
+
+const yesNoQuestions = [
+    { label: "Yes", value: "Yes" },
+    { label: "No", value: "No" },
+];
+
+export { radioOptions, checkBoxOptions, applicabilityOptions, yesNoQuestions };

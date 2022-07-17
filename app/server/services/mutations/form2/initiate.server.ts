@@ -1,6 +1,11 @@
 import LoginModel from "~/models/login.model"
 import Forms2Model from "~/models/form2.model"
 
+/**
+ * @function initiateForm2 - Initiate a new form 2 if no incomplete form 1 exists
+ * @param user Email of the user
+ * @returns ObjectId of the new form / existing form
+ */
 const intiateForm2 = async (user: string) => {
     try {
         const form2Exists = await Forms2Model.findOne({ user: user, isComplete: false })

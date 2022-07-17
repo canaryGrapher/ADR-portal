@@ -17,7 +17,7 @@ export default function Home() {
 
   const fetcher = useFetcher();
   const allFormsDataFetcher = useFetcher();
-  const goToForm = (identifier: number) => {
+  const goToForm = (identifier: string) => {
     fetcher.load(`/api/forms/form-router?formName=${identifier}`);
   };
 
@@ -42,9 +42,16 @@ export default function Home() {
           Select a form to fill:
         </h2>
         <div className="grid grid-cols-2 gap-5">
-          <CardSelect name={1} goToForm={goToForm} />
-          <CardSelect name={2} goToForm={goToForm} />
+          <CardSelect
+            name={"ADR Reporting Form"}
+            goToForm={() => goToForm("new-1")}
+          />
+          <CardSelect
+            name={"Medical Device Reporting Form"}
+            goToForm={() => goToForm("new-2")}
+          />
         </div>
+        {/* Showing all completed forms */}
         <p className="text-xl text-center mt-10 font-bold px-10 underline">
           Completed forms
         </p>
@@ -63,8 +70,8 @@ export default function Home() {
                 />
               ))
             ) : (
-              <div className="w-full py-10">
-                <p className="text-center">
+              <div className="w-full py-5">
+                <p className="text-center border-2 border-white py-10 mx-10">
                   No ADR reporting forms completed yet
                 </p>
               </div>
@@ -84,8 +91,8 @@ export default function Home() {
                 />
               ))
             ) : (
-              <div className="w-full py-10">
-                <p className="text-center">
+              <div className="w-full py-5">
+                <p className="text-center border-2 border-white py-10 mx-10">
                   No Medical device reporting forms completed yet
                 </p>
               </div>

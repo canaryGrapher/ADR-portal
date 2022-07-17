@@ -10,10 +10,13 @@ class Forms1 {
     _id?: mongoose.Types.ObjectId;
 
     @prop({ type: String, required: true })
-    public user!: String;
+    public user!: string;
 
     @prop({ type: Boolean, required: true })
-    public isComplete!: Boolean;
+    public isComplete!: boolean;
+
+    @prop({ type: Boolean, required: true, default: false })
+    public isApproved?: boolean;
 
     @prop({ type: Form1Page1 })
     public form1Page1?: Form1Page1;

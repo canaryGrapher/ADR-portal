@@ -1,39 +1,37 @@
 import { prop, PropType } from "@typegoose/typegoose";
 
-const options = ["Congenital-anomaly", "Life Threatening", "Hospitalized/Prolonged", "Disability", "Required intervention to Prevent permanent impairment/damage", "Death", "Other (Mention below)"]
-const options2 = ["Recovered", "Recovering", "Not Recovered", "Fatal", "Recovered with sequelae", "Unknown"]
 
 export default class Form1Page3e {
     @prop({ type: Boolean, required: true })
-    public isComplete!: Boolean;
+    public isComplete!: boolean;
 
     @prop({ type: Boolean })
-    public applicability?: Boolean;
+    public applicability?: boolean;
 
     @prop({ type: String })
-    public amcReportNumber?: String;
+    public amcReportNumber?: string;
 
     @prop({ type: String })
-    public worldwideUniqueNumber?: String;
+    public worldwideUniqueNumber?: string;
 
     @prop({ type: String })
-    public relevantTests?: String;
+    public relevantTests?: string;
 
     @prop({ type: String })
-    public relevantMedicalHistory?: String;
+    public relevantMedicalHistory?: string;
 
     @prop({ type: Boolean })
-    public seriousnessOfTheReaction: Boolean;
+    public seriousnessOfTheReaction: boolean;
 
     @prop({ type: () => String }, PropType.ARRAY)
-    public seriousnessLevel?: String[];
-
-    @prop({ type: Date })
-    public dateOfDeath: Date;
+    public seriousnessLevel?: string[];
 
     @prop({ type: String })
-    public otherDetails: String;
+    public dateOfDeath: string;
 
-    @prop({ type: String, enum: options2 })
-    public outcome: String;
+    @prop({ type: String })
+    public otherDetails: string;
+
+    @prop({ type: String })
+    public outcome: string;
 }

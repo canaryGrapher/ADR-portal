@@ -1,16 +1,22 @@
 import { useEffect, useState } from "react";
-
-// importing layouts
 import FormLayout from "~/layouts/forms/adr-reporting";
-
-// importing components
 import NavigationPanel from "~/components/forms/NavigationPanel";
-import { Form, Input, DatePicker, Switch, Checkbox, Radio, message } from "antd";
+import {
+  Form,
+  Input,
+  DatePicker,
+  Switch,
+  Checkbox,
+  Radio,
+  message,
+} from "antd";
 import { CheckboxValueType } from "antd/lib/checkbox/Group";
-
-// importing utilities
-import { radioOptions, checkBoxOptions } from "~/utils/adr-reporting/3e";
-
+import {
+  radioOptions,
+  checkBoxOptions,
+  applicabilityOptions,
+  yesNoQuestions,
+} from "~/utils/adr-reporting/3e";
 import { RootState } from "~/states/store";
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -152,6 +158,14 @@ export default function Form1page3e() {
               onChange={changeApplicability}
               checked={isApplicable}
             />
+            {/* <Form.Item label="Outcome" name="outcome" className="w-full">
+              <Radio.Group
+                size="large"
+                buttonStyle="solid"
+                optionType="button"
+                options={radioOptions}
+              />
+            </Form.Item> */}
           </Form.Item>
           <div className="grid grid-cols-2 gap-5">
             <Form.Item

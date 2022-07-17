@@ -16,7 +16,6 @@ export function ErrorBoundary({ error }: any) {
         <Links />
       </head>
       <body>
-        {/* add the UI you want your users to see */}
         <h1>Oh no! The application is facing issues.</h1>
         <pre>{error.message}</pre>
         <Scripts />
