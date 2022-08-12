@@ -36,6 +36,7 @@ authenticator.use(
                 currentFormOne: userDetails.currentFormOne?.toString(),
                 currentFormTwo: userDetails.currentFormTwo?.toString(),
                 token: `${email}-${userDetails._id}-${new Date().getTime()}`,
+                isAdmin: userDetails.isAdmin
             };
 
             return await Promise.resolve({ ...user });

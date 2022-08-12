@@ -29,6 +29,9 @@ class Login {
 
     @prop({ type: [mongoose.Types.ObjectId] })
     public completedFormsTwo?: [mongoose.Types.ObjectId];
+
+    @prop({ type: Boolean, default: false })
+    public isAdmin?: boolean
 }
 
 const LoginModel = getModelForClass(Login);

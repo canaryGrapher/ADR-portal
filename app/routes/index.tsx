@@ -1,14 +1,23 @@
 import { useState, useEffect } from "react";
-import { LoaderFunction, useFetcher } from "remix";
+import { LoaderFunction, useFetcher, json } from "remix";
 import authenticator from "~/server/authentication/auth.server";
 import { ConvertMongoDBObjectToDate } from "~/utils/functions/ConvertMongoDBObjectToDate";
 import CardSelect from "~/components/home/CardSelect";
 import CompletedForm from "~/components/home/CompletedForm";
+import { sessionStorage } from "~/server/authentication/session.server";
 
 export let loader: LoaderFunction = async ({ request }) => {
-  return await authenticator.isAuthenticated(request, {
+  await authenticator.isAuthenticated(request, {
     failureRedirect: "/login",
   });
+  
+  const session = await sessionStorage.getSession(
+    request.headers.get("Cookie")
+  );
+  console.log("Session: ", session.data);
+  console.log("isAdmin: ", session.data.sessionKey.isAdmin);
+  const error = session.get("sessionErrorKey");
+  return json<any>({ error });
 };
 
 export default function Home() {
@@ -37,6 +46,10 @@ export default function Home() {
 
   return (
     <div className="w-screen h-screen flex flex-col pb-10">
+      {/* {
+        //  display admin UI if isAdmin is true 
+            else display normal UI
+      } */}
       <div className="rounded-lg w-3/4 min-h-3/4 mx-auto p-10 text-left">
         <h2 className="text-white text-2xl font-medium">
           Select a form to fill:

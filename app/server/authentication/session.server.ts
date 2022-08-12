@@ -30,4 +30,5 @@ export type User = {
     currentFormOne?: string;
     currentFormTwo?: string;
     token: string;
+    isAdmin?: string;
 };
