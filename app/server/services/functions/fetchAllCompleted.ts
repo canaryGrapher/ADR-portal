@@ -7,8 +7,8 @@ import Forms2Model from "~/models/form2.model";
  */
 const getCompletedForms = async () => {
     try {
-        const form1Pointer = await Forms1Model.find({ isComplete: true }).select({ _id: 1, isApproved: 1 })
-        const form2Pointer = await Forms2Model.find({ isComplete: true }).select({ _id: 1, isApproved: 1 })
+        const form1Pointer = await Forms1Model.find({ isComplete: true }).select({ _id: 1, isApproved: 1, user: 1 })
+        const form2Pointer = await Forms2Model.find({ isComplete: true }).select({ _id: 1, isApproved: 1, user: 1 })
         const forms = { form1Pointer, form2Pointer };
 
         if (forms) {

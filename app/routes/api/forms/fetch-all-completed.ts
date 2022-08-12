@@ -8,11 +8,6 @@ export const loader: LoaderFunction = async ({ request }) => {
 
     // if user is logged in
     if (user) {
-        const url = new URL(request.url)
-        const session: Session = await getSession(
-            request.headers.get('Cookie')
-        );
-        
         const forms = await getCompletedForms();
         console.log("form data: ", forms);
         return forms;

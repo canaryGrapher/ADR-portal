@@ -62,7 +62,7 @@ export default function Home() {
   return (
     <div className="w-screen h-screen flex flex-col pb-10">
       {
-        !isAdmin.isAdmin 
+        isAdmin.isAdmin 
         ?
         <div className="container mx-auto">
           <p className="text-xl text-center mt-10 font-bold px-10 underline">
@@ -79,7 +79,6 @@ export default function Home() {
                     key={index}
                     ID={data._id}
                     name={ConvertMongoDBObjectToDate(data._id)}
-                    goToForm={() => goToForm(data._id)}
                   />
                 ))
               ) : (
@@ -100,7 +99,6 @@ export default function Home() {
                     key={index}
                     ID={data._id}
                     name={ConvertMongoDBObjectToDate(data._id)}
-                    goToForm={() => goToForm(data._id)}
                   />
                 ))
               ) : (
@@ -143,7 +141,7 @@ export default function Home() {
                     key={index}
                     ID={data._id}
                     name={ConvertMongoDBObjectToDate(data._id)}
-                    goToForm={() => goToForm(data._id)}
+                    // goToForm={() => goToForm(data._id)}
                   />
                 ))
               ) : (
@@ -164,7 +162,7 @@ export default function Home() {
                     key={index}
                     ID={data._id}
                     name={ConvertMongoDBObjectToDate(data._id)}
-                    goToForm={() => goToForm(data._id)}
+                    // goToForm={() => goToForm(data._id)}
                   />
                 ))
               ) : (

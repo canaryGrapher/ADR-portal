@@ -37,5 +37,22 @@ const getCompletedForm2 = async (user: string) => {
     }
 }
 
+/**
+ * @function getCompletedForms1
+ * @param user email address of the user
+ * @returns array of form1 data
+ */
+const getCompletedForm1Data = async (user: string) => {
+    try {
+        const form1Pointer = await Forms1Model.find({ user: user, isComplete: true })
+        if (form1Pointer) {
+            return form1Pointer
+        } else {
+            return []
+        }
+    }
+    catch (error) {
+    }
+}
 
-export { getCompletedForm1, getCompletedForm2 }
+export { getCompletedForm1, getCompletedForm2, getCompletedForm1Data }
