@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { useHistory } from "react-router";
 import { Link, useFetcher } from "remix";
 
 export default function Navbar(props: { location: any }) {
@@ -54,7 +53,7 @@ export default function Navbar(props: { location: any }) {
     <div className="h-14 p-1 shadow-xl font-medium flex flex-row justify-between">
       <div className="flex flex-row">
         <img src="/KMCLogo.png" className="p-1" />
-        {path != "" ? (
+        {path != "" && (path != undefined && path?.split("/")?.length > 1) ? (
           <>
             <Link to="/" className="text-md my-auto ml-5">
               <button className="text-white font-bold py-1 px-5 bg-[#6c567b] h-8 my-auto">

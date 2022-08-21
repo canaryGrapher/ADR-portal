@@ -3,6 +3,7 @@ import { Link } from "remix";
 const CompletedForm = (props: {
   name: string;
   ID: string;
+  isAdmin: boolean;
 }) => {
   return (
     <div className="flex flex-row w-full select-none px-10 mb-5">
@@ -20,7 +21,7 @@ const CompletedForm = (props: {
             </p>
             <p className="text-xs">Form ID: {props.ID}</p>
           </div>
-          <Link to={`/pdf/${props.ID}`}>Click</Link>
+          {props?.isAdmin && <Link to={`/pdf/${props.ID}`}>Click</Link>}
         </div>
       </div>
     </div>
