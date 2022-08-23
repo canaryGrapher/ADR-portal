@@ -76,9 +76,13 @@ export default function SubmitPage() {
                     headers: {
                       "Content-Type": "application/json",
                     },
-                  }).then(() => {
-                    window.location.href = "/";
-                  });
+                  })
+                    .then(() => {
+                      window.location.href = "/";
+                    })
+                    .catch(() => {
+                      alert("There was an error submitting this form.");
+                    });
                 }
               }}
             >
