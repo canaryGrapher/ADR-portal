@@ -71,12 +71,13 @@ export default function SubmitPage() {
                   "Are you sure you want to submit the form?"
                 );
                 if (confirmation) {
-                  redirect("/");
                   fetch("/api/forms/form1/submit", {
                     method: "post",
                     headers: {
                       "Content-Type": "application/json",
                     },
+                  }).then(() => {
+                    window.location.href = "/";
                   });
                 }
               }}
