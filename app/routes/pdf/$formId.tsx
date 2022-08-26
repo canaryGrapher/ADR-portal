@@ -2,10 +2,21 @@ import { Page, Text, View, Document, StyleSheet, Image, renderToStream } from '@
 import { LoaderFunction } from "remix";
 import { getCompletedForm1Data } from "~/server/services/functions/fetchCompletedForms.server";
 
+/* 
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+BUG: NEEDS ONE REFRESH BEFORE THE PDF LOADS
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+*/
+
 export let loader: LoaderFunction = async ({ request, params }) => {
 
+    // fetch form data
     const formData: any = await getCompletedForm1Data(params.formId);
-    console.log(formData);
+
+    // assign form data
+    const medicationDetails = formData.form1Page3.Form1Page3a.drugDetails;
+    const concommitantDetails = formData.form1Page3.Form1Page3d.drugDetails;
+    const reporterDetails = formData.form1Page4;
 
     // the styling for the PDF
     const styles = StyleSheet.create({
@@ -166,34 +177,22 @@ export let loader: LoaderFunction = async ({ request, params }) => {
                                 <Text>Frequency</Text>
                             </View>
                         </View>
-                        <View style={styles.sectionArea}>
-                            {
-                                sectionCMetaData.slice(0, 8).map((metaData: any) => {
-                                    return <Text style={[styles.tableCell, { width: metaData.width }]}></Text>
-                                })
-                            }
-                        </View>
-                        <View style={styles.sectionArea}>
-                            {
-                                sectionCMetaData.slice(0, 8).map((metaData: any) => {
-                                    return <Text style={[styles.tableCell, { width: metaData.width }]}></Text>
-                                })
-                            }
-                        </View>
-                        <View style={styles.sectionArea}>
-                            {
-                                sectionCMetaData.slice(0, 8).map((metaData: any) => {
-                                    return <Text style={[styles.tableCell, { width: metaData.width }]}></Text>
-                                })
-                            }
-                        </View>
-                        <View style={styles.sectionArea}>
-                            {
-                                sectionCMetaData.slice(0, 8).map((metaData: any) => {
-                                    return <Text style={[styles.tableCell, { width: metaData.width }]}></Text>
-                                })
-                            }
-                        </View>
+                        {
+                            medicationDetails?.map((medication: any) => {
+                                return (
+                                    <View style={styles.sectionArea}>
+                                        <Text style={[styles.tableCell, { width: sectionCMetaData[0].width }]}>{medication?.identifier + 1}</Text>
+                                        <Text style={[styles.tableCell, { width: sectionCMetaData[1].width }]}>{medication?.nameOfDrug.trim()}</Text>
+                                        <Text style={[styles.tableCell, { width: sectionCMetaData[2].width }]}>{medication?.manufacturer.trim()}</Text>
+                                        <Text style={[styles.tableCell, { width: sectionCMetaData[3].width }]}>{medication?.BatchNo_LotNo.trim()}</Text>
+                                        <Text style={[styles.tableCell, { width: sectionCMetaData[4].width }]}>{new Date(medication?.expDate).toDateString()}</Text>
+                                        <Text style={[styles.tableCell, { width: sectionCMetaData[5].width }]}>{medication?.doseUsed}</Text>
+                                        <Text style={[styles.tableCell, { width: sectionCMetaData[6].width }]}>{medication?.routeUsed.trim()}</Text>
+                                        <Text style={[styles.tableCell, { width: sectionCMetaData[7].width }]}>{medication?.frequency.trim()}</Text>
+                                    </View>
+                                )
+                            })
+                        }
                     </View>
                     {/* second row */}
                     <View style={[styles.sectionC, { marginTop: "2px" }]}>
@@ -238,34 +237,19 @@ export let loader: LoaderFunction = async ({ request, params }) => {
                                 <Text>Causality Assessment</Text>
                             </View>
                         </View>
-                        <View style={styles.sectionArea}>
-                            {
-                                sectionCMetaData.slice(8, 13).map((metaData: any) => {
-                                    return <Text style={[styles.tableCell, { width: metaData.width }]}></Text>
-                                })
-                            }
-                        </View>
-                        <View style={styles.sectionArea}>
-                            {
-                                sectionCMetaData.slice(8, 13).map((metaData: any) => {
-                                    return <Text style={[styles.tableCell, { width: metaData.width }]}></Text>
-                                })
-                            }
-                        </View>
-                        <View style={styles.sectionArea}>
-                            {
-                                sectionCMetaData.slice(8, 13).map((metaData: any) => {
-                                    return <Text style={[styles.tableCell, { width: metaData.width }]}></Text>
-                                })
-                            }
-                        </View>
-                        <View style={styles.sectionArea}>
-                            {
-                                sectionCMetaData.slice(8, 13).map((metaData: any) => {
-                                    return <Text style={[styles.tableCell, { width: metaData.width }]}></Text>
-                                })
-                            }
-                        </View>
+                        {
+                            medicationDetails?.map((medication: any) => {
+                                return (
+                                    <View style={styles.sectionArea}>
+                                        <Text style={[styles.tableCell, { width: sectionCMetaData[8].width }]}>{medication?.identifier + 1}</Text>
+                                        <Text style={[styles.tableCell, { width: sectionCMetaData[9].width }]}>{new Date(medication?.dateStarted).toDateString()}</Text>
+                                        <Text style={[styles.tableCell, { width: sectionCMetaData[10].width }]}>{new Date(medication?.dateStopped).toDateString()}</Text>
+                                        <Text style={[styles.tableCell, { width: sectionCMetaData[11].width }]}>{medication?.indication?.trim()}</Text>
+                                        <Text style={[styles.tableCell, { width: sectionCMetaData[12].width }]}>{""}</Text>
+                                    </View>
+                                )
+                            })
+                        }
                     </View>
                     {/* third row */}
                     <View style={[styles.sectionArea, { marginTop: "2px" }]}>
@@ -429,34 +413,22 @@ export let loader: LoaderFunction = async ({ request, params }) => {
                             <Text>Indication</Text>
                         </View>
                     </View>
-                    <View style={[styles.sectionArea, { justifyContent: "flex-start" }]}>
-                        {
-                            sectionCMetaData.slice(24, 32).map((metaData: any) => {
-                                return <Text style={[styles.tableCell, { width: metaData.width }]}></Text>
-                            })
-                        }
-                    </View>
-                    <View style={[styles.sectionArea, { justifyContent: "flex-start" }]}>
-                        {
-                            sectionCMetaData.slice(24, 32).map((metaData: any) => {
-                                return <Text style={[styles.tableCell, { width: metaData.width }]}></Text>
-                            })
-                        }
-                    </View>
-                    <View style={[styles.sectionArea, { justifyContent: "flex-start" }]}>
-                        {
-                            sectionCMetaData.slice(24, 32).map((metaData: any) => {
-                                return <Text style={[styles.tableCell, { width: metaData.width }]}></Text>
-                            })
-                        }
-                    </View>
-                    <View style={[styles.sectionArea, { justifyContent: "flex-start" }]}>
-                        {
-                            sectionCMetaData.slice(24, 32).map((metaData: any) => {
-                                return <Text style={[styles.tableCell, { width: metaData.width }]}></Text>
-                            })
-                        }
-                    </View>
+                    {
+                        concommitantDetails?.map((concom: any, ind: number) => {
+                            return (
+                                <View style={[styles.sectionArea, { justifyContent: "flex-start" }]}>
+                                    <Text style={[styles.tableCell, { width: sectionCMetaData[24].width }]}>{ind + 1}</Text>
+                                    <Text style={[styles.tableCell, { width: sectionCMetaData[25].width }]}>{concom?.name.trim()}</Text>
+                                    <Text style={[styles.tableCell, { width: sectionCMetaData[26].width }]}>{concom?.dose}</Text>
+                                    <Text style={[styles.tableCell, { width: sectionCMetaData[27].width }]}>{concom?.routeUsed.trim()}</Text>
+                                    <Text style={[styles.tableCell, { width: sectionCMetaData[28].width }]}>{concom?.frequency}</Text>
+                                    <Text style={[styles.tableCell, { width: sectionCMetaData[29].width }]}>{new Date(concom?.startDate).toDateString()}</Text>
+                                    <Text style={[styles.tableCell, { width: sectionCMetaData[30].width }]}>{new Date(concom?.stopDate).toDateString()}</Text>
+                                    <Text style={[styles.tableCell, { width: sectionCMetaData[31].width }]}>{concom?.indication}</Text>
+                                </View>
+                            )
+                        })
+                    }
                     <View style={[styles.sectionArea, { marginTop: "2px" }]}>
                         <View style={styles.additionalInfo}>
                             <View style={[styles.tableHeader, { height: "20px" }]}>
@@ -471,26 +443,26 @@ export let loader: LoaderFunction = async ({ request, params }) => {
                             <View style={{ height: "90px", padding: "2px" }}>
                                 <Text style={{ fontSize: "8px", fontFamily: "Helvetica-Bold" }}>Name and Address</Text>
                                 <Text style={{ fontSize: "8px", fontFamily: "Helvetica" }}>
-                                    Parthiv Menon, 15 Indira Nagar First Avenue Karnatka, Parthiv Menon, 15 Indira Nagar First Avenue Karnatka,Parthiv Menon, 15 Indira Nagar First Avenue Karnatka
+                                    {reporterDetails?.name + " " + (reporterDetails?.profAddress != null ? reporterDetails?.profAddress : "")}
                                 </Text>
                                 <View style={{ display: "flex", flexDirection: "row", marginTop: "2px" }}>
                                     <Text style={{ fontSize: "8px", fontFamily: "Helvetica-Bold", }}>Pin</Text>
-                                    <Text style={{ fontSize: "8px", fontFamily: "Helvetica", marginLeft: "2px" }}>680503</Text>
+                                    <Text style={{ fontSize: "8px", fontFamily: "Helvetica", marginLeft: "2px" }}>{reporterDetails?.pin}</Text>
                                     <Text style={{ fontSize: "8px", fontFamily: "Helvetica-Bold", marginLeft: "4px" }}>Email</Text>
-                                    <Text style={{ fontSize: "8px", fontFamily: "Helvetica", marginLeft: "2px" }}>parthivmenon01@gmail.com</Text>
+                                    <Text style={{ fontSize: "8px", fontFamily: "Helvetica", marginLeft: "2px" }}>{reporterDetails?.email}</Text>
                                 </View>
                                 <View style={{ display: "flex", flexDirection: "row", marginTop: "2px" }}>
                                     <Text style={{ fontSize: "8px", fontFamily: "Helvetica-Bold" }}>Contact No.</Text>
-                                    <Text style={{ fontSize: "8px", fontFamily: "Helvetica", marginLeft: "2px" }}>9495589440</Text>
+                                    <Text style={{ fontSize: "8px", fontFamily: "Helvetica", marginLeft: "2px" }}>{reporterDetails?.telephoneNumber}</Text>
                                 </View>
                                 <View style={{ display: "flex", flexDirection: "row", marginTop: "2px" }}>
                                     <Text style={{ fontSize: "8px", fontFamily: "Helvetica-Bold", }}>Occupation</Text>
-                                    <Text style={{ fontSize: "8px", fontFamily: "Helvetica", marginLeft: "2px" }}>Doctor</Text>
+                                    <Text style={{ fontSize: "8px", fontFamily: "Helvetica", marginLeft: "2px" }}>{reporterDetails?.occupation}</Text>
                                     <Text style={{ fontSize: "8px", fontFamily: "Helvetica-Bold", marginLeft: "4px" }}>Signature</Text>
-                                    <Text style={{ fontSize: "8px", fontFamily: "Helvetica", marginLeft: "2px" }}>parthiv</Text>
+                                    <Text style={{ fontSize: "8px", fontFamily: "Helvetica", marginLeft: "2px" }}></Text>
                                 </View>
                                 <View style={{ height: "10px", marginTop: "auto" }}>
-                                    <Text style={{ fontFamily: "Helvetica-Bold" }}>Date of this report (dd/mm/yyyy): </Text>
+                                    <Text style={{ fontFamily: "Helvetica-Bold" }}>Date of this report (dd/mm/yyyy): {new Date(reporterDetails?.dateOfThisReport).toDateString()} </Text>
                                 </View>
                             </View>
                         </View>
