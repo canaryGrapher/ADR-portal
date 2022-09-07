@@ -68,6 +68,20 @@ export let loader: LoaderFunction = async ({ request, params }) => {
             backgroundColor: "#ebf2ff",
             textAlign: "center"
         },
+        sectionA: {
+            display: "flex",
+            flexDirection: "column",
+            width: "100%",
+        },
+        sectionACell: {
+            padding: "2px",
+            border: "0.6px solid black",
+            textAlign: "left",
+            fontSize: "9px"
+        },
+        halfWidth: {
+            width: "50%"
+        },
         sectionC: {
             display: 'flex',
             flexDirection: "column",
@@ -144,6 +158,91 @@ export let loader: LoaderFunction = async ({ request, params }) => {
                             <Text style={{ fontSize: "8px", marginTop: "3px" }}>
                                 <span style={{ fontFamily: "Helvetica-Bold" }}>PvPI Helpline (Toll Free) :1800-180-3024</span> (9:00 AM to 5:30 PM, Monday-Friday)
                             </Text>
+                        </View>
+                    </View>
+                    <View style={styles.sectionA}>
+                        <View style={{ display: "flex", flexDirection: "row" }}>
+                            <View style={styles.halfWidth}>
+                                <View style={styles.sectionHeaders}>
+                                    <Text>A. PATIENT INFORMATION*</Text>
+                                </View>
+                                <View style={{ display: "flex", flexDirection: "row" }}>
+                                    <View style={[styles.sectionACell, { width: "50%" }]}>
+                                        <Text>1. Patient Initials: Parthiv Menon</Text>
+                                    </View>
+                                    <View style={[styles.sectionACell, { width: "50%" }]}>
+                                        <Text>2. Age or Date of Birth: 02/12/2001</Text>
+                                    </View>
+                                </View>
+                                <View style={{ display: "flex", flexDirection: "row" }}>
+                                    <View style={[styles.sectionACell, { width: "50%" }]}>
+                                        <Text>3. Gender: Male</Text>
+                                    </View>
+                                    <View style={[styles.sectionACell, { width: "50%" }]}>
+                                        <Text>4. Weight (in kg): </Text>
+                                    </View>
+                                </View>
+                                <View style={styles.sectionHeaders}>
+                                    <Text>B. SUSPECTED ADVERSE REACTION*</Text>
+                                </View>
+                                <View style={[styles.additionalInfo, { height: "220px", width: "100%" }]}>
+                                    <View style={[styles.sectionACell, { fontSize: "9px" }]}>
+                                        <Text> Describe Event/Reaction management with details , if any
+                                        </Text>
+                                    </View>
+                                    <View style={{
+                                        border: "0.6px solid black",
+                                        height: "200px",
+                                        backgroundColor: "#ebf2ff",
+                                        textAlign: "center"
+                                    }}></View>
+                                </View>
+                            </View>
+                            <View style={styles.halfWidth}>
+                                <View style={{
+                                    backgroundColor: "#400000",
+                                    border: "0.5px solid black",
+                                    color: "white",
+                                    fontSize: "8px",
+                                    fontFamily: "Helvetica-Bold",
+                                    padding: "2px"
+                                }}>
+                                    <Text>FOR AMC/NCC USE</Text>
+                                </View>
+                                <View style={styles.sectionACell}>
+                                    <Text>Reg. No. / IPD No. / OPD No. / CR No. : fiurcibwrf</Text>
+                                </View>
+                                <View style={styles.sectionACell}>
+                                    <Text>AMC Report No. : 3r82hcc08</Text>
+                                </View>
+                                <View style={styles.sectionACell}>
+                                    <Text>Worldwide Unique No.: 4t983hf4nc</Text>
+                                </View>
+                                <View style={[styles.additionalInfo, { width: "100%" }]}>
+                                    <View style={[styles.sectionACell, { fontSize: "9px" }]}>
+                                        <Text>Additional Information</Text>
+                                    </View>
+                                    <View style={{
+                                        border: "0.6px solid black",
+                                        height: "110px",
+                                        backgroundColor: "#ebf2ff",
+                                        textAlign: "center"
+                                    }}></View>
+                                </View>
+                                <View style={[styles.additionalInfo, { height: "130px", width: "100%" }]}>
+                                    <View style={[styles.sectionACell, { fontSize: "9px" }]}>
+                                        <Text>Relevant medical / medication history (e.g. allergies,
+                                            pregnancy, addiction, hepatic, renal dysfunction etc.)
+                                        </Text>
+                                    </View>
+                                    <View style={{
+                                        border: "0.6px solid black",
+                                        height: "110px",
+                                        backgroundColor: "#ebf2ff",
+                                        textAlign: "center"
+                                    }}></View>
+                                </View>
+                            </View>
                         </View>
                     </View>
                     <View style={styles.sectionC}>
