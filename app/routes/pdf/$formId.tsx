@@ -185,14 +185,22 @@ export let loader: LoaderFunction = async ({ request, params }) => {
                                 <View style={styles.sectionHeaders}>
                                     <Text>B. SUSPECTED ADVERSE REACTION*</Text>
                                 </View>
-                                <View style={[styles.additionalInfo, { height: "220px", width: "100%" }]}>
+                                <View style={{ display: "flex", flexDirection: "row", border: "0.6px solid black" }}>
+                                    <Text style={{ fontSize: "9px", padding: "2px" }}>5. Event / Reaction start date (dd/mm/yyyy)</Text>
+                                    <Text style={{ fontSize: "9px", flexGrow: 1, backgroundColor: "#ebf2ff", padding: "2px" }}>22/2/2001</Text>
+                                </View>
+                                <View style={{ display: "flex", flexDirection: "row", border: "0.6px solid black" }}>
+                                    <Text style={{ fontSize: "9px", padding: "2px" }}>6. Event / Reaction stop date (dd/mm/yyyy)</Text>
+                                    <Text style={{ fontSize: "9px", flexGrow: 1, backgroundColor: "#ebf2ff", padding: "2px" }}>22/2/2001</Text>
+                                </View>
+                                <View style={[styles.additionalInfo, { height: "190px", width: "100%" }]}>
                                     <View style={[styles.sectionACell, { fontSize: "9px" }]}>
-                                        <Text> Describe Event/Reaction management with details , if any
+                                        <Text>7. Describe Event/Reaction management with details , if any
                                         </Text>
                                     </View>
                                     <View style={{
                                         border: "0.6px solid black",
-                                        height: "200px",
+                                        height: "185px",
                                         backgroundColor: "#ebf2ff",
                                         textAlign: "center"
                                     }}></View>
@@ -207,7 +215,7 @@ export let loader: LoaderFunction = async ({ request, params }) => {
                                     fontFamily: "Helvetica-Bold",
                                     padding: "2px"
                                 }}>
-                                    <Text>FOR AMC/NCC USE</Text>
+                                    <Text style={{textAlign: "center"}}>FOR AMC/NCC USE</Text>
                                 </View>
                                 <View style={styles.sectionACell}>
                                     <Text>Reg. No. / IPD No. / OPD No. / CR No. : fiurcibwrf</Text>
@@ -218,26 +226,26 @@ export let loader: LoaderFunction = async ({ request, params }) => {
                                 <View style={styles.sectionACell}>
                                     <Text>Worldwide Unique No.: 4t983hf4nc</Text>
                                 </View>
-                                <View style={[styles.additionalInfo, { width: "100%" }]}>
+                                <View style={[styles.additionalInfo, { height: "80px", width: "100%" }]}>
                                     <View style={[styles.sectionACell, { fontSize: "9px" }]}>
-                                        <Text>Additional Information</Text>
+                                        <Text>12. Relevant investigations with dates :</Text>
                                     </View>
                                     <View style={{
                                         border: "0.6px solid black",
-                                        height: "110px",
+                                        height: "80px",
                                         backgroundColor: "#ebf2ff",
                                         textAlign: "center"
                                     }}></View>
                                 </View>
-                                <View style={[styles.additionalInfo, { height: "130px", width: "100%" }]}>
+                                <View style={[styles.additionalInfo, { height: "100px", width: "100%" }]}>
                                     <View style={[styles.sectionACell, { fontSize: "9px" }]}>
-                                        <Text>Relevant medical / medication history (e.g. allergies,
+                                        <Text>13. Relevant medical / medication history (e.g. allergies,
                                             pregnancy, addiction, hepatic, renal dysfunction etc.)
                                         </Text>
                                     </View>
                                     <View style={{
                                         border: "0.6px solid black",
-                                        height: "110px",
+                                        height: "80px",
                                         backgroundColor: "#ebf2ff",
                                         textAlign: "center"
                                     }}></View>
