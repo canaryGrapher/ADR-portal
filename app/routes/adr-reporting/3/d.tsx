@@ -117,11 +117,11 @@ function AddedDrugs(props: any) {
                   <div className="flex justify-center items-center gap-4 text-lg">
                     <div className="hover:text-neutral-500 cursor-pointer">
                       <EditFilled
-                        onClick={() => editFormData(drug._id, drug)}
+                        onClick={() => editFormData(drug.identifier != undefined ? drug.identifier : drug._id, drug)}
                       />
                     </div>
                     <div className="hover:text-neutral-500 cursor-pointer">
-                      <DeleteFilled onClick={() => deleteFormItem(drug._id)} />
+                      <DeleteFilled onClick={() => deleteFormItem(drug.identifier != undefined ? drug.identifier : drug._id)} />
                     </div>
                   </div>
                 </div>

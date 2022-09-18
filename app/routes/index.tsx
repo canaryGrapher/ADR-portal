@@ -79,7 +79,7 @@ export default function Home() {
                     key={index}
                     ID={data._id}
                     name={ConvertMongoDBObjectToDate(data._id)}
-                    isAdmin={isAdmin}
+                    isAdmin={isAdmin.isAdmin}
                   />
                 ))
               ) : (
@@ -100,7 +100,7 @@ export default function Home() {
                     key={index}
                     ID={data._id}
                     name={ConvertMongoDBObjectToDate(data._id)}
-                    isAdmin={isAdmin}
+                    isAdmin={isAdmin.isAdmin}
                   />
                 ))
               ) : (
@@ -143,7 +143,7 @@ export default function Home() {
                     key={index}
                     ID={data._id}
                     name={ConvertMongoDBObjectToDate(data._id)}
-                    isAdmin={isAdmin}
+                    isAdmin={isAdmin.isAdmin}
                     // goToForm={() => goToForm(data._id)}
                   />
                 ))
@@ -165,7 +165,7 @@ export default function Home() {
                     key={index}
                     ID={data._id}
                     name={ConvertMongoDBObjectToDate(data._id)}
-                    isAdmin={isAdmin}
+                    isAdmin={isAdmin.isAdmin}
                     // goToForm={() => goToForm(data._id)}
                   />
                 ))
