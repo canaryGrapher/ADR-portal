@@ -21,7 +21,7 @@ const CompletedForm = (props: {
             </p>
             <p className="text-xs">Form ID: {props.ID}</p>
           </div>
-          {props?.isAdmin && <Link to={`/pdf/${props.ID}`}>Click</Link>}
+          {props?.isAdmin && <Link to={`/pdf/${props.ID}`} target="_blank">Click</Link>}
         </div>
       </div>
     </div>
