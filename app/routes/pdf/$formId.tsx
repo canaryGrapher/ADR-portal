@@ -11,20 +11,16 @@ import {
 import { LoaderFunction } from "remix";
 import { getCompletedForm1Data } from "~/server/services/functions/fetchCompletedForms.server";
 
-/* 
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-BUG: NEEDS ONE REFRESH BEFORE THE PDF LOADS
-Else open the pdf in new page -anirudh
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-*/
-
 export let loader: LoaderFunction = async ({ request, params }) => {
   // fetch form data
   const formData: any = await getCompletedForm1Data(params.formId);
 
   // assign form data
+  const patientDetails = formData.form1Page1;
+  const drugInfo = formData.form1Page2;
   const medicationDetails = formData.form1Page3.Form1Page3a.drugDetails;
   const concommitantDetails = formData.form1Page3.Form1Page3d.drugDetails;
+  const amcInfo = formData.form1Page3.Form1Page3e;
   const reporterDetails = formData.form1Page4;
 
   // the styling for the PDF
@@ -65,7 +61,7 @@ export let loader: LoaderFunction = async ({ request, params }) => {
       flexDirection: "column",
       alignItems: "center",
       justifyContent: "center",
-      padding: "2rem",
+      padding: "10px",
     },
     sectionHeaders: {
       backgroundColor: "#c10100",
@@ -220,18 +216,18 @@ export let loader: LoaderFunction = async ({ request, params }) => {
                 </View>
                 <View style={{ display: "flex", flexDirection: "row" }}>
                   <View style={[styles.sectionACell, { width: "50%" }]}>
-                    <Text>1. Patient Initials: Parthiv Menon</Text>
+                    <Text>1. Patient Initials: {patientDetails?.patientInitials}</Text>
                   </View>
                   <View style={[styles.sectionACell, { width: "50%" }]}>
-                    <Text>2. Age or Date of Birth: 02/12/2001</Text>
+                    <Text>2. Age or Date of Birth: {new Date(patientDetails?.DateOfBirth).toDateString()}</Text>
                   </View>
                 </View>
                 <View style={{ display: "flex", flexDirection: "row" }}>
                   <View style={[styles.sectionACell, { width: "50%" }]}>
-                    <Text>3. Gender: Male</Text>
+                    <Text>3. Gender: {patientDetails?.gender === "male" ? "M" : "F"}</Text>
                   </View>
                   <View style={[styles.sectionACell, { width: "50%" }]}>
-                    <Text>4. Weight (in kg): </Text>
+                    <Text>4. Weight (in kg): {patientDetails?.weight?.toString()}</Text>
                   </View>
                 </View>
                 <View style={styles.sectionHeaders}>
@@ -255,7 +251,7 @@ export let loader: LoaderFunction = async ({ request, params }) => {
                       padding: "2px",
                     }}
                   >
-                    22/2/2001
+                    {new Date(drugInfo?.dateOfReactionStarted).toDateString()}
                   </Text>
                 </View>
                 <View
@@ -276,29 +272,26 @@ export let loader: LoaderFunction = async ({ request, params }) => {
                       padding: "2px",
                     }}
                   >
-                    22/2/2001
+                    {new Date(drugInfo?.dateOfRecovery).toDateString()}
+                  </Text>
+                </View>
+                <View style={[styles.sectionACell, { fontSize: "9px" }]}>
+                  <Text>
+                    7. Describe Event/Reaction management with details , if
+                    any
                   </Text>
                 </View>
                 <View
-                  style={[
-                    styles.additionalInfo,
-                    { height: "190px", width: "100%" },
-                  ]}
+                  style={{
+                    border: "0.6px solid black",
+                    minHeight: "100%",
+                    backgroundColor: "#ebf2ff",
+                    textAlign: "left",
+                    fontSize: "9px",
+                    padding: "2px",
+                  }}
                 >
-                  <View style={[styles.sectionACell, { fontSize: "9px" }]}>
-                    <Text>
-                      7. Describe Event/Reaction management with details , if
-                      any
-                    </Text>
-                  </View>
-                  <View
-                    style={{
-                      border: "0.6px solid black",
-                      height: "185px",
-                      backgroundColor: "#ebf2ff",
-                      textAlign: "center",
-                    }}
-                  ></View>
+                  <Text>{drugInfo?.reactionDescription}</Text>
                 </View>
               </View>
               <View style={styles.halfWidth}>
@@ -320,49 +313,45 @@ export let loader: LoaderFunction = async ({ request, params }) => {
                   </Text>
                 </View>
                 <View style={styles.sectionACell}>
-                  <Text>AMC Report No. : 3r82hcc08</Text>
+                  <Text>AMC Report No. : {amcInfo?.amcReportNumber}</Text>
                 </View>
                 <View style={styles.sectionACell}>
-                  <Text>Worldwide Unique No.: 4t983hf4nc</Text>
+                  <Text>Worldwide Unique No.: {amcInfo?.worldwideUniqueNumber}</Text>
+                </View>
+                <View style={[styles.sectionACell, { fontSize: "9px" }]}>
+                  <Text>12. Relevant investigations with dates :</Text>
                 </View>
                 <View
-                  style={[
-                    styles.additionalInfo,
-                    { height: "80px", width: "100%" },
-                  ]}
+                  style={{
+                    border: "0.6px solid black",
+                    minHeight: "80px",
+                    backgroundColor: "#ebf2ff",
+                    textAlign: "left",
+                    fontSize: "9px",
+                    padding: "2px"
+                  }}
                 >
-                  <View style={[styles.sectionACell, { fontSize: "9px" }]}>
-                    <Text>12. Relevant investigations with dates :</Text>
-                  </View>
-                  <View
-                    style={{
-                      border: "0.6px solid black",
-                      height: "80px",
-                      backgroundColor: "#ebf2ff",
-                      textAlign: "center",
-                    }}
-                  ></View>
+                  <Text>
+                    {amcInfo?.relevantTests}
+                  </Text>
+                </View>
+                <View style={[styles.sectionACell, { fontSize: "9px" }]}>
+                  <Text>
+                    13. Relevant medical / medication history (e.g. allergies,
+                    pregnancy, addiction, hepatic, renal dysfunction etc.)
+                  </Text>
                 </View>
                 <View
-                  style={[
-                    styles.additionalInfo,
-                    { height: "100px", width: "100%" },
-                  ]}
+                  style={{
+                    border: "0.6px solid black",
+                    minHeight: "80px",
+                    backgroundColor: "#ebf2ff",
+                    textAlign: "left",
+                    fontSize: "9px",
+                    padding: "2px"
+                  }}
                 >
-                  <View style={[styles.sectionACell, { fontSize: "9px" }]}>
-                    <Text>
-                      13. Relevant medical / medication history (e.g. allergies,
-                      pregnancy, addiction, hepatic, renal dysfunction etc.)
-                    </Text>
-                  </View>
-                  <View
-                    style={{
-                      border: "0.6px solid black",
-                      height: "80px",
-                      backgroundColor: "#ebf2ff",
-                      textAlign: "center",
-                    }}
-                  ></View>
+                  <Text>{amcInfo?.relevantMedicalHistory}</Text>
                 </View>
               </View>
             </View>
@@ -1283,8 +1272,8 @@ export let loader: LoaderFunction = async ({ request, params }) => {
                 }}
               >
                 NOTE : Serious/Adverse Event following immunization can also be
-                reported in Serious AEFI case Notification 
-                
+                reported in Serious AEFI case Notification
+
               </Text>
             </View>
 
@@ -1297,8 +1286,8 @@ export let loader: LoaderFunction = async ({ request, params }) => {
                   paddingLeft: "50px",
                 }}
               >
-                
-               Form available on {" "}<Link src={"http://www.ipc.gov.in"}>http://www.ipc.gov.in</Link>
+
+                Form available on {" "}<Link src={"http://www.ipc.gov.in"}>http://www.ipc.gov.in</Link>
               </Text>
             </View>
 
@@ -1306,7 +1295,7 @@ export let loader: LoaderFunction = async ({ request, params }) => {
               <Text
                 style={{
                   fontSize: "9px",
-                  fontFamily: "Helvetica-Bold", 
+                  fontFamily: "Helvetica-Bold",
                   paddingLeft: "5px",
                 }}
               >
@@ -1378,11 +1367,11 @@ export let loader: LoaderFunction = async ({ request, params }) => {
                   paddingLeft: "15px",
                 }}
               >
-                
+
                 <Text style={{ fontFamily: "Helvetica-Bold" }}>
                   Call on Helpline (Toll Free) 1800 180 3024
                 </Text>{" "}
-                to report ADRs or directly mail this filled form to 
+                to report ADRs or directly mail this filled form to
                 {" "}<Link src={"pvpi.ipc@gov.in"}>pvpi.ipc@gov.in</Link>
               </Text>
             </View>
@@ -1437,7 +1426,7 @@ export let loader: LoaderFunction = async ({ request, params }) => {
               </Text>
             </View>
 
-            
+
 
             <View style={styles.StaticContent}>
               <Text
@@ -1448,7 +1437,7 @@ export let loader: LoaderFunction = async ({ request, params }) => {
                   paddingLeft: "10px",
                 }}
               >
-                
+
               </Text>
               <Text
                 style={{
@@ -1464,8 +1453,8 @@ export let loader: LoaderFunction = async ({ request, params }) => {
             </View>
 
 
-            
-            
+
+
 
             <View style={styles.StaticContent}>
               <Text
@@ -1476,7 +1465,7 @@ export let loader: LoaderFunction = async ({ request, params }) => {
                   paddingLeft: "10px",
                 }}
               >
-                
+
               </Text>
               <Text
                 style={{
@@ -1508,7 +1497,7 @@ export let loader: LoaderFunction = async ({ request, params }) => {
                   justifyContent: "flex-start",
                 }}
               >
-                The reports are periodically reviewed by the NCC-PvPI. The information generated on the basis of these reports helps in continuous 
+                The reports are periodically reviewed by the NCC-PvPI. The information generated on the basis of these reports helps in continuous
               </Text>
             </View>
 
@@ -1521,16 +1510,16 @@ export let loader: LoaderFunction = async ({ request, params }) => {
                   paddingLeft: "12px",
                 }}
               >
-                
+
               </Text>
               <Text
                 style={{
                   fontSize: "8px",
                   fontFamily: "Helvetica",
                   justifyContent: "flex-start",
-                }}  
+                }}
               >
-               assessment of the benefit-risk ratio of medicines.
+                assessment of the benefit-risk ratio of medicines.
               </Text>
             </View>
 
@@ -1556,7 +1545,7 @@ export let loader: LoaderFunction = async ({ request, params }) => {
               </Text>
             </View>
 
-            
+
             <View style={styles.StaticContent}>
               <Text
                 style={{
@@ -1591,27 +1580,27 @@ export let loader: LoaderFunction = async ({ request, params }) => {
               </Text>
             </View>
 
-            
+
           </View>
-          <View style={{border: "0.5px solid black"}}>
-           <View>
-           <Text
+          <View style={{ border: "0.5px solid black" }}>
+            <View>
+              <Text
                 style={{
                   fontSize: "10px",
                   fontFamily: "Times-Bold",
                   color: "#00008B",
-                  paddingBottom:"5px",
+                  paddingBottom: "5px",
                   paddingLeft: "100px",
 
                 }}
               >
                 For Adverse Drug Reaction Reporting Tools
               </Text>
-            
-            </View>     
-         
 
-              <View style={styles.StaticContent}>
+            </View>
+
+
+            <View style={styles.StaticContent}>
               <Text
                 style={{
                   marginHorizontal: 8,
@@ -1634,8 +1623,8 @@ export let loader: LoaderFunction = async ({ request, params }) => {
             </View>
 
 
-                
-              <View style={styles.StaticContent}>
+
+            <View style={styles.StaticContent}>
               <Text
                 style={{
                   marginHorizontal: 8,
@@ -1653,7 +1642,7 @@ export let loader: LoaderFunction = async ({ request, params }) => {
                   justifyContent: "flex-start",
                 }}
               >
-                PvPI Helpline (Toll Free) : 1800 180 3024 
+                PvPI Helpline (Toll Free) : 1800 180 3024
               </Text>
 
               <Text
@@ -1663,12 +1652,12 @@ export let loader: LoaderFunction = async ({ request, params }) => {
                   justifyContent: "flex-start",
                 }}
               >
-               (9:00 AM to 5:30 PM, Monday-Friday)
+                (9:00 AM to 5:30 PM, Monday-Friday)
               </Text>
             </View>
 
 
-            
+
             <View style={styles.StaticContent}>
               <Text
                 style={{
