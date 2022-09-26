@@ -4,7 +4,7 @@ import FormLayout from "~/layouts/forms/adr-reporting";
 //importing components
 import NavigationPanel from "~/components/forms/NavigationPanel";
 import { FiHelpCircle } from "react-icons/fi";
-import { Collapse, Form, Radio, message } from "antd";
+import { Collapse, Form, Radio, message, List } from "antd";
 import { useEffect } from "react";
 //importing utilities
 import { options } from "~/utils/adr-reporting/3b2";
@@ -104,7 +104,22 @@ export default function Form1page3b2() {
                 <Collapse defaultActiveKey={["1"]}>
                   {options.map((option, index) => (
                     <Collapse.Panel header={option.label} key={index}>
-                      <p>{option.info}</p>
+                      {/* <div>
+                        {option.info.map((ques: string) => {
+                          <li>{ques}</li>
+                        })}
+                      </ul>
+                      <p>{option.info}</p> */}
+                      <List
+                        dataSource={option.info}
+                        renderItem={item => (
+                          <List.Item>
+                            <p>●  {item}</p>
+                          </List.Item>
+                        )}
+                      >
+
+                      </List>
                     </Collapse.Panel>
                   ))}
                 </Collapse>

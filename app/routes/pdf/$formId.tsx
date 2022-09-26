@@ -284,7 +284,7 @@ export let loader: LoaderFunction = async ({ request, params }) => {
                 <View
                   style={{
                     border: "0.6px solid black",
-                    minHeight: "100%",
+                    maxHeight: "100%",
                     backgroundColor: "#ebf2ff",
                     textAlign: "left",
                     fontSize: "9px",
