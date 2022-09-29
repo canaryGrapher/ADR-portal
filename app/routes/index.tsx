@@ -42,7 +42,6 @@ export default function Home() {
   };
 
   const isAdmin = useLoaderData();
-  console.log("isAdmin from loader: ", isAdmin);
 
   const getAdminSideForms = () => {
     return fetch(
@@ -68,7 +67,7 @@ export default function Home() {
           <p className="text-xl text-center mt-10 font-bold px-10 underline">
             Completed forms
           </p>
-          <div className="grid grid-cols-2 mt-2">
+          <div className="w-3/4 mx-auto grid grid-cols-2 mt-2">
             <div className="border-r-2">
               <p className="text-center text-lg font-bold px-10">
                 ADR Reporting Form
