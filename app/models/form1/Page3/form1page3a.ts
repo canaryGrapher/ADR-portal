@@ -1,7 +1,7 @@
 import { prop, mongoose, PropType } from "@typegoose/typegoose"
 
 class Form1Page3aData {
-    @prop({ type: Number, required: true, unique: true })
+    @prop({ type: Number, required: true })
     public identifier: number;
 
     @prop({ type: String, required: true })
