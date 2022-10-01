@@ -1,13 +1,14 @@
 // importing layouts
 import FormLayout from "~/layouts/forms/adr-reporting";
-import { useEffect } from "react";
+import { useEffect,useState,ChangeEvent,MouseEvent ,Component} from "react";
+import React from "react";
 // importing components
 import NavigationPanel from "~/components/forms/NavigationPanel";
 import { FiHelpCircle } from "react-icons/fi";
 import { Form, Radio, message } from "antd";
 
 //importing utilities
-import { RadioOptions, formLayout } from "~/utils/adr-reporting/3b1";
+import { formLayout1,formLayout2,formLayout3,formLayout4,formLayout5,formLayout6,formLayout7, RadioOptionss1,RadioOptionss2,RadioOptionss3,RadioOptionss4 } from "~/utils/adr-reporting/3b1";
 
 import { RootState } from "~/states/store";
 import { useSelector, useDispatch } from "react-redux";
@@ -17,12 +18,17 @@ import {
 } from "~/states/Slices/AdrReportingForm/3/b/1";
 import { LoaderFunction } from "remix";
 import authenticator from "~/server/authentication/auth.server";
+import handleRequest from "~/entry.server";
+
+
 
 export let loader: LoaderFunction = async ({ request }) => {
   return await authenticator.isAuthenticated(request, {
     failureRedirect: "/login",
   });
 };
+
+
 export default function Form1page3b1() {
   const [form] = Form.useForm();
   const info = () => {
@@ -38,6 +44,15 @@ export default function Form1page3b1() {
     dispatch(getFormData());
   }, []);
 
+
+  const [newNote,setNewNote] = useState('');
+
+// const onNoteChange =( event: MouseEvent<HTMLButtonElement>) => {
+//     if(event){
+//       event.preventDefault();
+//     }
+//   }  
+
   useEffect(() => {
     form.setFieldsValue(formState.data);
   }, [formState.status]);
@@ -47,13 +62,27 @@ export default function Form1page3b1() {
     dispatch(setNewFormData({ fieldName, value }));
   };
 
+
+ 
+  handleClick: (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    alert(event.currentTarget.tagName);
+  } 
+
+  
+
+
   return (
+    
     <FormLayout>
       <Form
         form={form}
         preserve={false}
         scrollToFirstError={true}
         name="Form1Page3b"
+        
+        
+
         onFinish={(values) => {
           fetch("/api/forms/form1/page3/b/i", {
             method: "post",
@@ -80,16 +109,91 @@ export default function Form1page3b1() {
             <div className="text-[24px] text-[#E8590C] pb-5">
               Naranjo’s Scale
             </div>
-            {formLayout.map((field, index) => (
+            {formLayout1.map((field, index) => (
               <Form.Item
                 key={index}
                 name={field.name}
                 label={field.label}
                 className="w-full pt-4"
               >
-                <Radio.Group options={RadioOptions} optionType="button" />
+                <Radio.Group options={RadioOptionss1} optionType="button" onChange={() => {handleClick}}   />
+                
               </Form.Item>
             ))}
+            {formLayout2.map((field, index) => (
+              <Form.Item
+                key={index}
+                name={field.name}
+                label={field.label}
+                className="w-full pt-4"
+              >
+                <Radio.Group options={RadioOptionss2} optionType="button"  />
+                
+              </Form.Item>
+            ))}
+            {formLayout3.map((field, index) => (
+              <Form.Item
+                key={index}
+                name={field.name}
+                label={field.label}
+                className="w-full pt-4"
+              >
+                <Radio.Group options={RadioOptionss1} optionType="button"  />
+                
+              </Form.Item>
+            ))}
+
+            {formLayout4.map((field, index) => (
+              <Form.Item
+                key={index}
+                name={field.name}
+                label={field.label}
+                className="w-full pt-4"
+              >
+                <Radio.Group options={RadioOptionss2} optionType="button"  />
+                
+              </Form.Item>
+            ))}
+
+            {formLayout5.map((field, index) => (
+              <Form.Item
+                key={index}
+                name={field.name}
+                label={field.label}
+                className="w-full pt-4"
+              >
+                <Radio.Group options={RadioOptionss3} optionType="button"  />
+                
+              </Form.Item>
+            ))}
+
+
+          {formLayout6.map((field, index) => (
+              <Form.Item
+                key={index}
+                name={field.name}
+                label={field.label}
+                className="w-full pt-4"
+                
+              >
+                <Radio.Group options={RadioOptionss4} optionType="button"    />
+                
+              </Form.Item>
+            ))}
+
+            {formLayout7.map((field, index) => (
+              <Form.Item
+                key={index}
+                name={field.name}
+                label={field.label}
+                className="w-full pt-4"
+              >
+                <Radio.Group options={RadioOptionss1} optionType="button"  />
+                
+              </Form.Item>
+            ))}
+
+            
             {/* calculated score for the ADR is displayed here */}
             <div className="flex flex-row-reverse text-black dark:text-gray-200">
               <div className="grid grid-cols-2 gap-x-3">
