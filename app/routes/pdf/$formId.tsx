@@ -1,3 +1,4 @@
+import { CheckOutlined } from "@ant-design/icons";
 import {
   Page,
   Text,
@@ -324,7 +325,7 @@ export let loader: LoaderFunction = async ({ request, params }) => {
                 <View
                   style={{
                     border: "0.6px solid black",
-                    minHeight: "80px",
+                    maxHeight: "100%",
                     backgroundColor: "#ebf2ff",
                     textAlign: "left",
                     fontSize: "9px",
@@ -344,7 +345,7 @@ export let loader: LoaderFunction = async ({ request, params }) => {
                 <View
                   style={{
                     border: "0.6px solid black",
-                    minHeight: "80px",
+                    maxHeight: "100%",
                     backgroundColor: "#ebf2ff",
                     textAlign: "left",
                     fontSize: "9px",
@@ -357,7 +358,7 @@ export let loader: LoaderFunction = async ({ request, params }) => {
             </View>
           </View>
           <View style={styles.sectionC}>
-            <View style={styles.sectionHeaders}>
+            <View style={[styles.sectionHeaders, { marginTop: "2px" }]}>
               <Text>C. SUSPECTED MEDICATION(S)*</Text>
             </View>
             {/* first row */}
@@ -646,42 +647,58 @@ export let loader: LoaderFunction = async ({ request, params }) => {
               </View>
             </View>
           </View>
-          <View style={styles.sectionArea}>
-            {sectionCMetaData.slice(13, 22).map((metaData: any) => {
-              return (
+          {
+            medicationDetails?.map((medication: any) => {
+              return (<View style={styles.sectionArea}>
                 <Text
-                  style={[styles.tableCell, { width: metaData.width }]}
-                ></Text>
-              );
-            })}
-          </View>
-          <View style={styles.sectionArea}>
-            {sectionCMetaData.slice(13, 22).map((metaData: any) => {
-              return (
+                  style={[styles.tableCell, { width: sectionCMetaData[13].width }]}
+                >
+                  {medication?.identifier + 1}
+                </Text>
                 <Text
-                  style={[styles.tableCell, { width: metaData.width }]}
-                ></Text>
-              );
-            })}
-          </View>
-          <View style={styles.sectionArea}>
-            {sectionCMetaData.slice(13, 22).map((metaData: any) => {
-              return (
+                  style={[styles.tableCell, { width: sectionCMetaData[14].width }]}
+                >
+                  {/* doseIncreased, doseReduced, drugWithdrawn, doseNotChanged, notApplicable, unknown, null */}
+                  {medication?.actionTaken === "drugWithdrawn" ? "Yes" : "-"}
+                </Text>
                 <Text
-                  style={[styles.tableCell, { width: metaData.width }]}
-                ></Text>
-              );
-            })}
-          </View>
-          <View style={styles.sectionArea}>
-            {sectionCMetaData.slice(13, 22).map((metaData: any) => {
-              return (
+                  style={[styles.tableCell, { width: sectionCMetaData[15].width }]}
+                >
+                  {medication?.actionTaken === "doseIncreased" ? "Yes" : "-"}
+                </Text>
                 <Text
-                  style={[styles.tableCell, { width: metaData.width }]}
-                ></Text>
-              );
-            })}
-          </View>
+                  style={[styles.tableCell, { width: sectionCMetaData[16].width }]}
+                >
+                  {medication?.actionTaken === "doseReduced" ? "Yes" : "-"}
+                </Text>
+                <Text
+                  style={[styles.tableCell, { width: sectionCMetaData[17].width }]}
+                >
+                  {medication?.actionTaken === "doseNotChanged" ? "Yes" : "-"}
+                </Text>
+                <Text
+                  style={[styles.tableCell, { width: sectionCMetaData[18].width }]}
+                >
+                  {medication?.reactionCategorization === "recurranceOfSymptoms" ? "Yes" : "-"}
+                </Text>
+                <Text
+                  style={[styles.tableCell, { width: sectionCMetaData[19].width }]}
+                >
+                  {medication?.reactionCategorization === "recurranceOfSymptoms" ? "-" : "Yes"}
+                </Text>
+                <Text
+                  style={[styles.tableCell, { width: sectionCMetaData[20].width }]}
+                >
+                  {medication?.reactionCategorization === "unknown" ? "Yes" : "-"}
+                </Text>
+                <Text
+                  style={[styles.tableCell, { width: sectionCMetaData[21].width }]}
+                >
+                  {medication?.doseAfterReintroduction !== "none" ? medication?.doseAfterReintroduction : "-"}
+                </Text>
+              </View>)
+            })
+          }
           {/* fourth row */}
           <View
             style={[
@@ -700,42 +717,24 @@ export let loader: LoaderFunction = async ({ request, params }) => {
               </View>
             </View>
           </View>
-          <View style={[styles.sectionArea, { justifyContent: "flex-start" }]}>
-            {sectionCMetaData.slice(22, 24).map((metaData: any) => {
-              return (
+
+          {medicationDetails.map((medication: any) => {
+            return (
+              <View style={[styles.sectionArea, { justifyContent: "flex-start" }]}>
                 <Text
-                  style={[styles.tableCell, { width: metaData.width }]}
-                ></Text>
-              );
-            })}
-          </View>
-          <View style={[styles.sectionArea, { justifyContent: "flex-start" }]}>
-            {sectionCMetaData.slice(22, 24).map((metaData: any) => {
-              return (
+                  style={[styles.tableCell, { width: sectionCMetaData[22].width }]}
+                >
+                  {medication?.reactionCategorization === "noRechallenge" ? "Yes" : "-"}
+                </Text>
                 <Text
-                  style={[styles.tableCell, { width: metaData.width }]}
-                ></Text>
-              );
-            })}
-          </View>
-          <View style={[styles.sectionArea, { justifyContent: "flex-start" }]}>
-            {sectionCMetaData.slice(22, 24).map((metaData: any) => {
-              return (
-                <Text
-                  style={[styles.tableCell, { width: metaData.width }]}
-                ></Text>
-              );
-            })}
-          </View>
-          <View style={[styles.sectionArea, { justifyContent: "flex-start" }]}>
-            {sectionCMetaData.slice(22, 24).map((metaData: any) => {
-              return (
-                <Text
-                  style={[styles.tableCell, { width: metaData.width }]}
-                ></Text>
-              );
-            })}
-          </View>
+                  style={[styles.tableCell, { width: sectionCMetaData[23].width }]}
+                >
+                  {medication?.reactionCategorization === "unknown" ? "Yes" : "-"}
+                </Text>
+              </View>
+            );
+          })
+          }
           <View style={[styles.sectionArea, { marginTop: "2px" }]}>
             <View
               style={[
@@ -1682,7 +1681,7 @@ export let loader: LoaderFunction = async ({ request, params }) => {
 
           </View>
         </Page>
-      </Document>
+      </Document >
     );
   };
 
