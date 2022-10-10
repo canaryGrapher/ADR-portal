@@ -20,6 +20,8 @@ const initialStateData: FormStateType = {
     wasThereAKnownTreatmentForTheAdverseDrugReaction: null,
     wasRequiredTherapeuticDrugMonitoringOrOtherNecessaryLabTestsNotPerformed: null,
     wasADrugInteractionInvolvedInTheAdr: null,
+    wasPoorComplianceInvolvedInTheAdr: null,
+    werePreventiveMeasuresNotPrescribedToThePatient: null
 };
 
 export const form1page3b4Slice = createSlice({

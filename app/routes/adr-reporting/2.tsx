@@ -100,23 +100,36 @@ export default function Form1page2() {
           <div className="grid grid-cols-2 gap-5">
             <Form.Item
               className="w-full"
-              label="Date of reaction started"
+              label="Event/reaction start date"
               name="dateOfReactionStarted"
               rules={[{ required: true, message: "Date of reaction started" }]}
             >
-              <DatePicker className="w-full" />
+              <DatePicker format="DD-MM-YYYY" className="w-full" />
             </Form.Item>
             <Form.Item
               className="w-full"
-              label="Date of recovery"
+              label="Event/reaction stop date"
               name="dateOfRecovery"
+              rules={[
+                ({ getFieldValue }) => ({
+                  validator(_, value) {
+                    const stopDate: any = value;
+                    const startDate: any = getFieldValue("dateOfReactionStarted");
+                    if (stopDate < startDate) {
+                      return Promise.reject(new Error("Date of recovery cannot be before date of reaction"));
+                    } else {
+                      return Promise.resolve();
+                    }
+                  },
+                }),
+              ]}
             >
-              <DatePicker className="w-full" />
+              <DatePicker format="DD-MM-YYYY" className="w-full" />
             </Form.Item>
           </div>
           <Form.Item
             className="w-full"
-            label="Describe reaction or problem"
+            label="Describe event/reaction management with details, if any"
             name="reactionDescription"
             rules={[
               { required: true, message: "Reaction description is mandatory" },

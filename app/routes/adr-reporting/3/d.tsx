@@ -3,7 +3,7 @@ import FormLayout from "~/layouts/forms/adr-reporting";
 import moment from "moment";
 
 // importing components
-import { Input, DatePicker, Form, message } from "antd";
+import { Input, DatePicker, Form, message, Select } from "antd";
 import NavigationPanel from "~/components/forms/NavigationPanel";
 
 // importing types
@@ -22,6 +22,7 @@ import {
 import { DeleteFilled, EditFilled } from "@ant-design/icons";
 import { LoaderFunction } from "remix";
 import authenticator from "~/server/authentication/auth.server";
+import { frequencyOptions, routeUsedOptions } from "~/utils/adr-reporting/3d";
 
 export let loader: LoaderFunction = async ({ request }) => {
   return await authenticator.isAuthenticated(request, {
@@ -117,7 +118,7 @@ function AddedDrugs(props: any) {
                   <div className="flex justify-center items-center gap-4 text-lg">
                     <div className="hover:text-neutral-500 cursor-pointer">
                       <EditFilled
-                        onClick={() => editFormData(drug.identifier != undefined ? drug.identifier : drug._id, drug)}
+                        onClick={() => editFormData(drug.identifier !== undefined ? (drug._id === undefined ? drug.identifier : drug._id) : drug._id, drug)}
                       />
                     </div>
                     <div className="hover:text-neutral-500 cursor-pointer">
@@ -203,7 +204,7 @@ const Subform = (props: PropTypes) => {
           <Input />
         </Form.Item>
         <Form.Item className="col-span-1" label="Route used" name="routeUsed">
-          <Input />
+          <Select allowClear={true} options={routeUsedOptions} />
         </Form.Item>
       </div>
       <Form.Item
@@ -211,7 +212,7 @@ const Subform = (props: PropTypes) => {
         label="Frequency (OD, BD)"
         name="frequency"
       >
-        <Input />
+        <Select allowClear={true} options={frequencyOptions} />
       </Form.Item>
       <div className="grid grid-cols-2 gap-5 pt-4">
         <Form.Item
@@ -222,7 +223,24 @@ const Subform = (props: PropTypes) => {
         >
           <DatePicker className="w-full" />
         </Form.Item>
-        <Form.Item className="col-span-1" label="Date stopped" name="stopDate">
+        <Form.Item
+          className="col-span-1"
+          label="Date stopped"
+          name="stopDate"
+          rules={[
+            ({ getFieldValue }) => ({
+              validator(_, value) {
+                const stopDate: any = value;
+                const startDate: any = getFieldValue("startDate");
+                if (stopDate < startDate) {
+                  return Promise.reject(new Error("Stop date cannot be before start date"));
+                } else {
+                  return Promise.resolve();
+                }
+              },
+            }),
+          ]}
+        >
           <DatePicker className="w-full" />
         </Form.Item>
       </div>

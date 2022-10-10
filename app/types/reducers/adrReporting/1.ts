@@ -1,12 +1,13 @@
 interface FormStateType {
-    patientInitials?: string;
+    firstName?: string;
+    lastName?: string;
     DateOfBirth?: string | null;
     ageOfOnset: number | undefined;
     gender?: "male" | "female" | "other" | null;
     weight?: number | null;
     patientID?: number | string | null;
     ip_op?: "inPatient" | "outPatient" | null;
-    unit?: string | null;
+    unit?: "mcg" | "mg" | "gm" | "IU" | null;
     reasonForTakingMedication?: string | null;
     medicineAdvised?: string | null;
     knownAllergies?: string | null;

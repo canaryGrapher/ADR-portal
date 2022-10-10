@@ -3,13 +3,13 @@ import FormLayout from "~/layouts/forms/adr-reporting";
 import moment from "moment";
 
 //importing components
-import { Input, Form, DatePicker, Radio, message } from "antd";
+import { Input, Form, DatePicker, Radio, message, Select } from "antd";
 import NavigationPanel from "~/components/forms/NavigationPanel";
 
 // importing types
 import { FormSubStateType } from "~/types/reducers/adrReporting/3/a";
 
-import { actionOptions, reintroductionOptions } from "~/utils/adr-reporting/3a";
+import { actionOptions, frequencyOptions, reintroductionOptions, routeUsedOptions, unitOptions } from "~/utils/adr-reporting/3a";
 
 // importing redux
 import { RootState } from "~/states/store";
@@ -120,7 +120,7 @@ function AddedDrugs(props: any) {
                   <div className="flex items-center justify-center gap-4 text-lg">
                     <div className="cursor-pointer hover:text-neutral-500">
                       <EditFilled
-                        onClick={() => editFormData(drug.identifier != undefined ? drug.identifier : drug._id, drug)}
+                        onClick={() => editFormData(drug.identifier !== undefined ? (drug._id === undefined ? drug.identifier : drug._id) : drug._id, drug)}
                       />
                     </div>
                     <div className="cursor-pointer hover:text-neutral-500">
@@ -232,7 +232,7 @@ const Subform = (props: PropTypes) => {
           <Input type={"number"} suffix="kgs" />
         </Form.Item>
         <Form.Item name="routeUsed" label="Route used" className="w-full">
-          <Input />
+          <Select allowClear={true} options={routeUsedOptions} />
         </Form.Item>
       </div>
       <div className="grid grid-cols-2 gap-5">
@@ -240,7 +240,7 @@ const Subform = (props: PropTypes) => {
           <Input />
         </Form.Item>
         <Form.Item name="unit" label="Unit" className="w-full">
-          <Input />
+          <Select allowClear={true} options={unitOptions} />
         </Form.Item>
       </div>
       <Form.Item
@@ -248,7 +248,7 @@ const Subform = (props: PropTypes) => {
         label="Frequency (OD, BD, etc.)"
         className="w-full"
       >
-        <Input />
+        <Select allowClear={true} options={frequencyOptions} />
       </Form.Item>
       <div className="grid grid-cols-2 gap-5">
         <Form.Item
@@ -257,10 +257,27 @@ const Subform = (props: PropTypes) => {
           className="w-full"
           rules={[{ required: true, message: "Start date is mandatory" }]}
         >
-          <DatePicker className="w-full" />
+          <DatePicker format="DD-MM-YYYY" className="w-full" />
         </Form.Item>
-        <Form.Item name="dateStopped" label="Date stopped" className="w-full">
-          <DatePicker className="w-full" />
+        <Form.Item
+          name="dateStopped"
+          label="Date stopped"
+          className="w-full"
+          rules={[
+            ({ getFieldValue }) => ({
+              validator(_, value) {
+                const stopDate: any = value;
+                const startDate: any = getFieldValue("dateStarted");
+                if (stopDate < startDate) {
+                  return Promise.reject(new Error("Date of recovery cannot be before date of reaction"));
+                } else {
+                  return Promise.resolve();
+                }
+              },
+            }),
+          ]}
+        >
+          <DatePicker format="DD-MM-YYYY" className="w-full" />
         </Form.Item>
       </div>
       <Form.Item name="indication" label="Indication" className="w-full">

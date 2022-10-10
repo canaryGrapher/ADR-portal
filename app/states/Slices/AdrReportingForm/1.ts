@@ -13,7 +13,8 @@ export const getFormData = createAsyncThunk(
     })
 
 const initialStateData: FormStateType = {
-    patientInitials: undefined,
+    firstName: undefined,
+    lastName: undefined,
     DateOfBirth: null,
     ageOfOnset: undefined,
     gender: null,
