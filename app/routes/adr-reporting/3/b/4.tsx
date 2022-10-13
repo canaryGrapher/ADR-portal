@@ -1,6 +1,6 @@
 // importing layouts
 import FormLayout from "~/layouts/forms/adr-reporting";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 // importing components
 import NavigationPanel from "~/components/forms/NavigationPanel";
 import { Radio, Form, message } from "antd";
@@ -47,6 +47,38 @@ export default function Form1page3b4() {
   const changeFormData = (value: any, fieldName: any) => {
     dispatch(setNewFormData({ fieldName, value }));
   };
+
+  useEffect(() => {
+    calculateResult();
+  }, [formState.data])
+
+  // calculate adr preventability
+  const [finalResult, setFinalResult] = useState<string>("");
+  const calculateResult = () => {
+    const options = formState.data;
+    const valuesArray: boolean[] = Object.values(options).map((value: boolean) => {
+      return value
+    });
+    const allEqual = (arr: boolean[]) => arr.every(val => val === arr[0]);
+    const isNull = (arr: boolean[]) => arr.every(val => val === null);
+    const definitePrev: any = valuesArray.slice(0, 5);
+    const probabPrev: any = valuesArray.slice(5, 9);
+    let isAllEqual: boolean;
+    if (!isNull(definitePrev) && !isNull(probabPrev)) {
+      isAllEqual = allEqual(definitePrev);
+      if (isAllEqual === true) {
+        setFinalResult("Definitely Preventable");
+        return;
+      };
+      isAllEqual = allEqual(probabPrev);
+      if (isAllEqual === true) {
+        setFinalResult("Probably Preventable");
+        return;
+      };
+      if (isAllEqual === false)
+        setFinalResult("Not Preventable");
+    }
+  }
 
   return (
     <FormLayout>
@@ -96,7 +128,10 @@ export default function Form1page3b4() {
               <p className="text-[16px] m-0 font-bold text-gray-800 dark:text-gray-300">
                 Final Result
               </p>
-              <Radio.Group options={formRadioOptions2} optionType="button" />
+              {/* <Radio.Group options={formRadioOptions2} optionType="button" /> */}
+              <p className="text-[#E8590C] text-2xl">
+                {finalResult} {finalResult !== "" && "ADR"}
+              </p>
             </div>
           </div>
         </div>

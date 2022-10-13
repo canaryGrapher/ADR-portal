@@ -13,6 +13,8 @@ const formLayout = [
     { label: "Was there a known treatment for the adverse drug reaction?", value: "wasThereAKnownTreatmentForTheAdverseDrugReaction" },
     { label: "Was required therapeutic drug monitoring or other necessary lab tests not performed?", value: "wasRequiredTherapeuticDrugMonitoringOrOtherNecessaryLabTestsNotPerformed" },
     { label: "Was a drug interaction involved in the ADR?", value: "wasADrugInteractionInvolvedInTheAdr" },
+    { label: "Was poor compliance involved in the ADR?", value: "wasPoorComplianceInvolvedInTheAdr" },
+    { label: "Were preventative measures not prescribed or administered to the patient?", value: "werePreventiveMeasuresNotPrescribedToThePatient" }, 
 ];
 
 export { formRadioOptions, formRadioOptions2, formLayout };

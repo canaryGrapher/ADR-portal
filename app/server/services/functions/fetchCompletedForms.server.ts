@@ -38,13 +38,13 @@ const getCompletedForm2 = async (user: string) => {
 }
 
 /**
- * @function getCompletedForms1
- * @param user email address of the user
- * @returns array of form1 data
+ * @function getCompletedForm1Data
+ * @param form ID of form to be fetched
+ * @returns form1 data
  */
-const getCompletedForm1Data = async (user: string) => {
+const getCompletedForm1Data = async (formId: string | undefined) => {
     try {
-        const form1Pointer = await Forms1Model.find({ user: user, isComplete: true })
+        const form1Pointer = await Forms1Model.findOne({ _id: formId, isComplete: true });
         if (form1Pointer) {
             return form1Pointer
         } else {

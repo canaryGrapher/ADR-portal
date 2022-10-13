@@ -10,6 +10,7 @@ import {
   genderOptions,
   advisedMedicineOptions,
   ip_op,
+  unit_op,
 } from "~/utils/adr-reporting/1";
 import { RootState } from "~/states/store";
 import { useSelector, useDispatch } from "react-redux";
@@ -60,6 +61,16 @@ export default function Form1page1() {
     dispatch(setNewFormData({ fieldName, value }));
   };
 
+  const checkAge = (e: any) => {
+    const enteredAge: number = e;
+    const currentDate = moment(new Date());
+    const enteredDob: any = formState.data.DateOfBirth;
+    const actualAge = currentDate.diff(enteredDob, 'years');
+    if (enteredAge > actualAge) {
+
+    }
+  }
+
   return (
     <FormLayout>
       <Form
@@ -93,16 +104,28 @@ export default function Form1page1() {
             <h2 className="text-[#E8590C]">Patient Information</h2>
           </div>
           <div className="w-full">
-            <Form.Item
-              label="Patient Initials"
-              name="patientInitials"
-              rules={[
-                { required: true, message: "Patient initials is required" },
-              ]}
-              className="w-full"
-            >
-              <Input />
-            </Form.Item>
+            <div className="grid grid-cols-2 gap-5">
+              <Form.Item
+                label="First Name"
+                name="firstName"
+                rules={[
+                  { required: true, message: "Patient first name is required" },
+                ]}
+                className="w-full"
+              >
+                <Input />
+              </Form.Item>
+              <Form.Item
+                label="Last Name"
+                name="lastName"
+                rules={[
+                  { required: true, message: "Patient last name is required" },
+                ]}
+                className="w-full"
+              >
+                <Input />
+              </Form.Item>
+            </div>
             <div className="grid grid-cols-2 gap-5">
               <Form.Item
                 label="Date of Birth"
@@ -118,6 +141,19 @@ export default function Form1page1() {
                 name="ageOfOnset"
                 rules={[
                   { required: true, message: "Age of onset is required" },
+                  ({ getFieldValue }) => ({
+                    validator(_, value) {
+                      const enteredAge: number = value;
+                      const currentDate = moment(new Date());
+                      const enteredDob: any = getFieldValue("DateOfBirth");
+                      const actualAge = currentDate.diff(enteredDob, 'years');
+                      if (enteredAge > actualAge) {
+                        return Promise.reject(new Error("Your age cannot exceed actual age"));
+                      } else {
+                        return Promise.resolve();
+                      }
+                    },
+                  }),
                 ]}
               >
                 <InputNumber style={{ width: "100%" }} />
@@ -139,7 +175,7 @@ export default function Form1page1() {
                 <Select allowClear={true} options={ip_op} />
               </Form.Item>
               <Form.Item label="Unit" name="unit" className="w-full">
-                <Input />
+                <Select allowClear={true} options={unit_op} />
               </Form.Item>
             </div>
             <Form.Item

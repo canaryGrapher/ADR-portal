@@ -116,30 +116,35 @@ export default function Form1page3b3() {
                   </div>
                 </div>
                 <p>
-                  The ADR requires no change in the treatment with the suspected
-                  drug.
+                  <span style={{ color: "#E8590C", fontWeight: "700" }}>Level 1</span>{" "}
+                  An ADR occurred but required no change in treatment with the suspected drug
                 </p>
                 <p>
-                  The ADR requires that the suspected drug be withheld,
-                  discontinued or otherwise changed. No antidote or other
-                  treatment is required, and there is no increase in length of
-                  stay
+                  <span style={{ color: "#E8590C", fontWeight: "700" }}>Level 2</span>{" "}
+                  The ADR required that treatment with the suspected drug be withheld, discontinued, or
+                  otherwise changed. No antidote or other treatment required. No increase in length of stay
+                  (LOS)
                 </p>
                 <p>
-                  The ADR requires no change in the treatment with the suspected
-                  drug.
+                  <span style={{ color: "#E8590C", fontWeight: "700" }}>Level 3</span>{" "}The ADR required that treatment
+                  with the suspected drug be held, discontinued, or otherwise
+                  changed, AND/OR An antidote or other treatment was required. No increase in LOS
                 </p>
                 <p>
-                  The ADR requires no change in the treatment with the suspected
-                  drug.
+                  <span style={{ color: "#E8590C", fontWeight: "700" }}>Level 4</span>{" "}Any level 3 ADR that increases
+                  the length of stay by at least one day OR The ADR was the reason for admission
                 </p>
                 <p>
-                  The ADR requires no change in the treatment with the suspected
-                  drug.
+                  <span style={{ color: "#E8590C", fontWeight: "700" }}>Level 5</span>{" "}
+                  Any level 4 ADR that requires intensive medical care
                 </p>
                 <p>
-                  The ADR requires no change in the treatment with the suspected
-                  drug.
+                  <span style={{ color: "#E8590C", fontWeight: "700" }}>Level 6</span>{" "}
+                  The adverse reaction caused permanent harm to the patient
+                </p>
+                <p>
+                  <span style={{ color: "#E8590C", fontWeight: "700" }}>Level 7</span>{" "}
+                  The adverse reaction either directly or indirectly led to the death of the patient
                 </p>
               </div>
             </div>

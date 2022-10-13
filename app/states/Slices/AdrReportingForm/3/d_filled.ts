@@ -30,7 +30,7 @@ export const form1page3dFilledSlice = createSlice({
         },
         removeAdditionalFormData: (state, action: PayloadAction<ActionType1>) => {
             // logic to remove the form data in this slice. This changes everytime the form is updated
-            state.data.drugDetails = state.data.drugDetails?.filter((item: any) => item._id !== action.payload.id)
+            state.data.drugDetails = state.data.drugDetails?.filter((item: any) => (item._id ? item._id : item.identifier) !== action.payload.id)
         },
         editAdditionalFormData: (state, action: PayloadAction<ActionType>) => {
             // logic to edit the form data in this slice. This changes everytime the form is updated

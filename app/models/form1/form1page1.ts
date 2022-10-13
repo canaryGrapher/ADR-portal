@@ -7,7 +7,10 @@ export default class Form1Page1 {
     public isComplete?: Boolean;
 
     @prop({ type: String, required: true })
-    public patientInitials!: String;
+    public firstName!: String;
+
+    @prop({ type: String, required: true })
+    public lastName!: String;
 
     @prop({ type: String })
     public DateOfBirth?: String;

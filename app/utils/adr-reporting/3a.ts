@@ -1,6 +1,5 @@
 const actionOptions = [
     { label: "Drug withdrawn", value: "drugWithdrawn" },
-    { label: "Dose increased", value: "doseIncreased" },
     { label: "Dose reduced", value: "doseReduced" },
     { label: "Dose not changed", value: "doseNotChanged" },
     { label: "Not applicable", value: "notApplicable" },
@@ -14,4 +13,25 @@ const reintroductionOptions = [
     { label: "Unknown", value: "unknown" },
 ];
 
-export { actionOptions, reintroductionOptions };
+const unitOptions = [
+    { label: "mcg", value: "mcg" },
+    { label: "mg", value: "mg" },
+    { label: "gm", value: "gm" },
+    { label: "IU", value: "IU" }
+]
+
+const routeUsedOptions = [
+    { label: "Oral", value: "oral" },
+    { label: "IV", value: "iv" },
+    { label: "IM", value: "im" },
+    { label: "SC", value: "sc" }
+]
+
+const frequencyOptions = [
+    { label: "OD", value: "od" },
+    { label: "BID", value: "bid" },
+    { label: "TID", value: "tid" },
+    { label: "SOS", value: "sos" },
+]
+
+export { actionOptions, reintroductionOptions, unitOptions, routeUsedOptions, frequencyOptions };

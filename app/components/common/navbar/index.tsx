@@ -1,5 +1,7 @@
+import { LogoutOutlined } from "@ant-design/icons";
+import { Tooltip } from "antd";
+import axios from "axios";
 import { useEffect, useState } from "react";
-import { useHistory } from "react-router";
 import { Link, useFetcher } from "remix";
 
 export default function Navbar(props: { location: any }) {
@@ -23,7 +25,17 @@ export default function Navbar(props: { location: any }) {
     }
   };
 
+  const logoutUser = async () => {
+    const res = await fetch('api/user/logout-user');
+    if(res.status === 200) {
+      window.location.replace("/");
+    } else {
+      alert("Something went wrong. Please try again.");
+    }
+  }
+
   useEffect(() => {
+    console.log(props.location)
     fetcher.load("/api/user/fetch-details");
     const currentPath = window.location.pathname;
 
@@ -47,14 +59,14 @@ export default function Navbar(props: { location: any }) {
       });
     } else {
       setPath("");
-    }
-  }, [props.location]);
+    }    
+  }, [props?.location.pathname]);
 
   return (
     <div className="h-14 p-1 shadow-xl font-medium flex flex-row justify-between">
       <div className="flex flex-row">
         <img src="/KMCLogo.png" className="p-1" />
-        {path != "" ? (
+        {path != "" && (path != undefined && path?.split("/")?.length >= 1) ? (
           <>
             <Link to="/" className="text-md my-auto ml-5">
               <button className="text-white font-bold py-1 px-5 bg-[#6c567b] h-8 my-auto">
@@ -78,10 +90,15 @@ export default function Navbar(props: { location: any }) {
       <div className="flex flex-row mr-5">
         <p className="text-white my-auto font-medium">
           {fetcher.data
-            ? fetcher.data.firstName + " " + fetcher.data.lastName
+            ? fetcher.data.firstName + " " + fetcher.data.lastName + " "
             : null}
         </p>
-        <div className="h-8 w-8 rounded-full bg-gray-700 my-auto ml-2"></div>
+        {/* <div className="h-8 w-8 rounded-full bg-gray-700 my-auto ml-2"></div> */}
+        {fetcher.data ? <Tooltip placement="bottom" title="Logout">
+          <div className="h-8 w-8 rounded-full text-center bg-gray-900 my-auto ml-2 cursor-pointer hover:scale-105" onClick={logoutUser}>
+            <LogoutOutlined />
+          </div>
+        </Tooltip> : null}
       </div>
     </div>
   );

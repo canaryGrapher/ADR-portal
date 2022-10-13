@@ -6,6 +6,8 @@ interface FormStateType {
     wasThereAKnownTreatmentForTheAdverseDrugReaction?: BooleanTypes | null;
     wasRequiredTherapeuticDrugMonitoringOrOtherNecessaryLabTestsNotPerformed?: BooleanTypes | null;
     wasADrugInteractionInvolvedInTheAdr?: BooleanTypes | null;
+    wasPoorComplianceInvolvedInTheAdr?: BooleanTypes | null;
+    werePreventiveMeasuresNotPrescribedToThePatient?: BooleanTypes | null
 }
 
 type PayloadKeys = keyof FormStateType;
