@@ -55,8 +55,15 @@ export default function Form1page3b1() {
   const [score, setScore] = useState<number>(0);
   const calculateAdrScore = () => {
     const options: any = formLayout;
-    const valueArray = Object.values(formState.data).map((value: string, index: number) => {
+    // create an array of the values
+    let valueArray = Object.values(formState.data).map((value: string, index: number) => {
       return value
+    });
+    // remove unnecessary values or values that are not accepted
+    valueArray = valueArray.filter((val) => {
+      if (val === "Yes" || val === "No" || val === "Don't know"){
+        return val
+      }
     });
     let tempScore:number = 0;
     Object.keys(formState.data).map((key: string, index: number) => {

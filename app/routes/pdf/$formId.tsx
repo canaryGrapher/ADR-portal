@@ -1,4 +1,3 @@
-import { CheckOutlined } from "@ant-design/icons";
 import {
   Page,
   Text,
@@ -273,7 +272,7 @@ export let loader: LoaderFunction = async ({ request, params }) => {
                       padding: "2px",
                     }}
                   >
-                    {new Date(drugInfo?.dateOfRecovery).toDateString()}
+                    {drugInfo?.dateOfRecovery ? new Date(drugInfo?.dateOfRecovery).toDateString() : "-"}
                   </Text>
                 </View>
                 <View style={[styles.sectionACell, { fontSize: "9px" }]}>
@@ -292,7 +291,7 @@ export let loader: LoaderFunction = async ({ request, params }) => {
                     padding: "2px",
                   }}
                 >
-                  <Text>{drugInfo?.reactionDescription}</Text>
+                  <Text>{drugInfo?.reactionDescription ? drugInfo?.reactionDescription : ""}</Text>
                 </View>
               </View>
               <View style={styles.halfWidth}>
@@ -314,10 +313,10 @@ export let loader: LoaderFunction = async ({ request, params }) => {
                   </Text>
                 </View>
                 <View style={styles.sectionACell}>
-                  <Text>AMC Report No. : {amcInfo?.amcReportNumber}</Text>
+                  <Text>AMC Report No. : {amcInfo?.amcReportNumber ? amcInfo?.amcReportNumber : ""}</Text>
                 </View>
                 <View style={styles.sectionACell}>
-                  <Text>Worldwide Unique No.: {amcInfo?.worldwideUniqueNumber}</Text>
+                  <Text>Worldwide Unique No.: {amcInfo?.worldwideUniqueNumber ? amcInfo?.worldwideUniqueNumber : ""}</Text>
                 </View>
                 <View style={[styles.sectionACell, { fontSize: "9px" }]}>
                   <Text>12. Relevant investigations with dates :</Text>
@@ -333,7 +332,7 @@ export let loader: LoaderFunction = async ({ request, params }) => {
                   }}
                 >
                   <Text>
-                    {amcInfo?.relevantTests}
+                    {amcInfo?.relevantTests ? amcInfo?.relevantTests : ""}
                   </Text>
                 </View>
                 <View style={[styles.sectionACell, { fontSize: "9px" }]}>
@@ -352,7 +351,7 @@ export let loader: LoaderFunction = async ({ request, params }) => {
                     padding: "2px"
                   }}
                 >
-                  <Text>{amcInfo?.relevantMedicalHistory}</Text>
+                  <Text>{amcInfo?.relevantMedicalHistory ? amcInfo?.relevantMedicalHistory : ""}</Text>
                 </View>
               </View>
             </View>
@@ -405,7 +404,7 @@ export let loader: LoaderFunction = async ({ request, params }) => {
                       { width: sectionCMetaData[1].width },
                     ]}
                   >
-                    {medication?.nameOfDrug.trim()}
+                    {medication?.nameOfDrug ? medication?.nameOfDrug.trim() : "-"}
                   </Text>
                   <Text
                     style={[
@@ -413,7 +412,7 @@ export let loader: LoaderFunction = async ({ request, params }) => {
                       { width: sectionCMetaData[2].width },
                     ]}
                   >
-                    {medication?.manufacturer.trim()}
+                    {medication?.manufacturer ? medication?.manufacturer.trim() : "-"}
                   </Text>
                   <Text
                     style={[
@@ -421,7 +420,7 @@ export let loader: LoaderFunction = async ({ request, params }) => {
                       { width: sectionCMetaData[3].width },
                     ]}
                   >
-                    {medication?.BatchNo_LotNo.trim()}
+                    {medication?.BatchNo_LotNo ? medication?.BatchNo_LotNo.trim() : "-"}
                   </Text>
                   <Text
                     style={[
@@ -429,7 +428,7 @@ export let loader: LoaderFunction = async ({ request, params }) => {
                       { width: sectionCMetaData[4].width },
                     ]}
                   >
-                    {new Date(medication?.expDate).toDateString()}
+                    {medication?.expDate ? new Date(medication?.expDate).toDateString() : "-"}
                   </Text>
                   <Text
                     style={[
@@ -437,7 +436,7 @@ export let loader: LoaderFunction = async ({ request, params }) => {
                       { width: sectionCMetaData[5].width },
                     ]}
                   >
-                    {medication?.doseUsed}
+                    {medication?.doseUsed ? medication?.doseUsed : "-"}
                   </Text>
                   <Text
                     style={[
@@ -445,7 +444,7 @@ export let loader: LoaderFunction = async ({ request, params }) => {
                       { width: sectionCMetaData[6].width },
                     ]}
                   >
-                    {medication?.routeUsed.trim()}
+                    {medication?.routeUsed ? medication?.routeUsed.trim() : "-"}
                   </Text>
                   <Text
                     style={[
@@ -453,7 +452,7 @@ export let loader: LoaderFunction = async ({ request, params }) => {
                       { width: sectionCMetaData[7].width },
                     ]}
                   >
-                    {medication?.frequency.trim()}
+                    {medication?.frequency ? medication?.frequency.trim() : "-"}
                   </Text>
                 </View>
               );
@@ -558,7 +557,7 @@ export let loader: LoaderFunction = async ({ request, params }) => {
                       { width: sectionCMetaData[9].width },
                     ]}
                   >
-                    {new Date(medication?.dateStarted).toDateString()}
+                    {medication?.dateStarted ? new Date(medication?.dateStarted).toDateString() : "-"}
                   </Text>
                   <Text
                     style={[
@@ -566,7 +565,7 @@ export let loader: LoaderFunction = async ({ request, params }) => {
                       { width: sectionCMetaData[10].width },
                     ]}
                   >
-                    {new Date(medication?.dateStopped).toDateString()}
+                    {medication?.dateStopped ? new Date(medication?.dateStopped).toDateString() : "-"}
                   </Text>
                   <Text
                     style={[
@@ -574,7 +573,7 @@ export let loader: LoaderFunction = async ({ request, params }) => {
                       { width: sectionCMetaData[11].width },
                     ]}
                   >
-                    {medication?.indication?.trim()}
+                    {medication?.indication ? medication?.indication?.trim() : "-"}
                   </Text>
                   <Text
                     style={[
@@ -658,7 +657,6 @@ export let loader: LoaderFunction = async ({ request, params }) => {
                 <Text
                   style={[styles.tableCell, { width: sectionCMetaData[14].width }]}
                 >
-                  {/* doseIncreased, doseReduced, drugWithdrawn, doseNotChanged, notApplicable, unknown, null */}
                   {medication?.actionTaken === "drugWithdrawn" ? "Yes" : "-"}
                 </Text>
                 <Text
@@ -847,7 +845,7 @@ export let loader: LoaderFunction = async ({ request, params }) => {
                     { width: sectionCMetaData[25].width },
                   ]}
                 >
-                  {concom?.name.trim()}
+                  {concom?.name ? concom?.name.trim() : "-"}
                 </Text>
                 <Text
                   style={[
@@ -863,7 +861,7 @@ export let loader: LoaderFunction = async ({ request, params }) => {
                     { width: sectionCMetaData[27].width },
                   ]}
                 >
-                  {concom?.routeUsed.trim()}
+                  {concom?.routeUsed ? concom?.routeUsed.trim() : "-"}
                 </Text>
                 <Text
                   style={[
@@ -871,7 +869,7 @@ export let loader: LoaderFunction = async ({ request, params }) => {
                     { width: sectionCMetaData[28].width },
                   ]}
                 >
-                  {concom?.frequency}
+                  {concom?.frequency ? concom?.frequency : "-"}
                 </Text>
                 <Text
                   style={[
@@ -879,7 +877,7 @@ export let loader: LoaderFunction = async ({ request, params }) => {
                     { width: sectionCMetaData[29].width },
                   ]}
                 >
-                  {new Date(concom?.startDate).toDateString()}
+                  {concom?.startDate ? `${new Date(concom?.startDate).toDateString()}` : "-"}
                 </Text>
                 <Text
                   style={[
@@ -887,7 +885,7 @@ export let loader: LoaderFunction = async ({ request, params }) => {
                     { width: sectionCMetaData[30].width },
                   ]}
                 >
-                  {new Date(concom?.stopDate).toDateString()}
+                  {concom?.stopDate ? `${new Date(concom?.stopDate).toDateString()}` : "-"}
                 </Text>
                 <Text
                   style={[
@@ -895,7 +893,7 @@ export let loader: LoaderFunction = async ({ request, params }) => {
                     { width: sectionCMetaData[31].width },
                   ]}
                 >
-                  {concom?.indication}
+                  {concom?.indication ? concom?.indication : ""}
                 </Text>
               </View>
             );
@@ -941,7 +939,7 @@ export let loader: LoaderFunction = async ({ request, params }) => {
                       marginLeft: "2px",
                     }}
                   >
-                    {reporterDetails?.pin}
+                    {reporterDetails?.pin ? reporterDetails?.pin :""}
                   </Text>
                   <Text
                     style={{
@@ -959,7 +957,7 @@ export let loader: LoaderFunction = async ({ request, params }) => {
                       marginLeft: "2px",
                     }}
                   >
-                    {reporterDetails?.email}
+                    {reporterDetails?.email ? reporterDetails?.email : ""}
                   </Text>
                 </View>
                 <View
@@ -981,7 +979,7 @@ export let loader: LoaderFunction = async ({ request, params }) => {
                       marginLeft: "2px",
                     }}
                   >
-                    {reporterDetails?.telephoneNumber}
+                    {reporterDetails?.telephoneNumber ? reporterDetails?.telephoneNumber : ""}
                   </Text>
                 </View>
                 <View
@@ -1003,7 +1001,7 @@ export let loader: LoaderFunction = async ({ request, params }) => {
                       marginLeft: "2px",
                     }}
                   >
-                    {reporterDetails?.occupation}
+                    {reporterDetails?.occupation ? reporterDetails?.occupation : ""}
                   </Text>
                   <Text
                     style={{
@@ -1025,7 +1023,7 @@ export let loader: LoaderFunction = async ({ request, params }) => {
                 <View style={{ height: "10px", marginTop: "auto" }}>
                   <Text style={{ fontFamily: "Helvetica-Bold" }}>
                     Date of this report (dd/mm/yyyy):{" "}
-                    {new Date(reporterDetails?.dateOfThisReport).toDateString()}{" "}
+                    {reporterDetails?.dateOfThisReport ? new Date(reporterDetails?.dateOfThisReport).toDateString() : ""}{" "}
                   </Text>
                 </View>
               </View>
