@@ -22,7 +22,9 @@ const ListItems = (props: ListItemsProps) => {
             bulletNumber={props.number}
           />
         </div>
-        <p className="cursor-pointer hover:underline text-base">{props.name}</p>
+        <Link to={props.baseUrl + "/" + props.pageLink}>
+          <p className="cursor-pointer hover:underline dark:text-[#A262CF] text-[#6C567B]">{props.name}</p>
+        </Link>
       </div>
       <div className="block pl-8">
         {props.currentPage.split("")[0] === props.pageLink &&
@@ -42,7 +44,9 @@ const ListItems = (props: ListItemsProps) => {
                     <GoPrimitiveDot className="text-md" />
                   </div>
                   <div className="flex flex-col justify-start p-0 m-0">
-                    <p className="m-0 p-0 text-md">{child.name}</p>
+                    <Link to={props.baseUrl + "/" + child.pageLink.split("").join("/")}>
+                      <p className="m-0 p-0 text-md dark:text-[#A262CF] text-[#6C567B]">{child.name}</p>
+                    </Link>
                   </div>
                 </div>
                 <div className="block pl-8 py-1">
