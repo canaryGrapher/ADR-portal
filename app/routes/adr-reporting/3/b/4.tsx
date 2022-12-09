@@ -53,30 +53,35 @@ export default function Form1page3b4() {
   }, [formState.data])
 
   // calculate adr preventability
-  const [finalResult, setFinalResult] = useState<string>("");
+  const [finalResult, setFinalResult] = useState<string>("To be calculated");
+  // enable or disable questions
+  const [enableFurtherQues, setEnableFurtherQues] = useState<boolean>(true);
   const calculateResult = () => {
     const options = formState.data;
-    const valuesArray: boolean[] = Object.values(options).map((value: boolean) => {
+    const valuesArray: string[] = Object.values(options).map((value: string) => {
       return value
     });
-    const allEqual = (arr: boolean[]) => arr.every(val => val === arr[0]);
-    const isNull = (arr: boolean[]) => arr.every(val => val === null);
-    const definitePrev: any = valuesArray.slice(0, 5);
-    const probabPrev: any = valuesArray.slice(5, 9);
-    let isAllEqual: boolean;
-    if (!isNull(definitePrev) && !isNull(probabPrev)) {
-      isAllEqual = allEqual(definitePrev);
-      if (isAllEqual === true) {
-        setFinalResult("Definitely Preventable");
-        return;
-      };
-      isAllEqual = allEqual(probabPrev);
-      if (isAllEqual === true) {
-        setFinalResult("Probably Preventable");
-        return;
-      };
-      if (isAllEqual === false)
-        setFinalResult("Not Preventable");
+    const anyOneYes = (arr: string[]) => arr.some(val => val != null && val.toString() === "Yes");
+    const allNo = (arr: string[]) => arr.every(val => val != null && val.toString() === "No");
+    const definitePrev: string[] = valuesArray.slice(0, 5);
+    const probabPrev: string[] = valuesArray.slice(5, 9);
+    // check if any one answer is yes in the first five questions
+    if (allNo(definitePrev)) {
+      // enable further questions
+      setEnableFurtherQues(false);
+      setFinalResult("To be calculated");
+    }
+    if (anyOneYes(definitePrev)) {
+      // disable further questions
+      setEnableFurtherQues(true);
+      // definitely preventable
+      setFinalResult("Definitely Preventable ADR");
+    } else if (anyOneYes(probabPrev)) {
+      // probably preventable
+      setFinalResult("Probably Preventable ADR");
+    } else if (allNo(valuesArray)) {
+      // not preventable
+      setFinalResult("Not Preventable ADR");
     }
   }
 
@@ -120,7 +125,7 @@ export default function Form1page3b4() {
                 label={field.label}
                 className="w-full pt-4"
               >
-                <Radio.Group options={formRadioOptions} optionType="button" />
+                <Radio.Group disabled={index >= 5 && enableFurtherQues} options={formRadioOptions} optionType="button" />
               </Form.Item>
             ))}
 
@@ -128,9 +133,8 @@ export default function Form1page3b4() {
               <p className="text-[16px] m-0 font-bold text-gray-800 dark:text-gray-300">
                 Final Result
               </p>
-              {/* <Radio.Group options={formRadioOptions2} optionType="button" /> */}
               <p className="text-[#E8590C] text-2xl">
-                {finalResult} {finalResult !== "" && "ADR"}
+                {finalResult}
               </p>
             </div>
           </div>
