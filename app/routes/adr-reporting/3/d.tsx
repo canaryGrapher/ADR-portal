@@ -64,20 +64,45 @@ export default function Form1page3d() {
         </div>
       </div>
       <Form
+
         onFinish={() => {
-          fetch("/api/forms/form1/page3/d", {
-            method: "post",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ ...formState.data }),
-          })
-            .then((res) => {
-              info();
+          console.log(formState.data);
+          let x= formState?.data?.drugDetails?.length
+          
+        if(x!=null){
+
+        
+
+            for(let i=0;i<x;i++){
+
+            
+
+          
+          if(formState?.data?.drugDetails && formState?.data?.drugDetails[i]?.nameOfDrug!="" && formState?.data?.drugDetails[i]?.dateStarted!="")
+          {
+            fetch("/api/forms/form1/page3/d", {
+              method: "post",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({ ...formState.data }),
             })
-            .catch((err) => {
-              error();
-            });
+              .then((res) => {
+                info();
+              })
+              .catch((err) => {
+                error();
+              });
+
+          }
+          else{
+            error();
+          }
+        }
+      }
+         
+          
+        
         }}
       >
         <NavigationPanel currentRoute="3d" />

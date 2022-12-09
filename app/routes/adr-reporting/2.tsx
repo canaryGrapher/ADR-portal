@@ -23,6 +23,8 @@ export let loader: LoaderFunction = async ({ request }) => {
   });
 };
 
+
+
 export default function Form1page2() {
   const info = () => {
     message.success("Form successfully submitted");
@@ -37,6 +39,8 @@ export default function Form1page2() {
   useEffect(() => {
     dispatch(getFormData());
   }, []);
+
+
 
   useEffect(() => {
     const ReactionStarted = formState.data.dateOfReactionStarted
@@ -66,6 +70,7 @@ export default function Form1page2() {
   const changeFormData = (value: any, fieldName: any) => {
     dispatch(setNewFormData({ fieldName, value }));
   };
+
   return (
     <FormLayout>
       <Form

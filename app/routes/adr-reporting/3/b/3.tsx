@@ -1,11 +1,11 @@
 // importing layouts
 import FormLayout from "~/layouts/forms/adr-reporting";
-import { useEffect } from "react";
+import { useState,useEffect } from "react";
 
 // importing components
 import NavigationPanel from "~/components/forms/NavigationPanel";
 import { FiHelpCircle } from "react-icons/fi";
-import { Radio, Progress, Form, message } from "antd";
+import { Radio, Progress, Form, message,Checkbox,Input } from "antd";
 
 //importing utilities
 import { radioOptions } from "~/utils/adr-reporting/3b3";
@@ -39,6 +39,15 @@ export default function Form1page3b3() {
   useEffect(() => {
     dispatch(getFormData());
   }, []);
+
+  const [predisposingFactorsValues, setPredisposingFactorsValues] = useState<
+    string[] | null
+  >([""]);
+
+  const onChangeCheckBoxGroup = (values: any[]) => {
+    setPredisposingFactorsValues(values);
+  };
+
 
   useEffect(() => {
     form.setFieldsValue(formState.data);
@@ -82,14 +91,12 @@ export default function Form1page3b3() {
               Hartwig's Severity Assessment Scale
             </div>
             <div className="min-w-full pt-4">
-              <Form.Item name="hartwigseveritytest" label="Select a level">
-                <Radio.Group
-                  optionType="button"
-                  buttonStyle="solid"
-                  size="large"
-                  options={radioOptions}
-                />
-              </Form.Item>
+              <Form.Item name="preDisposingFactors" label="Select a level">
+              <Checkbox.Group
+                options={radioOptions}
+                onChange={(e) => onChangeCheckBoxGroup(e)}
+              />
+            </Form.Item>
               <div className="flex flex-col pt-4">
                 <p className="m-0 p-0 text-gray-800 dark:text-gray-300 font-medium">
                   Mild Level

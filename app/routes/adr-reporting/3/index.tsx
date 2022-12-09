@@ -212,7 +212,7 @@ const Subform = (props: PropTypes) => {
           { required:true,
           message:"Name is mandatory" },
       ]}
-      className="w-full"
+      
       >
         <Input />
       </Form.Item>

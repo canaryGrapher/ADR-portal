@@ -1,5 +1,9 @@
 import { useEffect, useState } from "react";
 import moment from "moment";
+import {
+  getFormData as getFormData2,
+  
+} from "~/states/Slices/AdrReportingForm/2";
 
 // Import Form Layout
 import FormLayout from "~/layouts/forms/adr-reporting";
@@ -52,12 +56,14 @@ export default function Form1page4() {
   const dispatch = useDispatch();
   // converting date value to moment Object
   const formState = useSelector((state: RootState) => state.form1page4);
+  const formStateimp= useSelector((state:RootState) => state.form1page2);
   // change the redux value whenever there is a change in the form
   const changeFormData = (value: any, fieldName: any) => {
     dispatch(setNewFormData({ fieldName, value }));
   };
   useEffect(() => {
     dispatch(getFormData());
+    dispatch(getFormData2());
   }, []);
 
   useEffect(() => {
@@ -166,9 +172,10 @@ export default function Form1page4() {
                 ({  }) => ({
                   validator(_, value) {
                     const phoneNumber: any = value;
-                    const phoneLength: any = phoneNumber.toString().length();
-                    if (phoneLength< 10) {
-                      return Promise.reject(new Error("Invalid Phone Number"));
+                    const phoneLength: any = phoneNumber.length;
+                    console.log(phoneLength);
+                    if (phoneLength < 10 ) {
+                      return Promise.reject(new Error("Invalid Phone Number")); 
                     } else {
                       return Promise.resolve();
                     }
@@ -225,8 +232,25 @@ export default function Form1page4() {
               <Input />
             </Form.Item>
             {/* Seventh */}
-            <Form.Item label="Date of this report" name="dateOfThisReport">
+            <Form.Item label="Date of this report" name="dateOfThisReport"
+            rules={[
+              ({ getFieldValue }) => ({
+                validator(_, value) {
+                  const stopDate: any = value;
+                  const startDate: any = formStateimp.data.dateOfReactionStarted;
+                  console.log(startDate);
+                  console.log(stopDate);
+                  if (stopDate < startDate) {
+                    return Promise.reject(new Error("Date of recovery cannot be before date of reaction"));
+                  } else {
+                    return Promise.resolve();
+                  }
+                },
+              }),
+            ]}
+            >
               <DatePicker className="w-full" />
+
             </Form.Item>
           </div>
           {/* Eighth */}
