@@ -64,20 +64,31 @@ export default function Form1page3b4() {
     const definitePrev: any = valuesArray.slice(0, 5);
     const probabPrev: any = valuesArray.slice(5, 9);
     let isAllEqual: boolean;
-    if (!isNull(definitePrev) && !isNull(probabPrev)) {
-      isAllEqual = allEqual(definitePrev);
-      if (isAllEqual === true) {
-        setFinalResult("Definitely Preventable");
-        return;
-      };
-      isAllEqual = allEqual(probabPrev);
-      if (isAllEqual === true) {
-        setFinalResult("Probably Preventable");
-        return;
-      };
-      if (isAllEqual === false)
-        setFinalResult("Not Preventable");
+    if(!isNull(definitePrev))
+    {
+      setFinalResult("Definitely Preventable");
     }
+    else if(isNull(definitePrev) && !isNull(probabPrev))
+    {
+      setFinalResult("Probably Preventable");
+    }
+    else{
+      setFinalResult("Not Preventable");
+    }
+    // if (!isNull(definitePrev) && !isNull(probabPrev)) {
+    //   isAllEqual = allEqual(definitePrev);
+    //   if (isAllEqual === true) {
+    //     setFinalResult("Definitely Preventable");
+    //     return;
+    //   };
+    //   isAllEqual = allEqual(probabPrev);
+    //   if (isAllEqual === true) {
+    //     setFinalResult("Probably Preventable");
+    //     return;
+    //   };
+    //   if (isAllEqual === false)
+    //     setFinalResult("Not Preventable");
+    // }
   }
 
   return (

@@ -208,9 +208,13 @@ const Subform = (props: PropTypes) => {
         className="w-full"
         label="Name (Brand/Generic)"
         name="nameOfDrug"
-        rules={[{ required: true, message: "Drug name is mandatory" }]}
+        rules={[
+          { required:true,
+          message:"Name is mandatory" },
+      ]}
+      className="w-full"
       >
-        <Input required={true} />
+        <Input />
       </Form.Item>
       <div className="grid grid-cols-2 gap-5">
         <Form.Item name="manufacturer" label="Manufacturer" className="w-full">

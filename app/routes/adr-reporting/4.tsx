@@ -140,9 +140,15 @@ export default function Form1page4() {
               label="Email ID"
               rules={[
                 {
-                  required: true,
-                  message: "Email ID is required",
+                  
+                  type:"email",
+                  message: "Invalid Email",
                 },
+                {
+                  required: true,
+                  message:"Enter Email ID"
+
+                }
               ]}
               className="col-span-1"
             >
@@ -156,6 +162,19 @@ export default function Form1page4() {
                   required: true,
                   message: "Telephone is required",
                 },
+
+                ({  }) => ({
+                  validator(_, value) {
+                    const phoneNumber: any = value;
+                    const phoneLength: any = phoneNumber.toString().length();
+                    if (phoneLength< 10) {
+                      return Promise.reject(new Error("Invalid Phone Number"));
+                    } else {
+                      return Promise.resolve();
+                    }
+                  },
+                }),
+
               ]}
               className="col-span-1"
             >
