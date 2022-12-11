@@ -29,7 +29,8 @@ const unit_op = [
   { label: "mcg", value: "mcg" },
   { label: "mg", value: "mg" },
   { label: "gm", value: "gm" },
-  { label: "IU", value: "IU" }
+  { label: "IU", value: "IU" },
+  { label: "Other", value: "other" }
 ]
 
 export { advisedMedicineOptions, genderOptions, ip_op, unit_op };

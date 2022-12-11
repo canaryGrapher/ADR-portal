@@ -171,6 +171,42 @@ const Subform = (props: PropTypes) => {
   useEffect(() => {
     dispatch(getFormData());
   }, []);
+
+  const [otherRouteInputVisibility, setOtherRouteInputVisibility] = useState<boolean>(false);
+  const [otherFreqInputVisibility, setOtherFreqInputVisibility] = useState<boolean>(false);
+  useEffect(() => {
+    if (newFormState.routeUsed === "other") {
+      setOtherRouteInputVisibility(true);
+    } else {
+      setOtherRouteInputVisibility(false);
+    }
+
+    if (newFormState.frequency === "other") {
+      setOtherFreqInputVisibility(true);
+    } else {
+      setOtherFreqInputVisibility(false);
+    }
+  }, [formState.routeUsed, formState.frequency])
+
+
+  // check other input
+  const checkOthers = (e: any, label: string) => {
+    const input = e;
+    if (input.toLowerCase() === "other") {
+      if (label === "route") {
+        setOtherRouteInputVisibility(true);
+      } else if (label === "frequency") {
+        setOtherFreqInputVisibility(true);
+      }
+    } else {
+      if (label === "route") {
+        setOtherRouteInputVisibility(false);
+      } else if (label === "frequency") {
+        setOtherFreqInputVisibility(false);
+      }
+    }
+  }
+
   return (
     <Form
       form={form}
@@ -203,17 +239,43 @@ const Subform = (props: PropTypes) => {
         <Form.Item className="col-span-1" label="Dose used" name="doseUsage">
           <Input />
         </Form.Item>
-        <Form.Item className="col-span-1" label="Route used" name="routeUsed">
-          <Select allowClear={true} options={routeUsedOptions} />
+        <div className="flex gap-3">
+          <Form.Item className="w-full" label="Route used" name="routeUsed">
+            <Select allowClear={true} options={routeUsedOptions} onChange={(e: any) => checkOthers(e, "route")} />
+          </Form.Item>
+          <Form.Item hidden={!otherRouteInputVisibility} rules={[
+            {
+              required: otherRouteInputVisibility,
+              message: "Entering non-listed route is mandatory",
+            },
+          ]} name="otherRouteUsed" label="Other route" className="w-full">
+            <Input disabled={!otherRouteInputVisibility} />
+          </Form.Item>
+        </div>
+      </div>
+      <div className="flex gap-3">
+        <Form.Item
+          className="mt-4 w-full"
+          label="Frequency (OD, BD)"
+          name="frequency"
+        >
+          <Select allowClear={true} options={frequencyOptions} onChange={(e: any) => checkOthers(e, "frequency")} />
+        </Form.Item>
+        <Form.Item
+          name="otherFrequency"
+          hidden={!otherFreqInputVisibility}
+          label="Other frequency"
+          className="w-full"
+          rules={[
+            {
+              required: otherFreqInputVisibility,
+              message: "Entering non-listed frequency is mandatory",
+            },
+          ]}
+        >
+          <Input disabled={!otherFreqInputVisibility} />
         </Form.Item>
       </div>
-      <Form.Item
-        className="mt-4 w-full"
-        label="Frequency (OD, BD)"
-        name="frequency"
-      >
-        <Select allowClear={true} options={frequencyOptions} />
-      </Form.Item>
       <div className="grid grid-cols-2 gap-5 pt-4">
         <Form.Item
           className="col-span-1"

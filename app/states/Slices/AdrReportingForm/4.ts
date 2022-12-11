@@ -20,6 +20,7 @@ const initialStateData: FormStateType = {
     telephoneNumber: undefined,
     profAddress: null,
     occupation: null,
+    otherOccupation: undefined,
     department: null,
     dateOfThisReport: null,
     references: null,

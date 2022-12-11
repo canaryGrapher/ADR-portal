@@ -17,14 +17,16 @@ const unitOptions = [
     { label: "mcg", value: "mcg" },
     { label: "mg", value: "mg" },
     { label: "gm", value: "gm" },
-    { label: "IU", value: "IU" }
+    { label: "IU", value: "IU" },
+    { label: "Other", value: "other" }
 ]
 
 const routeUsedOptions = [
     { label: "Oral", value: "oral" },
     { label: "IV", value: "iv" },
     { label: "IM", value: "im" },
-    { label: "SC", value: "sc" }
+    { label: "SC", value: "sc" },
+    { label: "Other", value: "other" }
 ]
 
 const frequencyOptions = [
@@ -32,6 +34,7 @@ const frequencyOptions = [
     { label: "BID", value: "bid" },
     { label: "TID", value: "tid" },
     { label: "SOS", value: "sos" },
+    { label: "Other", value: "other" }
 ]
 
 export { actionOptions, reintroductionOptions, unitOptions, routeUsedOptions, frequencyOptions };

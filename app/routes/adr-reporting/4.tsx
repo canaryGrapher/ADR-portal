@@ -72,6 +72,9 @@ export default function Form1page4() {
       // @ts-ignore
       delete newFormState.dateOfThisReport;
     }
+    if(formState.data.occupation === "other") {
+      setOccupationState("other");
+    }
     form.setFieldsValue(newFormState);
   }, [formState.status]);
 
@@ -184,7 +187,7 @@ export default function Form1page4() {
           </Form.Item>
           <Form.Item
             className="w-full"
-            name="other"
+            name="otherOccupation"
             label="Mention the occupation"
             hidden={occupationState !== "other"}
             rules={[

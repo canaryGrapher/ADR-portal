@@ -26,6 +26,9 @@ export default class Form1Page4 {
     public occupation?: String;
 
     @prop({ type: String })
+    public otherOccupation?: String;
+
+    @prop({ type: String })
     public department?: String;
 
     @prop({ type: Date })

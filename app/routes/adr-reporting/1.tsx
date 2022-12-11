@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { LoaderFunction } from "remix";
 import authenticator from "~/server/authentication/auth.server";
 import FormLayout from "~/layouts/forms/adr-reporting";
@@ -53,6 +53,11 @@ export default function Form1page1() {
       // @ts-ignore
       delete newFormState.DateOfBirth;
     }
+    if (formState.data.unit === "other") {
+      setOthersInputVisibility(true);
+    } else {
+      setOthersInputVisibility(false);
+    }
     form.setFieldsValue(newFormState);
   }, [formState.status]);
 
@@ -61,13 +66,14 @@ export default function Form1page1() {
     dispatch(setNewFormData({ fieldName, value }));
   };
 
-  const checkAge = (e: any) => {
-    const enteredAge: number = e;
-    const currentDate = moment(new Date());
-    const enteredDob: any = formState.data.DateOfBirth;
-    const actualAge = currentDate.diff(enteredDob, 'years');
-    if (enteredAge > actualAge) {
-
+  // check other input for Unit field
+  const [othersInputVisibility, setOthersInputVisibility] = useState<boolean>(false);
+  const checkOthers = (e: any) => {
+    const unitInput = e;
+    if (unitInput.toLowerCase() === "other") {
+      setOthersInputVisibility(true);
+    } else {
+      setOthersInputVisibility(false);
     }
   }
 
@@ -174,9 +180,19 @@ export default function Form1page1() {
               <Form.Item label="IP/OP" name="ip_op" className="w-full">
                 <Select allowClear={true} options={ip_op} />
               </Form.Item>
-              <Form.Item label="Unit" name="unit" className="w-full">
-                <Select allowClear={true} options={unit_op} />
-              </Form.Item>
+              <div className="flex gap-3">
+                <Form.Item label="Unit" name="unit" className="w-full">
+                  <Select allowClear={true} options={unit_op} onChange={(e: any) => checkOthers(e)} />
+                </Form.Item>
+                <Form.Item hidden={!othersInputVisibility} rules={[
+                  {
+                    required: true,
+                    message: "Entering non-listed unit is mandatory",
+                  },
+                ]} label="Other unit" name="otherUnit" className="w-full">
+                  <Input disabled={!othersInputVisibility} />
+                </Form.Item>
+              </div>
             </div>
             <Form.Item
               label="Reason for taking medication/vaccination"

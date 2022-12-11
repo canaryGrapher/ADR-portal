@@ -2,7 +2,9 @@ interface FormSubStateType {
     name?: String;
     doseUsed?: String | null;
     routeUsed?: String | null;
+    otherRouteUsed?: String | null;
     frequency?: String | null;
+    otherFrequency?: String | null;
     startDate?: String;
     stopDate?: String | null;
     indication?: String | null;

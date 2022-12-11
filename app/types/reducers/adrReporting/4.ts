@@ -5,7 +5,8 @@ interface FormStateType {
     email?: String;
     telephoneNumber?: Number;
     profAddress?: String | null;
-    occupation?: "Physician" | "Dentist" | "Nurse" | "Pharmacist" | "Other" | null;
+    occupation?: "Physician" | "Dentist" | "Nurse" | "Pharmacist" | "other" | null;
+    otherOccupation?: string;
     department?: String | null;
     dateOfThisReport?: string | null;
     references?: String | null;
