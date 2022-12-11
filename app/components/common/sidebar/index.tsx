@@ -16,6 +16,7 @@ const Sidebar = () => {
   const [SidebarData, setSidebarData] = useState<TemplateProps[]>(
     AdrReporting.template
   );
+  const [baseUrl, setBaseUrl] = useState<string>(AdrReporting.baseUrl);
   const [activeForm, setActiveForm] = useState<string>("");
   const [activeTab, setActiveTab] = useState<string>("");
 
@@ -30,9 +31,11 @@ const Sidebar = () => {
       currentLocation.length >= 5 ? currentLocation[4] : "";
     if (currentForm === "adr-reporting") {
       setSidebarData(AdrReporting.template);
+      setBaseUrl(AdrReporting.baseUrl);
     }
     if (currentForm === "medical-device-reporting") {
       setSidebarData(MedicalDeviceReporting.template);
+      setBaseUrl(MedicalDeviceReporting.baseUrl);
     }
     setActiveForm(currentForm);
     setActiveTab(currentPage + currentPageSub + currentPageSubSub);
@@ -64,6 +67,7 @@ const Sidebar = () => {
               number={index}
               currentPage={activeTab}
               formName={activeForm}
+              baseUrl={baseUrl}
               pageLink={item.pageLink}
             />
           );

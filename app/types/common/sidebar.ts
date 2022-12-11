@@ -17,6 +17,7 @@ type ListItemsProps = {
   isCompleted: boolean;
   children?: TemplateProps[],
   number: number;
+  baseUrl?: string,
   currentPage: string;
 }
 

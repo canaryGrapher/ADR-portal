@@ -7,7 +7,7 @@ const AdrReporting: SidebarProps = {
     {
       name: "Patient Information",
       pageLink: "1",
-      isCompleted: true,
+      isCompleted: false,
       children: [],
     },
     {
