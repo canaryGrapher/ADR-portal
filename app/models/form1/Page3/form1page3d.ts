@@ -12,7 +12,13 @@ class Form1Page3dData {
     public routeUsed?: String;
 
     @prop({ type: String })
+    public otherRouteUsed?: String;
+
+    @prop({ type: String })
     public frequency?: String;
+
+    @prop({ type: String })
+    public otherFrequency?: String;
 
     @prop({ type: Date, required: true })
     public startDate!: Date;

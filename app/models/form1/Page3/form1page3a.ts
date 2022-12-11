@@ -17,13 +17,22 @@ class Form1Page3aData {
     public routeUsed?: string;
 
     @prop({ type: String })
+    public otherRouteUsed?: string;
+
+    @prop({ type: String })
     public ip_op?: string;
 
     @prop({ type: String })
     public unit?: string;
 
     @prop({ type: String })
+    public otherUnit?: string;
+
+    @prop({ type: String })
     public frequency?: string;
+
+    @prop({ type: String })
+    public otherFrequency?: string;
 
     @prop({ type: String, required: true })
     public dateStarted!: string;

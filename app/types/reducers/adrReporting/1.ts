@@ -7,7 +7,8 @@ interface FormStateType {
     weight?: number | null;
     patientID?: number | string | null;
     ip_op?: "inPatient" | "outPatient" | null;
-    unit?: "mcg" | "mg" | "gm" | "IU" | null;
+    unit?: "mcg" | "mg" | "gm" | "IU" | "other" | null;
+    otherUnit?: string | null;
     reasonForTakingMedication?: string | null;
     medicineAdvised?: string | null;
     knownAllergies?: string | null;

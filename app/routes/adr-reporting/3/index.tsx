@@ -146,6 +146,31 @@ const Subform = (props: PropTypes) => {
   const formState = useSelector((state: RootState) => state.form1page3);
   let newFormState = { ...formState };
 
+  const [otherRouteInputVisibility, setOtherRouteInputVisibility] = useState<boolean>(true);
+  const [otherUnitInputVisibility, setOtherUnitInputVisibility] = useState<boolean>(true);
+  const [otherFreqInputVisibility, setOtherFreqInputVisibility] = useState<boolean>(true);
+  useEffect(() => {
+    if (newFormState.routeUsed === "other") {
+      setOtherRouteInputVisibility(true);
+    } else {
+      setOtherRouteInputVisibility(false);
+    }
+
+    if (newFormState.unit === "other") {
+      setOtherUnitInputVisibility(true);
+    } else {
+      setOtherUnitInputVisibility(false);
+    }
+
+    if (newFormState.frequency === "other") {
+      setOtherFreqInputVisibility(true);
+    } else {
+      setOtherFreqInputVisibility(false);
+    }
+  }, [formState.routeUsed, formState.unit, formState.frequency]);
+
+  console.log(otherRouteInputVisibility);
+
   if (formState.expDate) {
     // @ts-ignore
     const expiryDate = moment(new Date(formState.expDate));
@@ -183,6 +208,29 @@ const Subform = (props: PropTypes) => {
   useEffect(() => {
     dispatch(getFormData());
   }, []);
+
+  // check other input
+  const checkOthers = (e: any, label: string) => {
+    const input = e;
+    if (input.toLowerCase() === "other") {
+      if (label === "route") {
+        setOtherRouteInputVisibility(true);
+      } else if (label === "unit") {
+        setOtherUnitInputVisibility(true);
+      } else if (label === "frequency") {
+        setOtherFreqInputVisibility(true);
+      }
+    } else {
+      if (label === "route") {
+        setOtherRouteInputVisibility(false);
+      } else if (label === "unit") {
+        setOtherUnitInputVisibility(false);
+      } else if (label === "frequency") {
+        setOtherFreqInputVisibility(false);
+      }
+    }
+  }
+
   return (
     <Form
       form={form}
@@ -231,25 +279,61 @@ const Subform = (props: PropTypes) => {
         <Form.Item name="doseUsed" label="Dose used" className="w-full">
           <Input type={"number"} suffix="kgs" />
         </Form.Item>
-        <Form.Item name="routeUsed" label="Route used" className="w-full">
-          <Select allowClear={true} options={routeUsedOptions} />
-        </Form.Item>
+        <div className="flex gap-3">
+          <Form.Item name="routeUsed" label="Route used" className="w-full">
+            <Select allowClear={true} options={routeUsedOptions} onChange={(e: any) => checkOthers(e, "route")} />
+          </Form.Item>
+          <Form.Item name="otherRouteUsed" label="Other route" hidden={!otherRouteInputVisibility} rules={[
+            {
+              required: otherRouteInputVisibility,
+              message: "Entering non-listed route is mandatory",
+            },
+          ]} className="w-full">
+            <Input disabled={!otherRouteInputVisibility} />
+          </Form.Item>
+        </div>
       </div>
       <div className="grid grid-cols-2 gap-5">
         <Form.Item name="ip_op" label="IP_OP" className="w-full">
           <Input />
         </Form.Item>
-        <Form.Item name="unit" label="Unit" className="w-full">
-          <Select allowClear={true} options={unitOptions} />
+        <div className="flex gap-3">
+          <Form.Item name="unit" label="Unit" className="w-full">
+            <Select allowClear={true} options={unitOptions} onChange={(e: any) => checkOthers(e, "unit")} />
+          </Form.Item>
+          <Form.Item name="otherUnit" label="Other unit" hidden={!otherUnitInputVisibility} rules={[
+            {
+              required: otherUnitInputVisibility,
+              message: "Entering non-listed route is mandatory",
+            },
+          ]} className="w-full">
+            <Input disabled={!otherUnitInputVisibility} />
+          </Form.Item>
+        </div>
+      </div>
+      <div className="flex gap-3">
+        <Form.Item
+          name="frequency"
+          label="Frequency (OD, BD, etc.)"
+          className="w-full"
+        >
+          <Select allowClear={true} options={frequencyOptions} onChange={(e: any) => checkOthers(e, "frequency")} />
+        </Form.Item>
+        <Form.Item
+          name="otherFrequency"
+          label="Other frequency"
+          className="w-full"
+          hidden={!otherFreqInputVisibility}
+          rules={[
+            {
+              required: otherFreqInputVisibility,
+              message: "Entering non-listed frequency is mandatory",
+            },
+          ]}
+        >
+          <Input disabled={!otherFreqInputVisibility} />
         </Form.Item>
       </div>
-      <Form.Item
-        name="frequency"
-        label="Frequency (OD, BD, etc.)"
-        className="w-full"
-      >
-        <Select allowClear={true} options={frequencyOptions} />
-      </Form.Item>
       <div className="grid grid-cols-2 gap-5">
         <Form.Item
           name="dateStarted"

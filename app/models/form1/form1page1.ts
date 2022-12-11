@@ -34,6 +34,9 @@ export default class Form1Page1 {
     public unit?: String;
 
     @prop({ type: String })
+    public otherUnit?: String;
+
+    @prop({ type: String })
     public reasonForTakingMedication?: String;
 
     @prop({ type: String })

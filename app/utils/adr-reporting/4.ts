@@ -3,7 +3,7 @@ const radioOptions = [
     { label: "Dentist", value: "Dentist" },
     { label: "Nurse", value: "Nurse" },
     { label: "Pharmacist", value: "Pharmacist" },
-    { label: "Other", value: "Other" },
+    { label: "Other", value: "other" },
 ];
 
 export { radioOptions };

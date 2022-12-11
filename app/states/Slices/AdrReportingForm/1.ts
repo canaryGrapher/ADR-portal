@@ -22,6 +22,7 @@ const initialStateData: FormStateType = {
     patientID: null,
     ip_op: null,
     unit: null,
+    otherUnit: null,
     reasonForTakingMedication: null,
     medicineAdvised: null,
     knownAllergies: null,
