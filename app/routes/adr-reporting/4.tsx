@@ -238,9 +238,10 @@ export default function Form1page4() {
                 validator(_, value) {
                   const stopDate: any = value;
                   const startDate: any = formStateimp.data.dateOfReactionStarted;
-                  console.log(startDate);
+                  let startDatemom= moment(startDate)
+                  console.log(startDatemom);
                   console.log(stopDate);
-                  if (stopDate < startDate) {
+                  if (stopDate < startDatemom) {
                     return Promise.reject(new Error("Date of recovery cannot be before date of reaction"));
                   } else {
                     return Promise.resolve();
