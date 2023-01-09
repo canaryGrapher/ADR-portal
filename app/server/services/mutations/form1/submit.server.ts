@@ -45,14 +45,14 @@ const completedForms = async (user: string, formID: string) => {
     const Form1Page4 = form1Pointer.form1Page4?.isComplete;
 
     return {
-        Form1Page1,
-        Form1Page2,
-        form1page3a,
-        form1page3b2,
-        form1page3b3,
-        form1page3d,
-        form1page3e,
-        Form1Page4
+        Form1Page1: Form1Page1 !== undefined ? Form1Page1 : false,
+        Form1Page2: Form1Page2 !== undefined ? Form1Page2 : false,
+        form1page3a: form1page3a !== undefined ? form1page3a : false,
+        form1page3b2: form1page3b2 !== undefined ? form1page3b2 : false,
+        form1page3b3: form1page3b3 !== undefined ? form1page3b3 : false,
+        form1page3d: form1page3d !== undefined ? form1page3d : false,
+        form1page3e: form1page3e !== undefined ? form1page3e : false,
+        Form1Page4: Form1Page4 !== undefined ? Form1Page4 : false
     }
 }
 
