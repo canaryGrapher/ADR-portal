@@ -124,7 +124,7 @@ function AddedDrugs(props: any) {
                       />
                     </div>
                     <div className="cursor-pointer hover:text-neutral-500">
-                      <DeleteFilled onClick={() => deleteFormItem(drug.identifier != undefined ? drug.identifier : drug._id)} />
+                      <DeleteFilled onClick={() => deleteFormItem(drug.identifier !== undefined ? (drug._id === undefined ? drug.identifier : drug._id) : drug._id)} />
                     </div>
                   </div>
                 </div>

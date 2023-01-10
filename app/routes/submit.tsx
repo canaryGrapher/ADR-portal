@@ -1,5 +1,5 @@
 // Import Form Layout
-import FormLayout from "~/layouts/forms/medical-device-reporting";
+import FormLayout from "~/layouts/forms/adr-reporting";
 import { Link, LoaderFunction, useSearchParams, redirect } from "remix";
 import authenticator from "~/server/authentication/auth.server";
 import { useEffect, useState } from "react";
