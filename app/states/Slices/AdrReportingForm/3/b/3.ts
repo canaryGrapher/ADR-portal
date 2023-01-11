@@ -13,7 +13,7 @@ export const getFormData = createAsyncThunk(
     })
 
 const initialStateData: FormStateType = {
-    hartwigseveritytest: null,
+    hartwigseveritytest: [],
 };
 
 export const form1page3b3Slice = createSlice({
