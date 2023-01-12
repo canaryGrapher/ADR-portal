@@ -1,11 +1,11 @@
 // importing layouts
 import FormLayout from "~/layouts/forms/adr-reporting";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 // importing components
 import NavigationPanel from "~/components/forms/NavigationPanel";
 import { FiHelpCircle } from "react-icons/fi";
-import { Radio, Progress, Form, message } from "antd";
+import { Progress, Form, message, Checkbox } from "antd";
 
 //importing utilities
 import { radioOptions } from "~/utils/adr-reporting/3b3";
@@ -36,12 +36,32 @@ export default function Form1page3b3() {
 
   const formState = useSelector((state: RootState) => state.form1page3b3);
 
+  const [scalePercent, setScalePercent] = useState<number>(0);
+  const [levelStatus, setLevelStatus] = useState<string>("Submit to view");
+  const updateScale = () => {
+    const numberData = formState.data.hartwigseveritytest?.map((level) => { return level.slice(6) });
+    if (numberData.includes("1") && numberData.includes("2")) {
+      setScalePercent((2 / 7) * 100);
+      setLevelStatus("Mild");
+    } else if (numberData.includes("3") && numberData.includes("4(a)") && numberData.includes("4(b)")) {
+      setScalePercent((5 / 7) * 100);
+      setLevelStatus("Moderate");
+    } else if (numberData.includes("5") && numberData.includes("6") && numberData.includes("7")) {
+      setScalePercent(100);
+      setLevelStatus("Severe");
+    } else {
+      setScalePercent(0);
+      setLevelStatus("Submit to view");
+    }
+  }
+
   useEffect(() => {
     dispatch(getFormData());
   }, []);
 
   useEffect(() => {
     form.setFieldsValue(formState.data);
+    updateScale();
   }, [formState.status]);
 
   // change the redux value whenever there is a change in the form
@@ -56,6 +76,7 @@ export default function Form1page3b3() {
         scrollToFirstError={true}
         name="Form1Page3b3"
         onFinish={(values) => {
+          updateScale();
           fetch("/api/forms/form1/page3/b/iii", {
             method: "post",
             headers: {
@@ -83,21 +104,15 @@ export default function Form1page3b3() {
             </div>
             <div className="min-w-full pt-4">
               <Form.Item name="hartwigseveritytest" label="Select a level">
-                <Radio.Group
-                  optionType="button"
-                  buttonStyle="solid"
-                  size="large"
-                  options={radioOptions}
-                />
+                <Checkbox.Group options={radioOptions} />
               </Form.Item>
               <div className="flex flex-col pt-4">
                 <p className="m-0 p-0 text-gray-800 dark:text-gray-300 font-medium">
-                  Mild Level
+                  {levelStatus} {levelStatus !== "" && "Level"}
                 </p>
                 <div className="w-full m-0 p-0">
                   <Progress
-                    // make percentage value dynamic
-                    percent={30}
+                    percent={scalePercent}
                     status={"normal"}
                     showInfo={false}
                     strokeColor={"#E8590C"}
@@ -131,8 +146,11 @@ export default function Form1page3b3() {
                   changed, AND/OR An antidote or other treatment was required. No increase in LOS
                 </p>
                 <p>
-                  <span style={{ color: "#E8590C", fontWeight: "700" }}>Level 4</span>{" "}Any level 3 ADR that increases
-                  the length of stay by at least one day OR The ADR was the reason for admission
+                  <span style={{ color: "#E8590C", fontWeight: "700" }}>Level 4 (a)</span>{" "}Any level 3 ADR that increases
+                  the length of stay by at least one day
+                </p>
+                <p>
+                  <span style={{ color: "#E8590C", fontWeight: "700" }}>Level 4 (b)</span>{" "}The ADR was the reason for admission
                 </p>
                 <p>
                   <span style={{ color: "#E8590C", fontWeight: "700" }}>Level 5</span>{" "}
