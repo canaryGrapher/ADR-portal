@@ -1,7 +1,8 @@
 repo_name: canaryGrapher/ADR-portal
 report_id: 800e7955ebec773b39452c2ceb61a2e9
+version: 0.1
 repo_type: Public
-timestamp: '2023-11-10T05:20:33+00:00'
+timestamp: '2024-01-05T09:00:14+00:00'
 requested_by: Parthiv-M
 provider: github
 branch: main
@@ -15,6 +16,7 @@ tools:
   category: Languages & Frameworks
   sub_category: Languages
   image_url: https://img.stackshare.io/service/6727/css.png
+  detection_source_url: https://github.com/canaryGrapher/ADR-portal
   detection_source: Repo Metadata
 - name: JavaScript
   description: Lightweight, interpreted, object-oriented language with first-class
@@ -25,6 +27,7 @@ tools:
   category: Languages & Frameworks
   sub_category: Languages
   image_url: https://img.stackshare.io/service/1209/javascript.jpeg
+  detection_source_url: https://github.com/canaryGrapher/ADR-portal
   detection_source: Repo Metadata
 - name: TypeScript
   description: A superset of JavaScript that compiles to clean JavaScript output
@@ -35,6 +38,7 @@ tools:
   category: Languages & Frameworks
   sub_category: Languages
   image_url: https://img.stackshare.io/service/1612/bynNY5dJ.jpg
+  detection_source_url: https://github.com/canaryGrapher/ADR-portal
   detection_source: Repo Metadata
 - name: Ant Design
   description: A set of high-quality React components
@@ -46,7 +50,7 @@ tools:
   category: Libraries
   sub_category: JavaScript Framework Components
   image_url: https://img.stackshare.io/service/6112/12101536.png
-  detection_source_url: package-lock.json
+  detection_source_url: https://github.com/canaryGrapher/ADR-portal/blob/main/package-lock.json
   detection_source: package.json
   last_updated_by: Yash Aryan
   last_updated_on: 2022-04-18 17:58:04.000000000 Z
@@ -60,7 +64,7 @@ tools:
   category: Libraries
   sub_category: Javascript UI Libraries
   image_url: https://img.stackshare.io/service/1020/OYIaJ1KK.png
-  detection_source_url: package-lock.json
+  detection_source_url: https://github.com/canaryGrapher/ADR-portal/blob/main/package-lock.json
   detection_source: package.json
   last_updated_by: Parthiv-M
   last_updated_on: 2022-08-21 09:51:07.000000000 Z
@@ -74,7 +78,7 @@ tools:
   category: Libraries
   sub_category: JavaScript Framework Components
   image_url: https://img.stackshare.io/service/3350/8261421.png
-  detection_source_url: package-lock.json
+  detection_source_url: https://github.com/canaryGrapher/ADR-portal/blob/main/package-lock.json
   detection_source: package.json
   last_updated_by: Parthiv-M
   last_updated_on: 2022-08-21 09:51:07.000000000 Z
@@ -87,7 +91,7 @@ tools:
   category: Libraries
   sub_category: State Management Library
   image_url: https://img.stackshare.io/service/4074/13142323.png
-  detection_source_url: package-lock.json
+  detection_source_url: https://github.com/canaryGrapher/ADR-portal/blob/main/package-lock.json
   detection_source: package.json
   last_updated_by: Yash Aryan
   last_updated_on: 2022-05-07 19:46:32.000000000 Z
@@ -101,7 +105,7 @@ tools:
   category: Data Stores
   sub_category: Object Document Mapper (ODM)
   image_url: https://img.stackshare.io/service/1231/0TXzZU7W_400x400.jpg
-  detection_source_url: package-lock.json
+  detection_source_url: https://github.com/canaryGrapher/ADR-portal/blob/main/package-lock.json
   detection_source: package.json
   last_updated_by: Yash Aryan
   last_updated_on: 2022-06-18 19:18:58.000000000 Z
@@ -113,6 +117,7 @@ tools:
   category: Build, Test, Deploy
   sub_category: Version Control System
   image_url: https://img.stackshare.io/service/1046/git.png
+  detection_source_url: https://github.com/canaryGrapher/ADR-portal
   detection_source: Repo Metadata
 - name: npm
   description: The package manager for JavaScript.
@@ -122,6 +127,7 @@ tools:
   category: Build, Test, Deploy
   sub_category: Front End Package Manager
   image_url: https://img.stackshare.io/service/1120/lejvzrnlpb308aftn31u.png
+  detection_source_url: https://github.com/canaryGrapher/ADR-portal/blob/main/package.json
   detection_source: package.json
   last_updated_by: Yash Aryan
   last_updated_on: 2022-02-23 19:07:52.000000000 Z
@@ -136,7 +142,7 @@ tools:
   category: Libraries
   sub_category: Javascript Utilities & Libraries
   image_url: https://img.stackshare.io/service/3643/Xrtdc94q_400x400.png
-  detection_source_url: package-lock.json
+  detection_source_url: https://github.com/canaryGrapher/ADR-portal/blob/main/package-lock.json
   detection_source: package.json
   last_updated_by: Yash Aryan
   last_updated_on: 2022-04-18 17:58:04.000000000 Z
@@ -150,7 +156,7 @@ tools:
   category: Libraries
   sub_category: Javascript Utilities & Libraries
   image_url: https://img.stackshare.io/no-img-open-source.png
-  detection_source_url: package-lock.json
+  detection_source_url: https://github.com/canaryGrapher/ADR-portal/blob/main/package-lock.json
   detection_source: package.json
   last_updated_by: Yash Aryan
   last_updated_on: 2022-06-15 21:14:27.000000000 Z
@@ -160,6 +166,7 @@ tools:
   open_source: false
   hosted_saas: false
   image_url: https://img.stackshare.io/service/9052/8yNrNxpU_normal.jpg
+  detection_source_url: https://github.com/canaryGrapher/ADR-portal/blob/main/package.json
   detection_source: package.json
   last_updated_by: Yash Aryan
   last_updated_on: 2022-05-28 07:39:26.000000000 Z
@@ -173,7 +180,7 @@ tools:
   category: Libraries
   sub_category: npm Packages
   image_url: https://img.stackshare.io/package/15894/default_1d65e37e65b7f80761374f0202776043277d505d.png
-  detection_source_url: package-lock.json
+  detection_source_url: https://github.com/canaryGrapher/ADR-portal/blob/main/package-lock.json
   detection_source: package.json
   last_updated_by: Parthiv-M
   last_updated_on: 2022-08-21 09:51:07.000000000 Z
@@ -187,7 +194,7 @@ tools:
   category: Libraries
   sub_category: npm Packages
   image_url: https://img.stackshare.io/package/15946/default_54b691c123fc8979741e800e4dcd3936c0f3b246.png
-  detection_source_url: package-lock.json
+  detection_source_url: https://github.com/canaryGrapher/ADR-portal/blob/main/package-lock.json
   detection_source: package.json
   last_updated_by: Parthiv-M
   last_updated_on: 2022-08-21 09:51:07.000000000 Z
@@ -201,7 +208,7 @@ tools:
   category: Libraries
   sub_category: npm Packages
   image_url: https://img.stackshare.io/package/16687/default_6dad4e42e12d47cc6edfbdea036dae12f91abebb.png
-  detection_source_url: package-lock.json
+  detection_source_url: https://github.com/canaryGrapher/ADR-portal/blob/main/package-lock.json
   detection_source: package.json
   last_updated_by: Parthiv-M
   last_updated_on: 2022-08-21 09:51:07.000000000 Z
@@ -215,7 +222,7 @@ tools:
   category: Libraries
   sub_category: npm Packages
   image_url: https://img.stackshare.io/package/17099/default_1dbf402c11ef653fcaedc84e608a244e30ebfb87.png
-  detection_source_url: package-lock.json
+  detection_source_url: https://github.com/canaryGrapher/ADR-portal/blob/main/package-lock.json
   detection_source: package.json
   last_updated_by: Parthiv-M
   last_updated_on: 2022-08-21 09:51:07.000000000 Z
@@ -229,7 +236,7 @@ tools:
   category: Libraries
   sub_category: npm Packages
   image_url: https://img.stackshare.io/package/16041/default_5fd43aeff4d6a935abc13737de01a0355210499d.png
-  detection_source_url: package-lock.json
+  detection_source_url: https://github.com/canaryGrapher/ADR-portal/blob/main/package-lock.json
   detection_source: package.json
   last_updated_by: Yash Aryan
   last_updated_on: 2022-05-07 19:46:32.000000000 Z
@@ -243,7 +250,7 @@ tools:
   category: Libraries
   sub_category: npm Packages
   image_url: https://img.stackshare.io/package/15847/default_4479dbac220be99e50e724b2df6cf415241d71fd.png
-  detection_source_url: package-lock.json
+  detection_source_url: https://github.com/canaryGrapher/ADR-portal/blob/main/package-lock.json
   detection_source: package.json
   last_updated_by: Yash Aryan
   last_updated_on: 2022-04-18 17:58:04.000000000 Z
@@ -257,7 +264,7 @@ tools:
   category: Libraries
   sub_category: npm Packages
   image_url: https://img.stackshare.io/package/16012/default_7a88bebb451873cc63bd99007de5bd3bb8ef85de.png
-  detection_source_url: package-lock.json
+  detection_source_url: https://github.com/canaryGrapher/ADR-portal/blob/main/package-lock.json
   detection_source: package.json
   last_updated_by: Yash Aryan
   last_updated_on: 2022-02-24 20:23:48.000000000 Z
@@ -278,7 +285,7 @@ tools:
   category: Libraries
   sub_category: npm Packages
   image_url: https://img.stackshare.io/package/15808/default_14fd11531839d935f920b6d55bd6f3528c890ad7.png
-  detection_source_url: package-lock.json
+  detection_source_url: https://github.com/canaryGrapher/ADR-portal/blob/main/package-lock.json
   detection_source: package.json
   last_updated_by: Parthiv-M
   last_updated_on: 2022-08-21 09:51:07.000000000 Z
@@ -292,7 +299,7 @@ tools:
   category: Libraries
   sub_category: npm Packages
   image_url: https://img.stackshare.io/package/16909/default_7b9968788548874538c601457e8dcd9c74bd2051.png
-  detection_source_url: package-lock.json
+  detection_source_url: https://github.com/canaryGrapher/ADR-portal/blob/main/package-lock.json
   detection_source: package.json
   last_updated_by: Parthiv-M
   last_updated_on: 2022-08-21 09:51:07.000000000 Z
@@ -306,7 +313,7 @@ tools:
   category: Libraries
   sub_category: npm Packages
   image_url: https://img.stackshare.io/package/15984/default_f49d4c116f8ea0155f4d92673b084378bba02760.png
-  detection_source_url: package-lock.json
+  detection_source_url: https://github.com/canaryGrapher/ADR-portal/blob/main/package-lock.json
   detection_source: package.json
   last_updated_by: Parthiv-M
   last_updated_on: 2022-08-21 09:51:07.000000000 Z
@@ -320,7 +327,7 @@ tools:
   category: Libraries
   sub_category: npm Packages
   image_url: https://img.stackshare.io/package/16058/default_261820f5687b4c88a3e8f95c71b5e8dccd34c1d7.png
-  detection_source_url: package-lock.json
+  detection_source_url: https://github.com/canaryGrapher/ADR-portal/blob/main/package-lock.json
   detection_source: package.json
   last_updated_by: Parthiv-M
   last_updated_on: 2022-08-21 09:51:07.000000000 Z
@@ -334,7 +341,7 @@ tools:
   category: Libraries
   sub_category: npm Packages
   image_url: https://img.stackshare.io/package/16025/default_e25d1fbb04a118c79fb444294461417342bd03bf.png
-  detection_source_url: package-lock.json
+  detection_source_url: https://github.com/canaryGrapher/ADR-portal/blob/main/package-lock.json
   detection_source: package.json
   last_updated_by: Parthiv-M
   last_updated_on: 2022-08-21 09:51:07.000000000 Z
@@ -348,7 +355,7 @@ tools:
   category: Libraries
   sub_category: npm Packages
   image_url: https://img.stackshare.io/package/17398/default_2cd7ed1c123f2fca074a6f4b16c4e73d5bfe82be.png
-  detection_source_url: package-lock.json
+  detection_source_url: https://github.com/canaryGrapher/ADR-portal/blob/main/package-lock.json
   detection_source: package.json
   last_updated_by: Yash Aryan
   last_updated_on: 2022-04-18 17:58:04.000000000 Z
